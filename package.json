@@ -1,0 +1,62 @@
+{
+  "name": "react-multi-carousel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf ./lib && tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YIZHUANG/react-multi-carousel.git"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "carousel",
+    "server-side rendering",
+    "ssr",
+    "multiple items"
+  ],
+  "author": "YIZHUANG",
+  "license": "MIT",
+  "homepage": "https://github.com/YIZHUANG/react-multi-carousel#readme",
+  "jest": {
+    "testURL": "http://localhost",
+    "collectCoverage": true,
+    "globals": {
+      "__LINK_PREFIX__": "",
+      "__PREFIX_LINKS__": "",
+      "ts-jest": {
+        "diagnostics": false
+      }
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testMatch": [
+      "**/*spec.(ts|tsx)"
+    ]
+  },
+  "devDependencies": {
+    "@types/enzyme": "^3.9.0",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "^24.0.9",
+    "@types/react": "^16.8.6",
+    "@types/react-dom": "^16.8.2",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.10.0",
+    "enzyme-to-json": "^3.3.5",
+    "jest": "^24.1.0",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "ts-jest": "^24.0.0",
+    "typescript": "^3.3.3333"
+  }
+}

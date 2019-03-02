@@ -1,0 +1,24 @@
+{
+  "name": "ssr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@zeit/next-css": "^1.0.1",
+    "faker": "^4.1.0",
+    "jss": "^9.8.7",
+    "mobile-detect": "^1.4.3",
+    "next": "^8.0.3",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-jss": "^8.6.1"
+  }
+}
