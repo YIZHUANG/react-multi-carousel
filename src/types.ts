@@ -23,16 +23,22 @@ interface CarouselProps {
   contentClassName?: string;
   itemClassName?:string;
   containerClassName?: string;
-  transition?:string;
+  customTransition?:string;
+  transitionDuration?: number;
+  // if you are using customTransition, make sure to put the duration here.
+  // for example, customTransition="all .5"  then put transitionDuration as 500.
+  // this is needed for the resizing to work.
 }
 interface CarouselInternalState {
   itemWidth: number;
+  containerWidth: number;
   slidesToShow: number;
   currentSlide: number;
   totalItems: number;
   activeItem: any;
   domLoaded: boolean;
   deviceType?: string;
+  transform: number | string;
 }
 
 export { CarouselInternalState, CarouselProps, responsiveType };

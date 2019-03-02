@@ -1,0 +1,13 @@
+.custom-right-arrow {
+  position: absolute !important;
+  right: 10px;
+  z-index: 1;
+}
+.custom-left-arrow {
+  position: absolute !important;
+  left: 10px;
+  z-index: 1;
+}
+.container {
+  margin-top: 50px;
+}

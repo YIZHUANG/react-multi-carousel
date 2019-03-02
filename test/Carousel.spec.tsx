@@ -3,6 +3,7 @@ import { configure, mount } from "enzyme";
 import * as Adapter from "enzyme-adapter-react-16";
 import toJson from "enzyme-to-json";
 
+// todos ...
 configure({ adapter: new Adapter() });
 
 import Carousel from "../src/Carousel";

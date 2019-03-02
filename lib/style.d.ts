@@ -1,17 +1,17 @@
 declare const containerStyle: {
     display: string;
     alignItems: string;
+    overflow: string;
 };
 declare const contentStyle: {
     display: string;
-    overflow: string;
     flexDirection: string;
-    transition: string;
     position: string;
-    alignItems: string;
+    willChange: string;
 };
 declare const arrowStyle: {
-    margin: string;
+    zIndex: number;
+    position: string;
     border: string;
     borderWidth: "0 3px 3px 0";
     display: string;
@@ -19,8 +19,10 @@ declare const arrowStyle: {
     cursor: string;
 };
 declare const leftArrowStyle: {
+    left: number;
     transform: string;
-    margin: string;
+    zIndex: number;
+    position: string;
     border: string;
     borderWidth: "0 3px 3px 0";
     display: string;
@@ -28,8 +30,10 @@ declare const leftArrowStyle: {
     cursor: string;
 };
 declare const rightArrowStyle: {
+    right: number;
     transform: string;
-    margin: string;
+    zIndex: number;
+    position: string;
     border: string;
     borderWidth: "0 3px 3px 0";
     display: string;

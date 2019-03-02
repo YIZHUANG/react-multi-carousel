@@ -3,3 +3,6 @@ examples
 coverage
 node_modules
 test
+.storybook
+stories
+.out

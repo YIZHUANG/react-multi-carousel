@@ -9,6 +9,8 @@ import {
 import { guessWidthFromDeviceType } from "./utils";
 import { CarouselInternalState, CarouselProps } from "./types";
 
+const defaultTransitionDuration = 300;
+const defaultTransition = "transform 300ms";
 class Container extends React.Component<CarouselProps, CarouselInternalState> {
   public static defaultProps: any = {
     slidesToSlide: 1,
@@ -17,10 +19,10 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     contentClassName: "",
     itemClassName: ""
   };
-  private readonly itemRef: React.RefObject<any>;
+  private readonly containerRef: React.RefObject<any>;
   constructor(props: CarouselProps) {
     super(props);
-    this.itemRef = React.createRef();
+    this.containerRef = React.createRef();
     this.state = {
       itemWidth: 0,
       slidesToShow: 0,
@@ -28,7 +30,9 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
       totalItems: React.Children.count(props.children),
       activeItem: {},
       deviceType: "",
-      domLoaded: false
+      domLoaded: false,
+      transform: 0,
+      containerWidth: 0
     };
     this.onResize = this.onResize.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
@@ -39,29 +43,107 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     this.handleTouchEnd = this.handleTouchEnd.bind(this);
   }
   public componentDidMount(): void {
-    const { disableSwipeOnMobile, disableDrag } = this.props;
     this.setState({ domLoaded: true });
-    if (this.itemRef && this.itemRef.current) {
-      this.setState({ itemWidth: this.itemRef.current.offsetWidth });
-    }
+    this.correctCurrentState();
     window.addEventListener("resize", this.onResize);
-    const allItems = [
-      ...(document.getElementsByClassName("carousel__item") as any)
-    ];
-    allItems.forEach(item => {
-      if (!disableDrag) {
-        item.addEventListener("mousedown", this.handleMouseDown);
-        item.addEventListener("mousemove", this.handleMouseMove);
-        item.addEventListener("mouseup", this.handleMouseUp);
-      }
-      if (!disableSwipeOnMobile) {
-        item.addEventListener("touchstart", this.handleTouchStart);
-        item.addEventListener("touchmove", this.handleTouchMove);
-        item.addEventListener("touchend", this.handleTouchEnd);
-      }
-    });
     this.onResize();
   }
+  public correctCurrentState(shouldCorrectItemPosition?:boolean): void {
+    const { responsive } = this.props;
+    Object.keys(responsive).forEach(item => {
+      const { breakpoint, items } = responsive[item];
+      const { max, min } = breakpoint;
+      if (window.innerWidth >= min && window.innerWidth <= max) {
+        this.setState({ slidesToShow: items, deviceType: item });
+        this.setContainerAndItemWidth(items, shouldCorrectItemPosition);
+      }
+    });
+  }
+  public setContainerAndItemWidth(
+    slidesToShow:number,
+    shouldCorrectItemPosition?:boolean
+  ): void {
+    if (this.containerRef && this.containerRef.current) {
+      const containerWidth = this.containerRef.current.offsetWidth;
+      const itemWidth:number = Math.round(this.containerRef.current.offsetWidth / slidesToShow);
+      this.setState({
+        containerWidth,
+        itemWidth
+      });
+      if (shouldCorrectItemPosition) {
+        this.setState({
+          transform: -(itemWidth * this.state.currentSlide)
+        });
+      }
+    }
+  }
+  public onResize(): void {
+    this.correctCurrentState();
+  }
+  public componentDidUpdate(
+    prevProps: CarouselProps,
+    { containerWidth }: CarouselInternalState
+  ): void {
+    if (
+      this.containerRef &&
+      this.containerRef.current &&
+      this.containerRef.current.offsetWidth !== containerWidth
+    ) {
+      setTimeout(() => {
+        this.correctCurrentState(true);
+      }, this.props.transitionDuration || defaultTransitionDuration);
+    }
+  }
+
+  public resetAllItems(): void {
+    this.setState({ transform: 0, currentSlide: 0 });
+  }
+
+  public next(): void {
+    const { slidesToShow } = this.state;
+    const { slidesToSlide, infinite } = this.props;
+    if (this.state.currentSlide + 1 + slidesToShow <= this.state.totalItems) {
+      this.setState({
+        transform: -(
+          this.state.itemWidth *
+          (this.state.currentSlide + slidesToSlide)
+        ),
+        currentSlide: this.state.currentSlide + slidesToSlide
+      });
+    } else {
+      if (infinite) {
+        this.resetAllItems();
+      }
+    }
+  }
+  public previous(): void {
+    const { slidesToShow } = this.state;
+    const { slidesToSlide, infinite } = this.props;
+    if (this.state.currentSlide - slidesToSlide >= 0) {
+      this.setState({
+        transform: -(
+          this.state.itemWidth *
+          (this.state.currentSlide - slidesToSlide)
+        ),
+        currentSlide: this.state.currentSlide - slidesToSlide
+      });
+    } else {
+      if (infinite) {
+        this.setState({
+          transform: -(
+            this.state.itemWidth *
+            (this.state.totalItems - slidesToShow)
+          ),
+          currentSlide: this.state.totalItems - slidesToShow
+        });
+      }
+    }
+  }
+
+  public componentWillUnmount(): void {
+    window.removeEventListener("resize", this.onResize);
+  }
+
   public handleMouseDown(e: any): void {
     if (this.props.disableDrag) {
       return;
@@ -74,17 +156,14 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.props.disableDrag) {
       return;
     }
-    const allItems = [
-      ...(document.getElementsByClassName("carousel__item") as any)
-    ];
     const { activeItem } = this.state;
     if (activeItem.mousedown) {
-      if (activeItem.initialPosition - e.pageX > this.state.itemWidth / 3) {
-        this.previous();
+      if (activeItem.initialPosition - e.pageX > this.state.itemWidth / 2) {
+        this.next();
         this.setState({ activeItem: {} });
       }
-      if (e.pageX - activeItem.initialPosition > this.state.itemWidth / 3) {
-        this.next();
+      if (e.pageX - activeItem.initialPosition > this.state.itemWidth / 2) {
+        this.previous();
         this.setState({ activeItem: {} });
       }
     }
@@ -131,115 +210,9 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     }
     this.setState({ activeItem: {} });
   }
-  public componentWillUnmount(): void {
-    const { disableSwipeOnMobile, disableDrag } = this.props;
-    const allItems = [
-      ...(document.getElementsByClassName("carousel__item") as any)
-    ];
-    allItems.forEach(item => {
-      if (!disableDrag) {
-        item.removeEventListener("mousedown", this.handleMouseDown);
-        item.removeEventListener("mousemove", this.handleMouseMove);
-        item.removeEventListener("mouseup", this.handleMouseUp);
-      }
-      if (!disableSwipeOnMobile) {
-        item.removeEventListener("touchstart", this.handleTouchStart);
-        item.removeEventListener("touchmove", this.handleTouchMove);
-        item.removeEventListener("touchend", this.handleTouchEnd);
-      }
-    });
-    window.removeEventListener("resize", this.onResize);
-  }
-  public onResize(): void {
-    const { itemWidth } = this.state;
-    this.setItemsToSlide();
-    if (
-      this.itemRef &&
-      this.itemRef.current &&
-      this.itemRef.current.offsetWidth !== itemWidth
-    ) {
-      this.setState({ itemWidth: this.itemRef.current.offsetWidth });
-    }
-  }
-  public resetAllItems(): void {
-    const allItems = [
-      ...(document.getElementsByClassName("carousel__item") as any)
-    ];
-    allItems.forEach(item => {
-      const left = item.offsetLeft;
-      item.style.transform = `translate3d(0px,0,0)`;
-    });
-    this.setState({
-      currentSlide: 0
-    });
-  }
-  public componentDidUpdate(
-    prevProps: CarouselProps,
-    { domLoaded, itemWidth }: CarouselInternalState
-  ): void {
-    if (!domLoaded && this.state.domLoaded) {
-      this.setItemsToSlide();
-    }
-    if (this.itemRef.current.offsetWidth !== itemWidth) {
-      this.setState({ itemWidth: this.itemRef.current.offsetWidth });
-    }
-  }
-  public setItemsToSlide() {
-    const { responsive } = this.props;
-    Object.keys(responsive).forEach(item => {
-      const { breakpoint, items } = responsive[item];
-      const { max, min } = breakpoint;
-      if (window.innerWidth >= min && window.innerWidth <= max) {
-        this.setState({ slidesToShow: items, deviceType: item });
-      }
-    });
-  }
-  public next(): void {
-    const { slidesToShow } = this.state;
-    const { slidesToSlide } = this.props;
-    const allItems = [
-      ...(document.getElementsByClassName("carousel__item") as any)
-    ];
-    if (this.state.currentSlide + 1 + slidesToShow <= this.state.totalItems) {
-      allItems.forEach(item => {
-        item.style.transform = `translate3d(${-(
-          this.state.itemWidth *
-          (this.state.currentSlide + slidesToSlide)
-        )}px,0,0)`;
-      });
-      this.setState({
-        currentSlide: this.state.currentSlide + slidesToSlide
-      });
-    } else {
-      this.resetAllItems();
-    }
-  }
-  public previous(): void {
-    const { slidesToShow } = this.state;
-    const { slidesToSlide } = this.props;
-    const allItems = [
-      ...(document.getElementsByClassName("carousel__item") as any)
-    ];
-    if (this.state.currentSlide - slidesToSlide >= 0) {
-      allItems.forEach(item => {
-        item.style.transform = `translate3d(-${this.state.itemWidth *
-          (this.state.currentSlide - slidesToSlide)}px,0,0)`;
-      });
-      this.setState({
-        currentSlide: this.state.currentSlide - slidesToSlide
-      });
-    } else {
-      allItems.forEach(item => {
-        item.style.transform = `translate3d(-${this.state.itemWidth *
-          (this.state.totalItems - slidesToShow)}px,0,0)`;
-      });
-      this.setState({
-        currentSlide: this.state.totalItems - slidesToShow
-      });
-    }
-  }
+
   public render(): any {
-    const { domLoaded, slidesToShow } = this.state;
+    const { domLoaded, slidesToShow, containerWidth, itemWidth } = this.state;
     const {
       deviceType,
       responsive,
@@ -255,18 +228,16 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
       containerClassName,
       contentClassName,
       itemClassName,
-      transition
+      customTransition
     } = this.props;
-    let itemWidth: number | string | undefined;
-    if (forSSR && deviceType && !domLoaded && !slidesToShow) {
-      itemWidth = guessWidthFromDeviceType(deviceType, responsive);
-    } else {
-      if (slidesToShow) {
-        itemWidth = (100 / slidesToShow).toFixed(1);
-      } else {
-        itemWidth = 0;
-      }
+    let flexBisis: number | string | undefined;
+    const domFullLoaded =
+      domLoaded && slidesToShow && containerWidth && itemWidth;
+    if (forSSR && deviceType && !domFullLoaded) {
+      flexBisis = guessWidthFromDeviceType(deviceType, responsive);
     }
+    const shouldRenderOnSSR =
+      forSSR && deviceType && !domFullLoaded && flexBisis;
     const isLeftEndReach = !(this.state.currentSlide - slidesToSlide >= 0);
     const isRightEndReach = !(
       this.state.currentSlide + 1 + slidesToShow <=
@@ -276,7 +247,7 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
       !removeArrow &&
       !(
         removeArrowOnDeviceType &&
-        (deviceType && removeArrowOnDeviceType.indexOf(deviceType) > -1 ||
+        ((deviceType && removeArrowOnDeviceType.indexOf(deviceType) > -1) ||
           (this.state.deviceType &&
             removeArrowOnDeviceType.indexOf(this.state.deviceType) > -1))
       );
@@ -285,13 +256,14 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     const LeftArrow = () => {
       if (customLeftArrow) {
         return React.cloneElement(customLeftArrow, {
-          onClick: disableLeftArrow ? () => {} : () => this.previous()
+          onClick: () => this.previous()
         });
       } else {
         return (
           <i
+            // @ts-ignore
             style={leftArrowStyle}
-            onClick={disableLeftArrow ? () => {} : () => this.previous()}
+            onClick={() => this.previous()}
           />
         );
       }
@@ -299,38 +271,55 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     const RightArrow = () => {
       if (customRightArrow) {
         return React.cloneElement(customRightArrow, {
-          onClick: disableRightArrow ? () => {} : () => this.next()
+          onClick: () => this.next()
         });
       } else {
         return (
           <i
+            // @ts-ignore
             style={rightArrowStyle}
-            onClick={disableRightArrow ? () => {} : () => this.next()}
+            onClick={() => this.next()}
           />
         );
       }
     };
     return (
-      <div className={containerClassName} style={containerStyle}>
-        {shouldShowArrows && <LeftArrow />}
-        {/*
-  // @ts-ignore */}
-        <div className={contentClassName} style={contentStyle}>
+      <div
+        className={containerClassName}
+        ref={this.containerRef}
+        style={containerStyle}
+      >
+        <div
+          className={contentClassName}
+          // @ts-ignore
+          style={{
+            ...contentStyle,
+            transition: customTransition || defaultTransition,
+            overflow: shouldRenderOnSSR ? "hidden" : "unset",
+            transform: `translate3d(${this.state.transform}px,0,0)`
+          }}
+        >
           {React.Children.toArray(children).map((child, index) => (
             <div
               key={index}
-              ref={this.itemRef}
+              onMouseMove={this.handleMouseMove}
+              onMouseDown={this.handleMouseDown}
+              onMouseUp={this.handleMouseUp}
+              onTouchStart={this.handleTouchStart}
+              onTouchMove={this.handleTouchMove}
+              onTouchEnd={this.handleTouchEnd}
               style={{
-                transition: transition || "all 0.2s",
-                flex: `1 0 ${itemWidth}%`
+                flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
+                width: domFullLoaded ? `${itemWidth}px` : "auto"
               }}
-              className={`carousel__item ${itemClassName}`}
+              className={itemClassName}
             >
               {child}
             </div>
           ))}
         </div>
-        {shouldShowArrows && <RightArrow />}
+        {shouldShowArrows && !disableLeftArrow && <LeftArrow />}
+        {shouldShowArrows && !disableRightArrow && <RightArrow />}
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React from "react";
 import faker from "faker";
 import MobileDetect from "mobile-detect";
+import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -11,8 +12,7 @@ import Link from "next/link";
 
 const styles = theme => ({
   root: {
-    textAlign: "center",
-    paddingTop: theme.spacing.unit * 20
+    textAlign: "center"
   }
 });
 
@@ -70,23 +70,20 @@ class Index extends React.Component {
     return (
       <div className={classes.root}>
         <Carousel
+          /*
           disableSwipeOnMobile
           disableDrag
+          */
           responsive={responsive}
           forSSR
-          slidesToSlide={2}
+          slidesToSlide={1}
           infinite={true}
-          className='test'
-          removeArrowOnDeviceType={['tablet', 'mobile']}
           deviceType={this.props.deviceType}
         >
           {fakerData.map(card => {
             return <Card {...card} />;
           })}
         </Carousel>
-        <Button variant="contained" color="secondary">
-          Super Secret Password
-        </Button>
       </div>
     );
   }

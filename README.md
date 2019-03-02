@@ -1,40 +1,35 @@
 # react-multi-carousel
 
+React carousel component supports multiple items and SSR with typescript.
+
+## NPM
+
+[NPM](https://www.npmjs.com/package/react-multi-carousel).
+
 ## Install
 
 ```
 $ npm install react-multi-carousel --save
 ```
 
-### Limitations.
+### How the SSR mode works?
 
-```
-It works if you don't ask for too much.
-```
+
+The current most common solution is to detect the device type of the user based on the user agent. (server-side or client-side).
+
+The end result will either be "mobile", "tablet" or "desktop", so based on these device types, we decided how many items we are showing in the Carousel.
+
+Codes for SSR are at [here](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/pages/index.js).
+
+Demo for the SSR are at [here](https://nextjs-4qframq08.now.sh)
 
 ## Demo.
 
-Demo can be found at [here](http://www.yizhuang.fi/).
+Demo and documentation can be found at [here](https://react-multi-carousel.surge.sh).
 
-## Props
-```
-responsive: responsiveType;
-deviceType?: string;
-forSSR?: boolean;
-slidesToSlide?: number; // number of slides on each slide.
-disableDrag?: boolean; // for desktop
-removeArrow?: boolean;
-disableSwipeOnMobile?: boolean;
-removeArrowOnDeviceType?: string | Array<string>;
-children: React.ReactNode | null;
-customLeftArrow?: React.ReactElement<any> | null;
-customRightArrow?: React.ReactElement<any> | null;
-infinite?: boolean;
-contentClassName?: string;
-itemClassName?:string;
-containerClassName?: string;
-transition?:string;
-```
+Codes are at [here](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/index.stories.js).
+
+
 ## Examples
 
 ```
@@ -68,3 +63,44 @@ const responsive = {
   })}
 </Carousel>
 ```
+
+## Custom Arrows.
+You can pass your own custom arrows to make it the way you want, the same for the position. For example, add media query for the arrows to go under when on smaller screens.
+
+```
+const CustomRightArrow = ({ onClick }) => <button onClick={() => onClick()} />
+<Carousel customRightArrow={<CustomRightArrow />} />
+```
+
+## General Props
+```
+responsive: responsiveType;
+deviceType?: string;
+forSSR?: boolean;
+slidesToSlide: number;
+disableDrag?: boolean;
+removeArrow?: boolean;
+disableSwipeOnMobile?: boolean;
+removeArrowOnDeviceType?: string | Array<string>;
+children: React.ReactNode | null;
+customLeftArrow?: React.ReactElement<any> | null;
+customRightArrow?: React.ReactElement<any> | null;
+infinite?: boolean;
+contentClassName?: string;
+itemClassName?:string;
+containerClassName?: string;
+customTransition?:string;
+transitionDuration?: number;
+// if you are using customTransition, make sure to put the duration here.
+// for example, customTransition="all .5"  then put transitionDuration as 500.
+// this is needed for the resizing to work.
+```
+
+## Specific Props
+
+| Name                 | Type              | Default               | Description                                                              |
+| :------------------- | :---------------- | :-------------------- | :----------------------------------------------------------------------- |
+| `responsive`              | `Object`         | `{}`               | How many items to show on each breakpoint.                                                                   |
+| `deviceType`            | `string` | `none`                 | Only pass this when use for server-side rendering, what to pass can be found in the example folder.                                                                    |
+| `forSSR`           | `bool`            | `false`               | For SSR |
+| `slidesToSlide`   | `number`          | `1` | How many slides to slide.                                                       |
