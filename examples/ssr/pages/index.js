@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 
 import Card from "../components/card";
-import Carousel from "../../../lib/index";
+import Carousel from "react-multi-carousel";
 
 import Link from "next/link";
 

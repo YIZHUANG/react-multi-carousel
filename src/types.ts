@@ -11,7 +11,7 @@ interface CarouselProps {
   responsive: responsiveType;
   deviceType?: string;
   forSSR?: boolean;
-  slidesToSlide?: number;
+  slidesToSlide: number;
   disableDrag?: boolean;
   removeArrow?: boolean;
   disableSwipeOnMobile?: boolean;

@@ -1,12 +1,20 @@
 # react-multi-carousel
 
-
 ## Install
 
 ```
 $ npm install react-multi-carousel --save
 ```
 
+### Limitations.
+
+```
+It works if you don't ask for too much.
+```
+
+## Demo.
+
+Demo can be found at [here](http://www.yizhuang.fi/).
 
 ## Props
 ```

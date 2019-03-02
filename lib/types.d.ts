@@ -17,9 +17,9 @@ interface CarouselProps {
     removeArrow?: boolean;
     disableSwipeOnMobile?: boolean;
     removeArrowOnDeviceType?: string | Array<string>;
-    children: React.ReactNode;
-    customLeftArrow?: React.ReactElement<any>;
-    customRightArrow?: React.ReactElement<any>;
+    children: React.ReactNode | null;
+    customLeftArrow?: React.ReactElement<any> | null;
+    customRightArrow?: React.ReactElement<any> | null;
     infinite?: boolean;
     contentClassName?: string;
     itemClassName?: string;
