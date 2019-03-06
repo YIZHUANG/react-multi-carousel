@@ -217,6 +217,43 @@ function MediaCard(props) {
 
 /***/ }),
 
+/***/ "./components/image.js":
+/*!*****************************!*\
+  !*** ./components/image.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var _jsxFileName = "/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/examples/ssr/components/image.js";
+
+
+var Image = function Image(_ref) {
+  var url = _ref.url,
+      alt = _ref.alt;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    draggable: false,
+    style: {
+      width: '100%',
+      position: 'relative'
+    },
+    src: url,
+    alt: alt,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5
+    },
+    __self: this
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Image);
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js":
 /*!***********************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js ***!
@@ -1467,10 +1504,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _components_card__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/card */ "./components/card.js");
-/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-multi-carousel */ "react-multi-carousel");
-/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _components_image__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/image */ "./components/image.js");
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-multi-carousel */ "react-multi-carousel");
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../style.css */ "./style.css");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_16__);
 
 
 
@@ -1478,6 +1518,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _jsxFileName = "/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/examples/ssr/pages/index.js";
+
+
 
 
 
@@ -1546,10 +1588,35 @@ function (_React$Component) {
         className: classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 71
+          lineNumber: 73
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_13___default.a
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_14___default.a
+      /*
+      disableSwipeOnMobile
+      disableDrag
+      */
+      , {
+        responsive: responsive,
+        forSSR: true,
+        containerClassName: "container",
+        slidesToSlide: 1,
+        infinite: true,
+        deviceType: this.props.deviceType,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 74
+        },
+        __self: this
+      }, fakerData.map(function (card) {
+        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_card__WEBPACK_IMPORTED_MODULE_12__["default"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, card, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 87
+          },
+          __self: this
+        }));
+      })), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_14___default.a
       /*
       disableSwipeOnMobile
       disableDrag
@@ -1559,20 +1626,24 @@ function (_React$Component) {
         forSSR: true,
         slidesToSlide: 1,
         infinite: true,
+        containerClassName: "container",
+        itemClassName: "image-item",
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 72
+          lineNumber: 91
         },
         __self: this
       }, fakerData.map(function (card) {
-        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_card__WEBPACK_IMPORTED_MODULE_12__["default"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, card, {
+        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_image__WEBPACK_IMPORTED_MODULE_13__["default"], {
+          url: card.image,
+          alt: card.headline,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 84
+            lineNumber: 105
           },
           __self: this
-        }));
+        });
       })));
     }
   }], [{
@@ -1609,6 +1680,17 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_6___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_11__["withStyles"])(styles)(Index));
+
+/***/ }),
+
+/***/ "./style.css":
+/*!*******************!*\
+  !*** ./style.css ***!
+  \*******************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 

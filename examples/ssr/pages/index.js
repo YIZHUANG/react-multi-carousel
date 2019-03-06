@@ -6,7 +6,9 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 
 import Card from "../components/card";
+import Image from "../components/image";
 import Carousel from "react-multi-carousel";
+import '../style.css';
 
 import Link from "next/link";
 
@@ -76,12 +78,31 @@ class Index extends React.Component {
           */
           responsive={responsive}
           forSSR
+          containerClassName='container'
           slidesToSlide={1}
           infinite={true}
           deviceType={this.props.deviceType}
         >
           {fakerData.map(card => {
             return <Card {...card} />;
+          })}
+        </Carousel>
+
+        <Carousel
+          /*
+          disableSwipeOnMobile
+          disableDrag
+          */
+          responsive={responsive}
+          forSSR
+          slidesToSlide={1}
+          infinite={true}
+          containerClassName='container'
+          itemClassName='image-item'
+          deviceType={this.props.deviceType}
+        >
+          {fakerData.map(card => {
+            return <Image url={card.image} alt={card.headline} />;
           })}
         </Carousel>
       </div>

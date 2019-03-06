@@ -21,7 +21,7 @@ The end result will either be "mobile", "tablet" or "desktop", so based on these
 
 Codes for SSR are at [here](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/pages/index.js).
 
-Demo for the SSR are at [here](https://nextjs-4qframq08.now.sh)
+Demo for the SSR are at [here](https://react-multi-carousel.now.sh/)
 
 ## Demo.
 
