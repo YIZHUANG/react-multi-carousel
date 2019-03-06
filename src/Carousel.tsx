@@ -44,11 +44,11 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public componentDidMount(): void {
     this.setState({ domLoaded: true });
-    this.correctCurrentState();
+    this.setItemsToShow();
     window.addEventListener("resize", this.onResize);
     this.onResize();
   }
-  public correctCurrentState(shouldCorrectItemPosition?:boolean): void {
+  public setItemsToShow(shouldCorrectItemPosition?: boolean): void {
     const { responsive } = this.props;
     Object.keys(responsive).forEach(item => {
       const { breakpoint, items } = responsive[item];
@@ -60,12 +60,14 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     });
   }
   public setContainerAndItemWidth(
-    slidesToShow:number,
-    shouldCorrectItemPosition?:boolean
+    slidesToShow: number,
+    shouldCorrectItemPosition?: boolean
   ): void {
     if (this.containerRef && this.containerRef.current) {
       const containerWidth = this.containerRef.current.offsetWidth;
-      const itemWidth:number = Math.round(this.containerRef.current.offsetWidth / slidesToShow);
+      const itemWidth: number = Math.round(
+        this.containerRef.current.offsetWidth / slidesToShow
+      );
       this.setState({
         containerWidth,
         itemWidth
@@ -78,7 +80,7 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     }
   }
   public onResize(): void {
-    this.correctCurrentState();
+    this.setItemsToShow();
   }
   public componentDidUpdate(
     prevProps: CarouselProps,
@@ -90,7 +92,7 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
       this.containerRef.current.offsetWidth !== containerWidth
     ) {
       setTimeout(() => {
-        this.correctCurrentState(true);
+        this.setItemsToShow(true);
       }, this.props.transitionDuration || defaultTransitionDuration);
     }
   }
@@ -289,18 +291,21 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
         ref={this.containerRef}
         style={containerStyle}
       >
-        <div
+        <ul
           className={contentClassName}
           // @ts-ignore
           style={{
             ...contentStyle,
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
             transition: customTransition || defaultTransition,
             overflow: shouldRenderOnSSR ? "hidden" : "unset",
             transform: `translate3d(${this.state.transform}px,0,0)`
           }}
         >
           {React.Children.toArray(children).map((child, index) => (
-            <div
+            <li
               key={index}
               onMouseMove={this.handleMouseMove}
               onMouseDown={this.handleMouseDown}
@@ -315,9 +320,9 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
               className={itemClassName}
             >
               {child}
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
         {shouldShowArrows && !disableLeftArrow && <LeftArrow />}
         {shouldShowArrows && !disableRightArrow && <RightArrow />}
       </div>
