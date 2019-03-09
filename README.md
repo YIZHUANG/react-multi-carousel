@@ -12,12 +12,17 @@ React carousel component supports multiple items and SSR with typescript.
 $ npm install react-multi-carousel --save
 ```
 
-### How the SSR mode works?
+### Technical approach.
 
+Detailed Can be found in this blog post [here](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
+
+### How the SSR mode works?
 
 The current most common solution is to detect the device type of the user based on the user agent. (server-side or client-side).
 
-The end result will either be "mobile", "tablet" or "desktop", so based on these device types, we decided how many items we are showing in the Carousel.
+Based based on the device type, we decided how many items we are showing in the Carousel.
+
+More detailed can be found in this blog post [here](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
 
 Codes for SSR are at [here](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/pages/index.js).
 
