@@ -33,9 +33,8 @@ interface CarouselInternalState {
     slidesToShow: number;
     currentSlide: number;
     totalItems: number;
-    activeItem: any;
     domLoaded: boolean;
     deviceType?: string;
-    transform: number | string;
+    transform: number;
 }
 export { CarouselInternalState, CarouselProps, responsiveType };

@@ -10,7 +10,7 @@ import { guessWidthFromDeviceType } from "./utils";
 import { CarouselInternalState, CarouselProps } from "./types";
 
 const defaultTransitionDuration = 300;
-const defaultTransition = "transform 300ms";
+const defaultTransition = "transform ease-in-out 300ms";
 class Container extends React.Component<CarouselProps, CarouselInternalState> {
   public static defaultProps: any = {
     slidesToSlide: 1,
@@ -20,6 +20,11 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     itemClassName: ""
   };
   private readonly containerRef: React.RefObject<any>;
+  public onMove:boolean;
+  public initialPosition: number;
+  public lastPosition: number;
+  public isAnimationAllowed: boolean;
+  public direction :string;
   constructor(props: CarouselProps) {
     super(props);
     this.containerRef = React.createRef();
@@ -28,7 +33,6 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
       slidesToShow: 0,
       currentSlide: 0,
       totalItems: React.Children.count(props.children),
-      activeItem: {},
       deviceType: "",
       domLoaded: false,
       transform: 0,
@@ -41,6 +45,11 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     this.handleTouchStart = this.handleTouchStart.bind(this);
     this.handleTouchMove = this.handleTouchMove.bind(this);
     this.handleTouchEnd = this.handleTouchEnd.bind(this);
+    this.onMove = false;
+    this.initialPosition = 0;
+    this.lastPosition = 0;
+    this.isAnimationAllowed = true;
+    this.direction = "";
   }
   public componentDidMount(): void {
     this.setState({ domLoaded: true });
@@ -96,21 +105,22 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
       }, this.props.transitionDuration || defaultTransitionDuration);
     }
   }
-
   public resetAllItems(): void {
     this.setState({ transform: 0, currentSlide: 0 });
   }
-
-  public next(): void {
+  public next(slidesHavePassed = 0): void {
+    this.isAnimationAllowed = true;
     const { slidesToShow } = this.state;
     const { slidesToSlide, infinite } = this.props;
-    if (this.state.currentSlide + 1 + slidesToShow <= this.state.totalItems) {
+    const nextMaximumSlides =
+      this.state.currentSlide + 1 + slidesHavePassed + slidesToShow;
+    const nextSlides =
+      this.state.currentSlide + slidesHavePassed + slidesToSlide;
+    const nextPosition = -(this.state.itemWidth * nextSlides);
+    if (nextMaximumSlides <= this.state.totalItems) {
       this.setState({
-        transform: -(
-          this.state.itemWidth *
-          (this.state.currentSlide + slidesToSlide)
-        ),
-        currentSlide: this.state.currentSlide + slidesToSlide
+        transform: nextPosition,
+        currentSlide: nextSlides
       });
     } else {
       if (infinite) {
@@ -118,99 +128,198 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
       }
     }
   }
-  public previous(): void {
+  public previous(slidesHavePassed = 0): void {
+    this.isAnimationAllowed = true;
     const { slidesToShow } = this.state;
     const { slidesToSlide, infinite } = this.props;
-    if (this.state.currentSlide - slidesToSlide >= 0) {
+    const nextMaximumSlides =
+      this.state.currentSlide - slidesHavePassed - slidesToSlide;
+    const nextSlides =
+      this.state.currentSlide - slidesHavePassed - slidesToSlide;
+    const nextPosition = -(this.state.itemWidth * nextSlides);
+    if (nextMaximumSlides >= 0) {
       this.setState({
-        transform: -(
-          this.state.itemWidth *
-          (this.state.currentSlide - slidesToSlide)
-        ),
-        currentSlide: this.state.currentSlide - slidesToSlide
+        transform: nextPosition,
+        currentSlide: nextSlides
       });
     } else {
+      const maxSlides = this.state.totalItems - slidesToShow;
+      const maxPosition = -(this.state.itemWidth * maxSlides);
       if (infinite) {
         this.setState({
-          transform: -(
-            this.state.itemWidth *
-            (this.state.totalItems - slidesToShow)
-          ),
-          currentSlide: this.state.totalItems - slidesToShow
+          transform: maxPosition,
+          currentSlide: maxSlides
         });
       }
     }
   }
-
   public componentWillUnmount(): void {
     window.removeEventListener("resize", this.onResize);
   }
-
+  public resetMoveStatus(): void {
+    this.onMove = false;
+    this.initialPosition = 0;
+    this.lastPosition = 0;
+    this.direction = "";
+  }
   public handleMouseDown(e: any): void {
     if (this.props.disableDrag) {
       return;
     }
-    this.setState({
-      activeItem: { mousedown: true, initialPosition: e.pageX }
-    });
+    this.onMove = true;
+    this.initialPosition = e.pageX;
+    this.lastPosition = e.pageX;
+    this.isAnimationAllowed = false;
   }
   public handleMouseMove(e: any): void {
     if (this.props.disableDrag) {
       return;
     }
-    const { activeItem } = this.state;
-    if (activeItem.mousedown) {
-      if (activeItem.initialPosition - e.pageX > this.state.itemWidth / 2) {
-        this.next();
-        this.setState({ activeItem: {} });
+    if (this.onMove) {
+      if (this.initialPosition > e.pageX) {
+        const translateXLimit = Math.abs(
+          -(
+            this.state.itemWidth *
+            (this.state.totalItems - this.state.slidesToShow)
+          )
+        );
+        const nextTranslate =
+          this.state.transform - (this.lastPosition - e.pageX);
+        const isLastSlide =
+          this.state.currentSlide ===
+          this.state.totalItems - this.state.slidesToShow;
+        if (Math.abs(nextTranslate) <= translateXLimit || (isLastSlide && this.props.infinite)) {
+          this.setState({ transform: nextTranslate });
+        }
       }
-      if (e.pageX - activeItem.initialPosition > this.state.itemWidth / 2) {
-        this.previous();
-        this.setState({ activeItem: {} });
+      if (e.pageX > this.initialPosition) {
+        const nextTranslate =
+          this.state.transform + (e.pageX - this.lastPosition);
+        const isFirstSlide = this.state.currentSlide === 0;
+        if (nextTranslate <= 0 || (isFirstSlide && this.props.infinite)) {
+          this.setState({ transform: nextTranslate });
+        }
       }
+      this.lastPosition = e.pageX;
     }
   }
   public handleMouseUp(e: any): void {
     if (this.props.disableDrag) {
       return;
     }
-    this.setState({ activeItem: {} });
+    if (this.onMove) {
+      if (this.initialPosition > e.pageX) {
+
+        const hasTravel = Math.round(
+          (this.initialPosition - e.pageX) / this.state.itemWidth
+        ) || 1;
+        this.next(hasTravel === 1 ? 0 : hasTravel - 1);
+      }
+      if (e.pageX > this.initialPosition) {
+        const hasTravel = Math.round(
+          (e.pageX - this.initialPosition) / this.state.itemWidth
+        );
+        this.previous(hasTravel === 1 ? 0 : hasTravel - 1);
+      }
+      this.resetMoveStatus();
+    }
   }
   public handleTouchStart(e: any): void {
     if (this.props.disableSwipeOnMobile) {
       return;
     }
-    this.setState({
-      activeItem: { touchStart: true, initialPosition: e.touches[0].screenX }
-    });
+    this.onMove = true;
+    this.initialPosition = e.touches[0].screenX;
+    this.lastPosition = e.touches[0].screenX;
+    this.isAnimationAllowed = false;
   }
   public handleTouchMove(e: any): void {
     if (this.props.disableSwipeOnMobile) {
       return;
     }
-    const { activeItem } = this.state;
-    if (activeItem.touchStart) {
-      if (
-        activeItem.initialPosition - e.touches[0].screenX >
-        this.state.itemWidth / 4
-      ) {
-        this.next();
-        this.setState({ activeItem: {} });
+    if (this.onMove) {
+      if (this.initialPosition > e.touches[0].screenX) {
+        this.direction = "right";
+        const translateXLimit = Math.abs(
+          -(
+            this.state.itemWidth *
+            (this.state.totalItems - this.state.slidesToShow)
+          )
+        );
+        const nextTranslate:number =
+          this.state.transform - (this.lastPosition - e.touches[0].screenX);
+        const isLastSlide =
+          this.state.currentSlide ===
+          this.state.totalItems - this.state.slidesToShow;
+        if (Math.abs(nextTranslate) <= translateXLimit || isLastSlide) {
+          this.setState({ transform: nextTranslate });
+        }
       }
-      if (
-        e.touches[0].screenX - activeItem.initialPosition >
-        this.state.itemWidth / 4
-      ) {
-        this.previous();
-        this.setState({ activeItem: {} });
+      if (e.touches[0].screenX > this.initialPosition) {
+        this.direction = "left";
+        const nextTranslate =
+          this.state.transform + (e.touches[0].screenX - this.lastPosition);
+        const isFirstSlide = this.state.currentSlide === 0;
+        if (nextTranslate <= 0 || isFirstSlide) {
+          this.setState({ transform: nextTranslate });
+        }
       }
+      this.lastPosition = e.touches[0].screenX;
     }
   }
-  public handleTouchEnd(e: any): void {
+  public handleTouchEnd(): void {
     if (this.props.disableSwipeOnMobile) {
       return;
     }
-    this.setState({ activeItem: {} });
+    this.isAnimationAllowed = true;
+    if (this.onMove) {
+      if (this.direction === "right") {
+        const hasTravel = Math.round(
+          (this.initialPosition - this.lastPosition) / this.state.itemWidth
+        );
+        this.next(hasTravel === 1 ? 0 : hasTravel - 1);
+      }
+      if (this.direction === "left") {
+        const hasTravel = Math.round(
+          (this.lastPosition - this.initialPosition) / this.state.itemWidth
+        );
+        this.previous(hasTravel === 1 ? 0 : hasTravel - 1);
+      }
+      this.resetMoveStatus();
+    }
+  }
+
+  public renderLeftArrow(): React.ReactElement<any> {
+    const { customLeftArrow } = this.props;
+    if (customLeftArrow) {
+      return React.cloneElement(customLeftArrow, {
+        onClick: () => this.previous()
+      });
+    } else {
+      return (
+        <i
+          // @ts-ignore
+          style={leftArrowStyle}
+          onClick={() => this.previous()}
+        />
+      );
+    }
+  }
+  public renderRightArrow(): React.ReactElement<any> {
+    const { customRightArrow } = this.props;
+    if (customRightArrow) {
+      return React.cloneElement(customRightArrow, {
+        onClick: () => this.next()
+      });
+    } else {
+      return (
+        <i
+          // @ts-ignore
+          style={rightArrowStyle}
+          onClick={() => this.next()}
+        />
+      );
+    }
   }
 
   public render(): any {
@@ -255,36 +364,6 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
       );
     const disableLeftArrow = !infinite && isLeftEndReach;
     const disableRightArrow = !infinite && isRightEndReach;
-    const LeftArrow = () => {
-      if (customLeftArrow) {
-        return React.cloneElement(customLeftArrow, {
-          onClick: () => this.previous()
-        });
-      } else {
-        return (
-          <i
-            // @ts-ignore
-            style={leftArrowStyle}
-            onClick={() => this.previous()}
-          />
-        );
-      }
-    };
-    const RightArrow = () => {
-      if (customRightArrow) {
-        return React.cloneElement(customRightArrow, {
-          onClick: () => this.next()
-        });
-      } else {
-        return (
-          <i
-            // @ts-ignore
-            style={rightArrowStyle}
-            onClick={() => this.next()}
-          />
-        );
-      }
-    };
     return (
       <div
         className={containerClassName}
@@ -299,20 +378,23 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
             listStyle: "none",
             padding: 0,
             margin: 0,
-            transition: customTransition || defaultTransition,
+            transition: this.isAnimationAllowed
+              ? customTransition || defaultTransition
+              : "none",
             overflow: shouldRenderOnSSR ? "hidden" : "unset",
             transform: `translate3d(${this.state.transform}px,0,0)`
           }}
+          onMouseMove={this.handleMouseMove}
+          onMouseDown={this.handleMouseDown}
+          onMouseUp={this.handleMouseUp}
+          onMouseLeave={this.handleMouseUp}
+          onTouchStart={this.handleTouchStart}
+          onTouchMove={this.handleTouchMove}
+          onTouchEnd={this.handleTouchEnd}
         >
           {React.Children.toArray(children).map((child, index) => (
             <li
               key={index}
-              onMouseMove={this.handleMouseMove}
-              onMouseDown={this.handleMouseDown}
-              onMouseUp={this.handleMouseUp}
-              onTouchStart={this.handleTouchStart}
-              onTouchMove={this.handleTouchMove}
-              onTouchEnd={this.handleTouchEnd}
               style={{
                 flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
                 width: domFullLoaded ? `${itemWidth}px` : "auto"
@@ -323,8 +405,8 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
             </li>
           ))}
         </ul>
-        {shouldShowArrows && !disableLeftArrow && <LeftArrow />}
-        {shouldShowArrows && !disableRightArrow && <RightArrow />}
+        {shouldShowArrows && !disableLeftArrow && this.renderLeftArrow()}
+        {shouldShowArrows && !disableRightArrow && this.renderRightArrow()}
       </div>
     );
   }
