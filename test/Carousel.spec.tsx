@@ -169,7 +169,7 @@ describe("Carousel", () => {
     wrapper.find('ul').simulate('mousemove', {
       clientX: -200
     })
-    wrapper.find('ul').simulate('mouseup')
+    wrapper.find('ul').simulate('mouseUp')
     expect(wrapper.state().transform).toBe(0);
     wrapper.unmount();
   });
@@ -246,7 +246,7 @@ describe("Carousel", () => {
       clientX: 10
     })
     wrapper.find('ul').simulate('mouseup')
-    expect(wrapper.state().transform).toBe(-200);   
+    expect(wrapper.state().transform).toBe(-200);
     // move to bottom 4 of the carousel - right, to test if oversliding is prevented.
     wrapper.find('ul').simulate('mousedown', {
       clientX: 1200
@@ -256,7 +256,7 @@ describe("Carousel", () => {
     })
     wrapper.find('ul').simulate('mouseup')
     expect(wrapper.state().transform).toBe(-1600);
-    // even though the move-right-action way pass the initial position, but it doesn't overslide out of the container of the carousel     
+    // even though the move-right-action way pass the initial position, but it doesn't overslide out of the container of the carousel
     wrapper.find('ul').simulate('mousedown', {
       clientX: 1600
     })
@@ -314,102 +314,102 @@ describe("Carousel", () => {
     global.dispatchEvent(new Event('resize'));
     wrapper.setState({ itemWidth: 200 });
     // move right
-    wrapper.find('ul').simulate('touchstart', {
+    wrapper.find('ul').simulate('touchStart', {
       clientX: 100
     })
-    wrapper.find('ul').simulate('touchmove', {
+    wrapper.find('ul').simulate('touchMove', {
       clientX: -200
     })
-    wrapper.find('ul').simulate('touchend')
+    wrapper.find('ul').simulate('touchEnd')
     expect(wrapper.state().transform).toBe(-600);
     // move left
-    wrapper.find('ul').simulate('touchstart', {
+    wrapper.find('ul').simulate('touchStart', {
       clientX: 100
     })
-    wrapper.find('ul').simulate('touchmove', {
+    wrapper.find('ul').simulate('touchMove', {
       clientX: 200
     })
-    wrapper.find('ul').simulate('touchend')
+    wrapper.find('ul').simulate('touchEnd')
     expect(wrapper.state().transform).toBe(-200);
     // move left
-    wrapper.find('ul').simulate('touchstart', {
+    wrapper.find('ul').simulate('touchStart', {
       clientX: 50
     })
-    wrapper.find('ul').simulate('touchmove', {
+    wrapper.find('ul').simulate('touchMove', {
       clientX: 60
     })
-    wrapper.find('ul').simulate('touchend')
+    wrapper.find('ul').simulate('touchEnd')
     expect(wrapper.state().transform).toBe(-0);
     // infinite - left
-    wrapper.find('ul').simulate('touchstart', {
+    wrapper.find('ul').simulate('touchStart', {
       clientX: 50
     })
-    wrapper.find('ul').simulate('touchmove', {
+    wrapper.find('ul').simulate('touchMove', {
       clientX: 60
     })
-    wrapper.find('ul').simulate('touchend')
+    wrapper.find('ul').simulate('touchEnd')
     expect(wrapper.state().transform).toBe(-1800);
     // infinite - right
-    wrapper.find('ul').simulate('touchstart', {
+    wrapper.find('ul').simulate('touchStart', {
       clientX: 50
     })
-    wrapper.find('ul').simulate('touchmove', {
+    wrapper.find('ul').simulate('touchMove', {
       clientX: 40
     })
-    wrapper.find('ul').simulate('touchend')
+    wrapper.find('ul').simulate('touchEnd')
     expect(wrapper.state().transform).toBe(0);
     // move right
-    wrapper.find('ul').simulate('touchstart', {
+    wrapper.find('ul').simulate('touchStart', {
       clientX: 50
     })
-    wrapper.find('ul').simulate('touchmove', {
+    wrapper.find('ul').simulate('touchMove', {
       clientX: 10
     })
-    wrapper.find('ul').simulate('touchend')
-    expect(wrapper.state().transform).toBe(-200);   
+    wrapper.find('ul').simulate('touchEnd')
+    expect(wrapper.state().transform).toBe(-200);
     // move to bottom 4 of the carousel - right, to test if oversliding is prevented.
-    wrapper.find('ul').simulate('touchstart', {
+    wrapper.find('ul').simulate('touchStart', {
       clientX: 1200
     })
-    wrapper.find('ul').simulate('touchmove', {
+    wrapper.find('ul').simulate('touchMove', {
       clientX: 10
     })
-    wrapper.find('ul').simulate('touchend')
+    wrapper.find('ul').simulate('touchEnd')
     expect(wrapper.state().transform).toBe(-1600);
-    // even though the move-right-action way pass the initial position, but it doesn't overslide out of the container of the carousel     
-    wrapper.find('ul').simulate('touchstart', {
+    // even though the move-right-action way pass the initial position, but it doesn't overslide out of the container of the carousel
+    wrapper.find('ul').simulate('touchStart', {
       clientX: 1600
     })
-    wrapper.find('ul').simulate('touchmove', {
+    wrapper.find('ul').simulate('touchMove', {
       clientX: 10
     })
-    wrapper.find('ul').simulate('touchend')
+    wrapper.find('ul').simulate('touchEnd')
     expect(wrapper.state().transform).toBe(-1800);
     // now do the same for previous action.
     // move to first 1 slide of the Carousel
-    wrapper.find('ul').simulate('touchstart', {
+    wrapper.find('ul').simulate('touchStart', {
       clientX: 11
     })
-    wrapper.find('ul').simulate('touchmove', {
+    wrapper.find('ul').simulate('touchMove', {
       clientX: 10
     })
-    wrapper.find('ul').simulate('touchend')
+    wrapper.find('ul').simulate('touchEnd')
      // move to first 3 slides of the Carousel
-    wrapper.find('ul').simulate('touchstart', {
+    wrapper.find('ul').simulate('touchStart', {
       clientX: 500
     })
-    wrapper.find('ul').simulate('touchmove', {
+    wrapper.find('ul').simulate('touchMove', {
       clientX: 10
     })
-    wrapper.find('ul').simulate('touchend')
+    wrapper.find('ul').simulate('touchEnd')
     // move to left as much as it can, but it doesn't overslide
-    wrapper.find('ul').simulate('touchstart', {
+    wrapper.find('ul').simulate('touchStart', {
       clientX: 10
     })
-    wrapper.find('ul').simulate('touchmove', {
+    wrapper.find('ul').simulate('touchMove', {
       clientX: 1000
     })
-    wrapper.find('ul').simulate('touchend')
+    wrapper.find('ul').simulate('touchEnd')
     expect(wrapper.state().transform).toBe(0);
     expect(wrapper.state().currentSlide).toBe(0);
   });
