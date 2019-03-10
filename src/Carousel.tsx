@@ -127,6 +127,17 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
         transform: nextPosition,
         currentSlide: nextSlides
       });
+    } else if (
+      slidesHavePassed > 0 &&
+      this.state.currentSlide + 1 + slidesToShow <= this.state.totalItems
+    ) {
+      // prevent over sliding;
+      const maxSlides = this.state.totalItems - slidesToShow;
+      const maxPosition = -(this.state.itemWidth * maxSlides);
+      this.setState({
+        transform: maxPosition,
+        currentSlide: maxSlides
+      });
     } else {
       if (infinite) {
         this.resetAllItems();
@@ -146,6 +157,15 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
       this.setState({
         transform: nextPosition,
         currentSlide: nextSlides
+      });
+    } else if (
+      slidesHavePassed > 0 &&
+      this.state.currentSlide - slidesToSlide >= 0
+    ) {
+      // prevent oversliding.
+      this.setState({
+        transform: 0,
+        currentSlide: 0
       });
     } else {
       const maxSlides = this.state.totalItems - slidesToShow;
@@ -223,13 +243,13 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
         const hasTravel =
           Math.round((this.initialPosition - e.pageX) / this.state.itemWidth) ||
           1;
-        this.next(hasTravel === 0 || hasTravel === 1 ? 0 : hasTravel - 1);
+        this.next(hasTravel);
       }
       if (e.pageX > this.initialPosition) {
         const hasTravel = Math.round(
           (e.pageX - this.initialPosition) / this.state.itemWidth
         );
-        this.previous(hasTravel === 0 || hasTravel === 1 ? 0 : hasTravel - 1);
+        this.previous(hasTravel);
       }
       this.resetMoveStatus();
     }
@@ -287,13 +307,13 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
         const hasTravel = Math.round(
           (this.initialPosition - this.lastPosition) / this.state.itemWidth
         );
-        this.next(hasTravel === 1 ? 0 : hasTravel - 1);
+        this.next(hasTravel);
       }
       if (this.direction === "left") {
         const hasTravel = Math.round(
           (this.lastPosition - this.initialPosition) / this.state.itemWidth
         );
-        this.previous(hasTravel === 1 ? 0 : hasTravel - 1);
+        this.previous(hasTravel);
       }
       this.resetMoveStatus();
     }
