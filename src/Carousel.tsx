@@ -9,8 +9,8 @@ import {
 import { guessWidthFromDeviceType } from "./utils";
 import { CarouselInternalState, CarouselProps } from "./types";
 
-const defaultTransitionDuration = 300;
-const defaultTransition = "transform ease-in-out 300ms";
+const defaultTransitionDuration = 500;
+const defaultTransition = "transform 500ms ease-in-out";
 class Container extends React.Component<CarouselProps, CarouselInternalState> {
   public static defaultProps: any = {
     slidesToSlide: 1,
@@ -20,11 +20,11 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     itemClassName: ""
   };
   private readonly containerRef: React.RefObject<any>;
-  public onMove:boolean;
+  public onMove: boolean;
   public initialPosition: number;
   public lastPosition: number;
   public isAnimationAllowed: boolean;
-  public direction :string;
+  public direction: string;
   constructor(props: CarouselProps) {
     super(props);
     this.containerRef = React.createRef();
@@ -188,7 +188,10 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
         const isLastSlide =
           this.state.currentSlide ===
           this.state.totalItems - this.state.slidesToShow;
-        if (Math.abs(nextTranslate) <= translateXLimit || (isLastSlide && this.props.infinite)) {
+        if (
+          Math.abs(nextTranslate) <= translateXLimit ||
+          (isLastSlide && this.props.infinite)
+        ) {
           this.setState({ transform: nextTranslate });
         }
       }
@@ -209,17 +212,16 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     }
     if (this.onMove) {
       if (this.initialPosition > e.pageX) {
-
-        const hasTravel = Math.round(
-          (this.initialPosition - e.pageX) / this.state.itemWidth
-        ) || 1;
-        this.next(hasTravel === 1 ? 0 : hasTravel - 1);
+        const hasTravel =
+          Math.round((this.initialPosition - e.pageX) / this.state.itemWidth) ||
+          1;
+        this.next(hasTravel === 0 || hasTravel === 1 ? 0 : hasTravel - 1);
       }
       if (e.pageX > this.initialPosition) {
         const hasTravel = Math.round(
           (e.pageX - this.initialPosition) / this.state.itemWidth
         );
-        this.previous(hasTravel === 1 ? 0 : hasTravel - 1);
+        this.previous(hasTravel === 0 || hasTravel === 1 ? 0 : hasTravel - 1);
       }
       this.resetMoveStatus();
     }
@@ -246,7 +248,7 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
             (this.state.totalItems - this.state.slidesToShow)
           )
         );
-        const nextTranslate:number =
+        const nextTranslate: number =
           this.state.transform - (this.lastPosition - e.touches[0].screenX);
         const isLastSlide =
           this.state.currentSlide ===
