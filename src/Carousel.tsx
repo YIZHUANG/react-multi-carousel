@@ -18,7 +18,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     containerClassName: "",
     contentClassName: "",
     itemClassName: "",
-    keyBoardControl: true
+    keyBoardControl: true,
+    autoPlaySpeed: 3000
   };
   private readonly containerRef: React.RefObject<any>;
   public onMove: boolean;
@@ -26,6 +27,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public lastPosition: number;
   public isAnimationAllowed: boolean;
   public direction: string;
+  public autoPlay?: any;
   constructor(props: CarouselProps) {
     super(props);
     this.containerRef = React.createRef();
@@ -44,6 +46,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.handleMove = this.handleMove.bind(this);
     this.handleOut = this.handleOut.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
+    this.next = this.next.bind(this);
+    this.previous = this.previous.bind(this);
     this.onMove = false;
     this.initialPosition = 0;
     this.lastPosition = 0;
@@ -57,6 +62,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.onResize();
     if (this.props.keyBoardControl) {
       window.addEventListener("keyup", this.onKeyUp);
+    }
+    if(this.props.autoPlay && this.props.autoPlaySpeed) {
+      this.autoPlay = setInterval(this.next,this.props.autoPlaySpeed)
     }
   }
   public setItemsToShow(shouldCorrectItemPosition?: boolean): void {
@@ -94,7 +102,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.setItemsToShow();
   }
   public componentDidUpdate(
-    prevProps: CarouselProps,
+    { keyBoardControl, autoPlay }: CarouselProps,
     { containerWidth }: CarouselInternalState
   ): void {
     if (
@@ -105,6 +113,16 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       setTimeout(() => {
         this.setItemsToShow(true);
       }, this.props.transitionDuration || defaultTransitionDuration);
+    }
+    if(keyBoardControl && !this.props.keyBoardControl) {
+      window.removeEventListener("keyup", this.onKeyUp);
+    }
+    if(autoPlay && !this.props.autoPlay && this.autoPlay) {
+      clearInterval(this.autoPlay)
+      this.autoPlay = undefined;
+    }
+    if(!autoPlay && this.props.autoPlay && !this.autoPlay) {
+      this.autoPlay = setInterval(this.next,this.props.autoPlaySpeed)
     }
   }
   public resetAllItems(): void {
@@ -180,6 +198,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.props.keyBoardControl) {
       window.removeEventListener("keyup", this.onKeyUp);
     }
+    if(this.props.autoPlay && this.autoPlay) {
+      clearInterval(this.autoPlay)
+      this.autoPlay = undefined;
+    }
   }
   public resetMoveStatus(): void {
     this.onMove = false;
@@ -242,6 +264,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
   }
   public handleOut(e: any): void {
+    if(this.props.autoPlay && !this.autoPlay) {
+      this.autoPlay = setInterval(this.next,this.props.autoPlaySpeed)
+    }
     const shouldDisableOnMobile =
       e.type === "touchend" && this.props.disableSwipeOnMobile;
     const shouldDisableOnDesktop =
@@ -266,13 +291,18 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.resetMoveStatus();
     }
   }
-
   public onKeyUp(e: any): void {
     switch (e.keyCode) {
       case 37:
         return this.previous();
       case 39:
         return this.next();
+    }
+  }
+  public handleEnter():void {
+    if(this.autoPlay && this.props.autoPlay) {
+      clearInterval(this.autoPlay)
+      this.autoPlay = undefined;
     }
   }
 
@@ -371,6 +401,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           onMouseMove={this.handleMove}
           onMouseDown={this.handleDown}
           onMouseUp={this.handleOut}
+          onMouseEnter={this.handleEnter}
           onMouseLeave={this.handleOut}
           onTouchStart={this.handleDown}
           onTouchMove={this.handleMove}

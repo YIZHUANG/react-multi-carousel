@@ -25,6 +25,8 @@ interface CarouselProps {
     itemClassName?: string;
     containerClassName?: string;
     keyBoardControl?: boolean;
+    autoPlay?: boolean;
+    autoPlaySpeed?: number;
     customTransition?: string;
     transitionDuration?: number;
 }

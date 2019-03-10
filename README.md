@@ -1,10 +1,15 @@
 # react-multi-carousel
 
-React carousel component supports multiple items and SSR with typescript.
+Lightweight React carousel component supports multiple items and SSR(Server-side rendering) with typescript.
 
 ## NPM
 
 [NPM](https://www.npmjs.com/package/react-multi-carousel).
+
+## Bundle size
+
+[Bundle-size](https://bundlephobia.com/result?p=react-multi-carousel@1.0.33).
+2.5kB
 
 ## Install
 
@@ -34,6 +39,20 @@ Demo and documentation can be found at [here](https://react-multi-carousel.surge
 
 Codes are at [here](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/index.stories.js).
 
+## Features.
+
+* Server-side rendering
+* Infinite mode
+* Custom animation
+* AutoPlay mode
+* Responsive
+* Swipe to slide
+* Mouse drag to slide
+* Keyboard control to slide
+* Multiple items
+* Show / hide arrows
+* Custom arrows / control buttons
+* Custom styling
 
 ## Examples
 
@@ -59,7 +78,12 @@ const responsive = {
   forSSR
   slidesToSlide={2}
   infinite={true}
-  className='test'
+  autoPlay={this.props.deviceType !== 'mobile' ? true : false}
+  autoPlaySpeed={1000}
+  keyBoardControl={true}
+  customTransition='all .5'
+  transitionDuration={500}
+  containerClassName='container-border-green'
   removeArrowOnDeviceType={['tablet', 'mobile']}
   deviceType={this.props.deviceType}
 >
@@ -95,6 +119,8 @@ const CustomRightArrow = ({ onClick }) => <button onClick={() => onClick()} />
   itemClassName?:string;
   containerClassName?: string;
   keyBoardControl?: boolean;
+  autoPlay?: boolean;
+  autoPlaySpeed?: number; // default 3000ms
   customTransition?:string;
   transitionDuration?: number;
   // if you are using customTransition, make sure to put the duration here.
@@ -110,3 +136,7 @@ const CustomRightArrow = ({ onClick }) => <button onClick={() => onClick()} />
 | `deviceType`            | `string` | `none`                 | Only pass this when use for server-side rendering, what to pass can be found in the example folder.                                                                    |
 | `forSSR`           | `bool`            | `false`               | For SSR |
 | `slidesToSlide`   | `number`          | `1` | How many slides to slide.                                                       |
+
+## Contribute
+
+Submit an issue for feature request or submit a pr.

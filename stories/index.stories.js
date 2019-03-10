@@ -150,3 +150,12 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
+  .addWithJSX("auto play", () => {
+    return (
+      <Carousel autoPlay autoPlaySpeed={1000} containerClassName='container' slidesToSlide={2} responsive={responsive}>
+        {fakerData.map(card => {
+          return <Card {...card} />;
+        })}
+      </Carousel>
+    );
+  })

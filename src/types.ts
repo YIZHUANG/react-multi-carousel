@@ -24,6 +24,8 @@ interface CarouselProps {
   itemClassName?:string;
   containerClassName?: string;
   keyBoardControl?: boolean;
+  autoPlay?: boolean;
+  autoPlaySpeed?: number; // default 3000ms
   customTransition?:string;
   transitionDuration?: number;
   // if you are using customTransition, make sure to put the duration here.
