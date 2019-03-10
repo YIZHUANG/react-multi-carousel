@@ -9,15 +9,16 @@ import {
 import { guessWidthFromDeviceType } from "./utils";
 import { CarouselInternalState, CarouselProps } from "./types";
 
-const defaultTransitionDuration = 500;
-const defaultTransition = "transform 500ms ease-in-out";
+const defaultTransitionDuration = 300;
+const defaultTransition = "transform 300ms ease-in-out";
 class Container extends React.Component<CarouselProps, CarouselInternalState> {
   public static defaultProps: any = {
     slidesToSlide: 1,
     infinite: false,
     containerClassName: "",
     contentClassName: "",
-    itemClassName: ""
+    itemClassName: "",
+    keyBoardControl: true
   };
   private readonly containerRef: React.RefObject<any>;
   public onMove: boolean;
@@ -45,6 +46,7 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     this.handleTouchStart = this.handleTouchStart.bind(this);
     this.handleTouchMove = this.handleTouchMove.bind(this);
     this.handleTouchEnd = this.handleTouchEnd.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
     this.onMove = false;
     this.initialPosition = 0;
     this.lastPosition = 0;
@@ -56,6 +58,9 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     this.setItemsToShow();
     window.addEventListener("resize", this.onResize);
     this.onResize();
+    if (this.props.keyBoardControl) {
+      window.addEventListener("keyup", this.onKeyUp);
+    }
   }
   public setItemsToShow(shouldCorrectItemPosition?: boolean): void {
     const { responsive } = this.props;
@@ -155,6 +160,9 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public componentWillUnmount(): void {
     window.removeEventListener("resize", this.onResize);
+    if (this.props.keyBoardControl) {
+      window.removeEventListener("keyup", this.onKeyUp);
+    }
   }
   public resetMoveStatus(): void {
     this.onMove = false;
@@ -290,7 +298,14 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
       this.resetMoveStatus();
     }
   }
-
+  public onKeyUp(e: any): void {
+    switch (e.keyCode) {
+      case 37:
+        return this.previous();
+      case 39:
+        return this.next();
+    }
+  }
   public renderLeftArrow(): React.ReactElement<any> {
     const { customLeftArrow } = this.props;
     if (customLeftArrow) {
