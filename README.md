@@ -119,7 +119,7 @@ const CustomRightArrow = ({ onClick }) => <button onClick={() => onClick()} />
   itemClassName?:string;
   containerClassName?: string;
   keyBoardControl?: boolean;
-  autoPlay?: boolean;
+  autoPlay?: boolean; // make sure you put infinite={true} if autoPlay is enabled.
   autoPlaySpeed?: number; // default 3000ms
   customTransition?:string;
   transitionDuration?: number;

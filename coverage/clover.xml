@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1552247008131" clover="3.2.0">
-  <project timestamp="1552247008131" name="All files">
-    <metrics statements="165" coveredstatements="144" conditionals="98" coveredconditionals="69" methods="33" coveredmethods="27" elements="296" coveredelements="240" complexity="0" loc="165" ncloc="165" packages="2" files="6" classes="6"/>
+<coverage generated="1552248681223" clover="3.2.0">
+  <project timestamp="1552248681224" name="All files">
+    <metrics statements="167" coveredstatements="144" conditionals="101" coveredconditionals="70" methods="33" coveredmethods="27" elements="301" coveredelements="241" complexity="0" loc="167" ncloc="167" packages="2" files="6" classes="6"/>
     <package name="src">
-      <metrics statements="141" coveredstatements="120" conditionals="98" coveredconditionals="69" methods="27" coveredmethods="21"/>
+      <metrics statements="143" coveredstatements="120" conditionals="101" coveredconditionals="70" methods="27" coveredmethods="21"/>
       <file name="Carousel.tsx" path="/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/src/Carousel.tsx">
-        <metrics statements="130" coveredstatements="112" conditionals="98" coveredconditionals="69" methods="26" coveredmethods="21"/>
+        <metrics statements="132" coveredstatements="112" conditionals="101" coveredconditionals="70" methods="26" coveredmethods="21"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
@@ -90,52 +90,54 @@
         <line num="223" count="22" type="stmt"/>
         <line num="230" count="1" type="stmt"/>
         <line num="232" count="22" type="cond" truecount="1" falsecount="1"/>
-        <line num="235" count="14" type="stmt"/>
-        <line num="236" count="14" type="stmt"/>
-        <line num="243" count="14" type="stmt"/>
-        <line num="245" count="14" type="stmt"/>
-        <line num="251" count="12" type="stmt"/>
-        <line num="255" count="8" type="stmt"/>
-        <line num="257" count="8" type="stmt"/>
-        <line num="258" count="8" type="stmt"/>
-        <line num="260" count="6" type="stmt"/>
-        <line num="263" count="22" type="stmt"/>
-        <line num="268" count="0" type="stmt"/>
-        <line num="271" count="23" type="cond" truecount="2" falsecount="0"/>
-        <line num="273" count="23" type="cond" truecount="3" falsecount="0"/>
-        <line num="276" count="1" type="stmt"/>
-        <line num="280" count="14" type="stmt"/>
-        <line num="283" count="14" type="stmt"/>
-        <line num="286" count="8" type="stmt"/>
-        <line num="289" count="8" type="stmt"/>
-        <line num="291" count="22" type="stmt"/>
-        <line num="297" count="0" type="stmt"/>
-        <line num="299" count="0" type="stmt"/>
-        <line num="304" count="0" type="stmt"/>
-        <line num="305" count="0" type="stmt"/>
-        <line num="310" count="100" type="stmt"/>
-        <line num="312" count="98" type="stmt"/>
-        <line num="313" count="8" type="stmt"/>
-        <line num="316" count="2" type="stmt"/>
-        <line num="320" count="0" type="stmt"/>
-        <line num="326" count="100" type="stmt"/>
-        <line num="328" count="98" type="stmt"/>
-        <line num="329" count="6" type="stmt"/>
-        <line num="332" count="2" type="stmt"/>
-        <line num="336" count="0" type="stmt"/>
-        <line num="343" count="100" type="stmt"/>
-        <line num="357" count="100" type="stmt"/>
-        <line num="360" count="100" type="cond" truecount="3" falsecount="1"/>
-        <line num="362" count="0" type="stmt"/>
-        <line num="365" count="100" type="cond" truecount="2" falsecount="2"/>
-        <line num="366" count="100" type="stmt"/>
-        <line num="367" count="100" type="stmt"/>
-        <line num="372" count="100" type="cond" truecount="2" falsecount="0"/>
-        <line num="379" count="100" type="cond" truecount="1" falsecount="1"/>
-        <line num="380" count="100" type="cond" truecount="1" falsecount="1"/>
-        <line num="381" count="100" type="stmt"/>
-        <line num="411" count="1160" type="stmt"/>
-        <line num="429" count="1" type="stmt"/>
+        <line num="234" count="0" type="stmt"/>
+        <line num="235" count="0" type="stmt"/>
+        <line num="239" count="14" type="stmt"/>
+        <line num="240" count="14" type="stmt"/>
+        <line num="247" count="14" type="stmt"/>
+        <line num="249" count="14" type="stmt"/>
+        <line num="255" count="12" type="stmt"/>
+        <line num="259" count="8" type="stmt"/>
+        <line num="261" count="8" type="stmt"/>
+        <line num="262" count="8" type="stmt"/>
+        <line num="264" count="6" type="stmt"/>
+        <line num="267" count="22" type="stmt"/>
+        <line num="272" count="0" type="stmt"/>
+        <line num="275" count="23" type="cond" truecount="2" falsecount="0"/>
+        <line num="277" count="23" type="cond" truecount="3" falsecount="0"/>
+        <line num="280" count="1" type="stmt"/>
+        <line num="284" count="14" type="stmt"/>
+        <line num="287" count="14" type="stmt"/>
+        <line num="290" count="8" type="stmt"/>
+        <line num="293" count="8" type="stmt"/>
+        <line num="295" count="22" type="stmt"/>
+        <line num="301" count="0" type="stmt"/>
+        <line num="303" count="0" type="stmt"/>
+        <line num="308" count="0" type="stmt"/>
+        <line num="309" count="0" type="stmt"/>
+        <line num="314" count="100" type="stmt"/>
+        <line num="316" count="98" type="stmt"/>
+        <line num="317" count="8" type="stmt"/>
+        <line num="320" count="2" type="stmt"/>
+        <line num="324" count="0" type="stmt"/>
+        <line num="330" count="100" type="stmt"/>
+        <line num="332" count="98" type="stmt"/>
+        <line num="333" count="6" type="stmt"/>
+        <line num="336" count="2" type="stmt"/>
+        <line num="340" count="0" type="stmt"/>
+        <line num="347" count="100" type="stmt"/>
+        <line num="361" count="100" type="stmt"/>
+        <line num="364" count="100" type="cond" truecount="3" falsecount="1"/>
+        <line num="366" count="0" type="stmt"/>
+        <line num="369" count="100" type="cond" truecount="2" falsecount="2"/>
+        <line num="370" count="100" type="stmt"/>
+        <line num="371" count="100" type="stmt"/>
+        <line num="376" count="100" type="cond" truecount="2" falsecount="0"/>
+        <line num="383" count="100" type="cond" truecount="1" falsecount="1"/>
+        <line num="384" count="100" type="cond" truecount="1" falsecount="1"/>
+        <line num="385" count="100" type="stmt"/>
+        <line num="415" count="1160" type="stmt"/>
+        <line num="433" count="1" type="stmt"/>
       </file>
       <file name="style.ts" path="/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/src/style.ts">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
