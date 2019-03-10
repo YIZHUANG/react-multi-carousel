@@ -12,6 +12,12 @@ React carousel component supports multiple items and SSR with typescript.
 $ npm install react-multi-carousel --save
 ```
 
+### TypeScript.
+
+```
+$ npm install @types/react-multi-carousel --save-dev
+```
+
 ### Technical approach.
 
 Detailed Can be found in this blog post [here](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).

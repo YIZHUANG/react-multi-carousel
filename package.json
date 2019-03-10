@@ -3,6 +3,7 @@
   "version": "1.0.30",
   "description": "",
   "main": "index.js",
+  "types": "/lib/index.d.ts",
   "scripts": {
     "build": "rm -rf ./lib && tsc",
     "test": "jest",
