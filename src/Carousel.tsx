@@ -241,8 +241,7 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.onMove) {
       if (this.initialPosition > e.pageX) {
         const hasTravel =
-          Math.round((this.initialPosition - e.pageX) / this.state.itemWidth) ||
-          1;
+          Math.round((this.initialPosition - e.pageX) / this.state.itemWidth)
         this.next(hasTravel);
       }
       if (e.pageX > this.initialPosition) {
