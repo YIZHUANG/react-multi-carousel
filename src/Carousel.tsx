@@ -128,7 +128,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       slidesHavePassed > 0 &&
       this.state.currentSlide + 1 + slidesToShow <= this.state.totalItems
     ) {
-      // prevent over sliding;
+      // prevent oversliding;
       const maxSlides = this.state.totalItems - slidesToShow;
       const maxPosition = -(this.state.itemWidth * maxSlides);
       this.setState({
@@ -252,16 +252,16 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
     if (this.onMove) {
       if (this.direction === "right") {
-        const hasTravel = Math.round(
+        const slidesHavePassed = Math.round(
           (this.initialPosition - this.lastPosition) / this.state.itemWidth
         );
-        this.next(hasTravel);
+        this.next(slidesHavePassed);
       }
       if (this.direction === "left") {
-        const hasTravel = Math.round(
+        const slidesHavePassed = Math.round(
           (this.lastPosition - this.initialPosition) / this.state.itemWidth
         );
-        this.previous(hasTravel);
+        this.previous(slidesHavePassed);
       }
       this.resetMoveStatus();
     }
@@ -309,7 +309,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
   }
 
-  public render(): any {
+  public render(): React.ReactNode {
     const { domLoaded, slidesToShow, containerWidth, itemWidth } = this.state;
     const {
       deviceType,
@@ -326,13 +326,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       customTransition
     } = this.props;
     let flexBisis: number | string | undefined;
-    const domFullLoaded =
+    const domFullyLoaded =
       domLoaded && slidesToShow && containerWidth && itemWidth;
-    if (forSSR && deviceType && !domFullLoaded) {
+    if (forSSR && deviceType && !domFullyLoaded) {
       flexBisis = guessWidthFromDeviceType(deviceType, responsive);
     }
     const shouldRenderOnSSR =
-      forSSR && deviceType && !domFullLoaded && flexBisis;
+      forSSR && deviceType && !domFullyLoaded && flexBisis;
     const isLeftEndReach = !(this.state.currentSlide - slidesToSlide >= 0);
     const isRightEndReach = !(
       this.state.currentSlide + 1 + slidesToShow <=
@@ -381,7 +381,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
               key={index}
               style={{
                 flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
-                width: domFullLoaded ? `${itemWidth}px` : "auto"
+                width: domFullyLoaded ? `${itemWidth}px` : "auto"
               }}
               className={itemClassName}
             >
