@@ -28,6 +28,8 @@
   "license": "MIT",
   "homepage": "https://github.com/YIZHUANG/react-multi-carousel#readme",
   "jest": {
+    "testEnvironment":"jsdom",
+    "verbose": true,
     "testURL": "http://localhost",
     "collectCoverage": true,
     "globals": {
