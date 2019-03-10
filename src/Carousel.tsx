@@ -11,7 +11,7 @@ import { CarouselInternalState, CarouselProps } from "./types";
 
 const defaultTransitionDuration = 300;
 const defaultTransition = "transform 300ms ease-in-out";
-class Container extends React.Component<CarouselProps, CarouselInternalState> {
+class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public static defaultProps: any = {
     slidesToSlide: 1,
     infinite: false,
@@ -317,9 +317,6 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
       forSSR,
       children,
       slidesToSlide,
-      customLeftArrow,
-      customRightArrow,
-      disableSwipeOnMobile,
       removeArrow,
       removeArrowOnDeviceType,
       infinite,
@@ -398,8 +395,4 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
     );
   }
 }
-const Carousel = ({ children, ...rest }: CarouselProps): React.ReactNode => (
-  <Container {...rest}>{children}</Container>
-);
-
 export default Carousel;

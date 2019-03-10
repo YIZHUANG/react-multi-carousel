@@ -7,6 +7,9 @@ import toJson from "enzyme-to-json";
 configure({ adapter: new Adapter() });
 
 import Carousel from "../src/Carousel";
+import { CustomLeftArrow, CustomRightArrow } from './Arrows';
+import fakerData from './fakeData';
+import Card from './Card';
 
 const responsive = {
   desktop: {
@@ -22,6 +25,7 @@ const responsive = {
     items: 1
   }
 };
+
 
 describe("Carousel", () => {
   test("it renders", () => {
@@ -41,4 +45,45 @@ describe("Carousel", () => {
     );
     expect(wrapper.find(".test-class").length).toBe(1);
   });
+  test('can pass custom arrows', () => {
+    const wrapper = mount(
+      <Carousel
+        forSSR
+        customLeftArrow={<CustomLeftArrow />}
+        customRightArrow={<CustomRightArrow />}
+        responsive={responsive}
+        slidesToSlide={2}
+        infinite={true}
+        containerClassName="test-class"
+        responsive={responsive}
+      >
+        <div>1</div>
+        <div>2</div>
+      </Carousel>
+    );
+    expect(wrapper.find(CustomLeftArrow).length).toBe(1);
+    expect(wrapper.find(CustomRightArrow).length).toBe(1);
+    expect(wrapper.find(CustomLeftArrow).props().onClick).toBeTruthy();
+    expect(wrapper.find(CustomRightArrow).props().onClick).toBeTruthy();
+  });
+  test('Has the correct initial state', () => {
+    const wrapper = mount(
+      <Carousel
+        forSSR
+        customLeftArrow={<CustomLeftArrow />}
+        customRightArrow={<CustomRightArrow />}
+        responsive={responsive}
+        slidesToSlide={2}
+        infinite={true}
+        containerClassName="test-class"
+        responsive={responsive}
+      >
+        {fakerData.map(card => {
+          return <Card {...card} />;
+        })}
+      </Carousel>
+    );
+    const {totalItems } = wrapper.state()
+    expect(totalItems).toBe(12)
+  })
 });
