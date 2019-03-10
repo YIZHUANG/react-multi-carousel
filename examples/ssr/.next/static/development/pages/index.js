@@ -115806,7 +115806,7 @@ const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const style_1 = __webpack_require__(/*! ./style */ "./node_modules/react-multi-carousel/lib/style.js");
 const utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/react-multi-carousel/lib/utils.js");
 const defaultTransitionDuration = 300;
-const defaultTransition = "transform ease-in-out 300ms";
+const defaultTransition = "transform 300ms ease-in-out";
 class Container extends React.Component {
     constructor(props) {
         super(props);
@@ -115828,6 +115828,7 @@ class Container extends React.Component {
         this.handleTouchStart = this.handleTouchStart.bind(this);
         this.handleTouchMove = this.handleTouchMove.bind(this);
         this.handleTouchEnd = this.handleTouchEnd.bind(this);
+        this.onKeyUp = this.onKeyUp.bind(this);
         this.onMove = false;
         this.initialPosition = 0;
         this.lastPosition = 0;
@@ -115839,6 +115840,9 @@ class Container extends React.Component {
         this.setItemsToShow();
         window.addEventListener("resize", this.onResize);
         this.onResize();
+        if (this.props.keyBoardControl) {
+            window.addEventListener("keyup", this.onKeyUp);
+        }
     }
     setItemsToShow(shouldCorrectItemPosition) {
         const { responsive } = this.props;
@@ -115894,6 +115898,16 @@ class Container extends React.Component {
                 currentSlide: nextSlides
             });
         }
+        else if (slidesHavePassed > 0 &&
+            this.state.currentSlide + 1 + slidesToShow <= this.state.totalItems) {
+            // prevent over sliding;
+            const maxSlides = this.state.totalItems - slidesToShow;
+            const maxPosition = -(this.state.itemWidth * maxSlides);
+            this.setState({
+                transform: maxPosition,
+                currentSlide: maxSlides
+            });
+        }
         else {
             if (infinite) {
                 this.resetAllItems();
@@ -115913,6 +115927,14 @@ class Container extends React.Component {
                 currentSlide: nextSlides
             });
         }
+        else if (slidesHavePassed > 0 &&
+            this.state.currentSlide - slidesToSlide >= 0) {
+            // prevent oversliding.
+            this.setState({
+                transform: 0,
+                currentSlide: 0
+            });
+        }
         else {
             const maxSlides = this.state.totalItems - slidesToShow;
             const maxPosition = -(this.state.itemWidth * maxSlides);
@@ -115926,6 +115948,9 @@ class Container extends React.Component {
     }
     componentWillUnmount() {
         window.removeEventListener("resize", this.onResize);
+        if (this.props.keyBoardControl) {
+            window.removeEventListener("keyup", this.onKeyUp);
+        }
     }
     resetMoveStatus() {
         this.onMove = false;
@@ -115953,7 +115978,8 @@ class Container extends React.Component {
                 const nextTranslate = this.state.transform - (this.lastPosition - e.pageX);
                 const isLastSlide = this.state.currentSlide ===
                     this.state.totalItems - this.state.slidesToShow;
-                if (Math.abs(nextTranslate) <= translateXLimit || (isLastSlide && this.props.infinite)) {
+                if (Math.abs(nextTranslate) <= translateXLimit ||
+                    (isLastSlide && this.props.infinite)) {
                     this.setState({ transform: nextTranslate });
                 }
             }
@@ -115973,12 +115999,13 @@ class Container extends React.Component {
         }
         if (this.onMove) {
             if (this.initialPosition > e.pageX) {
-                const hasTravel = Math.round((this.initialPosition - e.pageX) / this.state.itemWidth) || 1;
-                this.next(hasTravel === 1 ? 0 : hasTravel - 1);
+                const hasTravel = Math.round((this.initialPosition - e.pageX) / this.state.itemWidth) ||
+                    1;
+                this.next(hasTravel);
             }
             if (e.pageX > this.initialPosition) {
                 const hasTravel = Math.round((e.pageX - this.initialPosition) / this.state.itemWidth);
-                this.previous(hasTravel === 1 ? 0 : hasTravel - 1);
+                this.previous(hasTravel);
             }
             this.resetMoveStatus();
         }
@@ -116027,13 +116054,21 @@ class Container extends React.Component {
         if (this.onMove) {
             if (this.direction === "right") {
                 const hasTravel = Math.round((this.initialPosition - this.lastPosition) / this.state.itemWidth);
-                this.next(hasTravel === 1 ? 0 : hasTravel - 1);
+                this.next(hasTravel);
             }
             if (this.direction === "left") {
                 const hasTravel = Math.round((this.lastPosition - this.initialPosition) / this.state.itemWidth);
-                this.previous(hasTravel === 1 ? 0 : hasTravel - 1);
+                this.previous(hasTravel);
             }
             this.resetMoveStatus();
+        }
+    }
+    onKeyUp(e) {
+        switch (e.keyCode) {
+            case 37:
+                return this.previous();
+            case 39:
+                return this.next();
         }
     }
     renderLeftArrow() {
@@ -116099,7 +116134,8 @@ Container.defaultProps = {
     infinite: false,
     containerClassName: "",
     contentClassName: "",
-    itemClassName: ""
+    itemClassName: "",
+    keyBoardControl: true
 };
 const Carousel = (_a) => {
     var { children } = _a, rest = __rest(_a, ["children"]);
@@ -119089,8 +119125,8 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
-      var images = [faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.imageUrl(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.fashion(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.people(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.nature(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.city()];
-      var fakerData = Array(5).fill(0).map(function (item, index) {
+      var images = [faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.imageUrl(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.fashion(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.people(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.nature(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.city(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.abstract(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.animals(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.business(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.cats(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.food(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.nightlife(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.fashion()];
+      var fakerData = Array(12).fill(0).map(function (item, index) {
         return {
           image: images[index],
           headline: faker__WEBPACK_IMPORTED_MODULE_7___default.a.lorem.sentence(),
@@ -119124,7 +119160,7 @@ function (_React$Component) {
         className: classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 73
+          lineNumber: 80
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_14___default.a
@@ -119141,14 +119177,14 @@ function (_React$Component) {
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 74
+          lineNumber: 81
         },
         __self: this
       }, fakerData.map(function (card) {
         return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_card__WEBPACK_IMPORTED_MODULE_12__["default"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, card, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 87
+            lineNumber: 94
           },
           __self: this
         }));
@@ -119167,7 +119203,7 @@ function (_React$Component) {
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 91
+          lineNumber: 98
         },
         __self: this
       }, fakerData.map(function (card) {
@@ -119176,7 +119212,7 @@ function (_React$Component) {
           alt: card.headline,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 105
+            lineNumber: 112
           },
           __self: this
         });
@@ -119219,7 +119255,7 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!******************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fyi.a.zhuang%2FDesktop%2Fnpm%2Freact-multi-carousel%2Fexamples%2Fssr%2Fpages%2Findex.js ***!
   \******************************************************************************************************************************************************************/
@@ -119242,5 +119278,5 @@ module.exports = dll_3681e7fd756237ce51c6;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js","styles"]]]));;
+},[[2,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=index.js.map

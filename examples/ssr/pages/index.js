@@ -44,9 +44,16 @@ class Index extends React.Component {
       faker.image.fashion(),
       faker.image.people(),
       faker.image.nature(),
-      faker.image.city()
+      faker.image.city(),
+      faker.image.abstract(),
+      faker.image.animals(),
+      faker.image.business(),
+      faker.image.cats(),
+      faker.image.food(),
+      faker.image.nightlife(),
+      faker.image.fashion()
     ];
-    const fakerData = Array(5)
+    const fakerData = Array(12)
       .fill(0)
       .map((item, index) => {
         return {

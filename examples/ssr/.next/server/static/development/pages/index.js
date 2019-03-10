@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1553,8 +1553,8 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
-      var images = [faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.imageUrl(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.fashion(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.people(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.nature(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.city()];
-      var fakerData = Array(5).fill(0).map(function (item, index) {
+      var images = [faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.imageUrl(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.fashion(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.people(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.nature(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.city(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.abstract(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.animals(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.business(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.cats(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.food(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.nightlife(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.fashion()];
+      var fakerData = Array(12).fill(0).map(function (item, index) {
         return {
           image: images[index],
           headline: faker__WEBPACK_IMPORTED_MODULE_7___default.a.lorem.sentence(),
@@ -1588,7 +1588,7 @@ function (_React$Component) {
         className: classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 73
+          lineNumber: 80
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_14___default.a
@@ -1605,14 +1605,14 @@ function (_React$Component) {
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 74
+          lineNumber: 81
         },
         __self: this
       }, fakerData.map(function (card) {
         return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_card__WEBPACK_IMPORTED_MODULE_12__["default"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, card, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 87
+            lineNumber: 94
           },
           __self: this
         }));
@@ -1631,7 +1631,7 @@ function (_React$Component) {
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 91
+          lineNumber: 98
         },
         __self: this
       }, fakerData.map(function (card) {
@@ -1640,7 +1640,7 @@ function (_React$Component) {
           alt: card.headline,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 105
+            lineNumber: 112
           },
           __self: this
         });
@@ -1694,7 +1694,7 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
