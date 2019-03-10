@@ -280,7 +280,7 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
         const isLastSlide =
           this.state.currentSlide ===
           this.state.totalItems - this.state.slidesToShow;
-        if (Math.abs(nextTranslate) <= translateXLimit || isLastSlide) {
+        if (Math.abs(nextTranslate) <= translateXLimit || (isLastSlide && this.props.infinite)) {
           this.setState({ transform: nextTranslate });
         }
       }
@@ -289,7 +289,7 @@ class Container extends React.Component<CarouselProps, CarouselInternalState> {
         const nextTranslate =
           this.state.transform + (e.touches[0].screenX - this.lastPosition);
         const isFirstSlide = this.state.currentSlide === 0;
-        if (nextTranslate <= 0 || isFirstSlide) {
+        if (nextTranslate <= 0 || (isFirstSlide && this.props.infinite)) {
           this.setState({ transform: nextTranslate });
         }
       }
