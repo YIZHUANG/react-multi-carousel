@@ -130,7 +130,6 @@ storiesOf("Carousel", module)
       <Carousel
         disableSwipeOnMobile
         containerClassName='container'
-        disableDrag
         infinite={true}
         customLeftArrow={<CustomLeftArrow />}
         customRightArrow={<CustomRightArrow />}

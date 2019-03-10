@@ -115999,8 +115999,7 @@ class Container extends React.Component {
         }
         if (this.onMove) {
             if (this.initialPosition > e.pageX) {
-                const hasTravel = Math.round((this.initialPosition - e.pageX) / this.state.itemWidth) ||
-                    1;
+                const hasTravel = Math.round((this.initialPosition - e.pageX) / this.state.itemWidth);
                 this.next(hasTravel);
             }
             if (e.pageX > this.initialPosition) {
@@ -116031,7 +116030,7 @@ class Container extends React.Component {
                 const nextTranslate = this.state.transform - (this.lastPosition - e.touches[0].screenX);
                 const isLastSlide = this.state.currentSlide ===
                     this.state.totalItems - this.state.slidesToShow;
-                if (Math.abs(nextTranslate) <= translateXLimit || isLastSlide) {
+                if (Math.abs(nextTranslate) <= translateXLimit || (isLastSlide && this.props.infinite)) {
                     this.setState({ transform: nextTranslate });
                 }
             }
@@ -116039,7 +116038,7 @@ class Container extends React.Component {
                 this.direction = "left";
                 const nextTranslate = this.state.transform + (e.touches[0].screenX - this.lastPosition);
                 const isFirstSlide = this.state.currentSlide === 0;
-                if (nextTranslate <= 0 || isFirstSlide) {
+                if (nextTranslate <= 0 || (isFirstSlide && this.props.infinite)) {
                     this.setState({ transform: nextTranslate });
                 }
             }
@@ -119255,7 +119254,7 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
 /*!******************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fyi.a.zhuang%2FDesktop%2Fnpm%2Freact-multi-carousel%2Fexamples%2Fssr%2Fpages%2Findex.js ***!
   \******************************************************************************************************************************************************************/
@@ -119278,5 +119277,5 @@ module.exports = dll_3681e7fd756237ce51c6;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js","styles"]]]));;
+},[[1,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=index.js.map
