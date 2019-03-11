@@ -63,8 +63,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.props.keyBoardControl) {
       window.addEventListener("keyup", this.onKeyUp);
     }
-    if(this.props.autoPlay && this.props.autoPlaySpeed) {
-      this.autoPlay = setInterval(this.next,this.props.autoPlaySpeed)
+    if (this.props.autoPlay && this.props.autoPlaySpeed) {
+      this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
   }
   public setItemsToShow(shouldCorrectItemPosition?: boolean): void {
@@ -114,15 +114,15 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         this.setItemsToShow(true);
       }, this.props.transitionDuration || defaultTransitionDuration);
     }
-    if(keyBoardControl && !this.props.keyBoardControl) {
+    if (keyBoardControl && !this.props.keyBoardControl) {
       window.removeEventListener("keyup", this.onKeyUp);
     }
-    if(autoPlay && !this.props.autoPlay && this.autoPlay) {
-      clearInterval(this.autoPlay)
+    if (autoPlay && !this.props.autoPlay && this.autoPlay) {
+      clearInterval(this.autoPlay);
       this.autoPlay = undefined;
     }
-    if(!autoPlay && this.props.autoPlay && !this.autoPlay) {
-      this.autoPlay = setInterval(this.next,this.props.autoPlaySpeed)
+    if (!autoPlay && this.props.autoPlay && !this.autoPlay) {
+      this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
   }
   public resetAllItems(): void {
@@ -133,7 +133,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const { slidesToShow } = this.state;
     const { slidesToSlide, infinite } = this.props;
     const nextMaximumSlides =
-      this.state.currentSlide + 1 + slidesHavePassed + slidesToShow;
+      this.state.currentSlide +
+      1 +
+      slidesHavePassed +
+      slidesToShow +
+      slidesToSlide;
     const nextSlides =
       this.state.currentSlide + slidesHavePassed + slidesToSlide;
     const nextPosition = -(this.state.itemWidth * nextSlides);
@@ -143,8 +147,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         currentSlide: nextSlides
       });
     } else if (
-      slidesHavePassed > 0 &&
-      this.state.currentSlide + 1 + slidesToShow <= this.state.totalItems
+      nextMaximumSlides > this.state.totalItems &&
+      this.state.currentSlide !== this.state.totalItems - slidesToShow
     ) {
       // prevent oversliding;
       const maxSlides = this.state.totalItems - slidesToShow;
@@ -163,20 +167,15 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.isAnimationAllowed = true;
     const { slidesToShow } = this.state;
     const { slidesToSlide, infinite } = this.props;
-    const nextMaximumSlides =
-      this.state.currentSlide - slidesHavePassed - slidesToSlide;
     const nextSlides =
       this.state.currentSlide - slidesHavePassed - slidesToSlide;
     const nextPosition = -(this.state.itemWidth * nextSlides);
-    if (nextMaximumSlides >= 0) {
+    if (nextSlides >= 0) {
       this.setState({
         transform: nextPosition,
         currentSlide: nextSlides
       });
-    } else if (
-      slidesHavePassed > 0 &&
-      this.state.currentSlide - slidesToSlide >= 0
-    ) {
+    } else if (nextSlides < 0 && this.state.currentSlide !== 0) {
       // prevent oversliding.
       this.setState({
         transform: 0,
@@ -198,8 +197,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.props.keyBoardControl) {
       window.removeEventListener("keyup", this.onKeyUp);
     }
-    if(this.props.autoPlay && this.autoPlay) {
-      clearInterval(this.autoPlay)
+    if (this.props.autoPlay && this.autoPlay) {
+      clearInterval(this.autoPlay);
       this.autoPlay = undefined;
     }
   }
@@ -230,8 +229,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       return;
     }
     const { clientX } = e.touches ? e.touches[0] : e;
-    if(e.touches && this.autoPlay && this.props.autoPlay) {
-      clearInterval(this.autoPlay)
+    if (e.touches && this.autoPlay && this.props.autoPlay) {
+      clearInterval(this.autoPlay);
       this.autoPlay = undefined;
     }
     if (this.onMove) {
@@ -268,8 +267,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
   }
   public handleOut(e: any): void {
-    if(this.props.autoPlay && !this.autoPlay) {
-      this.autoPlay = setInterval(this.next,this.props.autoPlaySpeed)
+    if (this.props.autoPlay && !this.autoPlay) {
+      this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
     const shouldDisableOnMobile =
       e.type === "touchend" && this.props.disableSwipeOnMobile;
@@ -303,9 +302,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         return this.next();
     }
   }
-  public handleEnter():void {
-    if(this.autoPlay && this.props.autoPlay) {
-      clearInterval(this.autoPlay)
+  public handleEnter(): void {
+    if (this.autoPlay && this.props.autoPlay) {
+      clearInterval(this.autoPlay);
       this.autoPlay = undefined;
     }
   }
