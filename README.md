@@ -2,6 +2,8 @@
 
 Lightweight React carousel component supports multiple items and SSR(Server-side rendering) with typescript.
 
+[www.w3js.com -> react-multi-carousel](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
+
 ## NPM
 
 [NPM](https://www.npmjs.com/package/react-multi-carousel).
