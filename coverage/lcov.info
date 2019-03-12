@@ -1,5 +1,5 @@
 TN:
-SF:/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/src/Carousel.tsx
+SF:/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/src/Carousel.tsx
 FN:31,(anonymous_0)
 FN:58,(anonymous_1)
 FN:70,(anonymous_2)
@@ -292,7 +292,7 @@ BRF:101
 BRH:70
 end_of_record
 TN:
-SF:/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/src/style.ts
+SF:/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/src/style.ts
 FNF:0
 FNH:0
 DA:24,1
@@ -308,7 +308,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/src/utils.ts
+SF:/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/src/utils.ts
 FN:3,guessWidthFromDeviceType
 FNF:1
 FNH:0
@@ -323,7 +323,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/test/Arrows.tsx
+SF:/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/test/Arrows.tsx
 FN:4,(anonymous_0)
 FN:6,(anonymous_1)
 FN:15,(anonymous_2)
@@ -349,7 +349,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/test/Card.tsx
+SF:/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/test/Card.tsx
 FN:20,MediaCard
 FNF:1
 FNH:1
@@ -372,7 +372,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/test/fakeData.tsx
+SF:/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/test/fakeData.tsx
 FN:6,(anonymous_0)
 FNF:1
 FNH:1

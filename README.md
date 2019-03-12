@@ -2,7 +2,7 @@
 
 Lightweight React carousel component supports multiple items and SSR(Server-side rendering) with typescript.
 
-[www.w3js.com -> react-multi-carousel](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
+The technical details of this carousel can be found at [www.w3js.com -> react-multi-carousel](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
 
 ## NPM
 
@@ -13,6 +13,12 @@ Lightweight React carousel component supports multiple items and SSR(Server-side
 [Bundle-size](https://bundlephobia.com/result?p=react-multi-carousel@1.0.33).
 2.5kB
 
+## Demo.
+
+Demo and documentation can be found at [here](https://react-multi-carousel.surge.sh).
+
+Codes at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/index.stories.js).
+
 ## Install
 
 ```
@@ -21,7 +27,7 @@ $ npm install react-multi-carousel --save
 
 ### Technical approach.
 
-Detailed Can be found in this blog post [here](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
+Detailed Can be found in this blog post at [w3js](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
 
 ### How the SSR mode works?
 
@@ -31,15 +37,9 @@ Based based on the device type, we decided how many items we are showing in the 
 
 More detailed can be found in this blog post [here](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
 
-Codes for SSR are at [here](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/pages/index.js).
+Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/pages/index.js).
 
-Demo for the SSR are at [here](https://react-multi-carousel.now.sh/)
-
-## Demo.
-
-Demo and documentation can be found at [here](https://react-multi-carousel.surge.sh).
-
-Codes are at [here](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/index.stories.js).
+Demo for the SSR are at [here](https://react-multi-carousel.now.sh/) Try to disable JavaScript to test if it renders on the server-side.
 
 ## Features.
 

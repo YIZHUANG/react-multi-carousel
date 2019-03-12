@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1552330568734" clover="3.2.0">
-  <project timestamp="1552330568735" name="All files">
+<coverage generated="1552406155230" clover="3.2.0">
+  <project timestamp="1552406155230" name="All files">
     <metrics statements="166" coveredstatements="143" conditionals="101" coveredconditionals="70" methods="33" coveredmethods="27" elements="300" coveredelements="240" complexity="0" loc="166" ncloc="166" packages="2" files="6" classes="6"/>
     <package name="src">
       <metrics statements="142" coveredstatements="119" conditionals="101" coveredconditionals="70" methods="27" coveredmethods="21"/>
-      <file name="Carousel.tsx" path="/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/src/Carousel.tsx">
+      <file name="Carousel.tsx" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/src/Carousel.tsx">
         <metrics statements="131" coveredstatements="111" conditionals="101" coveredconditionals="70" methods="26" coveredmethods="21"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -138,7 +138,7 @@
         <line num="414" count="1160" type="stmt"/>
         <line num="432" count="1" type="stmt"/>
       </file>
-      <file name="style.ts" path="/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/src/style.ts">
+      <file name="style.ts" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/src/style.ts">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="24" count="1" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
@@ -148,7 +148,7 @@
         <line num="39" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
       </file>
-      <file name="utils.ts" path="/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/src/utils.ts">
+      <file name="utils.ts" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/src/utils.ts">
         <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="9" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
@@ -158,7 +158,7 @@
     </package>
     <package name="test">
       <metrics statements="24" coveredstatements="24" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
-      <file name="Arrows.tsx" path="/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/test/Arrows.tsx">
+      <file name="Arrows.tsx" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/test/Arrows.tsx">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -170,7 +170,7 @@
         <line num="19" count="6" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
       </file>
-      <file name="Card.tsx" path="/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/test/Card.tsx">
+      <file name="Card.tsx" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/test/Card.tsx">
         <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -185,7 +185,7 @@
         <line num="22" count="60" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
       </file>
-      <file name="fakeData.tsx" path="/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/test/fakeData.tsx">
+      <file name="fakeData.tsx" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/test/fakeData.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="4" count="1" type="stmt"/>
         <line num="7" count="12" type="stmt"/>
