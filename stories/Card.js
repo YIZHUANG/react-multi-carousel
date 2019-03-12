@@ -32,12 +32,16 @@ function MediaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
+        <a target="_blank" href="https://w3js.com">
+          <Button size="small" color="primary">
+            Share
+          </Button>
+        </a>
+        <a target="_blank" href="https://w3js.com">
+          <Button size="small" color="primary">
+            Learn More
+          </Button>
+        </a>
       </CardActions>
     </Card>
   );

@@ -73,6 +73,7 @@
     "jest": "^24.1.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-ga": "^2.5.7",
     "storybook-addon-jsx": "^6.0.0",
     "ts-jest": "^24.0.0",
     "typescript": "^3.3.3333"

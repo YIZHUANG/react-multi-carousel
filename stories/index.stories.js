@@ -2,6 +2,7 @@ import React from "react";
 
 import faker from "faker";
 import Button from "@material-ui/core/Button";
+import ReactGA from 'react-ga';
 
 import { storiesOf, setAddon } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
@@ -13,27 +14,41 @@ import Carousel from "../src";
 
 setAddon(JSX);
 
+if(typeof window !== 'undefined') {
+  ReactGA.initialize('UA-135638821-1');
+  ReactGA.pageview(window.location.pathname + window.location.search);
+}
+
+
 const images = [
-  faker.image.imageUrl(),
-  faker.image.fashion(),
-  faker.image.people(),
-  faker.image.nature(),
-  faker.image.city(),
-  faker.image.abstract(),
-  faker.image.animals(),
-  faker.image.business(),
-  faker.image.cats(),
-  faker.image.food(),
-  faker.image.nightlife(),
-  faker.image.fashion()
+  'https://images.unsplash.com/photo-1552298930-24a24595de10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1552300977-cbc8b08d95e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1552250638-14e2a8e85123?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1552320853-b14fa736e4c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1552320853-b14fa736e4c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1552311412-02930b11ce59?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1552285227-5a2f4b075a64?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1552264885-97cf191866e9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1552255096-2c689c9da505?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1552318965-6e6be7484ada?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1552311971-598182195748?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1552256029-4e3aa83bbe2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
 ];
+const texts = [
+  'Appending currency sign to a purchase form in your e-commerce site using plain JavaScript.',
+  'Fixing CSS load order/style.chunk.css incorrect in Nextjs',
+  'React Carousel with Server Side Rendering Support – Part 1',
+  'React Carousel with Server Side Rendering Support – Part 2',
+  'Flutter Xcode couldn’t find any iOS App Development provisioning profiles'
+]
 const fakerData = Array(12)
   .fill(0)
   .map((item, index) => {
+    const number = faker.random.number({min:0, max:3});
     return {
       image: images[index],
-      headline: faker.lorem.sentence(),
-      description: faker.lorem.sentences(3, 3)
+      headline: 'w3js.com - web front-end studio',
+      description: texts[number]
     };
   });
 
