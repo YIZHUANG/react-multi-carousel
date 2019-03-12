@@ -15,7 +15,7 @@ The technical details of this carousel can be found at [www.w3js.com -> react-mu
 
 ## Demo.
 
-Demo and documentation can be found at [here](https://react-multi-carousel.surge.sh).
+Demo and documentation can be found at [here](https://w3js.com/react-multi-carousel/).
 
 Codes at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/index.stories.js).
 
