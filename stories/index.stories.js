@@ -11,6 +11,7 @@ import JSX from 'storybook-addon-jsx';
 import './style.css';
 import Card from "./Card";
 import Carousel from "../src";
+import '../src/styles.css';
 
 setAddon(JSX);
 

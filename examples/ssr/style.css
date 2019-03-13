@@ -4,3 +4,17 @@
 .container {
   margin-top: 20px;
 }
+.container-with-dots {
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+.react-multi-carousel-dot-list {
+  bottom: 0px !important;
+}
+#__next {
+  overflow: scroll;
+  margin-bottom: 40px;
+}
+.react-multi-carousel-dot button {
+  border-color: grey !important;
+}

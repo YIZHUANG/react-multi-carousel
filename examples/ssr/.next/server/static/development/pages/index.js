@@ -1640,9 +1640,10 @@ function (_React$Component) {
       , {
         responsive: responsive,
         forSSR: true,
+        shouldShowDots: true,
         slidesToSlide: 1,
         infinite: true,
-        containerClassName: "container",
+        containerClassName: "container-with-dots",
         itemClassName: "image-item",
         deviceType: this.props.deviceType,
         __source: {
@@ -1656,7 +1657,7 @@ function (_React$Component) {
           alt: card.headline,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 120
+            lineNumber: 121
           },
           __self: this
         });

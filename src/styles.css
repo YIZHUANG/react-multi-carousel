@@ -61,7 +61,7 @@
 
 .react-multi-carousel-dot-list {
   position: absolute;
-  bottom: 10px;
+  bottom: 0;
   display: flex;
   width: 100%;
   justify-content: center;
@@ -82,7 +82,7 @@
   transition: background .5s;
   border-width: 2px;
   border-style: solid;
-  border-color: RGBA(255,255,255,0.5);
+  border-color: grey;
   padding: 0;
   margin: 0;
   margin-right: 6px;

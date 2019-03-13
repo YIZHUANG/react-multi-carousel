@@ -110,9 +110,10 @@ class Index extends React.Component {
           */
           responsive={responsive}
           forSSR
+          shouldShowDots
           slidesToSlide={1}
           infinite={true}
-          containerClassName="container"
+          containerClassName="container-with-dots"
           itemClassName="image-item"
           deviceType={this.props.deviceType}
         >
