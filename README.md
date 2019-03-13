@@ -23,6 +23,9 @@ Codes at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/master/s
 
 ```
 $ npm install react-multi-carousel --save
+
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 ```
 
 ### Technical approach.
@@ -76,6 +79,7 @@ const responsive = {
 <Carousel
   disableSwipeOnMobile
   disableDrag
+  shouldShowDots={true}
   responsive={responsive}
   forSSR
   slidesToSlide={2}

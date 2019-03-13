@@ -26,6 +26,7 @@ interface CarouselProps {
   keyBoardControl?: boolean;
   autoPlay?: boolean;
   autoPlaySpeed?: number; // default 3000ms
+  shouldShowDots?: boolean;
   customTransition?:string;
   transitionDuration?: number;
   // if you are using customTransition, make sure to put the duration here.

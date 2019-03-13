@@ -27,6 +27,7 @@ interface CarouselProps {
     keyBoardControl?: boolean;
     autoPlay?: boolean;
     autoPlaySpeed?: number;
+    shouldShowDots?: boolean;
     customTransition?: string;
     transitionDuration?: number;
 }

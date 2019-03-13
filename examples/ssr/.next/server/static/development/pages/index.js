@@ -120,7 +120,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Typography */ "@material-ui/core/Typography");
 /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_8__);
-var _jsxFileName = "/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/examples/ssr/components/card.js";
+var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/components/card.js";
 
 
 
@@ -228,7 +228,7 @@ function MediaCard(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _jsxFileName = "/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/examples/ssr/components/image.js";
+var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/components/image.js";
 
 
 var Image = function Image(_ref) {
@@ -238,6 +238,7 @@ var Image = function Image(_ref) {
     draggable: false,
     style: {
       width: '100%',
+      height: '100%',
       position: 'relative'
     },
     src: url,
@@ -1517,7 +1518,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "/Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/examples/ssr/pages/index.js";
+var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/pages/index.js";
 
 
 
@@ -1553,7 +1554,8 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
-      var images = [faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.imageUrl(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.fashion(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.people(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.nature(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.city(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.abstract(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.animals(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.business(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.cats(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.food(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.nightlife(), faker__WEBPACK_IMPORTED_MODULE_7___default.a.image.fashion()];
+      var images = ["https://images.unsplash.com/photo-1552298930-24a24595de10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552300977-cbc8b08d95e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552250638-14e2a8e85123?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552320853-b14fa736e4c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552320853-b14fa736e4c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552311412-02930b11ce59?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552285227-5a2f4b075a64?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552264885-97cf191866e9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552255096-2c689c9da505?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552318965-6e6be7484ada?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552311971-598182195748?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552256029-4e3aa83bbe2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"];
+      var texts = ["Appending currency sign to a purchase form in your e-commerce site using plain JavaScript.", "Fixing CSS load order/style.chunk.css incorrect in Nextjs", "React Carousel with Server Side Rendering Support – Part 1", "React Carousel with Server Side Rendering Support – Part 2", "Flutter Xcode couldn’t find any iOS App Development provisioning profiles"];
       var fakerData = Array(12).fill(0).map(function (item, index) {
         return {
           image: images[index],
@@ -1588,7 +1590,7 @@ function (_React$Component) {
         className: classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 80
+          lineNumber: 87
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_14___default.a
@@ -1605,14 +1607,14 @@ function (_React$Component) {
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 81
+          lineNumber: 88
         },
         __self: this
       }, fakerData.map(function (card) {
         return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_card__WEBPACK_IMPORTED_MODULE_12__["default"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, card, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 94
+            lineNumber: 101
           },
           __self: this
         }));
@@ -1631,7 +1633,7 @@ function (_React$Component) {
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 98
+          lineNumber: 105
         },
         __self: this
       }, fakerData.map(function (card) {
@@ -1640,7 +1642,7 @@ function (_React$Component) {
           alt: card.headline,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 112
+            lineNumber: 119
           },
           __self: this
         });
@@ -1701,7 +1703,7 @@ function (_React$Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/yi.a.zhuang/Desktop/npm/react-multi-carousel/examples/ssr/pages/index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! /Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/pages/index.js */"./pages/index.js");
 
 
 /***/ }),

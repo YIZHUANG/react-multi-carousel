@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./styles.css";
 import { CarouselInternalState, CarouselProps } from "./types";
 declare class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     static defaultProps: any;
@@ -25,8 +26,10 @@ declare class Carousel extends React.Component<CarouselProps, CarouselInternalSt
     handleOut(e: any): void;
     onKeyUp(e: any): void;
     handleEnter(): void;
+    goToSlide(slide: number): void;
     renderLeftArrow(): React.ReactElement<any>;
     renderRightArrow(): React.ReactElement<any>;
+    renderDotsList(): JSX.Element;
     render(): React.ReactNode;
 }
 export default Carousel;

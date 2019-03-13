@@ -1,11 +1,6 @@
 import * as React from "react";
 
-import {
-  containerStyle,
-  contentStyle,
-  rightArrowStyle,
-  leftArrowStyle
-} from "./style";
+import "./styles.css";
 import { guessWidthFromDeviceType } from "./utils";
 import { CarouselInternalState, CarouselProps } from "./types";
 
@@ -19,7 +14,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     contentClassName: "",
     itemClassName: "",
     keyBoardControl: true,
-    autoPlaySpeed: 3000
+    autoPlaySpeed: 3000,
+    shouldShowDots: false
   };
   private readonly containerRef: React.RefObject<any>;
   public onMove: boolean;
@@ -309,6 +305,14 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
   }
 
+  public goToSlide(slide: number): void {
+    const { itemWidth } = this.state;
+    this.setState({
+      currentSlide: slide,
+      transform: -(itemWidth * slide)
+    });
+  }
+
   public renderLeftArrow(): React.ReactElement<any> {
     const { customLeftArrow } = this.props;
     if (customLeftArrow) {
@@ -317,9 +321,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       });
     } else {
       return (
-        <i
-          // @ts-ignore
-          style={leftArrowStyle}
+        <button
+          className="react-multiple-carousel__arrow react-multiple-carousel__arrow--left"
           onClick={() => this.previous()}
         />
       );
@@ -333,13 +336,34 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       });
     } else {
       return (
-        <i
-          // @ts-ignore
-          style={rightArrowStyle}
+        <button
+          className="react-multiple-carousel__arrow react-multiple-carousel__arrow--right"
           onClick={() => this.next()}
         />
       );
     }
+  }
+
+  public renderDotsList() {
+    return (
+      <ul className="react-multi-carousel-dot-list">
+        {Array(this.state.totalItems)
+          .fill(0)
+          .map((item, index) => {
+            return (
+              <li
+                className={`react-multi-carousel-dot ${
+                  this.state.currentSlide === index
+                    ? "react-multi-carousel-dot--active"
+                    : ""
+                }`}
+              >
+                <button onClick={() => this.goToSlide(index)} />
+              </li>
+            );
+          })}
+      </ul>
+    );
   }
 
   public render(): React.ReactNode {
@@ -383,18 +407,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const disableRightArrow = !infinite && isRightEndReach;
     return (
       <div
-        className={containerClassName}
+        className={`react-multi-carousel-list ${containerClassName}`}
         ref={this.containerRef}
-        style={containerStyle}
       >
         <ul
-          className={contentClassName}
+          className={`react-multi-carousel-track ${contentClassName}`}
           // @ts-ignore
           style={{
-            ...contentStyle,
-            listStyle: "none",
-            padding: 0,
-            margin: 0,
             transition: this.isAnimationAllowed
               ? customTransition || defaultTransition
               : "none",
@@ -425,6 +444,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         </ul>
         {shouldShowArrows && !disableLeftArrow && this.renderLeftArrow()}
         {shouldShowArrows && !disableRightArrow && this.renderRightArrow()}
+        {this.props.shouldShowDots && this.renderDotsList()}
       </div>
     );
   }

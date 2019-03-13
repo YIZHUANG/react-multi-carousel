@@ -8,7 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "../components/card";
 import Image from "../components/image";
 import Carousel from "react-multi-carousel";
-import '../style.css';
+import "../style.css";
 
 import Link from "next/link";
 
@@ -40,18 +40,25 @@ class Index extends React.Component {
   render() {
     const { classes } = this.props;
     const images = [
-      faker.image.imageUrl(),
-      faker.image.fashion(),
-      faker.image.people(),
-      faker.image.nature(),
-      faker.image.city(),
-      faker.image.abstract(),
-      faker.image.animals(),
-      faker.image.business(),
-      faker.image.cats(),
-      faker.image.food(),
-      faker.image.nightlife(),
-      faker.image.fashion()
+      "https://images.unsplash.com/photo-1552298930-24a24595de10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1552300977-cbc8b08d95e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1552250638-14e2a8e85123?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1552320853-b14fa736e4c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1552320853-b14fa736e4c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1552311412-02930b11ce59?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1552285227-5a2f4b075a64?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1552264885-97cf191866e9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1552255096-2c689c9da505?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1552318965-6e6be7484ada?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1552311971-598182195748?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1552256029-4e3aa83bbe2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+    ];
+    const texts = [
+      "Appending currency sign to a purchase form in your e-commerce site using plain JavaScript.",
+      "Fixing CSS load order/style.chunk.css incorrect in Nextjs",
+      "React Carousel with Server Side Rendering Support – Part 1",
+      "React Carousel with Server Side Rendering Support – Part 2",
+      "Flutter Xcode couldn’t find any iOS App Development provisioning profiles"
     ];
     const fakerData = Array(12)
       .fill(0)
@@ -85,7 +92,7 @@ class Index extends React.Component {
           */
           responsive={responsive}
           forSSR
-          containerClassName='container'
+          containerClassName="container"
           slidesToSlide={1}
           infinite={true}
           deviceType={this.props.deviceType}
@@ -104,8 +111,8 @@ class Index extends React.Component {
           forSSR
           slidesToSlide={1}
           infinite={true}
-          containerClassName='container'
-          itemClassName='image-item'
+          containerClassName="container"
+          itemClassName="image-item"
           deviceType={this.props.deviceType}
         >
           {fakerData.map(card => {
