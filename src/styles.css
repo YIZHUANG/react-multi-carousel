@@ -1,7 +1,9 @@
 @font-face {
   font-family: "revicons";
-  fallback: fallbak;
-  src: url("./revicons.woff");
+  fallback: fallback;
+  src: url("./revicons.woff") format('woff'),
+  url("./revicons.ttf") format('ttf'),
+  url("./revicons.eot") format('ttf');
 }
 .react-multi-carousel-list {
   display: flex;

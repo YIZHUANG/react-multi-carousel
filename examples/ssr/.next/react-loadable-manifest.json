@@ -21,6 +21,20 @@
       "name": null,
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": 3,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "react-multi-carousel/lib/styles.css": [
+    {
+      "id": "./node_modules/react-multi-carousel/lib/styles.css",
+      "name": "./node_modules/react-multi-carousel/lib/styles.css",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
     }
   ]
 }

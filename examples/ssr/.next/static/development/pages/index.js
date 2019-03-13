@@ -115793,22 +115793,12 @@ module.exports = __webpack_require__(/*! ./lib */ "./node_modules/react-multi-ca
 
 "use strict";
 
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
-            t[p[i]] = s[p[i]];
-    return t;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const style_1 = __webpack_require__(/*! ./style */ "./node_modules/react-multi-carousel/lib/style.js");
 const utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/react-multi-carousel/lib/utils.js");
 const defaultTransitionDuration = 300;
 const defaultTransition = "transform 300ms ease-in-out";
-class Container extends React.Component {
+class Carousel extends React.Component {
     constructor(props) {
         super(props);
         this.containerRef = React.createRef();
@@ -115823,13 +115813,13 @@ class Container extends React.Component {
             containerWidth: 0
         };
         this.onResize = this.onResize.bind(this);
-        this.handleMouseDown = this.handleMouseDown.bind(this);
-        this.handleMouseMove = this.handleMouseMove.bind(this);
-        this.handleMouseUp = this.handleMouseUp.bind(this);
-        this.handleTouchStart = this.handleTouchStart.bind(this);
-        this.handleTouchMove = this.handleTouchMove.bind(this);
-        this.handleTouchEnd = this.handleTouchEnd.bind(this);
+        this.handleDown = this.handleDown.bind(this);
+        this.handleMove = this.handleMove.bind(this);
+        this.handleOut = this.handleOut.bind(this);
         this.onKeyUp = this.onKeyUp.bind(this);
+        this.handleEnter = this.handleEnter.bind(this);
+        this.next = this.next.bind(this);
+        this.previous = this.previous.bind(this);
         this.onMove = false;
         this.initialPosition = 0;
         this.lastPosition = 0;
@@ -115843,6 +115833,9 @@ class Container extends React.Component {
         this.onResize();
         if (this.props.keyBoardControl) {
             window.addEventListener("keyup", this.onKeyUp);
+        }
+        if (this.props.autoPlay && this.props.autoPlaySpeed) {
+            this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
         }
     }
     setItemsToShow(shouldCorrectItemPosition) {
@@ -115874,13 +115867,23 @@ class Container extends React.Component {
     onResize() {
         this.setItemsToShow();
     }
-    componentDidUpdate(prevProps, { containerWidth }) {
+    componentDidUpdate({ keyBoardControl, autoPlay }, { containerWidth }) {
         if (this.containerRef &&
             this.containerRef.current &&
             this.containerRef.current.offsetWidth !== containerWidth) {
             setTimeout(() => {
                 this.setItemsToShow(true);
             }, this.props.transitionDuration || defaultTransitionDuration);
+        }
+        if (keyBoardControl && !this.props.keyBoardControl) {
+            window.removeEventListener("keyup", this.onKeyUp);
+        }
+        if (autoPlay && !this.props.autoPlay && this.autoPlay) {
+            clearInterval(this.autoPlay);
+            this.autoPlay = undefined;
+        }
+        if (!autoPlay && this.props.autoPlay && !this.autoPlay) {
+            this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
         }
     }
     resetAllItems() {
@@ -115890,7 +115893,11 @@ class Container extends React.Component {
         this.isAnimationAllowed = true;
         const { slidesToShow } = this.state;
         const { slidesToSlide, infinite } = this.props;
-        const nextMaximumSlides = this.state.currentSlide + 1 + slidesHavePassed + slidesToShow;
+        const nextMaximumSlides = this.state.currentSlide +
+            1 +
+            slidesHavePassed +
+            slidesToShow +
+            slidesToSlide;
         const nextSlides = this.state.currentSlide + slidesHavePassed + slidesToSlide;
         const nextPosition = -(this.state.itemWidth * nextSlides);
         if (nextMaximumSlides <= this.state.totalItems) {
@@ -115899,9 +115906,9 @@ class Container extends React.Component {
                 currentSlide: nextSlides
             });
         }
-        else if (slidesHavePassed > 0 &&
-            this.state.currentSlide + 1 + slidesToShow <= this.state.totalItems) {
-            // prevent over sliding;
+        else if (nextMaximumSlides > this.state.totalItems &&
+            this.state.currentSlide !== this.state.totalItems - slidesToShow) {
+            // prevent oversliding;
             const maxSlides = this.state.totalItems - slidesToShow;
             const maxPosition = -(this.state.itemWidth * maxSlides);
             this.setState({
@@ -115919,17 +115926,15 @@ class Container extends React.Component {
         this.isAnimationAllowed = true;
         const { slidesToShow } = this.state;
         const { slidesToSlide, infinite } = this.props;
-        const nextMaximumSlides = this.state.currentSlide - slidesHavePassed - slidesToSlide;
         const nextSlides = this.state.currentSlide - slidesHavePassed - slidesToSlide;
         const nextPosition = -(this.state.itemWidth * nextSlides);
-        if (nextMaximumSlides >= 0) {
+        if (nextSlides >= 0) {
             this.setState({
                 transform: nextPosition,
                 currentSlide: nextSlides
             });
         }
-        else if (slidesHavePassed > 0 &&
-            this.state.currentSlide - slidesToSlide >= 0) {
+        else if (nextSlides < 0 && this.state.currentSlide !== 0) {
             // prevent oversliding.
             this.setState({
                 transform: 0,
@@ -115952,6 +115957,10 @@ class Container extends React.Component {
         if (this.props.keyBoardControl) {
             window.removeEventListener("keyup", this.onKeyUp);
         }
+        if (this.props.autoPlay && this.autoPlay) {
+            clearInterval(this.autoPlay);
+            this.autoPlay = undefined;
+        }
     }
     resetMoveStatus() {
         this.onMove = false;
@@ -115959,24 +115968,33 @@ class Container extends React.Component {
         this.lastPosition = 0;
         this.direction = "";
     }
-    handleMouseDown(e) {
-        if (this.props.disableDrag) {
+    handleDown(e) {
+        if ((e.touches && this.props.disableSwipeOnMobile) ||
+            (e && !e.touches && this.props.disableDrag)) {
             return;
         }
+        const { clientX } = e.touches ? e.touches[0] : e;
         this.onMove = true;
-        this.initialPosition = e.pageX;
-        this.lastPosition = e.pageX;
+        this.initialPosition = clientX;
+        this.lastPosition = clientX;
         this.isAnimationAllowed = false;
     }
-    handleMouseMove(e) {
-        if (this.props.disableDrag) {
+    handleMove(e) {
+        if ((e.touches && this.props.disableSwipeOnMobile) ||
+            (e && !e.touches && this.props.disableDrag)) {
             return;
         }
+        const { clientX } = e.touches ? e.touches[0] : e;
+        if (e.touches && this.autoPlay && this.props.autoPlay) {
+            clearInterval(this.autoPlay);
+            this.autoPlay = undefined;
+        }
         if (this.onMove) {
-            if (this.initialPosition > e.pageX) {
+            if (this.initialPosition > clientX) {
+                this.direction = "right";
                 const translateXLimit = Math.abs(-(this.state.itemWidth *
                     (this.state.totalItems - this.state.slidesToShow)));
-                const nextTranslate = this.state.transform - (this.lastPosition - e.pageX);
+                const nextTranslate = this.state.transform - (this.lastPosition - clientX);
                 const isLastSlide = this.state.currentSlide ===
                     this.state.totalItems - this.state.slidesToShow;
                 if (Math.abs(nextTranslate) <= translateXLimit ||
@@ -115984,81 +116002,35 @@ class Container extends React.Component {
                     this.setState({ transform: nextTranslate });
                 }
             }
-            if (e.pageX > this.initialPosition) {
-                const nextTranslate = this.state.transform + (e.pageX - this.lastPosition);
-                const isFirstSlide = this.state.currentSlide === 0;
-                if (nextTranslate <= 0 || (isFirstSlide && this.props.infinite)) {
-                    this.setState({ transform: nextTranslate });
-                }
-            }
-            this.lastPosition = e.pageX;
-        }
-    }
-    handleMouseUp(e) {
-        if (this.props.disableDrag) {
-            return;
-        }
-        if (this.onMove) {
-            if (this.initialPosition > e.pageX) {
-                const hasTravel = Math.round((this.initialPosition - e.pageX) / this.state.itemWidth);
-                this.next(hasTravel);
-            }
-            if (e.pageX > this.initialPosition) {
-                const hasTravel = Math.round((e.pageX - this.initialPosition) / this.state.itemWidth);
-                this.previous(hasTravel);
-            }
-            this.resetMoveStatus();
-        }
-    }
-    handleTouchStart(e) {
-        if (this.props.disableSwipeOnMobile) {
-            return;
-        }
-        this.onMove = true;
-        this.initialPosition = e.touches[0].screenX;
-        this.lastPosition = e.touches[0].screenX;
-        this.isAnimationAllowed = false;
-    }
-    handleTouchMove(e) {
-        if (this.props.disableSwipeOnMobile) {
-            return;
-        }
-        if (this.onMove) {
-            if (this.initialPosition > e.touches[0].screenX) {
-                this.direction = "right";
-                const translateXLimit = Math.abs(-(this.state.itemWidth *
-                    (this.state.totalItems - this.state.slidesToShow)));
-                const nextTranslate = this.state.transform - (this.lastPosition - e.touches[0].screenX);
-                const isLastSlide = this.state.currentSlide ===
-                    this.state.totalItems - this.state.slidesToShow;
-                if (Math.abs(nextTranslate) <= translateXLimit || (isLastSlide && this.props.infinite)) {
-                    this.setState({ transform: nextTranslate });
-                }
-            }
-            if (e.touches[0].screenX > this.initialPosition) {
+            if (clientX > this.initialPosition) {
                 this.direction = "left";
-                const nextTranslate = this.state.transform + (e.touches[0].screenX - this.lastPosition);
+                const nextTranslate = this.state.transform + (clientX - this.lastPosition);
                 const isFirstSlide = this.state.currentSlide === 0;
                 if (nextTranslate <= 0 || (isFirstSlide && this.props.infinite)) {
                     this.setState({ transform: nextTranslate });
                 }
             }
-            this.lastPosition = e.touches[0].screenX;
+            this.lastPosition = clientX;
         }
     }
-    handleTouchEnd() {
-        if (this.props.disableSwipeOnMobile) {
+    handleOut(e) {
+        if (this.props.autoPlay && !this.autoPlay) {
+            this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
+        }
+        const shouldDisableOnMobile = e.type === "touchend" && this.props.disableSwipeOnMobile;
+        const shouldDisableOnDesktop = (e.type === "mouseleave" || e.type === "mouseup") &&
+            this.props.disableDrag;
+        if (shouldDisableOnMobile || shouldDisableOnDesktop) {
             return;
         }
-        this.isAnimationAllowed = true;
         if (this.onMove) {
             if (this.direction === "right") {
-                const hasTravel = Math.round((this.initialPosition - this.lastPosition) / this.state.itemWidth);
-                this.next(hasTravel);
+                const slidesHavePassed = Math.round((this.initialPosition - this.lastPosition) / this.state.itemWidth);
+                this.next(slidesHavePassed);
             }
             if (this.direction === "left") {
-                const hasTravel = Math.round((this.lastPosition - this.initialPosition) / this.state.itemWidth);
-                this.previous(hasTravel);
+                const slidesHavePassed = Math.round((this.lastPosition - this.initialPosition) / this.state.itemWidth);
+                this.previous(slidesHavePassed);
             }
             this.resetMoveStatus();
         }
@@ -116071,6 +116043,19 @@ class Container extends React.Component {
                 return this.next();
         }
     }
+    handleEnter() {
+        if (this.autoPlay && this.props.autoPlay) {
+            clearInterval(this.autoPlay);
+            this.autoPlay = undefined;
+        }
+    }
+    goToSlide(slide) {
+        const { itemWidth } = this.state;
+        this.setState({
+            currentSlide: slide,
+            transform: -(itemWidth * slide)
+        });
+    }
     renderLeftArrow() {
         const { customLeftArrow } = this.props;
         if (customLeftArrow) {
@@ -116079,9 +116064,7 @@ class Container extends React.Component {
             });
         }
         else {
-            return (React.createElement("i", { 
-                // @ts-ignore
-                style: style_1.leftArrowStyle, onClick: () => this.previous() }));
+            return (React.createElement("button", { className: "react-multiple-carousel__arrow react-multiple-carousel__arrow--left", onClick: () => this.previous() }));
         }
     }
     renderRightArrow() {
@@ -116092,20 +116075,28 @@ class Container extends React.Component {
             });
         }
         else {
-            return (React.createElement("i", { 
-                // @ts-ignore
-                style: style_1.rightArrowStyle, onClick: () => this.next() }));
+            return (React.createElement("button", { className: "react-multiple-carousel__arrow react-multiple-carousel__arrow--right", onClick: () => this.next() }));
         }
+    }
+    renderDotsList() {
+        return (React.createElement("ul", { className: "react-multi-carousel-dot-list" }, Array(this.state.totalItems)
+            .fill(0)
+            .map((item, index) => {
+            return (React.createElement("li", { className: `react-multi-carousel-dot ${this.state.currentSlide === index
+                    ? "react-multi-carousel-dot--active"
+                    : ""}` },
+                React.createElement("button", { onClick: () => this.goToSlide(index) })));
+        })));
     }
     render() {
         const { domLoaded, slidesToShow, containerWidth, itemWidth } = this.state;
-        const { deviceType, responsive, forSSR, children, slidesToSlide, customLeftArrow, customRightArrow, disableSwipeOnMobile, removeArrow, removeArrowOnDeviceType, infinite, containerClassName, contentClassName, itemClassName, customTransition } = this.props;
+        const { deviceType, responsive, forSSR, children, slidesToSlide, removeArrow, removeArrowOnDeviceType, infinite, containerClassName, contentClassName, itemClassName, customTransition } = this.props;
         let flexBisis;
-        const domFullLoaded = domLoaded && slidesToShow && containerWidth && itemWidth;
-        if (forSSR && deviceType && !domFullLoaded) {
+        const domFullyLoaded = domLoaded && slidesToShow && containerWidth && itemWidth;
+        if (forSSR && deviceType && !domFullyLoaded) {
             flexBisis = utils_1.guessWidthFromDeviceType(deviceType, responsive);
         }
-        const shouldRenderOnSSR = forSSR && deviceType && !domFullLoaded && flexBisis;
+        const shouldRenderOnSSR = forSSR && deviceType && !domFullyLoaded && flexBisis;
         const isLeftEndReach = !(this.state.currentSlide - slidesToSlide >= 0);
         const isRightEndReach = !(this.state.currentSlide + 1 + slidesToShow <=
             this.state.totalItems);
@@ -116116,30 +116107,33 @@ class Container extends React.Component {
                         removeArrowOnDeviceType.indexOf(this.state.deviceType) > -1)));
         const disableLeftArrow = !infinite && isLeftEndReach;
         const disableRightArrow = !infinite && isRightEndReach;
-        return (React.createElement("div", { className: containerClassName, ref: this.containerRef, style: style_1.containerStyle },
-            React.createElement("ul", { className: contentClassName, 
+        return (React.createElement("div", { className: `react-multi-carousel-list ${containerClassName}`, ref: this.containerRef },
+            React.createElement("ul", { className: `react-multi-carousel-track ${contentClassName}`, 
                 // @ts-ignore
-                style: Object.assign({}, style_1.contentStyle, { listStyle: "none", padding: 0, margin: 0, transition: this.isAnimationAllowed
+                style: {
+                    transition: this.isAnimationAllowed
                         ? customTransition || defaultTransition
-                        : "none", overflow: shouldRenderOnSSR ? "hidden" : "unset", transform: `translate3d(${this.state.transform}px,0,0)` }), onMouseMove: this.handleMouseMove, onMouseDown: this.handleMouseDown, onMouseUp: this.handleMouseUp, onMouseLeave: this.handleMouseUp, onTouchStart: this.handleTouchStart, onTouchMove: this.handleTouchMove, onTouchEnd: this.handleTouchEnd }, React.Children.toArray(children).map((child, index) => (React.createElement("li", { key: index, style: {
+                        : "none",
+                    overflow: shouldRenderOnSSR ? "hidden" : "unset",
+                    transform: `translate3d(${this.state.transform}px,0,0)`
+                }, onMouseMove: this.handleMove, onMouseDown: this.handleDown, onMouseUp: this.handleOut, onMouseEnter: this.handleEnter, onMouseLeave: this.handleOut, onTouchStart: this.handleDown, onTouchMove: this.handleMove, onTouchEnd: this.handleOut }, React.Children.toArray(children).map((child, index) => (React.createElement("li", { key: index, style: {
                     flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
-                    width: domFullLoaded ? `${itemWidth}px` : "auto"
+                    width: domFullyLoaded ? `${itemWidth}px` : "auto"
                 }, className: itemClassName }, child)))),
             shouldShowArrows && !disableLeftArrow && this.renderLeftArrow(),
-            shouldShowArrows && !disableRightArrow && this.renderRightArrow()));
+            shouldShowArrows && !disableRightArrow && this.renderRightArrow(),
+            this.props.shouldShowDots && this.renderDotsList()));
     }
 }
-Container.defaultProps = {
+Carousel.defaultProps = {
     slidesToSlide: 1,
     infinite: false,
     containerClassName: "",
     contentClassName: "",
     itemClassName: "",
-    keyBoardControl: true
-};
-const Carousel = (_a) => {
-    var { children } = _a, rest = __rest(_a, ["children"]);
-    return (React.createElement(Container, Object.assign({}, rest), children));
+    keyBoardControl: true,
+    autoPlaySpeed: 3000,
+    shouldShowDots: false
 };
 exports.default = Carousel;
 //# sourceMappingURL=Carousel.js.map
@@ -116159,47 +116153,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Carousel_1 = __webpack_require__(/*! ./Carousel */ "./node_modules/react-multi-carousel/lib/Carousel.js");
 exports.default = Carousel_1.default;
 //# sourceMappingURL=index.js.map
-
-/***/ }),
-
-/***/ "./node_modules/react-multi-carousel/lib/style.js":
-/*!********************************************************!*\
-  !*** ./node_modules/react-multi-carousel/lib/style.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const containerStyle = {
-    display: "flex",
-    alignItems: "center",
-    overflow: 'hidden'
-};
-exports.containerStyle = containerStyle;
-const contentStyle = {
-    display: "flex",
-    flexDirection: "row",
-    position: "relative",
-    willChange: 'transform'
-};
-exports.contentStyle = contentStyle;
-const arrowStyle = {
-    zIndex: 1,
-    position: 'absolute',
-    border: "solid black",
-    borderWidth: "0 3px 3px 0",
-    display: "inline-block",
-    padding: 13,
-    cursor: "pointer"
-};
-exports.arrowStyle = arrowStyle;
-const leftArrowStyle = Object.assign({}, arrowStyle, { left: 30, transform: "rotate(135deg)" });
-exports.leftArrowStyle = leftArrowStyle;
-const rightArrowStyle = Object.assign({}, arrowStyle, { right: 30, transform: "rotate(-45deg)" });
-exports.rightArrowStyle = rightArrowStyle;
-//# sourceMappingURL=style.js.map
 
 /***/ }),
 
@@ -119081,8 +119034,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../style.css */ "./style.css");
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_17__);
 
 
 
@@ -119090,6 +119045,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/pages/index.js";
+
 
 
 
@@ -119125,7 +119081,7 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
-      var images = ["https://images.unsplash.com/photo-1552298930-24a24595de10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552300977-cbc8b08d95e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552250638-14e2a8e85123?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552320853-b14fa736e4c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552320853-b14fa736e4c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552311412-02930b11ce59?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552285227-5a2f4b075a64?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552264885-97cf191866e9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552255096-2c689c9da505?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552318965-6e6be7484ada?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552311971-598182195748?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1552256029-4e3aa83bbe2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"];
+      var images = ['https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', 'https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60', 'https://images.unsplash.com/photo-1550133730-695473e544be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', 'https://images.unsplash.com/photo-1550167164-1b67c2be3973?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', 'https://images.unsplash.com/photo-1550338861-b7cfeaf8ffd8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', 'https://images.unsplash.com/photo-1550223640-23097fc71cb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', 'https://images.unsplash.com/photo-1550353175-a3611868086b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', 'https://images.unsplash.com/photo-1550330039-a54e15ed9d33?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', 'https://images.unsplash.com/photo-1549737328-8b9f3252b927?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', 'https://images.unsplash.com/photo-1549833284-6a7df91c1f65?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', 'https://images.unsplash.com/photo-1549985908-597a09ef0a7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', 'https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'];
       var texts = ["Appending currency sign to a purchase form in your e-commerce site using plain JavaScript.", "Fixing CSS load order/style.chunk.css incorrect in Nextjs", "React Carousel with Server Side Rendering Support – Part 1", "React Carousel with Server Side Rendering Support – Part 2", "Flutter Xcode couldn’t find any iOS App Development provisioning profiles"];
       var fakerData = Array(12).fill(0).map(function (item, index) {
         return {
@@ -119161,7 +119117,7 @@ function (_React$Component) {
         className: classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 87
+          lineNumber: 88
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_14___default.a
@@ -119178,14 +119134,14 @@ function (_React$Component) {
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 88
+          lineNumber: 89
         },
         __self: this
       }, fakerData.map(function (card) {
         return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_card__WEBPACK_IMPORTED_MODULE_12__["default"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, card, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 101
+            lineNumber: 102
           },
           __self: this
         }));
@@ -119204,7 +119160,7 @@ function (_React$Component) {
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 105
+          lineNumber: 106
         },
         __self: this
       }, fakerData.map(function (card) {
@@ -119213,7 +119169,7 @@ function (_React$Component) {
           alt: card.headline,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 119
+            lineNumber: 120
           },
           __self: this
         });
