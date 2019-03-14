@@ -128,12 +128,23 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
   }
   public resetAllItems(): void {
-    this.setState({ transform: 0, currentSlide: 0 });
+    const { afterChanged, beforeChanged } = this.props;
+    const previousSlide = this.state.currentSlide;
+    if(typeof beforeChanged === 'function') {
+      beforeChanged(0, this.getState());
+    }
+    this.setState({ transform: 0, currentSlide: 0 }, () => {
+      if (typeof afterChanged === "function") {
+        setTimeout(() => {
+          afterChanged(previousSlide, this.getState());
+        }, this.props.transitionDuration || defaultTransitionDuration);
+      }
+    });
   }
   public next(slidesHavePassed = 0): void {
     this.isAnimationAllowed = true;
     const { slidesToShow } = this.state;
-    const { slidesToSlide, infinite } = this.props;
+    const { slidesToSlide, infinite, afterChanged, beforeChanged } = this.props;
     const nextMaximumSlides =
       this.state.currentSlide +
       1 +
@@ -143,11 +154,24 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const nextSlides =
       this.state.currentSlide + slidesHavePassed + slidesToSlide;
     const nextPosition = -(this.state.itemWidth * nextSlides);
+    const previousSlide = this.state.currentSlide;
     if (nextMaximumSlides <= this.state.totalItems) {
-      this.setState({
-        transform: nextPosition,
-        currentSlide: nextSlides
-      });
+      if(typeof beforeChanged === 'function') {
+        beforeChanged(nextSlides, this.getState());
+      }
+      this.setState(
+        {
+          transform: nextPosition,
+          currentSlide: nextSlides
+        },
+        () => {
+          if (typeof afterChanged === "function") {
+            setTimeout(() => {
+              afterChanged(previousSlide, this.getState());
+            }, this.props.transitionDuration || defaultTransitionDuration);
+          }
+        }
+      );
     } else if (
       nextMaximumSlides > this.state.totalItems &&
       this.state.currentSlide !== this.state.totalItems - slidesToShow
@@ -155,10 +179,22 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       // prevent oversliding;
       const maxSlides = this.state.totalItems - slidesToShow;
       const maxPosition = -(this.state.itemWidth * maxSlides);
-      this.setState({
-        transform: maxPosition,
-        currentSlide: maxSlides
-      });
+      if(typeof beforeChanged === 'function') {
+        beforeChanged(maxSlides, this.getState());
+      }
+      this.setState(
+        {
+          transform: maxPosition,
+          currentSlide: maxSlides
+        },
+        () => {
+          if (typeof afterChanged === "function") {
+            setTimeout(() => {
+              afterChanged(previousSlide, this.getState());
+            }, this.props.transitionDuration || defaultTransitionDuration);
+          }
+        }
+      );
     } else {
       if (infinite) {
         this.resetAllItems();
@@ -168,29 +204,66 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public previous(slidesHavePassed = 0): void {
     this.isAnimationAllowed = true;
     const { slidesToShow } = this.state;
-    const { slidesToSlide, infinite } = this.props;
+    const { slidesToSlide, infinite, afterChanged, beforeChanged } = this.props;
     const nextSlides =
       this.state.currentSlide - slidesHavePassed - slidesToSlide;
     const nextPosition = -(this.state.itemWidth * nextSlides);
+    const previousSlide = this.state.currentSlide;
     if (nextSlides >= 0) {
-      this.setState({
-        transform: nextPosition,
-        currentSlide: nextSlides
-      });
+      if(typeof beforeChanged === 'function') {
+        beforeChanged(nextSlides, this.getState());
+      }
+      this.setState(
+        {
+          transform: nextPosition,
+          currentSlide: nextSlides
+        },
+        () => {
+          if (typeof afterChanged === "function") {
+            setTimeout(() => {
+              afterChanged(previousSlide, this.getState());
+            }, this.props.transitionDuration || defaultTransitionDuration);
+          }
+        }
+      );
     } else if (nextSlides < 0 && this.state.currentSlide !== 0) {
       // prevent oversliding.
-      this.setState({
-        transform: 0,
-        currentSlide: 0
-      });
+      if(typeof beforeChanged === 'function') {
+        beforeChanged(0, this.getState());
+      }
+      this.setState(
+        {
+          transform: 0,
+          currentSlide: 0
+        },
+        () => {
+          if (typeof afterChanged === "function") {
+            setTimeout(() => {
+              afterChanged(previousSlide, this.getState());
+            }, this.props.transitionDuration || defaultTransitionDuration);
+          }
+        }
+      );
     } else {
       const maxSlides = this.state.totalItems - slidesToShow;
       const maxPosition = -(this.state.itemWidth * maxSlides);
       if (infinite) {
-        this.setState({
-          transform: maxPosition,
-          currentSlide: maxSlides
-        });
+        if(typeof beforeChanged === 'function') {
+          beforeChanged(maxSlides, this.getState());
+        }
+        this.setState(
+          {
+            transform: maxPosition,
+            currentSlide: maxSlides
+          },
+          () => {
+            if (typeof afterChanged === "function") {
+              setTimeout(() => {
+                afterChanged(previousSlide, this.getState());
+              }, this.props.transitionDuration || defaultTransitionDuration);
+            }
+          }
+        );
       }
     }
   }
@@ -327,10 +400,24 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
 
   public goToSlide(slide: number): void {
     const { itemWidth } = this.state;
-    this.setState({
-      currentSlide: slide,
-      transform: -(itemWidth * slide)
-    });
+    const { afterChanged, beforeChanged } = this.props;
+    const previousSlide = this.state.currentSlide;
+    if(typeof beforeChanged === 'function') {
+      beforeChanged(slide, this.getState());
+    }
+    this.setState(
+      {
+        currentSlide: slide,
+        transform: -(itemWidth * slide)
+      },
+      () => {
+        if (typeof afterChanged === "function") {
+          setTimeout(() => {
+            afterChanged(previousSlide, this.getState());
+          }, this.props.transitionDuration || defaultTransitionDuration);
+        }
+      }
+    );
   }
   public getState(): any {
     return {

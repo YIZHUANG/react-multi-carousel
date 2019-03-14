@@ -43,7 +43,7 @@ The current most common solution is to detect the device type of the user based 
 
 Based based on the device type, we decided how many items we are showing in the Carousel.
 
-For example, we want to show 3 items at the same time on desktop (screen size 1024 - 2000px possibily) and 2 items on tablet(700px - 1024px) and 1 item on mobile.  ---> this can be achieved through user-agent detection.
+For example, we want to show 3 items at the same time on desktop (screen size 1024 - 2000px possibily) and 2 items on tablet(700px - 1024px) and 1 item on mobile. ---> this can be achieved through user-agent detection.
 
 More detailed can be found in this blog post [here](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
 
@@ -53,22 +53,20 @@ Demo for the SSR are at [here](https://react-multi-carousel.now.sh/) Try to disa
 
 ## Features.
 
-* Server-side rendering
-* Infinite mode
-* Custom animation
-* AutoPlay mode
-* Responsive
-* Swipe to slide
-* Mouse drag to slide
-* Keyboard control to slide
-* Multiple items
-* Show / hide arrows
-* Custom arrows / control buttons
-* Custom dots
-* Custom styling
-* Accessibility support
-
-
+- Server-side rendering
+- Infinite mode
+- Custom animation
+- AutoPlay mode
+- Responsive
+- Swipe to slide
+- Mouse drag to slide
+- Keyboard control to slide
+- Multiple items
+- Show / hide arrows
+- Custom arrows / control buttons
+- Custom dots
+- Custom styling
+- Accessibility support
 
 ## Examples
 
@@ -111,9 +109,10 @@ const responsive = {
 ```
 
 ## Custom Arrows.
+
 You can pass your own custom arrows to make it the way you want, the same for the position. For example, add media query for the arrows to go under when on smaller screens.
 
-You custom arrows will receive a list of props/state  that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
+You custom arrows will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
 
 ```
 const CustomRightArrow = ({ onClick, ...rest }) => {
@@ -125,9 +124,10 @@ const CustomRightArrow = ({ onClick, ...rest }) => {
 ```
 
 ## Custom dots.
+
 You can pass your own custom dots to replace the default one
 
-You custom dots will receive a list of props/state  that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
+You custom dots will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
 
 ```
 const CustomDot = ({ onClick, ...rest }) => {
@@ -158,44 +158,98 @@ const CarouselItem = ({ isvisible, currentSlide, onMove }) => {
 </Carousel>
 ```
 
-## General Props
+## afterChanged call back.
+
+This is a callback function that is invoked each time there has been a sliding.
+
 ```
-  responsive: responsiveType;
-  deviceType?: string;
-  forSSR?: boolean;
-  slidesToSlide: number;
-  disableDrag?: boolean;
-  removeArrow?: boolean;
-  disableSwipeOnMobile?: boolean;
-  removeArrowOnDeviceType?: string | Array<string>;
-  children: any;
-  customLeftArrow?: React.ReactElement<any> | null;
-  customRightArrow?: React.ReactElement<any> | null;
-  customDot?: React.ReactElement<any> | null;
-  infinite?: boolean;
-  minimumTouchDrag: number; // default 50px. The amount of distance to drag / swipe in order to move to the next slide.
-  contentClassName?: string;
-  itemClassName?: string;
-  containerClassName?: string;
-  keyBoardControl?: boolean;
-  autoPlay?: boolean;
-  autoPlaySpeed?: number; // default 3000ms
-  shouldShowDots?: boolean;
-  customTransition?: string;
-  transitionDuration?: number;
-  // if you are using customTransition, make sure to put the duration here.
-  // for example, customTransition="all .5"  then put transitionDuration as 500.
-  // this is needed for the resizing to work.
+<Carousel afterChanged={(previousSlide, { currentSlide, onMove }) => {
+    doSpeicalThing()
+  }}>
+</Carousel>
+```
+
+## beforeChanged call back
+
+This is a callback function that is invoked each time before a sliding.
+
+```
+<Carousel beforeChanged={(nextSlide, { currentSlide, onMove }) => {
+    doSpeicalThing()
+  }}>
+</Carousel>
+```
+
+## Combine beforeChanged and nextChanged, real usage.
+
+They are very useful in the following cases:
+
+- The carousel item is clickable, but you don't want it to be clickable while the user is dragging it or swiping it.
+
+```
+<Carousel beforeChanged={() => this.setState({ isMoving: true })} afterChanged={() => this.setState({ isMoving: false })}>
+  <a onClick={(e) => {
+    if(this.state.isMoving) {
+      e.preventDefault()
+    }
+    }} href='https://w3js.com'>Click me</a>
+</Carousel>
+```
+
+- Preparing for the next slide.
+
+```
+<Carousel beforeChanged={(nextSlide) => this.setState({ nextSlide: nextSlide })}>
+  <div>Initial slide</div>
+  <div onClick={() => {
+    if(this.state.nextSlide === 1) {
+      doVerySpecialThing();
+    }
+    }}>Second slide</div>
+</Carousel>
+```
+
+## General Props
+
+```
+responsive: responsiveType;
+deviceType?: string;
+forSSR?: boolean;
+slidesToSlide: number;
+disableDrag?: boolean;
+removeArrow?: boolean;
+disableSwipeOnMobile?: boolean;
+removeArrowOnDeviceType?: string | Array<string>;
+children: any;
+customLeftArrow?: React.ReactElement<any> | null;
+customRightArrow?: React.ReactElement<any> | null;
+customDot?: React.ReactElement<any> | null;
+infinite?: boolean;
+minimumTouchDrag: number; // default 50px. The amount of distance to drag / swipe in order to move to the next slide.
+afterChanged?: (previousSlide: number, state: any) => void; // Change callback after sliding everytime. `(previousSlide, currentState) => ...`
+beforeChanged?: (nextSlide: number, state: any) => void; // Change callback before sliding everytime. `(previousSlide, currentState) => ...`
+contentClassName?: string;
+itemClassName?: string;
+containerClassName?: string;
+keyBoardControl?: boolean;
+autoPlay?: boolean;
+autoPlaySpeed?: number; // default 3000ms
+shouldShowDots?: boolean;
+customTransition?: string;
+transitionDuration?: number;
+// if you are using customTransition, make sure to put the duration here.
+// for example, customTransition="all .5"  then put transitionDuration as 500.
+// this is needed for the resizing to work.
 ```
 
 ## Specific Props
 
-| Name                 | Type              | Default               | Description                                                              |
-| :------------------- | :---------------- | :-------------------- | :----------------------------------------------------------------------- |
-| `responsive`              | `Object`         | `{}`               | How many items to show on each breakpoint.                                                                   |
-| `deviceType`            | `string` | `none`                 | Only pass this when use for server-side rendering, what to pass can be found in the example folder.                                                                    |
-| `forSSR`           | `bool`            | `false`               | For SSR |
-| `slidesToSlide`   | `number`          | `1` | How many slides to slide.                                                       |
+| Name            | Type     | Default | Description                                                                                         |
+| :-------------- | :------- | :------ | :-------------------------------------------------------------------------------------------------- |
+| `responsive`    | `Object` | `{}`    | How many items to show on each breakpoint.                                                          |
+| `deviceType`    | `string` | `none`  | Only pass this when use for server-side rendering, what to pass can be found in the example folder. |
+| `forSSR`        | `bool`   | `false` | For SSR                                                                                             |
+| `slidesToSlide` | `number` | `1`     | How many slides to slide.                                                                           |
 
 ## Contribute
 

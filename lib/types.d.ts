@@ -23,6 +23,8 @@ interface CarouselProps {
     customDot?: React.ReactElement<any> | null;
     infinite?: boolean;
     minimumTouchDrag: number;
+    afterChanged?: (previousSlide: number, state: any) => void;
+    beforeChanged?: (nextSlide: number, state: any) => void;
     contentClassName?: string;
     itemClassName?: string;
     containerClassName?: string;

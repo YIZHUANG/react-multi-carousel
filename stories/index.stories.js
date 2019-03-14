@@ -12,7 +12,7 @@ import "./style.css";
 import Card from "./Card";
 import { CustomLeftArrow, CustomRightArrow } from "./CustomArrows";
 import CustomDot from "./CustomDot";
-import Image from './CustomImage';
+import Image from "./CustomImage";
 import Carousel from "../src";
 import "../src/assets/styles.css";
 
@@ -84,7 +84,6 @@ const responsiveImageHero = {
     items: 1
   }
 };
-
 
 storiesOf("Carousel", module)
   .addWithJSX("With infinite mode", () => (
@@ -243,6 +242,49 @@ storiesOf("Carousel", module)
         infinite
         containerClassName="container"
         slidesToSlide={1}
+        responsive={responsiveImageHero}
+      >
+        {images.slice(0, 5).map((url, ...rest) => {
+          return <Image url={url} />;
+        })}
+      </Carousel>
+    );
+  })
+  .addWithJSX("afterChanged function, a callback function", () => {
+    return (
+      <Carousel
+        shouldShowDots
+        infinite
+        containerClassName="container"
+        slidesToSlide={1}
+        afterChanged={(previousSlide, { currentSlide, onMove }) =>
+          alert(
+            "previous slide is " +
+              previousSlide +
+              "currentSlide is " +
+              currentSlide
+          )
+        }
+        responsive={responsiveImageHero}
+      >
+        {images.slice(0, 5).map((url, ...rest) => {
+          return <Image url={url} />;
+        })}
+      </Carousel>
+    );
+  })
+  .addWithJSX("beforeChanged function, a callback function", () => {
+    return (
+      <Carousel
+        shouldShowDots
+        infinite
+        containerClassName="container"
+        slidesToSlide={1}
+        beforeChanged={(nextSlide, { currentSlide, onMove }) =>
+          alert(
+            "previous slide is " + currentSlide + " nextSlide is " + nextSlide
+          )
+        }
         responsive={responsiveImageHero}
       >
         {images.slice(0, 5).map((url, ...rest) => {
