@@ -143,6 +143,7 @@ const CustomDot = ({ onClick, ...rest }) => {
 All the items you passed as children will received a list of props/state of the current carousel that's passed back by the Carousel.
 This is useful if you want to support accessibility or do your own stuff.
 
+```
 const CarouselItem = ({ isvisible, currentSlide, onMove }) => {
   return <div onClick={(e) => {
     if(onMove) {
@@ -155,7 +156,7 @@ const CarouselItem = ({ isvisible, currentSlide, onMove }) => {
   <CarouselItem />
   <CarouselItem />
 </Carousel>
-
+```
 
 ## General Props
 ```
