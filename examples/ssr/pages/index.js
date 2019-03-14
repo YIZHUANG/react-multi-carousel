@@ -19,7 +19,7 @@ const styles = theme => ({
   },
   title: {
     maxWidth: 400,
-    margin: 'auto',
+    margin: "auto",
     marginTop: 10
   }
 });
@@ -43,6 +43,7 @@ class Index extends React.Component {
     }
     return { deviceType };
   }
+  state = { isMoving: false }
   render() {
     const { classes } = this.props;
     const images = [
@@ -71,8 +72,8 @@ class Index extends React.Component {
       .map((item, index) => {
         return {
           image: images[index],
-          headline: faker.lorem.sentence(),
-          description: faker.lorem.sentences(3, 3)
+          headline: 'w3js -> web front-end studio',
+          description: texts[index] || texts[0]
         };
       });
     const responsive = {
@@ -91,20 +92,12 @@ class Index extends React.Component {
     };
     return (
       <div className={classes.root}>
-        <Typography
-          className={classes.title}
-          variant="h6"
-          color="grey"
-        >
+        <Typography className={classes.title} variant="h6" color="grey">
           <a target="_blank" href="https://w3js.com/">
             A Carousel supports multiple items and server-side rendering
           </a>
         </Typography>
-        <Typography
-          className={classes.title}
-          variant="p"
-          color="grey"
-        >
+        <Typography className={classes.title} variant="p" color="grey">
           <a target="_blank" href="https://w3js.com/">
             This is the server-side rendering demo of the libiary, try to
             disable the JavaScript in your browser, you will still see our
@@ -118,13 +111,15 @@ class Index extends React.Component {
           */
           responsive={responsive}
           forSSR
-          containerClassName="container"
+          beforeChanged={() => this.setState({ isMoving: true })}
+          afterChanged={() => this.setState({ isMoving: false })}
+          containerClassName="first-carousel-container container"
           slidesToSlide={1}
           infinite={true}
           deviceType={this.props.deviceType}
         >
           {fakerData.map(card => {
-            return <Card {...card} />;
+            return <Card isMoving={this.state.isMoving} {...card} />;
           })}
         </Carousel>
 
@@ -137,12 +132,12 @@ class Index extends React.Component {
           forSSR
           shouldShowDots
           slidesToSlide={1}
-          infinite={true}
+          infinite={false}
           containerClassName="container-with-dots"
           itemClassName="image-item"
           deviceType={this.props.deviceType}
         >
-          {fakerData.map(card => {
+          {fakerData.slice(0,5).map(card => {
             return <Image url={card.image} alt={card.headline} />;
           })}
         </Carousel>

@@ -19,8 +19,13 @@ const styles = {
 };
 
 function MediaCard(props) {
-  const { classes, image, headline, description } = props;
+  const { classes, image, headline, description, isMoving } = props;
   return (
+    <a onClick={(e) => {
+        if(isMoving) {
+          e.preventDefault();
+        }
+      }} href='https://w3js.com' target="_blank">
     <Card className={classes.card}>
       <CardActionArea>
         <CardMedia className={classes.media} image={image} title={headline} />
@@ -40,6 +45,7 @@ function MediaCard(props) {
         </Button>
       </CardActions>
     </Card>
+  </a>
   );
 }
 export default withStyles(styles)(MediaCard);

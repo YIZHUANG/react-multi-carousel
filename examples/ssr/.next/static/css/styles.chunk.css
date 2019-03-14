@@ -23,6 +23,10 @@ a {
   color: inherit;
   text-decoration: none;
 }
+.first-carousel-container {
+  margin-bottom: 50px;
+}
+
 @font-face {
   font-family: "revicons";
   fallback: fallback;

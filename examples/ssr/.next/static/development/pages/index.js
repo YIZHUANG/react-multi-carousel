@@ -50,18 +50,32 @@ function MediaCard(props) {
   var classes = props.classes,
       image = props.image,
       headline = props.headline,
-      description = props.description;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    className: classes.card,
+      description = props.description,
+      isMoving = props.isMoving;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    onClick: function onClick(e) {
+      if (isMoving) {
+        e.preventDefault();
+      }
+    },
+    href: "https://w3js.com",
+    target: "_blank",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 24
     },
     __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    className: classes.card,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 29
+    },
+    __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActionArea__WEBPACK_IMPORTED_MODULE_3___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 30
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardMedia__WEBPACK_IMPORTED_MODULE_6___default.a, {
@@ -70,13 +84,13 @@ function MediaCard(props) {
     title: headline,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26
+      lineNumber: 31
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_5___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27
+      lineNumber: 32
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_8___default.a, {
@@ -85,20 +99,20 @@ function MediaCard(props) {
     component: "h2",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 33
     },
     __self: this
   }, headline), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_8___default.a, {
     component: "p",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 36
     },
     __self: this
   }, description))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_4___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 39
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7___default.a, {
@@ -106,7 +120,7 @@ function MediaCard(props) {
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 40
     },
     __self: this
   }, "Share"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7___default.a, {
@@ -114,10 +128,10 @@ function MediaCard(props) {
     color: "primary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 43
     },
     __self: this
-  }, "Learn More")));
+  }, "Learn More"))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["withStyles"])(styles)(MediaCard));
@@ -565,6 +579,36 @@ function _createClass(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties(Constructor, staticProps);
   return Constructor;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _defineProperty; });
+/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
 }
 
 /***/ }),
@@ -115858,11 +115902,17 @@ class Carousel extends React.Component {
                 itemWidth
             });
             if (shouldCorrectItemPosition) {
-                this.setState({
-                    transform: -(itemWidth * this.state.currentSlide)
-                });
+                this.correctItemsPosition(itemWidth);
             }
         }
+    }
+    correctItemsPosition(itemWidth) {
+        if (!this.isAnimationAllowed) {
+            this.isAnimationAllowed = true;
+        }
+        this.setState({
+            transform: -(itemWidth * this.state.currentSlide)
+        });
     }
     onResize() {
         this.setItemsToShow();
@@ -115887,12 +115937,23 @@ class Carousel extends React.Component {
         }
     }
     resetAllItems() {
-        this.setState({ transform: 0, currentSlide: 0 });
+        const { afterChanged, beforeChanged } = this.props;
+        const previousSlide = this.state.currentSlide;
+        if (typeof beforeChanged === 'function') {
+            beforeChanged(0, this.getState());
+        }
+        this.setState({ transform: 0, currentSlide: 0 }, () => {
+            if (typeof afterChanged === "function") {
+                setTimeout(() => {
+                    afterChanged(previousSlide, this.getState());
+                }, this.props.transitionDuration || defaultTransitionDuration);
+            }
+        });
     }
     next(slidesHavePassed = 0) {
         this.isAnimationAllowed = true;
         const { slidesToShow } = this.state;
-        const { slidesToSlide, infinite } = this.props;
+        const { slidesToSlide, infinite, afterChanged, beforeChanged } = this.props;
         const nextMaximumSlides = this.state.currentSlide +
             1 +
             slidesHavePassed +
@@ -115900,10 +115961,20 @@ class Carousel extends React.Component {
             slidesToSlide;
         const nextSlides = this.state.currentSlide + slidesHavePassed + slidesToSlide;
         const nextPosition = -(this.state.itemWidth * nextSlides);
+        const previousSlide = this.state.currentSlide;
         if (nextMaximumSlides <= this.state.totalItems) {
+            if (typeof beforeChanged === 'function') {
+                beforeChanged(nextSlides, this.getState());
+            }
             this.setState({
                 transform: nextPosition,
                 currentSlide: nextSlides
+            }, () => {
+                if (typeof afterChanged === "function") {
+                    setTimeout(() => {
+                        afterChanged(previousSlide, this.getState());
+                    }, this.props.transitionDuration || defaultTransitionDuration);
+                }
             });
         }
         else if (nextMaximumSlides > this.state.totalItems &&
@@ -115911,9 +115982,18 @@ class Carousel extends React.Component {
             // prevent oversliding;
             const maxSlides = this.state.totalItems - slidesToShow;
             const maxPosition = -(this.state.itemWidth * maxSlides);
+            if (typeof beforeChanged === 'function') {
+                beforeChanged(maxSlides, this.getState());
+            }
             this.setState({
                 transform: maxPosition,
                 currentSlide: maxSlides
+            }, () => {
+                if (typeof afterChanged === "function") {
+                    setTimeout(() => {
+                        afterChanged(previousSlide, this.getState());
+                    }, this.props.transitionDuration || defaultTransitionDuration);
+                }
             });
         }
         else {
@@ -115925,29 +116005,57 @@ class Carousel extends React.Component {
     previous(slidesHavePassed = 0) {
         this.isAnimationAllowed = true;
         const { slidesToShow } = this.state;
-        const { slidesToSlide, infinite } = this.props;
+        const { slidesToSlide, infinite, afterChanged, beforeChanged } = this.props;
         const nextSlides = this.state.currentSlide - slidesHavePassed - slidesToSlide;
         const nextPosition = -(this.state.itemWidth * nextSlides);
+        const previousSlide = this.state.currentSlide;
         if (nextSlides >= 0) {
+            if (typeof beforeChanged === 'function') {
+                beforeChanged(nextSlides, this.getState());
+            }
             this.setState({
                 transform: nextPosition,
                 currentSlide: nextSlides
+            }, () => {
+                if (typeof afterChanged === "function") {
+                    setTimeout(() => {
+                        afterChanged(previousSlide, this.getState());
+                    }, this.props.transitionDuration || defaultTransitionDuration);
+                }
             });
         }
         else if (nextSlides < 0 && this.state.currentSlide !== 0) {
             // prevent oversliding.
+            if (typeof beforeChanged === 'function') {
+                beforeChanged(0, this.getState());
+            }
             this.setState({
                 transform: 0,
                 currentSlide: 0
+            }, () => {
+                if (typeof afterChanged === "function") {
+                    setTimeout(() => {
+                        afterChanged(previousSlide, this.getState());
+                    }, this.props.transitionDuration || defaultTransitionDuration);
+                }
             });
         }
         else {
             const maxSlides = this.state.totalItems - slidesToShow;
             const maxPosition = -(this.state.itemWidth * maxSlides);
             if (infinite) {
+                if (typeof beforeChanged === 'function') {
+                    beforeChanged(maxSlides, this.getState());
+                }
                 this.setState({
                     transform: maxPosition,
                     currentSlide: maxSlides
+                }, () => {
+                    if (typeof afterChanged === "function") {
+                        setTimeout(() => {
+                            afterChanged(previousSlide, this.getState());
+                        }, this.props.transitionDuration || defaultTransitionDuration);
+                    }
                 });
             }
         }
@@ -116026,11 +116134,23 @@ class Carousel extends React.Component {
         if (this.onMove) {
             if (this.direction === "right") {
                 const slidesHavePassed = Math.round((this.initialPosition - this.lastPosition) / this.state.itemWidth);
-                this.next(slidesHavePassed);
+                if (this.initialPosition - this.lastPosition >=
+                    this.props.minimumTouchDrag) {
+                    this.next(slidesHavePassed);
+                }
+                else {
+                    this.correctItemsPosition(this.state.itemWidth);
+                }
             }
             if (this.direction === "left") {
                 const slidesHavePassed = Math.round((this.lastPosition - this.initialPosition) / this.state.itemWidth);
-                this.previous(slidesHavePassed);
+                if (this.lastPosition - this.initialPosition >
+                    this.props.minimumTouchDrag) {
+                    this.previous(slidesHavePassed);
+                }
+                else {
+                    this.correctItemsPosition(this.state.itemWidth);
+                }
             }
             this.resetMoveStatus();
         }
@@ -116051,16 +116171,31 @@ class Carousel extends React.Component {
     }
     goToSlide(slide) {
         const { itemWidth } = this.state;
+        const { afterChanged, beforeChanged } = this.props;
+        const previousSlide = this.state.currentSlide;
+        if (typeof beforeChanged === 'function') {
+            beforeChanged(slide, this.getState());
+        }
         this.setState({
             currentSlide: slide,
             transform: -(itemWidth * slide)
+        }, () => {
+            if (typeof afterChanged === "function") {
+                setTimeout(() => {
+                    afterChanged(previousSlide, this.getState());
+                }, this.props.transitionDuration || defaultTransitionDuration);
+            }
         });
+    }
+    getState() {
+        return Object.assign({}, this.state, { onMove: this.onMove, direction: this.direction });
     }
     renderLeftArrow() {
         const { customLeftArrow } = this.props;
         if (customLeftArrow) {
             return React.cloneElement(customLeftArrow, {
-                onClick: () => this.previous()
+                onClick: () => this.previous(),
+                state: this.getState()
             });
         }
         else {
@@ -116071,7 +116206,8 @@ class Carousel extends React.Component {
         const { customRightArrow } = this.props;
         if (customRightArrow) {
             return React.cloneElement(customRightArrow, {
-                onClick: () => this.next()
+                onClick: () => this.next(),
+                state: this.getState()
             });
         }
         else {
@@ -116079,10 +116215,18 @@ class Carousel extends React.Component {
         }
     }
     renderDotsList() {
+        const { customDot } = this.props;
         return (React.createElement("ul", { className: "react-multi-carousel-dot-list" }, Array(this.state.totalItems)
             .fill(0)
             .map((item, index) => {
-            return (React.createElement("li", { className: `react-multi-carousel-dot ${this.state.currentSlide === index
+            if (customDot) {
+                return React.cloneElement(customDot, {
+                    index,
+                    onClick: () => this.goToSlide(index),
+                    state: this.getState()
+                });
+            }
+            return (React.createElement("li", { key: index, className: `react-multi-carousel-dot ${this.state.currentSlide === index
                     ? "react-multi-carousel-dot--active"
                     : ""}` },
                 React.createElement("button", { onClick: () => this.goToSlide(index) })));
@@ -116119,7 +116263,12 @@ class Carousel extends React.Component {
                 }, onMouseMove: this.handleMove, onMouseDown: this.handleDown, onMouseUp: this.handleOut, onMouseEnter: this.handleEnter, onMouseLeave: this.handleOut, onTouchStart: this.handleDown, onTouchMove: this.handleMove, onTouchEnd: this.handleOut }, React.Children.toArray(children).map((child, index) => (React.createElement("li", { key: index, style: {
                     flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
                     width: domFullyLoaded ? `${itemWidth}px` : "auto"
-                }, className: itemClassName }, child)))),
+                }, className: itemClassName }, React.cloneElement(child, {
+                index,
+                isvisible: index >= this.state.currentSlide &&
+                    index < this.state.currentSlide + this.state.slidesToShow,
+                state: this.getState()
+            }))))),
             shouldShowArrows && !disableLeftArrow && this.renderLeftArrow(),
             shouldShowArrows && !disableRightArrow && this.renderRightArrow(),
             this.props.shouldShowDots && this.renderDotsList()));
@@ -116133,7 +116282,8 @@ Carousel.defaultProps = {
     itemClassName: "",
     keyBoardControl: true,
     autoPlaySpeed: 3000,
-    shouldShowDots: false
+    shouldShowDots: false,
+    minimumTouchDrag: 50
 };
 exports.default = Carousel;
 //# sourceMappingURL=Carousel.js.map
@@ -119015,29 +119165,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/createClass */ "./node_modules/@babel/runtime-corejs2/helpers/esm/createClass.js");
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime-corejs2/helpers/esm/possibleConstructorReturn.js");
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime-corejs2/helpers/esm/getPrototypeOf.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/inherits */ "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var faker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! faker */ "./node_modules/faker/index.js");
-/* harmony import */ var faker__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(faker__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var mobile_detect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! mobile-detect */ "./node_modules/mobile-detect/mobile-detect.js");
-/* harmony import */ var mobile_detect__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(mobile_detect__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/Typography/index.js");
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/Button/index.js");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _components_card__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/card */ "./components/card.js");
-/* harmony import */ var _components_image__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/image */ "./components/image.js");
-/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
-/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../style.css */ "./style.css");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
-/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/assertThisInitialized */ "./node_modules/@babel/runtime-corejs2/helpers/esm/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/inherits */ "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var faker__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! faker */ "./node_modules/faker/index.js");
+/* harmony import */ var faker__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(faker__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var mobile_detect__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! mobile-detect */ "./node_modules/mobile-detect/mobile-detect.js");
+/* harmony import */ var mobile_detect__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(mobile_detect__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/Typography/index.js");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/Button/index.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _components_card__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/card */ "./components/card.js");
+/* harmony import */ var _components_image__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/image */ "./components/image.js");
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../style.css */ "./style.css");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_19__);
+
+
 
 
 
@@ -119065,7 +119219,7 @@ var styles = function styles(theme) {
     },
     title: {
       maxWidth: 400,
-      margin: 'auto',
+      margin: "auto",
       marginTop: 10
     }
   };
@@ -119074,25 +119228,41 @@ var styles = function styles(theme) {
 var Index =
 /*#__PURE__*/
 function (_React$Component) {
-  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(Index, _React$Component);
+  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_6__["default"])(Index, _React$Component);
 
   function Index() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, Index);
 
-    return Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(Index).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(this, (_getPrototypeOf2 = Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(Index)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_7__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__["default"])(_this), "state", {
+      isMoving: false
+    });
+
+    return _this;
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(Index, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var classes = this.props.classes;
       var images = ["https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1550133730-695473e544be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1550167164-1b67c2be3973?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1550338861-b7cfeaf8ffd8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1550223640-23097fc71cb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1550353175-a3611868086b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1550330039-a54e15ed9d33?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1549737328-8b9f3252b927?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1549833284-6a7df91c1f65?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1549985908-597a09ef0a7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"];
       var texts = ["Appending currency sign to a purchase form in your e-commerce site using plain JavaScript.", "Fixing CSS load order/style.chunk.css incorrect in Nextjs", "React Carousel with Server Side Rendering Support – Part 1", "React Carousel with Server Side Rendering Support – Part 2", "Flutter Xcode couldn’t find any iOS App Development provisioning profiles"];
       var fakerData = Array(12).fill(0).map(function (item, index) {
         return {
           image: images[index],
-          headline: faker__WEBPACK_IMPORTED_MODULE_7___default.a.lorem.sentence(),
-          description: faker__WEBPACK_IMPORTED_MODULE_7___default.a.lorem.sentences(3, 3)
+          headline: 'w3js -> web front-end studio',
+          description: texts[index] || texts[0]
         };
       });
       var responsive = {
@@ -119118,48 +119288,48 @@ function (_React$Component) {
           items: 1
         }
       };
-      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         className: classes.root,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 93
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9___default.a, {
-        className: classes.title,
-        variant: "h6",
-        color: "grey",
         __source: {
           fileName: _jsxFileName,
           lineNumber: 94
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("a", {
+      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11___default.a, {
+        className: classes.title,
+        variant: "h6",
+        color: "grey",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 95
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
         target: "_blank",
         href: "https://w3js.com/",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 99
+          lineNumber: 96
         },
         __self: this
-      }, "A Carousel supports multiple items and server-side rendering")), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_9___default.a, {
+      }, "A Carousel supports multiple items and server-side rendering")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11___default.a, {
         className: classes.title,
         variant: "p",
         color: "grey",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 103
+          lineNumber: 100
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("a", {
+      }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
         target: "_blank",
         href: "https://w3js.com/",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 108
+          lineNumber: 101
         },
         __self: this
-      }, "This is the server-side rendering demo of the libiary, try to disable the JavaScript in your browser, you will still see our Carousel renders nicely")), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_14___default.a
+      }, "This is the server-side rendering demo of the libiary, try to disable the JavaScript in your browser, you will still see our Carousel renders nicely")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_16___default.a
       /*
       disableSwipeOnMobile
       disableDrag
@@ -119167,24 +119337,36 @@ function (_React$Component) {
       , {
         responsive: responsive,
         forSSR: true,
-        containerClassName: "container",
+        beforeChanged: function beforeChanged() {
+          return _this2.setState({
+            isMoving: true
+          });
+        },
+        afterChanged: function afterChanged() {
+          return _this2.setState({
+            isMoving: false
+          });
+        },
+        containerClassName: "first-carousel-container container",
         slidesToSlide: 1,
         infinite: true,
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 114
+          lineNumber: 107
         },
         __self: this
       }, fakerData.map(function (card) {
-        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_card__WEBPACK_IMPORTED_MODULE_12__["default"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, card, {
+        return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_card__WEBPACK_IMPORTED_MODULE_14__["default"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+          isMoving: _this2.state.isMoving
+        }, card, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 127
+            lineNumber: 122
           },
           __self: this
         }));
-      })), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_14___default.a
+      })), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_16___default.a
       /*
       disableSwipeOnMobile
       disableDrag
@@ -119194,22 +119376,22 @@ function (_React$Component) {
         forSSR: true,
         shouldShowDots: true,
         slidesToSlide: 1,
-        infinite: true,
+        infinite: false,
         containerClassName: "container-with-dots",
         itemClassName: "image-item",
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 131
+          lineNumber: 126
         },
         __self: this
-      }, fakerData.map(function (card) {
-        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_image__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      }, fakerData.slice(0, 5).map(function (card) {
+        return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_image__WEBPACK_IMPORTED_MODULE_15__["default"], {
           url: card.image,
           alt: card.headline,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 146
+            lineNumber: 141
           },
           __self: this
         });
@@ -119229,7 +119411,7 @@ function (_React$Component) {
         userAgent = navigator.userAgent;
       }
 
-      var md = new mobile_detect__WEBPACK_IMPORTED_MODULE_8___default.a(userAgent);
+      var md = new mobile_detect__WEBPACK_IMPORTED_MODULE_10___default.a(userAgent);
 
       if (md.tablet()) {
         deviceType = "tablet";
@@ -119246,9 +119428,9 @@ function (_React$Component) {
   }]);
 
   return Index;
-}(react__WEBPACK_IMPORTED_MODULE_6___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_8___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_11__["withStyles"])(styles)(Index));
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_13__["withStyles"])(styles)(Index));
 
 /***/ }),
 
