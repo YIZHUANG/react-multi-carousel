@@ -12,7 +12,8 @@
     "storybook": "start-storybook -p 6006",
     "export": "build-storybook -c .storybook -o .out",
     "build-storybook": "build-storybook",
-    "after-build": "cd src && copyfiles -f assets/* ../lib"
+    "after-build": "cd src && copyfiles -f assets/* ../lib",
+    "publish-ssr": "cd examples/ssr && now && now alias react-multi-carousel.now.sh"
   },
   "repository": {
     "type": "git",

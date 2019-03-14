@@ -17,7 +17,12 @@ The technical details of this carousel can be found at [www.w3js.com -> react-mu
 
 Demo and documentation can be found at [here](https://w3js.com/react-multi-carousel/).
 
-Codes at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/index.stories.js).
+Demo for the SSR are at [here](https://react-multi-carousel.now.sh/)
+Try to disable JavaScript to test if it renders on the server-side.
+
+Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/pages/index.js).
+
+Codes for the documentation at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/index.stories.js).
 
 ## Install
 
