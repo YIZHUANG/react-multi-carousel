@@ -2,6 +2,7 @@ interface responsiveType {
   [key: string]: {
     breakpoint: { max: number; min: number };
     items: number;
+    paritialVisibilityGutter?: number;
   };
 }
 
@@ -29,6 +30,9 @@ interface CarouselProps {
   autoPlay?: boolean;
   autoPlaySpeed?: number; // default 3000ms
   shouldShowDots?: boolean;
+  // Show next/previous item partially, if its right, only show the next item partially, else show both
+  // partialVisbile has to be used in conjunction with the responsive props, details are in documentation.
+  partialVisbile?: "right" | boolean;
   customTransition?: string;
   transitionDuration?: number;
   // if you are using customTransition, make sure to put the duration here.

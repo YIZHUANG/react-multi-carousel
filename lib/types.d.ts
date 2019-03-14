@@ -6,6 +6,7 @@ interface responsiveType {
             min: number;
         };
         items: number;
+        paritialVisibilityGutter?: number;
     };
 }
 interface CarouselProps {
@@ -32,6 +33,7 @@ interface CarouselProps {
     autoPlay?: boolean;
     autoPlaySpeed?: number;
     shouldShowDots?: boolean;
+    partialVisbile?: "right" | boolean;
     customTransition?: string;
     transitionDuration?: number;
 }

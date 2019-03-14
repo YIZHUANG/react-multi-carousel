@@ -11,4 +11,18 @@ function guessWidthFromDeviceType(
   }
   return itemWidth;
 }
-export { guessWidthFromDeviceType };
+
+function getParitialVisibilityGutter(
+  responsive: responsiveType,
+  partialVisbile?: string | boolean,
+  serverSideDeviceType?: string | undefined,
+  clientSideDeviceType?: string | undefined
+):number | undefined {
+  let gutter:number | undefined = 0;
+  const deviceType = clientSideDeviceType || serverSideDeviceType
+  if(partialVisbile && deviceType) {
+    gutter = responsive[deviceType].paritialVisibilityGutter
+  }
+  return gutter;
+}
+export { guessWidthFromDeviceType, getParitialVisibilityGutter };

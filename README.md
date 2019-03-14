@@ -1,6 +1,6 @@
 # react-multi-carousel
 
-Lightweight customizable React carousel component supports multiple items and SSR(Server-side rendering) with typescript.
+Lightweight fully customizable React carousel component supports multiple items and SSR(Server-side rendering) with typescript.
 
 The technical details of this carousel can be found at [www.w3js.com -> react-multi-carousel](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
 
@@ -145,16 +145,43 @@ This is useful if you want to support accessibility or do your own stuff.
 
 ```
 const CarouselItem = ({ isvisible, currentSlide, onMove }) => {
-  return <div onClick={(e) => {
-    if(onMove) {
-      e.preventDefault();
-    }
-  }} aria-hidden={isvisible ? 'false':'true'} className={isvisible? 'special style' : 'normal style'}></div>
+  return <div aria-hidden={isvisible ? 'false':'true'} className={isvisible? 'special style' : 'normal style'}></div>
 }
 <Carousel>
   <CarouselItem />
   <CarouselItem />
   <CarouselItem />
+</Carousel>
+```
+
+## paritialVisibile props.
+
+Shows the next / previous items paritially, this is very useful if you want to indicate to the users that this carousel component is swipable, has more items behind it.
+
+paritialVisibile = 'right' means showing only next items paritially
+paritialVisibile = {true} means showing both.
+
+```
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+    paritialVisibilityGutter: 40 // this is needed to tell the amount of px that should be visible.
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    paritialVisibilityGutter: 30 // this is needed to tell the amount of px that should be visible.
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    paritialVisibilityGutter: 30 // this is needed to tell the amount of px that should be visible.
+  }
+}
+<Carousel paritialVisibile='right' responsive={responsive}>
+  <ItemOne />
+  <ItemTwo />
 </Carousel>
 ```
 

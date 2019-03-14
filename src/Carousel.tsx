@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { guessWidthFromDeviceType } from "./utils";
+import { guessWidthFromDeviceType, getParitialVisibilityGutter } from "./utils";
 import { CarouselInternalState, CarouselProps } from "./types";
 
 const defaultTransitionDuration = 300;
@@ -15,7 +15,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     keyBoardControl: true,
     autoPlaySpeed: 3000,
     shouldShowDots: false,
-    minimumTouchDrag: 50
+    minimumTouchDrag: 50,
+    showGutter: true
   };
   private readonly containerRef: React.RefObject<any>;
   public onMove: boolean;
@@ -130,7 +131,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public resetAllItems(): void {
     const { afterChanged, beforeChanged } = this.props;
     const previousSlide = this.state.currentSlide;
-    if(typeof beforeChanged === 'function') {
+    if (typeof beforeChanged === "function") {
       beforeChanged(0, this.getState());
     }
     this.setState({ transform: 0, currentSlide: 0 }, () => {
@@ -156,7 +157,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const nextPosition = -(this.state.itemWidth * nextSlides);
     const previousSlide = this.state.currentSlide;
     if (nextMaximumSlides <= this.state.totalItems) {
-      if(typeof beforeChanged === 'function') {
+      if (typeof beforeChanged === "function") {
         beforeChanged(nextSlides, this.getState());
       }
       this.setState(
@@ -179,7 +180,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       // prevent oversliding;
       const maxSlides = this.state.totalItems - slidesToShow;
       const maxPosition = -(this.state.itemWidth * maxSlides);
-      if(typeof beforeChanged === 'function') {
+      if (typeof beforeChanged === "function") {
         beforeChanged(maxSlides, this.getState());
       }
       this.setState(
@@ -210,7 +211,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const nextPosition = -(this.state.itemWidth * nextSlides);
     const previousSlide = this.state.currentSlide;
     if (nextSlides >= 0) {
-      if(typeof beforeChanged === 'function') {
+      if (typeof beforeChanged === "function") {
         beforeChanged(nextSlides, this.getState());
       }
       this.setState(
@@ -228,7 +229,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       );
     } else if (nextSlides < 0 && this.state.currentSlide !== 0) {
       // prevent oversliding.
-      if(typeof beforeChanged === 'function') {
+      if (typeof beforeChanged === "function") {
         beforeChanged(0, this.getState());
       }
       this.setState(
@@ -248,7 +249,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       const maxSlides = this.state.totalItems - slidesToShow;
       const maxPosition = -(this.state.itemWidth * maxSlides);
       if (infinite) {
-        if(typeof beforeChanged === 'function') {
+        if (typeof beforeChanged === "function") {
           beforeChanged(maxSlides, this.getState());
         }
         this.setState(
@@ -402,7 +403,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const { itemWidth } = this.state;
     const { afterChanged, beforeChanged } = this.props;
     const previousSlide = this.state.currentSlide;
-    if(typeof beforeChanged === 'function') {
+    if (typeof beforeChanged === "function") {
       beforeChanged(slide, this.getState());
     }
     this.setState(
@@ -504,7 +505,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       containerClassName,
       contentClassName,
       itemClassName,
-      customTransition
+      customTransition,
+      partialVisbile
     } = this.props;
     let flexBisis: number | string | undefined;
     const domFullyLoaded =
@@ -529,6 +531,24 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       );
     const disableLeftArrow = !infinite && isLeftEndReach;
     const disableRightArrow = !infinite && isRightEndReach;
+
+    const paritialVisibilityGutter = getParitialVisibilityGutter(
+      responsive,
+      partialVisbile,
+      deviceType,
+      this.state.deviceType
+    );
+
+    // this is the perfect formular, the perfect code.
+    const currentTransform =
+      paritialVisibilityGutter && partialVisbile
+        ? partialVisbile === "right"
+          ? this.state.transform +
+            this.state.currentSlide * paritialVisibilityGutter
+          : this.state.transform +
+            this.state.currentSlide * paritialVisibilityGutter +
+            (this.state.currentSlide === 0 ? 0 : (paritialVisibilityGutter + paritialVisibilityGutter / 2))
+        : this.state.transform;
     return (
       <div
         className={`react-multi-carousel-list ${containerClassName}`}
@@ -542,7 +562,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
               ? customTransition || defaultTransition
               : "none",
             overflow: shouldRenderOnSSR ? "hidden" : "unset",
-            transform: `translate3d(${this.state.transform}px,0,0)`
+            transform: `translate3d(${currentTransform}px,0,0)`
           }}
           onMouseMove={this.handleMove}
           onMouseDown={this.handleDown}
@@ -558,7 +578,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
               key={index}
               style={{
                 flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
-                width: domFullyLoaded ? `${itemWidth}px` : "auto"
+                width: domFullyLoaded
+                  ? `${
+                      partialVisbile && paritialVisibilityGutter
+                        ? itemWidth - paritialVisibilityGutter
+                        : itemWidth
+                    }px`
+                  : "auto"
               }}
               className={itemClassName}
             >
