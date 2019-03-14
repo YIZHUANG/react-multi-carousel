@@ -18,3 +18,8 @@
 .react-multi-carousel-dot button {
   border-color: grey !important;
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
