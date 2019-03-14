@@ -112,7 +112,7 @@ const responsive = {
 
 You can pass your own custom arrows to make it the way you want, the same for the position. For example, add media query for the arrows to go under when on smaller screens.
 
-You custom arrows will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
+You custom arrows will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress. [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=Custom%20arrow&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 ```
 const CustomRightArrow = ({ onClick, ...rest }) => {
@@ -127,7 +127,7 @@ const CustomRightArrow = ({ onClick, ...rest }) => {
 
 You can pass your own custom dots to replace the default one
 
-You custom dots will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
+You custom dots will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress. [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=custom%20dots&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 ```
 const CustomDot = ({ onClick, ...rest }) => {
@@ -142,6 +142,9 @@ const CustomDot = ({ onClick, ...rest }) => {
 
 All the items you passed as children will received a list of props/state of the current carousel that's passed back by the Carousel.
 This is useful if you want to support accessibility or do your own stuff.
+[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=with%20aria%20hidden%2C%20inspect%20me%20in%20the%20debugger&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
+
+Inspect the element in the chrome debugger.
 
 ```
 const CarouselItem = ({ isvisible, currentSlide, onMove }) => {
@@ -160,6 +163,8 @@ Shows the next / previous items paritially, this is very useful if you want to i
 
 paritialVisibile = 'right' means showing only next items paritially
 paritialVisibile = {true} means showing both.
+
+[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=paritially%20visibie%20on%20next%20items&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 ```
 const responsive = {
@@ -189,6 +194,8 @@ const responsive = {
 
 This is a callback function that is invoked each time there has been a sliding.
 
+[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=afterChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
+
 ```
 <Carousel afterChanged={(previousSlide, { currentSlide, onMove }) => {
     doSpeicalThing()
@@ -199,6 +206,8 @@ This is a callback function that is invoked each time there has been a sliding.
 ## beforeChanged call back
 
 This is a callback function that is invoked each time before a sliding.
+
+[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=beforeChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 ```
 <Carousel beforeChanged={(nextSlide, { currentSlide, onMove }) => {
@@ -262,6 +271,9 @@ keyBoardControl?: boolean;
 autoPlay?: boolean;
 autoPlaySpeed?: number; // default 3000ms
 shouldShowDots?: boolean;
+// Show next/previous item partially, if its right, only show the next item partially, else show both
+// partialVisbile has to be used in conjunction with the responsive props, details are in documentation.
+partialVisbile?: "right" | boolean;
 customTransition?: string;
 transitionDuration?: number;
 // if you are using customTransition, make sure to put the duration here.
