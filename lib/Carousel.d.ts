@@ -13,6 +13,7 @@ declare class Carousel extends React.Component<CarouselProps, CarouselInternalSt
     componentDidMount(): void;
     setItemsToShow(shouldCorrectItemPosition?: boolean): void;
     setContainerAndItemWidth(slidesToShow: number, shouldCorrectItemPosition?: boolean): void;
+    correctItemsPosition(itemWidth: number): void;
     onResize(): void;
     componentDidUpdate({ keyBoardControl, autoPlay }: CarouselProps, { containerWidth }: CarouselInternalState): void;
     resetAllItems(): void;
@@ -26,6 +27,7 @@ declare class Carousel extends React.Component<CarouselProps, CarouselInternalSt
     onKeyUp(e: any): void;
     handleEnter(): void;
     goToSlide(slide: number): void;
+    getState(): any;
     renderLeftArrow(): React.ReactElement<any>;
     renderRightArrow(): React.ReactElement<any>;
     renderDotsList(): JSX.Element;

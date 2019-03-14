@@ -39,6 +39,7 @@ describe("Carousel", () => {
         infinite={true}
         containerClassName="test-class"
         responsive={responsive}
+        minimumTouchDrag={0}
       >
         <div>1</div>
         <div>2</div>
@@ -56,6 +57,7 @@ describe("Carousel", () => {
         responsive={responsive}
         slidesToSlide={2}
         infinite={true}
+        minimumTouchDrag={0}
         containerClassName="test-class"
         responsive={responsive}
       >
@@ -80,6 +82,7 @@ describe("Carousel", () => {
         infinite={true}
         containerClassName="test-class"
         responsive={responsive}
+        minimumTouchDrag={0}
       >
         {fakerData.map(card => {
           return <Card {...card} />;
@@ -108,6 +111,7 @@ describe("Carousel", () => {
         infinite={true}
         containerClassName="test-class"
         responsive={responsive}
+        minimumTouchDrag={0}
       >
         {fakerData.map(card => {
           return <Card {...card} />;
@@ -184,6 +188,7 @@ describe("Carousel", () => {
         infinite={true}
         containerClassName="test-class"
         responsive={responsive}
+        minimumTouchDrag={0}
       >
         {fakerData.map(card => {
           return <Card {...card} />;
@@ -304,6 +309,7 @@ describe("Carousel", () => {
         infinite={true}
         containerClassName="test-class"
         responsive={responsive}
+        minimumTouchDrag={0}
       >
         {fakerData.map(card => {
           return <Card {...card} />;

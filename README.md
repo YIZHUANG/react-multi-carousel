@@ -1,6 +1,6 @@
 # react-multi-carousel
 
-Lightweight React carousel component supports multiple items and SSR(Server-side rendering) with typescript.
+Lightweight customizable React carousel component supports multiple items and SSR(Server-side rendering) with typescript.
 
 The technical details of this carousel can be found at [www.w3js.com -> react-multi-carousel](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
 
@@ -43,6 +43,8 @@ The current most common solution is to detect the device type of the user based 
 
 Based based on the device type, we decided how many items we are showing in the Carousel.
 
+For example, we want to show 3 items at the same time on desktop (screen size 1024 - 2000px possibily) and 2 items on tablet(700px - 1024px) and 1 item on mobile.  ---> this can be achieved through user-agent detection.
+
 More detailed can be found in this blog post [here](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
 
 Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/pages/index.js).
@@ -62,7 +64,11 @@ Demo for the SSR are at [here](https://react-multi-carousel.now.sh/) Try to disa
 * Multiple items
 * Show / hide arrows
 * Custom arrows / control buttons
+* Custom dots
 * Custom styling
+* Accessibility support
+
+
 
 ## Examples
 
@@ -107,10 +113,49 @@ const responsive = {
 ## Custom Arrows.
 You can pass your own custom arrows to make it the way you want, the same for the position. For example, add media query for the arrows to go under when on smaller screens.
 
+You custom arrows will receive a list of props/state  that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
+
 ```
-const CustomRightArrow = ({ onClick }) => <button onClick={() => onClick()} />
+const CustomRightArrow = ({ onClick, ...rest }) => {
+  const { onMove, state: {  currentSlide, deviceType }  } = rest;
+  // onMove means if dragging or swiping in progress.
+  return <button onClick={() => onClick()} />
+}
 <Carousel customRightArrow={<CustomRightArrow />} />
 ```
+
+## Custom dots.
+You can pass your own custom dots to replace the default one
+
+You custom dots will receive a list of props/state  that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
+
+```
+const CustomDot = ({ onClick, ...rest }) => {
+  const { onMove, index, state: { currentSlide, deviceType }  } = rest;
+  // onMove means if dragging or swiping in progress.
+  return <button className={currentSlide === index ? 'active' : 'inactive'} onClick={() => onClick()} />
+}
+<Carousel shouldShowDots customDot={<CustomDot />} />
+```
+
+## The items you passed as children.
+
+All the items you passed as children will received a list of props/state of the current carousel that's passed back by the Carousel.
+This is useful if you want to support accessibility or do your own stuff.
+
+const CarouselItem = ({ isvisible, currentSlide, onMove }) => {
+  return <div onClick={(e) => {
+    if(onMove) {
+      e.preventDefault();
+    }
+  }} aria-hidden={isvisible ? 'false':'true'} className={isvisible? 'special style' : 'normal style'}></div>
+}
+<Carousel>
+  <CarouselItem />
+  <CarouselItem />
+  <CarouselItem />
+</Carousel>
+
 
 ## General Props
 ```
@@ -122,17 +167,20 @@ const CustomRightArrow = ({ onClick }) => <button onClick={() => onClick()} />
   removeArrow?: boolean;
   disableSwipeOnMobile?: boolean;
   removeArrowOnDeviceType?: string | Array<string>;
-  children: React.ReactNode | null;
+  children: any;
   customLeftArrow?: React.ReactElement<any> | null;
   customRightArrow?: React.ReactElement<any> | null;
+  customDot?: React.ReactElement<any> | null;
   infinite?: boolean;
+  minimumTouchDrag: number; // default 50px. The amount of distance to drag / swipe in order to move to the next slide.
   contentClassName?: string;
-  itemClassName?:string;
+  itemClassName?: string;
   containerClassName?: string;
   keyBoardControl?: boolean;
-  autoPlay?: boolean; // make sure you put infinite={true} if autoPlay is enabled.
+  autoPlay?: boolean;
   autoPlaySpeed?: number; // default 3000ms
-  customTransition?:string;
+  shouldShowDots?: boolean;
+  customTransition?: string;
   transitionDuration?: number;
   // if you are using customTransition, make sure to put the duration here.
   // for example, customTransition="all .5"  then put transitionDuration as 500.

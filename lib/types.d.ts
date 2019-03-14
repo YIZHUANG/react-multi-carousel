@@ -17,10 +17,12 @@ interface CarouselProps {
     removeArrow?: boolean;
     disableSwipeOnMobile?: boolean;
     removeArrowOnDeviceType?: string | Array<string>;
-    children: React.ReactNode | null;
+    children: any;
     customLeftArrow?: React.ReactElement<any> | null;
     customRightArrow?: React.ReactElement<any> | null;
+    customDot?: React.ReactElement<any> | null;
     infinite?: boolean;
+    minimumTouchDrag: number;
     contentClassName?: string;
     itemClassName?: string;
     containerClassName?: string;

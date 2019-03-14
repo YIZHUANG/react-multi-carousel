@@ -1,5 +1,3 @@
-
-
 interface responsiveType {
   [key: string]: {
     breakpoint: { max: number; min: number };
@@ -16,18 +14,20 @@ interface CarouselProps {
   removeArrow?: boolean;
   disableSwipeOnMobile?: boolean;
   removeArrowOnDeviceType?: string | Array<string>;
-  children: React.ReactNode | null;
+  children: any;
   customLeftArrow?: React.ReactElement<any> | null;
   customRightArrow?: React.ReactElement<any> | null;
+  customDot?: React.ReactElement<any> | null;
   infinite?: boolean;
+  minimumTouchDrag: number; // default 50px. The amount of distance to drag / swipe in order to move to the next slide.
   contentClassName?: string;
-  itemClassName?:string;
+  itemClassName?: string;
   containerClassName?: string;
   keyBoardControl?: boolean;
   autoPlay?: boolean;
   autoPlaySpeed?: number; // default 3000ms
   shouldShowDots?: boolean;
-  customTransition?:string;
+  customTransition?: string;
   transitionDuration?: number;
   // if you are using customTransition, make sure to put the duration here.
   // for example, customTransition="all .5"  then put transitionDuration as 500.

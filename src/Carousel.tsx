@@ -14,7 +14,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     itemClassName: "",
     keyBoardControl: true,
     autoPlaySpeed: 3000,
-    shouldShowDots: false
+    shouldShowDots: false,
+    minimumTouchDrag: 50
   };
   private readonly containerRef: React.RefObject<any>;
   public onMove: boolean;
@@ -87,11 +88,17 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         itemWidth
       });
       if (shouldCorrectItemPosition) {
-        this.setState({
-          transform: -(itemWidth * this.state.currentSlide)
-        });
+        this.correctItemsPosition(itemWidth);
       }
     }
+  }
+  public correctItemsPosition(itemWidth: number): void {
+    if (!this.isAnimationAllowed) {
+      this.isAnimationAllowed = true;
+    }
+    this.setState({
+      transform: -(itemWidth * this.state.currentSlide)
+    });
   }
   public onResize(): void {
     this.setItemsToShow();
@@ -278,13 +285,27 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         const slidesHavePassed = Math.round(
           (this.initialPosition - this.lastPosition) / this.state.itemWidth
         );
-        this.next(slidesHavePassed);
+        if (
+          this.initialPosition - this.lastPosition >=
+          this.props.minimumTouchDrag
+        ) {
+          this.next(slidesHavePassed);
+        } else {
+          this.correctItemsPosition(this.state.itemWidth);
+        }
       }
       if (this.direction === "left") {
         const slidesHavePassed = Math.round(
           (this.lastPosition - this.initialPosition) / this.state.itemWidth
         );
-        this.previous(slidesHavePassed);
+        if (
+          this.lastPosition - this.initialPosition >
+          this.props.minimumTouchDrag
+        ) {
+          this.previous(slidesHavePassed);
+        } else {
+          this.correctItemsPosition(this.state.itemWidth);
+        }
       }
       this.resetMoveStatus();
     }
@@ -311,12 +332,19 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       transform: -(itemWidth * slide)
     });
   }
-
+  public getState(): any {
+    return {
+      ...this.state,
+      onMove: this.onMove,
+      direction: this.direction
+    };
+  }
   public renderLeftArrow(): React.ReactElement<any> {
     const { customLeftArrow } = this.props;
     if (customLeftArrow) {
       return React.cloneElement(customLeftArrow, {
-        onClick: () => this.previous()
+        onClick: () => this.previous(),
+        state: this.getState()
       });
     } else {
       return (
@@ -331,7 +359,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const { customRightArrow } = this.props;
     if (customRightArrow) {
       return React.cloneElement(customRightArrow, {
-        onClick: () => this.next()
+        onClick: () => this.next(),
+        state: this.getState()
       });
     } else {
       return (
@@ -344,13 +373,22 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
 
   public renderDotsList() {
+    const { customDot } = this.props;
     return (
       <ul className="react-multi-carousel-dot-list">
         {Array(this.state.totalItems)
           .fill(0)
           .map((item, index) => {
+            if (customDot) {
+              return React.cloneElement(customDot, {
+                index,
+                onClick: () => this.goToSlide(index),
+                state: this.getState()
+              });
+            }
             return (
               <li
+                key={index}
                 className={`react-multi-carousel-dot ${
                   this.state.currentSlide === index
                     ? "react-multi-carousel-dot--active"
@@ -437,7 +475,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
               }}
               className={itemClassName}
             >
-              {child}
+              {React.cloneElement(child, {
+                index,
+                isvisible:
+                  index >= this.state.currentSlide &&
+                  index < this.state.currentSlide + this.state.slidesToShow,
+                state: this.getState()
+              })}
             </li>
           ))}
         </ul>
