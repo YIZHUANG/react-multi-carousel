@@ -6,7 +6,7 @@
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 6px;
-  opacity: .8;
+  opacity: 0.8;
   cursor: pointer;
   transform: rotate(-45deg);
 }
@@ -21,11 +21,11 @@
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 6px;
-  opacity: .8;
+  opacity: 0.8;
   cursor: pointer;
   transform: rotate(135deg);
 }
-.custom-left-arrow{
+.custom-left-arrow {
   opacity: 1;
 }
 .container {
@@ -36,5 +36,17 @@
 }
 .container-with-dots {
   margin-top: 10%;
+  padding-bottom: 20px;
+}
+.custom-button-group {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  right: 0;
+}
+.container-padding-bottom {
   padding-bottom: 20px;
 }

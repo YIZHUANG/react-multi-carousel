@@ -49,7 +49,8 @@ More detailed can be found in this blog post [here](https://w3js.com/index.php/2
 
 Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/pages/index.js).
 
-Demo for the SSR are at [here](https://react-multi-carousel.now.sh/) Try to disable JavaScript to test if it renders on the server-side.
+* Demo for the SSR are at [here](https://react-multi-carousel.now.sh/)
+* Try to disable JavaScript to test if it renders on the server-side.
 
 ## Features.
 
@@ -129,12 +130,13 @@ const CustomRightArrow = ({ onClick, ...rest }) => {
 ## Custom button group.
 This is very useful if you don't want the dots, or arrows and you want to fully customize the control functionality and styling yourself.
 ```
-const ButtonGroup = ({ next, previous, ...rest }) => {
+const ButtonGroup = ({ next, previous, goToSlide ...rest }) => {
   const { state: { currentSlide } } = rest;
   return (
     <div className="carousel-button-group"> // remember to give it position:absolute
       <ButtonOne className={currentSlide === 0 : 'disable' : ''} onClick={() => previous()} />
       <ButtonTwo onClick={() => next()} />
+      <ButtonThree onClick={() => goToSlide(currentSlide + 1)}> Go to any slide </ButtonThree>
     </div>
   );
 };
@@ -161,14 +163,15 @@ const CustomDot = ({ onClick, ...rest }) => {
 
 ## The items you passed as children.
 
-All the items you passed as children will received a list of props/state of the current carousel that's passed back by the Carousel.
+All the items you passed as children will received a list of props and the current state that's passed back by the Carousel.
 This is useful if you want to support accessibility or do your own stuff.
 [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=with%20aria%20hidden%2C%20inspect%20me%20in%20the%20debugger&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 Inspect the element in the chrome debugger.
 
 ```
-const CarouselItem = ({ isvisible, currentSlide, onMove }) => {
+const CarouselItem = ({ isvisible, currentSlide, onMove, ...rest }) => {
+  console.log(rest);
   return <div aria-hidden={isvisible ? 'false':'true'} className={isvisible? 'special style' : 'normal style'}></div>
 }
 <Carousel>
@@ -178,7 +181,7 @@ const CarouselItem = ({ isvisible, currentSlide, onMove }) => {
 </Carousel>
 ```
 
-## paritialVisibile props.
+## ParitialVisibile props.
 
 Shows the next / previous items paritially, this is very useful if you want to indicate to the users that this carousel component is swipable, has more items behind it.
 
@@ -211,9 +214,9 @@ const responsive = {
 </Carousel>
 ```
 
-## afterChanged call back.
+## afterChanged callback.
 
-This is a callback function that is invoked each time there has been a sliding.
+This is a callback function that is invoked each time when there has been a sliding.
 
 [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=afterChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
@@ -284,8 +287,8 @@ customDot?: React.ReactElement<any> | null;
 customButtonGroup?: React.ReactElement<any> | null;
 infinite?: boolean;
 minimumTouchDrag: number; // default 50px. The amount of distance to drag / swipe in order to move to the next slide.
-afterChanged?: (previousSlide: number, state: any) => void; // Change callback after sliding everytime. `(previousSlide, currentState) => ...`
-beforeChanged?: (nextSlide: number, state: any) => void; // Change callback before sliding everytime. `(previousSlide, currentState) => ...`
+afterChanged?: (previousSlide: number, state: CarouselInternalState) => void; // A callback after sliding everytime. `(previousSlide, currentState) => ...`
+beforeChanged?: (nextSlide: number, state: CarouselInternalState) => void; // A callback before sliding everytime. `(previousSlide, currentState) => ...`
 contentClassName?: string; // Use this to style your own track list.
 itemClassName?: string; // Use this to style your own Carousel item. For example add padding-left and padding-right
 containerClassName?: string; // Use this to style the whole container. For example add padding to allow the "dots" or "arrows" to go to other places without being overflown.
@@ -294,7 +297,7 @@ keyBoardControl?: boolean;
 autoPlay?: boolean;
 autoPlaySpeed?: number; // default 3000ms
 shouldShowDots?: boolean;
-// Show next/previous item partially, if its right, only show the next item partially, else show both
+// Show next/previous item partially, if partialVisbile === 'right', only show the next item partially, partialVisbile === {true} show both
 // partialVisbile has to be used in conjunction with the responsive props, details are in documentation.
 partialVisbile?: "right" | boolean;
 customTransition?: string;

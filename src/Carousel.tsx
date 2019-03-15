@@ -47,6 +47,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.handleEnter = this.handleEnter.bind(this);
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
+    this.getIfSlideIsVisbile = this.getIfSlideIsVisbile.bind(this);
     this.onMove = false;
     this.initialPosition = 0;
     this.lastPosition = 0;
@@ -466,6 +467,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       return React.cloneElement(customButtonGroup, {
         previous: () => this.previous(),
         next: () => this.next(),
+        goToSlide: (slideIndex: number) => this.goToSlide(slideIndex),
         state: this.getState()
       });
     }
@@ -500,6 +502,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
             );
           })}
       </ul>
+    );
+  }
+
+  public getIfSlideIsVisbile(index: number): boolean {
+    return (
+      index >= this.state.currentSlide &&
+      index < this.state.currentSlide + this.state.slidesToShow
     );
   }
 
@@ -605,9 +614,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
             >
               {React.cloneElement(child, {
                 index,
-                isvisible:
-                  index >= this.state.currentSlide &&
-                  index < this.state.currentSlide + this.state.slidesToShow,
+                isvisible: this.getIfSlideIsVisbile(index),
                 state: this.getState()
               })}
             </li>

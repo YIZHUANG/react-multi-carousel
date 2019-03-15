@@ -22,8 +22,8 @@ interface CarouselProps {
   customButtonGroup?: React.ReactElement<any> | null;
   infinite?: boolean;
   minimumTouchDrag: number; // default 50px. The amount of distance to drag / swipe in order to move to the next slide.
-  afterChanged?: (previousSlide: number, state: any) => void; // Change callback after sliding everytime. `(previousSlide, currentState) => ...`
-  beforeChanged?: (nextSlide: number, state: any) => void; // Change callback before sliding everytime. `(previousSlide, currentState) => ...`
+  afterChanged?: (previousSlide: number, state: stateCallBack) => void; // Change callback after sliding everytime. `(previousSlide, currentState) => ...`
+  beforeChanged?: (nextSlide: number, state: stateCallBack) => void; // Change callback before sliding everytime. `(previousSlide, currentState) => ...`
   contentClassName?: string; // Use this to style your own track list.
   itemClassName?: string; // Use this to style your own Carousel item. For example add padding-left and padding-right
   containerClassName?: string; // Use this to style the whole container. For example add padding to allow the "dots" or "arrows" to go to other places without being overflown.
@@ -41,6 +41,20 @@ interface CarouselProps {
   // for example, customTransition="all .5"  then put transitionDuration as 500.
   // this is needed for the resizing to work.
 }
+
+
+interface buttonGroupCallBack {
+  previous: () => void;
+  next: () => void;
+  goToSlide: (index:number) => void;
+  state: stateCallBack
+}
+
+interface stateCallBack extends CarouselInternalState {
+  onMove: boolean;
+  direction: string | undefined;
+}
+
 interface CarouselInternalState {
   itemWidth: number;
   containerWidth: number;
@@ -52,4 +66,4 @@ interface CarouselInternalState {
   transform: number;
 }
 
-export { CarouselInternalState, CarouselProps, responsiveType };
+export { CarouselInternalState, CarouselProps, responsiveType, stateCallBack, buttonGroupCallBack };

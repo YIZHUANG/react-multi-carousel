@@ -10,7 +10,11 @@ import { linkTo } from "@storybook/addon-links";
 import JSX from "storybook-addon-jsx";
 import "./style.css";
 import Card from "./Card";
-import { CustomLeftArrow, CustomRightArrow } from "./CustomArrows";
+import {
+  CustomLeftArrow,
+  CustomRightArrow,
+  CustomButtonGroup
+} from "./CustomArrows";
 import CustomDot from "./CustomDot";
 import Image from "./CustomImage";
 import Carousel from "../src";
@@ -169,7 +173,7 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX("auto play", () => {
+  .addWithJSX("Auto play", () => {
     return (
       <Carousel
         autoPlay
@@ -185,7 +189,7 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX("with dots", () => {
+  .addWithJSX("With dots", () => {
     return (
       <Carousel
         shouldShowDots
@@ -211,7 +215,7 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX("custom dots", () => {
+  .addWithJSX("Custom dots", () => {
     return (
       <Carousel
         shouldShowDots
@@ -238,7 +242,7 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX("with aria hidden, inspect me in the debugger", () => {
+  .addWithJSX("With aria hidden, inspect me in the debugger", () => {
     return (
       <Carousel
         shouldShowDots
@@ -253,7 +257,7 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX("afterChanged function, a callback function", () => {
+  .addWithJSX("With afterChanged function, a callback function", () => {
     return (
       <Carousel
         shouldShowDots
@@ -264,7 +268,7 @@ storiesOf("Carousel", module)
           alert(
             "previous slide is " +
               previousSlide +
-              "currentSlide is " +
+              " currentSlide is " +
               currentSlide
           )
         }
@@ -276,7 +280,7 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX("beforeChanged function, a callback function", () => {
+  .addWithJSX("With beforeChanged function, a callback function", () => {
     return (
       <Carousel
         shouldShowDots
@@ -296,21 +300,43 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX("paritially visibie on next items", () => {
+  .addWithJSX("With paritially visibie on next items", () => {
     return (
-      <Carousel partialVisbile='right' containerClassName="container" responsive={responsive}>
+      <Carousel
+        partialVisbile="right"
+        containerClassName="container"
+        responsive={responsive}
+      >
         {fakerData.map(card => {
           return <Card {...card} />;
         })}
       </Carousel>
     );
   })
-  .addWithJSX("paritially visibie on both direction", () => {
+  .addWithJSX("With paritially visibie on both direction", () => {
     return (
-      <Carousel partialVisbile={true} containerClassName="container" responsive={responsive}>
+      <Carousel
+        partialVisbile={true}
+        containerClassName="container"
+        responsive={responsive}
+      >
         {fakerData.map(card => {
           return <Card {...card} />;
         })}
       </Carousel>
     );
   })
+  .addWithJSX("With custom button group", () => {
+    return (
+      <Carousel
+        removeArrow
+        containerClassName='container-padding-bottom'
+        customButtonGroup={<CustomButtonGroup />}
+        responsive={responsive}
+      >
+        {fakerData.map(card => {
+          return <Card {...card} />;
+        })}
+      </Carousel>
+    );
+  });
