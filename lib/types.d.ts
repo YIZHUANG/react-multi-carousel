@@ -29,6 +29,7 @@ interface CarouselProps {
     contentClassName?: string;
     itemClassName?: string;
     containerClassName?: string;
+    dotListClassName?: string;
     keyBoardControl?: boolean;
     autoPlay?: boolean;
     autoPlaySpeed?: number;

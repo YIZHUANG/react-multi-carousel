@@ -23,9 +23,10 @@ interface CarouselProps {
   minimumTouchDrag: number; // default 50px. The amount of distance to drag / swipe in order to move to the next slide.
   afterChanged?: (previousSlide: number, state: any) => void; // Change callback after sliding everytime. `(previousSlide, currentState) => ...`
   beforeChanged?: (nextSlide: number, state: any) => void; // Change callback before sliding everytime. `(previousSlide, currentState) => ...`
-  contentClassName?: string;
-  itemClassName?: string;
-  containerClassName?: string;
+  contentClassName?: string; // Use this to style your own track list.
+  itemClassName?: string; // Use this to style your own Carousel item. For example add padding-left and padding-right
+  containerClassName?: string; // Use this to style the whole container. For example add padding to allow the "dots" or "arrows" to go to other places without being overflown.
+  dotListClassName?: string; // Use this to style the dot list.
   keyBoardControl?: boolean;
   autoPlay?: boolean;
   autoPlaySpeed?: number; // default 3000ms

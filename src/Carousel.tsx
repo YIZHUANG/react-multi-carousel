@@ -16,7 +16,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     autoPlaySpeed: 3000,
     shouldShowDots: false,
     minimumTouchDrag: 50,
-    showGutter: true
+    showGutter: true,
+    dotListClassName: ''
   };
   private readonly containerRef: React.RefObject<any>;
   public onMove: boolean;
@@ -461,9 +462,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
 
   public renderDotsList() {
-    const { customDot } = this.props;
+    const { customDot, dotListClassName } = this.props;
     return (
-      <ul className="react-multi-carousel-dot-list">
+      <ul className={`react-multi-carousel-dot-list ${dotListClassName}`}>
         {Array(this.state.totalItems)
           .fill(0)
           .map((item, index) => {
@@ -547,7 +548,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
             this.state.currentSlide * paritialVisibilityGutter
           : this.state.transform +
             this.state.currentSlide * paritialVisibilityGutter +
-            (this.state.currentSlide === 0 ? 0 : (paritialVisibilityGutter + paritialVisibilityGutter / 2))
+            (this.state.currentSlide === 0
+              ? 0
+              : paritialVisibilityGutter + paritialVisibilityGutter / 2)
         : this.state.transform;
     return (
       <div
@@ -578,6 +581,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
               key={index}
               style={{
                 flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
+                position: "relative",
                 width: domFullyLoaded
                   ? `${
                       partialVisbile && paritialVisibilityGutter
