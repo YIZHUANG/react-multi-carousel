@@ -17,7 +17,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     shouldShowDots: false,
     minimumTouchDrag: 50,
     showGutter: true,
-    dotListClassName: ''
+    dotListClassName: ""
   };
   private readonly containerRef: React.RefObject<any>;
   public onMove: boolean;
@@ -460,8 +460,19 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       );
     }
   }
+  public renderButtonGroups(): React.ReactElement<any> | null {
+    const { customButtonGroup } = this.props;
+    if (customButtonGroup) {
+      return React.cloneElement(customButtonGroup, {
+        previous: () => this.previous(),
+        next: () => this.next(),
+        state: this.getState()
+      });
+    }
+    return null;
+  }
 
-  public renderDotsList() {
+  public renderDotsList(): React.ReactElement<any> {
     const { customDot, dotListClassName } = this.props;
     return (
       <ul className={`react-multi-carousel-dot-list ${dotListClassName}`}>
@@ -604,6 +615,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         </ul>
         {shouldShowArrows && !disableLeftArrow && this.renderLeftArrow()}
         {shouldShowArrows && !disableRightArrow && this.renderRightArrow()}
+        {this.renderButtonGroups()}
         {this.props.shouldShowDots && this.renderDotsList()}
       </div>
     );

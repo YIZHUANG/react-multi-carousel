@@ -30,7 +30,8 @@ declare class Carousel extends React.Component<CarouselProps, CarouselInternalSt
     getState(): any;
     renderLeftArrow(): React.ReactElement<any>;
     renderRightArrow(): React.ReactElement<any>;
-    renderDotsList(): JSX.Element;
+    renderButtonGroups(): React.ReactElement<any> | null;
+    renderDotsList(): React.ReactElement<any>;
     render(): React.ReactNode;
 }
 export default Carousel;

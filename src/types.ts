@@ -19,6 +19,7 @@ interface CarouselProps {
   customLeftArrow?: React.ReactElement<any> | null;
   customRightArrow?: React.ReactElement<any> | null;
   customDot?: React.ReactElement<any> | null;
+  customButtonGroup?: React.ReactElement<any> | null;
   infinite?: boolean;
   minimumTouchDrag: number; // default 50px. The amount of distance to drag / swipe in order to move to the next slide.
   afterChanged?: (previousSlide: number, state: any) => void; // Change callback after sliding everytime. `(previousSlide, currentState) => ...`

@@ -126,6 +126,24 @@ const CustomRightArrow = ({ onClick, ...rest }) => {
 <Carousel customRightArrow={<CustomRightArrow />} />
 ```
 
+## Custom button group.
+This is very useful if you don't want the dots, or arrows and you want to fully customize the control functionality and styling yourself.
+```
+const ButtonGroup = ({ next, previous, ...rest }) => {
+  const { state: { currentSlide } } = rest;
+  return (
+    <div className="carousel-button-group"> // remember to give it position:absolute
+      <ButtonOne className={currentSlide === 0 : 'disable' : ''} onClick={() => previous()} />
+      <ButtonTwo onClick={() => next()} />
+    </div>
+  );
+};
+<Carousel removeArrow customButtonGroup={<ButtonGroup />}>
+  <ItemOne>
+  <ItemTwo>
+</Carousel>
+```
+
 ## Custom dots.
 
 You can pass your own custom dots to replace the default one
@@ -263,6 +281,7 @@ children: any;
 customLeftArrow?: React.ReactElement<any> | null;
 customRightArrow?: React.ReactElement<any> | null;
 customDot?: React.ReactElement<any> | null;
+customButtonGroup?: React.ReactElement<any> | null;
 infinite?: boolean;
 minimumTouchDrag: number; // default 50px. The amount of distance to drag / swipe in order to move to the next slide.
 afterChanged?: (previousSlide: number, state: any) => void; // Change callback after sliding everytime. `(previousSlide, currentState) => ...`
