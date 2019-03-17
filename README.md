@@ -275,6 +275,20 @@ They are very useful in the following cases:
 </Carousel>
 ```
 
+## Using ref.
+
+```
+<Carousel ref={(el) => (this.Carousel = el)} removeArrow responsive={responsive}>
+  <ItemOne />
+  <ItemTwo />
+</Carousel>
+<button onClick={() => {
+    const nextSlide = this.Carousel.state.currentSlide + 1;
+     // this.Carousel.next()
+     // this.Carousel.goToSlide(nextSlide)
+  }}>Click me</button>
+```
+
 ## General Props
 
 ```

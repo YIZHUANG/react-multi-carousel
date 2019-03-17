@@ -25,8 +25,8 @@ interface CarouselProps {
     customButtonGroup?: React.ReactElement<any> | null;
     infinite?: boolean;
     minimumTouchDrag: number;
-    afterChanged?: (previousSlide: number, state: any) => void;
-    beforeChanged?: (nextSlide: number, state: any) => void;
+    afterChanged?: (previousSlide: number, state: stateCallBack) => void;
+    beforeChanged?: (nextSlide: number, state: stateCallBack) => void;
     contentClassName?: string;
     itemClassName?: string;
     containerClassName?: string;
@@ -39,6 +39,16 @@ interface CarouselProps {
     customTransition?: string;
     transitionDuration?: number;
 }
+interface buttonGroupCallBack {
+    previous: () => void;
+    next: () => void;
+    goToSlide: (index: number) => void;
+    state: stateCallBack;
+}
+interface stateCallBack extends CarouselInternalState {
+    onMove: boolean;
+    direction: string | undefined;
+}
 interface CarouselInternalState {
     itemWidth: number;
     containerWidth: number;
@@ -49,4 +59,4 @@ interface CarouselInternalState {
     deviceType?: string;
     transform: number;
 }
-export { CarouselInternalState, CarouselProps, responsiveType };
+export { CarouselInternalState, CarouselProps, responsiveType, stateCallBack, buttonGroupCallBack };
