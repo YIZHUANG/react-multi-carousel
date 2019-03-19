@@ -16,7 +16,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     autoPlaySpeed: 3000,
     shouldShowDots: false,
     minimumTouchDrag: 50,
-    showGutter: true,
     dotListClassName: ""
   };
   private readonly containerRef: React.RefObject<any>;
@@ -434,7 +433,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (customLeftArrow) {
       return React.cloneElement(customLeftArrow, {
         onClick: () => this.previous(),
-        state: this.getState()
+        carouselState: this.getState()
       });
     } else {
       return (
@@ -450,7 +449,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (customRightArrow) {
       return React.cloneElement(customRightArrow, {
         onClick: () => this.next(),
-        state: this.getState()
+        carouselState: this.getState()
       });
     } else {
       return (
@@ -468,7 +467,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         previous: () => this.previous(),
         next: () => this.next(),
         goToSlide: (slideIndex: number) => this.goToSlide(slideIndex),
-        state: this.getState()
+        carouselState: this.getState()
       });
     }
     return null;
@@ -485,7 +484,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
               return React.cloneElement(customDot, {
                 index,
                 onClick: () => this.goToSlide(index),
-                state: this.getState()
+                carouselState: this.getState()
               });
             }
             return (
@@ -615,7 +614,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
               {React.cloneElement(child, {
                 index,
                 isvisible: this.getIfSlideIsVisbile(index),
-                state: this.getState()
+                carouselState: this.getState()
               })}
             </li>
           ))}

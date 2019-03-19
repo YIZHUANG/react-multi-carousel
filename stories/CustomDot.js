@@ -1,7 +1,7 @@
 import * as React from "react";
 
-const CustomDot = ({ onClick, index, state }) => {
-  const { currentSlide } = state;
+const CustomDot = ({ onClick, index, carouselState }) => {
+  const { currentSlide } = carouselState;
   return (
     <li style={{ background: index === currentSlide ? "grey" : "initial" }}>
       <button
