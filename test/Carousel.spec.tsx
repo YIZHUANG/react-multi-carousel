@@ -9,7 +9,7 @@ import toJson from "enzyme-to-json";
 
 configure({ adapter: new Adapter() });
 
-import Carousel from "../src/Carousel";
+import Carousel from "../lib/Carousel";
 import { CustomLeftArrow, CustomRightArrow } from './Arrows';
 import fakerData from './fakeData';
 import Card from './Card';

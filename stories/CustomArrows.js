@@ -7,8 +7,8 @@ const CustomRightArrow = ({ onClick }) => {
   return <i className="custom-right-arrow" onClick={() => onClick()} />;
 };
 
-const CustomButtonGroup = ({ next, previous, goToSlide, state }) => {
-  const { totalItems, currentSlide } = state;
+const CustomButtonGroup = ({ next, previous, goToSlide, carouselState }) => {
+  const { totalItems, currentSlide } = carouselState;
   return (
     <div className="custom-button-group">
       <div>Current slide is {currentSlide}</div>

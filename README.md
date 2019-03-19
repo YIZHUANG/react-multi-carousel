@@ -4,20 +4,38 @@ Lightweight fully customizable React carousel component supports multiple items 
 
 The technical details of this carousel can be found at [www.w3js.com -> react-multi-carousel](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
 
-## NPM
+[![npm version](https://badge.fury.io/js/react-multi-carousel.svg)](https://www.npmjs.com/package/react-multi-carousel)
+[![Build Status](https://api.travis-ci.org/YIZHUANG/react-multi-carousel.svg?branch=master)](https://travis-ci.org/YIZHUANG/react-multi-carousel)
 
-[NPM](https://www.npmjs.com/package/react-multi-carousel).
+
+### Features.
+
+- Server-side rendering
+- Infinite mode
+- Custom animation
+- AutoPlay mode
+- Responsive
+- Swipe to slide
+- Mouse drag to slide
+- Keyboard control to slide
+- Multiple items
+- Show / hide arrows
+- Custom arrows / control buttons
+- Custom dots
+- Custom styling
+- Accessibility support
 
 ## Bundle size
 
-[Bundle-size](https://bundlephobia.com/result?p=react-multi-carousel@1.0.33).
+[Bundle-size](https://bundlephobia.com/result?p=react-multi-carousel).
 2.5kB
 
 ## Demo.
 
 Demo and documentation can be found at [here](https://w3js.com/react-multi-carousel/).
 
-Demo for the SSR are at [here](https://react-multi-carousel.now.sh/)
+Demo for the SSR  <https://react-multi-carousel.now.sh/>
+
 Try to disable JavaScript to test if it renders on the server-side.
 
 Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/pages/index.js).
@@ -52,26 +70,13 @@ Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/
 - Demo for the SSR are at [here](https://react-multi-carousel.now.sh/)
 - Try to disable JavaScript to test if it renders on the server-side.
 
-## Features.
 
-- Server-side rendering
-- Infinite mode
-- Custom animation
-- AutoPlay mode
-- Responsive
-- Swipe to slide
-- Mouse drag to slide
-- Keyboard control to slide
-- Multiple items
-- Show / hide arrows
-- Custom arrows / control buttons
-- Custom dots
-- Custom styling
-- Accessibility support
-
-## Examples
+## Usage
 
 ```
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
@@ -106,9 +111,10 @@ const responsive = {
   itemClassName='carousel-item-gutter-padding-left-40'
   containerClassName='carousel-container-padding-bottom-80'
 >
-  {fakerData.map(card => {
-    return <Card {...card} />;
-  })}
+<div>Item 1</div>
+<div>Item 2</div>
+<div>Item 3</div>
+<div>Item 4</div>
 </Carousel>
 ```
 
@@ -116,7 +122,9 @@ const responsive = {
 
 You can pass your own custom arrows to make it the way you want, the same for the position. For example, add media query for the arrows to go under when on smaller screens.
 
-You custom arrows will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.  [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=Custom%20arrow&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel). <br/>
+You custom arrows will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.  
+
+[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=Custom%20arrow&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomArrows.js)
 
@@ -131,12 +139,15 @@ const CustomRightArrow = ({ onClick, ...rest }) => {
 
 ## Custom button group.
 
-This is very useful if you don't want the dots, or arrows and you want to fully customize the control functionality and styling yourself. [Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=With%20custom%20button%20group&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel). <br/>
+This is very useful if you don't want the dots, or arrows and you want to fully customize the control functionality and styling yourself.
+
+[Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=With%20custom%20button%20group&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
+
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomArrows.js)
 
 ```
 const ButtonGroup = ({ next, previous, goToSlide ...rest }) => {
-  const { state: { currentSlide } } = rest;
+  const { carouselState: { currentSlide } } = rest;
   return (
     <div className="carousel-button-group"> // remember to give it position:absolute
       <ButtonOne className={currentSlide === 0 : 'disable' : ''} onClick={() => previous()} />
@@ -155,12 +166,15 @@ const ButtonGroup = ({ next, previous, goToSlide ...rest }) => {
 
 You can pass your own custom dots to replace the default one
 
-You custom dots will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress. [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=custom%20dots&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel). <br/>
+You custom dots will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
+
+[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=custom%20dots&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
+
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomDot.js)
 
 ```
 const CustomDot = ({ onClick, ...rest }) => {
-  const { onMove, index, state: { currentSlide, deviceType }  } = rest;
+  const { onMove, index, carouselState: { currentSlide, deviceType }  } = rest;
   // onMove means if dragging or swiping in progress.
   return <button className={currentSlide === index ? 'active' : 'inactive'} onClick={() => onClick()} />
 }
@@ -289,52 +303,38 @@ They are very useful in the following cases:
   }}>Click me</button>
 ```
 
-## General Props
-
-```
-responsive: responsiveType;
-deviceType?: string;
-forSSR?: boolean;
-slidesToSlide: number;
-disableDrag?: boolean;
-removeArrow?: boolean;
-disableSwipeOnMobile?: boolean;
-removeArrowOnDeviceType?: string | Array<string>;
-children: any;
-customLeftArrow?: React.ReactElement<any> | null;
-customRightArrow?: React.ReactElement<any> | null;
-customDot?: React.ReactElement<any> | null;
-customButtonGroup?: React.ReactElement<any> | null;
-infinite?: boolean;
-minimumTouchDrag: number; // default 50px. The amount of distance to drag / swipe in order to move to the next slide.
-afterChanged?: (previousSlide: number, state: CarouselInternalState) => void; // A callback after sliding everytime. `(previousSlide, currentState) => ...`
-beforeChanged?: (nextSlide: number, state: CarouselInternalState) => void; // A callback before sliding everytime. `(previousSlide, currentState) => ...`
-contentClassName?: string; // Use this to style your own track list.
-itemClassName?: string; // Use this to style your own Carousel item. For example add padding-left and padding-right
-containerClassName?: string; // Use this to style the whole container. For example add padding to allow the "dots" or "arrows" to go to other places without being overflown.
-dotListClassName?: string; // Use this to style the dot list.
-keyBoardControl?: boolean;
-autoPlay?: boolean;
-autoPlaySpeed?: number; // default 3000ms
-shouldShowDots?: boolean;
-// Show next/previous item partially, if partialVisbile === 'right', only show the next item partially, partialVisbile === {true} show both
-// partialVisbile has to be used in conjunction with the responsive props, details are in documentation.
-partialVisbile?: "right" | boolean;
-customTransition?: string;
-transitionDuration?: number;
-// if you are using customTransition, make sure to put the duration here.
-// for example, customTransition="all .5"  then put transitionDuration as 500.
-// this is needed for the resizing to work.
-```
-
 ## Specific Props
 
-| Name            | Type     | Default | Description                                                                                         |
-| :-------------- | :------- | :------ | :-------------------------------------------------------------------------------------------------- |
-| `responsive`    | `Object` | `{}`    | How many items to show on each breakpoint.                                                          |
-| `deviceType`    | `string` | `none`  | Only pass this when use for server-side rendering, what to pass can be found in the example folder. |
-| `forSSR`        | `bool`   | `false` | For SSR                                                                                             |
-| `slidesToSlide` | `number` | `1`     | How many slides to slide.                                                                           |
+| Name            | Type          | Default | Description |
+| :---------      | :--:          | :-----: | :----------- |
+| responsive      | `object`     | `{}` | Numbers of slides to show at each breakpoint |
+| deviceType      | `string`     | `''` | Only pass this when use for server-side rendering, what to pass can be found in the example folder  |
+| forSSR        | `boolean`     | `false` | Use in conjunction with responsive and deviceType prop |
+| slidesToSlide            | `Number`     | `1` | How many slides to slide. |
+| disableDrag            | `boolean`      | `false` | Optionally disable dragging on desktop |
+| disableSwipeOnMobile          | `boolean`     | `false` | Optionally disable swiping on mobile  |
+| removeArrow          | `boolean`      | `false` | Hide the default arrows |
+| removeArrowOnDeviceType | `string or array`      | `''` | Hide the default arrows at different break point, should be used with `responsive` props. Value could be `mobile` or `['mobile', 'tablet'], can be a string or array` |
+| customLeftArrow         | `jsx`      | `null` | Replace the default arrow with your own |
+| customRightArrow        | `jsx`    | `null` | Replace the default arrow with your own |
+| customDot           | `jsx`    | null | Replace the default dots with your own |
+| customButtonGroup    | `jsx`    | null | Fully customize your own control functionality if you don't want arrows or dots |
+| infinite                 | `boolean`      | false | Infinite loop |
+| minimumTouchDrag     | `number`     | `50` | The amount of distance to drag / swipe in order to move to the next slide. |
+| afterChanged              | `function`     | `null` | A callback after sliding everytime. |
+| beforeChanged           | `function`     | `null` | A callback before sliding everytime. |
+| contentClassName              | `string`      | `'react-multi-carousel-track'` | Use this to style your own track list. |
+| itemClassName        | `string`      | `''` | Use this to style your own Carousel item. For example add padding-left and padding-right |
+| containerClassName  | `string`      | `'react-multi-carousel-list'` | Use this to style the whole container. For example add padding to allow the "dots" or "arrows" to go to other places without being overflown. |
+| dotListClassName             | `string`     | `'react-multi-carousel-dot-list'` | Use this to style the dot list. |
+| keyBoardControl         | `boolean`     | `true` | Use keyboard to navigate to next/previous slide |
+| autoPlay          | `boolean`     | `false` | Auto play |
+| autoPlaySpeed       | `number` | 3000 | The unit is ms |  
+| shouldShowDots            | `boolean`     | `false` | Hide the default dot list |
+| partialVisbile | `boolean | string`      | `false` | Show partial prev/next slides. If `partialVisbile === 'right'` only show partial next slides, otherwise show both. This is use with the `responsive` prop, see example for details |
+| customTransition | `string`      | `transform 300ms ease-in-out` | Configure your own anaimation when sliding |
+| transitionDuration | `number     | `300` | The unit is ms, if you are using customTransition, make sure to put the duration here as this is needed for the resizing to work. |
+
 
 ## Contribute
 
