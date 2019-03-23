@@ -1,14 +1,14 @@
 import * as React from "react";
-
+/* tslint:disable */
 import { guessWidthFromDeviceType, getParitialVisibilityGutter } from "./utils";
 import { CarouselInternalState, CarouselProps } from "./types";
 
 const defaultTransitionDuration = 300;
 const defaultTransition = "transform 300ms ease-in-out";
-class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
+class Carousel extends React.Component<any, any> {
   public static defaultProps: any = {
     slidesToSlide: 1,
-    infinite: false,
+    infinite: true,
     containerClassName: "",
     contentClassName: "",
     itemClassName: "",
@@ -25,13 +25,14 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public isAnimationAllowed: boolean;
   public direction: string;
   public autoPlay?: any;
-  constructor(props: CarouselProps) {
+  constructor(props: any) {
     super(props);
     this.containerRef = React.createRef();
     this.state = {
       itemWidth: 0,
       slidesToShow: 0,
       currentSlide: 0,
+      clones: React.Children.toArray(props.children),
       totalItems: React.Children.count(props.children),
       deviceType: "",
       domLoaded: false,
@@ -50,7 +51,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.onMove = false;
     this.initialPosition = 0;
     this.lastPosition = 0;
-    this.isAnimationAllowed = true;
+    this.isAnimationAllowed = false;
     this.direction = "";
   }
   public componentDidMount(): void {
@@ -65,13 +66,37 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
   }
+  public setClones(slidesToShow:any):any {
+    this.isAnimationAllowed = false;
+    const childrenArr = React.Children.toArray(this.props.children);
+    const clones = [
+      ...childrenArr.slice(
+        childrenArr.length - slidesToShow,
+        childrenArr.length
+      ),
+      ...childrenArr,
+      ...childrenArr.slice(0, slidesToShow)
+    ];
+    this.setState(
+      {
+        clones,
+        totalItems: clones.length,
+        currentSlide: slidesToShow
+      },
+      () => {
+        this.correctItemsPosition(this.state.itemWidth);
+      }
+    );
+  }
   public setItemsToShow(shouldCorrectItemPosition?: boolean): void {
     const { responsive } = this.props;
     Object.keys(responsive).forEach(item => {
       const { breakpoint, items } = responsive[item];
       const { max, min } = breakpoint;
       if (window.innerWidth >= min && window.innerWidth <= max) {
-        this.setState({ slidesToShow: items, deviceType: item });
+        this.setState({ slidesToShow: items, deviceType: item }, () => {
+          this.setClones(items);
+        });
         this.setContainerAndItemWidth(items, shouldCorrectItemPosition);
       }
     });
@@ -95,9 +120,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
   }
   public correctItemsPosition(itemWidth: number): void {
-    if (!this.isAnimationAllowed) {
-      this.isAnimationAllowed = true;
-    }
     this.setState({
       transform: -(itemWidth * this.state.currentSlide)
     });
@@ -107,7 +129,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public componentDidUpdate(
     { keyBoardControl, autoPlay }: CarouselProps,
-    { containerWidth }: CarouselInternalState
+    { containerWidth, domLoaded }: CarouselInternalState
   ): void {
     if (
       this.containerRef &&
@@ -128,6 +150,33 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (!autoPlay && this.props.autoPlay && !this.autoPlay) {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
+    if (this.state.domLoaded && domLoaded) {
+      const hasEnterClonedRight =
+        this.state.totalItems - this.state.slidesToShow ===
+        this.state.currentSlide;
+      const hasEnterClonedLeft = this.state.currentSlide === 0;
+      if (hasEnterClonedRight) {
+        this.isAnimationAllowed = false;
+        setTimeout(() => {
+          this.setState({
+            transform: -(this.state.itemWidth * this.state.slidesToShow),
+            currentSlide: this.state.slidesToShow
+          });
+        }, this.props.transitionDuration || defaultTransitionDuration);
+      }
+      if (hasEnterClonedLeft) {
+        this.isAnimationAllowed = false;
+        setTimeout(() => {
+          this.setState({
+            transform: -(
+              this.state.itemWidth *
+              (this.state.totalItems - this.state.slidesToShow * 2)
+            ),
+            currentSlide: this.state.totalItems - this.state.slidesToShow * 2
+          });
+        }, this.props.transitionDuration || defaultTransitionDuration);
+      }
+    }
   }
   public resetAllItems(): void {
     const { afterChanged, beforeChanged } = this.props;
@@ -144,7 +193,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     });
   }
   public next(slidesHavePassed = 0): void {
-    this.isAnimationAllowed = true;
     const { slidesToShow } = this.state;
     const { slidesToSlide, infinite, afterChanged, beforeChanged } = this.props;
     const nextMaximumSlides =
@@ -161,6 +209,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       if (typeof beforeChanged === "function") {
         beforeChanged(nextSlides, this.getState());
       }
+      this.isAnimationAllowed = true;
       this.setState(
         {
           transform: nextPosition,
@@ -184,6 +233,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       if (typeof beforeChanged === "function") {
         beforeChanged(maxSlides, this.getState());
       }
+      this.isAnimationAllowed = true;
       this.setState(
         {
           transform: maxPosition,
@@ -199,12 +249,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       );
     } else {
       if (infinite) {
-        this.resetAllItems();
       }
     }
   }
   public previous(slidesHavePassed = 0): void {
-    this.isAnimationAllowed = true;
     const { slidesToShow } = this.state;
     const { slidesToSlide, infinite, afterChanged, beforeChanged } = this.props;
     const nextSlides =
@@ -215,6 +263,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       if (typeof beforeChanged === "function") {
         beforeChanged(nextSlides, this.getState());
       }
+      this.isAnimationAllowed = true;
       this.setState(
         {
           transform: nextPosition,
@@ -233,6 +282,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       if (typeof beforeChanged === "function") {
         beforeChanged(0, this.getState());
       }
+      this.isAnimationAllowed = true;
       this.setState(
         {
           transform: 0,
@@ -253,6 +303,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         if (typeof beforeChanged === "function") {
           beforeChanged(maxSlides, this.getState());
         }
+        this.isAnimationAllowed = true;
         this.setState(
           {
             transform: maxPosition,
@@ -311,7 +362,16 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = undefined;
     }
     if (this.onMove) {
-      if (this.initialPosition > clientX) {
+      const slidesHavePassedRight = Math.round(
+        (this.initialPosition - this.lastPosition) / this.state.itemWidth
+      );
+      const slidesHavePassedLeft = Math.round(
+        (this.lastPosition - this.initialPosition) / this.state.itemWidth
+      );
+      if (
+        this.initialPosition > clientX &&
+        slidesHavePassedRight <= this.state.slidesToShow
+      ) {
         this.direction = "right";
         const translateXLimit = Math.abs(
           -(
@@ -331,7 +391,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           this.setState({ transform: nextTranslate });
         }
       }
-      if (clientX > this.initialPosition) {
+      if (
+        clientX > this.initialPosition &&
+        slidesHavePassedLeft <= this.state.slidesToShow
+      ) {
         this.direction = "left";
         const nextTranslate =
           this.state.transform + (clientX - this.lastPosition);
@@ -595,7 +658,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           onTouchMove={this.handleMove}
           onTouchEnd={this.handleOut}
         >
-          {React.Children.toArray(children).map((child, index) => (
+          {this.state.clones.map((child:any, index:any) => (
             <li
               key={index}
               style={{
@@ -611,11 +674,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
               }}
               className={itemClassName}
             >
-              {React.cloneElement(child, {
-                index,
-                isvisible: this.getIfSlideIsVisbile(index),
-                carouselState: this.getState()
-              })}
+              {child}
             </li>
           ))}
         </ul>

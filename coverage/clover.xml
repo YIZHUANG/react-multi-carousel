@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1552860494460" clover="3.2.0">
-  <project timestamp="1552860494460" name="All files">
+<coverage generated="1553025862415" clover="3.2.0">
+  <project timestamp="1553025862415" name="All files">
     <metrics statements="269" coveredstatements="201" conditionals="247" coveredconditionals="143" methods="60" coveredmethods="37" elements="576" coveredelements="381" complexity="0" loc="269" ncloc="269" packages="2" files="5" classes="5"/>
     <package name="lib">
       <metrics statements="245" coveredstatements="177" conditionals="247" coveredconditionals="143" methods="54" coveredmethods="31"/>
@@ -238,7 +238,7 @@
         <line num="445" count="100" type="stmt"/>
         <line num="454" count="1160" type="stmt"/>
         <line num="473" count="1" type="stmt"/>
-        <line num="486" count="1" type="stmt"/>
+        <line num="485" count="1" type="stmt"/>
       </file>
       <file name="utils.js" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/lib/utils.js">
         <metrics statements="12" coveredstatements="7" conditionals="8" coveredconditionals="4" methods="2" coveredmethods="1"/>
