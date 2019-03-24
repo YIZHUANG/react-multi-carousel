@@ -19,19 +19,20 @@ const styles = {
 };
 
 function MediaCard(props) {
-  const { classes, image, headline, description, isMoving } = props;
+  const { classes, image, headline, index, description, isMoving } = props;
   return (
     <a onClick={(e) => {
         if(isMoving) {
           e.preventDefault();
         }
+        e.preventDefault();
       }} href='https://w3js.com' target="_blank">
     <Card className={classes.card}>
       <CardActionArea>
         <CardMedia className={classes.media} image={image} title={headline} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {headline}
+            {index}
           </Typography>
           <Typography component="p">{description}</Typography>
         </CardContent>

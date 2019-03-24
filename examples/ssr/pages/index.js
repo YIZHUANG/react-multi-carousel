@@ -111,7 +111,7 @@ class Index extends React.Component {
           */
           responsive={responsive}
           forSSR
-          infinite={true}
+          infinite={false}
           beforeChanged={() => this.setState({ isMoving: true })}
           afterChanged={() => this.setState({ isMoving: false })}
           containerClassName="first-carousel-container container"

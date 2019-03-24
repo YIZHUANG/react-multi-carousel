@@ -69,6 +69,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           props.transitionDuration || defaultTransitionDuration
         )
       : this.previous.bind(this);
+    this.goToSlide = infinite
+      ? throttle(
+          this.goToSlide.bind(this),
+          props.transitionDuration || defaultTransitionDuration
+        )
+      : this.goToSlide.bind(this);
     this.getIfSlideIsVisbile = this.getIfSlideIsVisbile.bind(this);
     this.onMove = false;
     this.initialPosition = 0;
@@ -208,7 +214,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       hasEnterClonedBefore,
       nextSlide,
       nextPosition
-    } = whenEnteredClones(this.state, childrenArr);
+    } = whenEnteredClones(this.state, childrenArr, this.props);
     if (
       // this is to prevent this gets called on the server-side.
       this.state.domLoaded &&
@@ -515,13 +521,15 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       beforeChanged(slide, this.getState());
     }
     this.isAnimationAllowed = true;
-    // getCounterPart()
     this.setState(
       {
         currentSlide: slide,
         transform: -(itemWidth * slide)
       },
       () => {
+        if (this.props.infinite) {
+          this.correctClonesPosition({ domLoaded: true, isSliding: true });
+        }
         if (typeof afterChanged === "function") {
           setTimeout(() => {
             afterChanged(previousSlide, this.getState());
@@ -594,11 +602,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
             const slideIndex = infinite
               ? getCounterPart(index, this.state, childrenArr)
               : index;
+            // console.log(getCounterPart(this.state.currentSlide, this.state, childrenArr), slideIndex);
             if (customDot) {
               return React.cloneElement(customDot, {
                 index: slideIndex,
-                onClick: () =>
-                  this.goToSlide(slideIndex),
+                onClick: () => this.goToSlide(slideIndex),
                 carouselState: this.getState()
               });
             }
@@ -665,6 +673,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         <li
           key={index}
           aria-hidden={this.getIfSlideIsVisbile(index) ? "false" : "true"}
+          data-index={index}
           style={{
             flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
             position: "relative",
@@ -685,6 +694,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     return React.Children.toArray(children).map((child, index) => (
       <li
         key={index}
+        data-index={index}
         aria-hidden={this.getIfSlideIsVisbile(index) ? "false" : "true"}
         style={{
           flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",

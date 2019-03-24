@@ -1,4 +1,4 @@
-import { responsiveType, CarouselInternalState } from "./types";
+import { responsiveType, CarouselInternalState, CarouselProps } from "./types";
 
 function guessWidthFromDeviceType(
   deviceType: string,
@@ -28,15 +28,27 @@ function getParitialVisibilityGutter(
 
 function getCounterPart(
   index: number,
-  { slidesToShow }: { slidesToShow: number },
+  {
+    slidesToShow,
+    currentSlide,
+    totalItems
+  }: { slidesToShow: number; currentSlide: number; totalItems: number },
   childrenArr: any[]
 ): number {
   if (childrenArr.length > slidesToShow * 2) {
     const originalFirstSlide =
       childrenArr.length - (childrenArr.length - slidesToShow * 2);
-    return originalFirstSlide + index;
+    if (index < currentSlide) {
+      return originalFirstSlide + index;
+    } else {
+      return index - (childrenArr.length - slidesToShow * 2);
+    }
   } else {
-    return childrenArr.length + index;
+    if (currentSlide >= childrenArr.length) {
+      return childrenArr.length + index;
+    } else {
+      return index;
+    }
   }
 }
 
@@ -65,7 +77,8 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
 
 function whenEnteredClones(
   { currentSlide, slidesToShow, itemWidth, totalItems }: CarouselInternalState,
-  childrenArr: any[]
+  childrenArr: any[],
+  props: CarouselProps
 ): {
   hasEnterClonedAfter: boolean;
   hasEnterClonedBefore: boolean;
@@ -96,8 +109,13 @@ function whenEnteredClones(
       nextPosition = -(itemWidth * nextSlide);
     }
     if (hasEnterClonedBefore) {
-      nextSlide = totalItems - slidesToShow * 2;
-      nextPosition = -(itemWidth * nextSlide);
+      if (props.shouldShowDots) {
+        nextSlide = childrenArr.length;
+        nextPosition = -(itemWidth * nextSlide);
+      } else {
+        nextSlide = totalItems - slidesToShow * 2;
+        nextPosition = -(itemWidth * nextSlide);
+      }
     }
   }
   return {

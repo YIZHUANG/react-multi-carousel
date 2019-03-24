@@ -104,8 +104,8 @@ class Index extends React.Component {
           slidesToSlide={1}
           deviceType={this.props.deviceType}
         >
-          {fakerData.map(card => {
-            return <Card isMoving={this.state.isMoving} {...card} />;
+          {fakerData.map((card, index) => {
+            return <Card index={index} isMoving={this.state.isMoving} {...card} />;
           })}
         </Carousel>
 
@@ -118,12 +118,12 @@ class Index extends React.Component {
           forSSR
           shouldShowDots
           slidesToSlide={1}
-          infinite={false}
+          infinite={true}
           containerClassName="container-with-dots"
           itemClassName="image-item"
           deviceType={this.props.deviceType}
         >
-          {fakerData.slice(0,5).map(card => {
+          {fakerData.slice(0,9).map(card => {
             return <Image url={card.image} alt={card.headline} />;
           })}
         </Carousel>
