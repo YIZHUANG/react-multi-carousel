@@ -181,26 +181,6 @@ const CustomDot = ({ onClick, ...rest }) => {
 <Carousel shouldShowDots customDot={<CustomDot />} />
 ```
 
-## The items you passed as children.
-
-All the items you passed as children will received a list of props and the current state that's passed back by the Carousel.
-This is useful if you want to support accessibility or do your own stuff.
-[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=with%20aria%20hidden%2C%20inspect%20me%20in%20the%20debugger&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
-
-Inspect the element in the chrome debugger.
-
-```
-const CarouselItem = ({ isvisible, currentSlide, onMove, ...rest }) => {
-  console.log(rest);
-  return <div aria-hidden={isvisible ? 'false':'true'} className={isvisible? 'special style' : 'normal style'}></div>
-}
-<Carousel>
-  <CarouselItem />
-  <CarouselItem />
-  <CarouselItem />
-</Carousel>
-```
-
 ## ParitialVisibile props.
 
 Shows the next / previous items paritially, this is very useful if you want to indicate to the users that this carousel component is swipable, has more items behind it.

@@ -1,3 +1,5 @@
+import { any } from "prop-types";
+
 interface responsiveType {
   [key: string]: {
     breakpoint: { max: number; min: number };
@@ -64,6 +66,8 @@ interface CarouselInternalState {
   domLoaded: boolean;
   deviceType?: string;
   transform: number;
+  isSliding?: boolean;
+  clones: any[];
 }
 
 export { CarouselInternalState, CarouselProps, responsiveType, stateCallBack, buttonGroupCallBack };
