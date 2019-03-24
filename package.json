@@ -5,7 +5,6 @@
   "main": "index.js",
   "types": "/lib/index.d.ts",
   "scripts": {
-    "preversion": "npm run test",
     "build": "rm -rf ./lib && tsc && npm run after-build",
     "test": "jest",
     "test:watch": "jest --watch",
