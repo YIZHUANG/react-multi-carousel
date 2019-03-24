@@ -1,0 +1,34 @@
+html body {
+  padding: 0;
+  margin: 0;
+}
+
+.image-item {
+  padding: 10px;
+}
+.container {
+  margin-top: 20px;
+}
+.container-with-dots {
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+.react-multi-carousel-dot-list {
+  bottom: 0px !important;
+}
+#__next {
+  overflow: scroll;
+  padding: 50px;
+  margin-bottom: 40px;
+}
+.react-multi-carousel-dot button {
+  border-color: grey !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.first-carousel-container {
+  margin-bottom: 50px;
+}

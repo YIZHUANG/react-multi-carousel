@@ -1,0 +1,30 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "target": "es5",
+        "module": "esnext",
+        "jsx": "preserve",
+        "allowJs": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noImplicitAny": false,
+        "removeComments": false,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "checkJs": true,
+        "baseUrl": ".",
+        "typeRoots": ["./node_modules/@types"],
+        "lib": ["dom", "esnext"],
+        "paths": {
+            "components/*": ["./components/*"],
+            "api/*": ["./api/*"],
+            "utils/*": ["./utils/*"],
+            "@routes": ["./routes/index.ts"]
+        }
+    },
+    "exclude": ["node_modules"]
+}

@@ -319,3 +319,10 @@ They are very useful in the following cases:
 ## Contribute
 
 Submit an issue for feature request or submit a pr.
+
+
+## Locale development.
+
+* cd app
+* npm install
+* npm run dev

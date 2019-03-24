@@ -5,11 +5,9 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 
-import Card from "../components/card";
-import Image from "../components/image";
-import Carousel from "react-multi-carousel";
-import "../style.css";
-import "react-multi-carousel/lib/styles.css";
+import Card from "../../components/card";
+import Image from "../../components/image";
+import Carousel from "../../../src";
 
 import Link from "next/link";
 
@@ -92,18 +90,6 @@ class Index extends React.Component {
     };
     return (
       <div className={classes.root}>
-        <Typography className={classes.title} variant="h6" color="grey">
-          <a target="_blank" href="https://w3js.com/">
-            A Carousel supports multiple items and server-side rendering
-          </a>
-        </Typography>
-        <Typography className={classes.title} variant="p" color="grey">
-          <a target="_blank" href="https://w3js.com/">
-            This is the server-side rendering demo of the libiary, try to
-            disable the JavaScript in your browser, you will still see our
-            Carousel renders nicely
-          </a>
-        </Typography>
         <Carousel
           /*
           disableSwipeOnMobile

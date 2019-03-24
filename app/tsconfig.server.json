@@ -1,0 +1,8 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "module": "commonjs",
+        "outDir": "dist/"
+    },
+    "include": ["./server/index.ts", "./routes/index.ts"]
+}
