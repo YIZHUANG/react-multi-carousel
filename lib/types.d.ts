@@ -58,5 +58,7 @@ interface CarouselInternalState {
     domLoaded: boolean;
     deviceType?: string;
     transform: number;
+    isSliding?: boolean;
+    clones: any[];
 }
 export { CarouselInternalState, CarouselProps, responsiveType, stateCallBack, buttonGroupCallBack };

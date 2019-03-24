@@ -11,12 +11,16 @@ declare class Carousel extends React.Component<CarouselProps, CarouselInternalSt
     autoPlay?: any;
     constructor(props: CarouselProps);
     componentDidMount(): void;
+    setClones(slidesToShow: number, itemWidth?: number, forResizing?: boolean): void;
     setItemsToShow(shouldCorrectItemPosition?: boolean): void;
     setContainerAndItemWidth(slidesToShow: number, shouldCorrectItemPosition?: boolean): void;
     correctItemsPosition(itemWidth: number): void;
-    onResize(): void;
-    componentDidUpdate({ keyBoardControl, autoPlay }: CarouselProps, { containerWidth }: CarouselInternalState): void;
-    resetAllItems(): void;
+    onResize(value?: any): void;
+    componentDidUpdate({ keyBoardControl, autoPlay }: CarouselProps, { containerWidth, domLoaded, isSliding }: CarouselInternalState): void;
+    correctClonesPosition({ domLoaded, isSliding }: {
+        domLoaded?: boolean;
+        isSliding?: boolean;
+    }): void;
     next(slidesHavePassed?: number): void;
     previous(slidesHavePassed?: number): void;
     componentWillUnmount(): void;
@@ -33,6 +37,8 @@ declare class Carousel extends React.Component<CarouselProps, CarouselInternalSt
     renderButtonGroups(): React.ReactElement<any> | null;
     renderDotsList(): React.ReactElement<any>;
     getIfSlideIsVisbile(index: number): boolean;
+    getServerSideState(): any;
+    renderCarouselItems(): any;
     render(): React.ReactNode;
 }
 export default Carousel;
