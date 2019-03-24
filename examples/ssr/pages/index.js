@@ -132,7 +132,7 @@ class Index extends React.Component {
           forSSR
           shouldShowDots
           slidesToSlide={1}
-          infinite={false}
+          infinite
           containerClassName="container-with-dots"
           itemClassName="image-item"
           deviceType={this.props.deviceType}

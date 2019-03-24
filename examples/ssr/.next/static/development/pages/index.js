@@ -115874,6 +115874,9 @@ class Carousel extends React.Component {
         this.previous = infinite
             ? utils_1.throttle(this.previous.bind(this), props.transitionDuration || defaultTransitionDuration)
             : this.previous.bind(this);
+        this.goToSlide = infinite
+            ? utils_1.throttle(this.goToSlide.bind(this), props.transitionDuration || defaultTransitionDuration)
+            : this.goToSlide.bind(this);
         this.getIfSlideIsVisbile = this.getIfSlideIsVisbile.bind(this);
         this.onMove = false;
         this.initialPosition = 0;
@@ -115981,7 +115984,7 @@ class Carousel extends React.Component {
     }
     correctClonesPosition({ domLoaded, isSliding }) {
         const childrenArr = React.Children.toArray(this.props.children);
-        const { hasEnterClonedAfter, hasEnterClonedBefore, nextSlide, nextPosition } = utils_1.whenEnteredClones(this.state, childrenArr);
+        const { hasEnterClonedAfter, hasEnterClonedBefore, nextSlide, nextPosition } = utils_1.whenEnteredClones(this.state, childrenArr, this.props);
         if (
         // this is to prevent this gets called on the server-side.
         this.state.domLoaded &&
@@ -116200,9 +116203,7 @@ class Carousel extends React.Component {
                 const slidesHavePassed = Math.round((this.initialPosition - this.lastPosition) / this.state.itemWidth);
                 if (this.initialPosition - this.lastPosition >=
                     this.props.minimumTouchDrag) {
-                    this.next(slidesHavePassed > this.state.slidesToShow
-                        ? this.state.slidesToShow
-                        : slidesHavePassed);
+                    this.next(slidesHavePassed);
                 }
                 else {
                     this.correctItemsPosition(this.state.itemWidth);
@@ -116212,9 +116213,7 @@ class Carousel extends React.Component {
                 const slidesHavePassed = Math.round((this.lastPosition - this.initialPosition) / this.state.itemWidth);
                 if (this.lastPosition - this.initialPosition >
                     this.props.minimumTouchDrag) {
-                    this.previous(slidesHavePassed > this.state.slidesToShow
-                        ? this.state.slidesToShow
-                        : slidesHavePassed);
+                    this.previous(slidesHavePassed);
                 }
                 else {
                     this.correctItemsPosition(this.state.itemWidth);
@@ -116245,11 +116244,13 @@ class Carousel extends React.Component {
             beforeChanged(slide, this.getState());
         }
         this.isAnimationAllowed = true;
-        // getCounterPart()
         this.setState({
             currentSlide: slide,
             transform: -(itemWidth * slide)
         }, () => {
+            if (this.props.infinite) {
+                this.correctClonesPosition({ domLoaded: true, isSliding: true });
+            }
             if (typeof afterChanged === "function") {
                 setTimeout(() => {
                     afterChanged(previousSlide, this.getState());
@@ -116306,6 +116307,7 @@ class Carousel extends React.Component {
             const slideIndex = infinite
                 ? utils_1.getCounterPart(index, this.state, childrenArr)
                 : index;
+            // console.log(getCounterPart(this.state.currentSlide, this.state, childrenArr), slideIndex);
             if (customDot) {
                 return React.cloneElement(customDot, {
                     index: slideIndex,
@@ -116345,7 +116347,7 @@ class Carousel extends React.Component {
         const { children, infinite, itemClassName, partialVisbile } = this.props;
         const { flexBisis, shouldRenderOnSSR, domFullyLoaded, paritialVisibilityGutter } = this.getServerSideState();
         if (infinite) {
-            return this.state.clones.map((child, index) => (React.createElement("li", { key: index, "aria-hidden": this.getIfSlideIsVisbile(index) ? "false" : "true", style: {
+            return this.state.clones.map((child, index) => (React.createElement("li", { key: index, "aria-hidden": this.getIfSlideIsVisbile(index) ? "false" : "true", "data-index": index, style: {
                     flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
                     position: "relative",
                     width: domFullyLoaded
@@ -116355,7 +116357,7 @@ class Carousel extends React.Component {
                         : "auto"
                 }, className: itemClassName }, child)));
         }
-        return React.Children.toArray(children).map((child, index) => (React.createElement("li", { key: index, "aria-hidden": this.getIfSlideIsVisbile(index) ? "false" : "true", style: {
+        return React.Children.toArray(children).map((child, index) => (React.createElement("li", { key: index, "data-index": index, "aria-hidden": this.getIfSlideIsVisbile(index) ? "false" : "true", style: {
                 flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
                 position: "relative",
                 width: domFullyLoaded
@@ -116467,13 +116469,23 @@ function getParitialVisibilityGutter(responsive, partialVisbile, serverSideDevic
     return gutter;
 }
 exports.getParitialVisibilityGutter = getParitialVisibilityGutter;
-function getCounterPart(index, { slidesToShow }, childrenArr) {
+function getCounterPart(index, { slidesToShow, currentSlide, totalItems }, childrenArr) {
     if (childrenArr.length > slidesToShow * 2) {
         const originalFirstSlide = childrenArr.length - (childrenArr.length - slidesToShow * 2);
-        return originalFirstSlide + index;
+        if (index < currentSlide) {
+            return originalFirstSlide + index;
+        }
+        else {
+            return index - (childrenArr.length - slidesToShow * 2);
+        }
     }
     else {
-        return childrenArr.length + index;
+        if (currentSlide >= childrenArr.length) {
+            return childrenArr.length + index;
+        }
+        else {
+            return index;
+        }
     }
 }
 exports.getCounterPart = getCounterPart;
@@ -116498,7 +116510,7 @@ function getClones(slidesToShow, childrenArr) {
     };
 }
 exports.getClones = getClones;
-function whenEnteredClones({ currentSlide, slidesToShow, itemWidth, totalItems }, childrenArr) {
+function whenEnteredClones({ currentSlide, slidesToShow, itemWidth, totalItems }, childrenArr, props) {
     let nextSlide = 0;
     let nextPosition = 0;
     let hasEnterClonedAfter;
@@ -116508,7 +116520,7 @@ function whenEnteredClones({ currentSlide, slidesToShow, itemWidth, totalItems }
         hasEnterClonedAfter =
             currentSlide >= originalFirstSlide + childrenArr.length;
         if (hasEnterClonedAfter) {
-            nextSlide = originalFirstSlide;
+            nextSlide = currentSlide - childrenArr.length;
             nextPosition = -(itemWidth * nextSlide);
         }
         if (hasEnterClonedBefore) {
@@ -116523,8 +116535,14 @@ function whenEnteredClones({ currentSlide, slidesToShow, itemWidth, totalItems }
             nextPosition = -(itemWidth * nextSlide);
         }
         if (hasEnterClonedBefore) {
-            nextSlide = totalItems - slidesToShow * 2;
-            nextPosition = -(itemWidth * nextSlide);
+            if (props.shouldShowDots) {
+                nextSlide = childrenArr.length;
+                nextPosition = -(itemWidth * nextSlide);
+            }
+            else {
+                nextSlide = totalItems - slidesToShow * 2;
+                nextPosition = -(itemWidth * nextSlide);
+            }
         }
     }
     return {
@@ -119560,7 +119578,7 @@ function (_React$Component) {
       , {
         responsive: responsive,
         forSSR: true,
-        infinite: true,
+        infinite: false,
         beforeChanged: function beforeChanged() {
           return _this2.setState({
             isMoving: true
@@ -119599,7 +119617,7 @@ function (_React$Component) {
         forSSR: true,
         shouldShowDots: true,
         slidesToSlide: 1,
-        infinite: false,
+        infinite: true,
         containerClassName: "container-with-dots",
         itemClassName: "image-item",
         deviceType: this.props.deviceType,
@@ -119657,7 +119675,7 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!*********************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fyi.a.zhuang%2FDesktop%2Fbackup%2Freact-multi-carousel%2Fexamples%2Fssr%2Fpages%2Findex.js ***!
   \*********************************************************************************************************************************************************************/
@@ -119680,5 +119698,5 @@ module.exports = dll_3681e7fd756237ce51c6;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js","styles"]]]));;
+},[[2,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=index.js.map

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1718,7 +1718,7 @@ function (_React$Component) {
       , {
         responsive: responsive,
         forSSR: true,
-        infinite: true,
+        infinite: false,
         beforeChanged: function beforeChanged() {
           return _this2.setState({
             isMoving: true
@@ -1757,7 +1757,7 @@ function (_React$Component) {
         forSSR: true,
         shouldShowDots: true,
         slidesToSlide: 1,
-        infinite: false,
+        infinite: true,
         containerClassName: "container-with-dots",
         itemClassName: "image-item",
         deviceType: this.props.deviceType,
@@ -1826,7 +1826,7 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
