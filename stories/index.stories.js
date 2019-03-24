@@ -303,6 +303,7 @@ storiesOf("Carousel", module)
   .addWithJSX("With paritially visibie on next items", () => {
     return (
       <Carousel
+        infinite
         partialVisbile="right"
         containerClassName="container"
         responsive={responsive}
