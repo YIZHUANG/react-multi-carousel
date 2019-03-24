@@ -115,7 +115,7 @@ class Index extends React.Component {
           afterChanged={() => this.setState({ isMoving: false })}
           containerClassName="first-carousel-container container"
           slidesToSlide={1}
-          infinite={true}
+          infinite={false}
           deviceType={this.props.deviceType}
         >
           {fakerData.map(card => {
