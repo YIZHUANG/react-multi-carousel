@@ -82,7 +82,7 @@ function whenEnteredClones(
     hasEnterClonedAfter =
       currentSlide >= originalFirstSlide + childrenArr.length;
     if (hasEnterClonedAfter) {
-      nextSlide = originalFirstSlide;
+      nextSlide = currentSlide - childrenArr.length;
       nextPosition = -(itemWidth * nextSlide);
     }
     if (hasEnterClonedBefore) {

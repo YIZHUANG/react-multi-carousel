@@ -471,11 +471,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           this.initialPosition - this.lastPosition >=
           this.props.minimumTouchDrag
         ) {
-          this.next(
-            slidesHavePassed > this.state.slidesToShow
-              ? this.state.slidesToShow
-              : slidesHavePassed
-          );
+          this.next(slidesHavePassed);
         } else {
           this.correctItemsPosition(this.state.itemWidth);
         }
@@ -488,11 +484,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           this.lastPosition - this.initialPosition >
           this.props.minimumTouchDrag
         ) {
-          this.previous(
-            slidesHavePassed > this.state.slidesToShow
-              ? this.state.slidesToShow
-              : slidesHavePassed
-          );
+          this.previous(slidesHavePassed);
         } else {
           this.correctItemsPosition(this.state.itemWidth);
         }
