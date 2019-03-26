@@ -93,8 +93,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.props.autoPlay && this.props.autoPlaySpeed) {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
-    const childrenArr = React.Children.toArray(this.props.children)
   }
+
+  /*
+  We only want to set the clones on the client-side cause it relies on getting the width of the carousel items.
+  */
   public setClones(
     slidesToShow: number,
     itemWidth?: number,
@@ -128,6 +131,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }
     });
   }
+  // this is for resizing.
   public setContainerAndItemWidth(
     slidesToShow: number,
     shouldCorrectItemPosition?: boolean
@@ -154,6 +158,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
   }
   public correctItemsPosition(itemWidth: number, isAnimationAllowed?: boolean): void {
+    /*
+    For swipe, drag and resizing, they changed the position of the carousel, but the position are not always correct.
+    Hence, this is to make sure our items are in the correct place.
+    */
     if(isAnimationAllowed) {
       this.isAnimationAllowed = true;
     }
@@ -190,6 +198,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.containerRef.current &&
       this.containerRef.current.offsetWidth !== containerWidth
     ) {
+      // this is for handing resizing.
       setTimeout(() => {
         this.setItemsToShow(true);
       }, this.props.transitionDuration || defaultTransitionDuration);
@@ -205,6 +214,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
     if (this.props.infinite) {
+      // this is to quicly cancel the animation and move the items position to create the infinite effects.
       this.correctClonesPosition({ domLoaded, isSliding });
     }
   }

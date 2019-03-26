@@ -26,6 +26,13 @@ function getParitialVisibilityGutter(
   return gutter;
 }
 
+
+/*
+getCounterPart gets the index of the clones.
+For example, we have an array [clones, originalChildren, clones];
+And we want to get the counter part index of the clones for the originalChildren.
+And this does that.
+*/
 function getCounterPart(
   index: number,
   {
@@ -79,6 +86,10 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
   };
 }
 
+/*
+When the user sees the clones, we need to reset the position, and cancel the animation so that it
+creates the infinite effects.
+*/
 function whenEnteredClones(
   { currentSlide, slidesToShow, itemWidth, totalItems }: CarouselInternalState,
   childrenArr: any[],
