@@ -14,7 +14,7 @@ declare class Carousel extends React.Component<CarouselProps, CarouselInternalSt
     setClones(slidesToShow: number, itemWidth?: number, forResizing?: boolean): void;
     setItemsToShow(shouldCorrectItemPosition?: boolean): void;
     setContainerAndItemWidth(slidesToShow: number, shouldCorrectItemPosition?: boolean): void;
-    correctItemsPosition(itemWidth: number): void;
+    correctItemsPosition(itemWidth: number, isAnimationAllowed?: boolean): void;
     onResize(value?: any): void;
     componentDidUpdate({ keyBoardControl, autoPlay }: CarouselProps, { containerWidth, domLoaded, isSliding }: CarouselInternalState): void;
     correctClonesPosition({ domLoaded, isSliding }: {

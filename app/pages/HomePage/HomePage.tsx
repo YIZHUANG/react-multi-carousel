@@ -77,7 +77,7 @@ class Index extends React.Component {
     const responsive = {
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 3
+        items: 8
       },
       tablet: {
         breakpoint: { max: 1024, min: 464 },
@@ -117,6 +117,7 @@ class Index extends React.Component {
           responsive={responsive}
           forSSR
           shouldShowDots
+          minimumTouchDrag={80}
           slidesToSlide={1}
           infinite={true}
           containerClassName="container-with-dots"

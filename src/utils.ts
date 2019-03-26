@@ -41,6 +41,10 @@ function getCounterPart(
     if (index < currentSlide) {
       return originalFirstSlide + index;
     } else {
+      // this means navigative value.
+      if (index - (childrenArr.length - slidesToShow * 2) < 0) {
+        return index * 2;
+      }
       return index - (childrenArr.length - slidesToShow * 2);
     }
   } else {

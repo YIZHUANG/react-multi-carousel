@@ -22,7 +22,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     keyBoardControl: true,
     autoPlaySpeed: 3000,
     shouldShowDots: false,
-    minimumTouchDrag: 50,
+    minimumTouchDrag: 80,
     dotListClassName: ""
   };
   private readonly containerRef: React.RefObject<any>;
@@ -93,6 +93,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.props.autoPlay && this.props.autoPlaySpeed) {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
+    const childrenArr = React.Children.toArray(this.props.children)
   }
   public setClones(
     slidesToShow: number,
@@ -152,7 +153,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }
     }
   }
-  public correctItemsPosition(itemWidth: number): void {
+  public correctItemsPosition(itemWidth: number, isAnimationAllowed?: boolean): void {
+    if(isAnimationAllowed) {
+      this.isAnimationAllowed = true;
+    }
+    if(!isAnimationAllowed && this.isAnimationAllowed) {
+      this.isAnimationAllowed = false;
+    }
     this.setState({
       transform: -(itemWidth * this.state.currentSlide)
     });
@@ -479,7 +486,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         ) {
           this.next(slidesHavePassed);
         } else {
-          this.correctItemsPosition(this.state.itemWidth);
+          this.correctItemsPosition(this.state.itemWidth, true);
         }
       }
       if (this.direction === "left") {
@@ -492,7 +499,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         ) {
           this.previous(slidesHavePassed);
         } else {
-          this.correctItemsPosition(this.state.itemWidth);
+          this.correctItemsPosition(this.state.itemWidth, true);
         }
       }
       this.resetMoveStatus();
