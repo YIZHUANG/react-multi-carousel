@@ -115895,6 +115895,7 @@ class Carousel extends React.Component {
         if (this.props.autoPlay && this.props.autoPlaySpeed) {
             this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
         }
+        const childrenArr = React.Children.toArray(this.props.children);
     }
     setClones(slidesToShow, itemWidth, forResizing) {
         this.isAnimationAllowed = false;
@@ -115936,7 +115937,13 @@ class Carousel extends React.Component {
             }
         }
     }
-    correctItemsPosition(itemWidth) {
+    correctItemsPosition(itemWidth, isAnimationAllowed) {
+        if (isAnimationAllowed) {
+            this.isAnimationAllowed = true;
+        }
+        if (!isAnimationAllowed && this.isAnimationAllowed) {
+            this.isAnimationAllowed = false;
+        }
         this.setState({
             transform: -(itemWidth * this.state.currentSlide)
         });
@@ -116206,7 +116213,7 @@ class Carousel extends React.Component {
                     this.next(slidesHavePassed);
                 }
                 else {
-                    this.correctItemsPosition(this.state.itemWidth);
+                    this.correctItemsPosition(this.state.itemWidth, true);
                 }
             }
             if (this.direction === "left") {
@@ -116216,7 +116223,7 @@ class Carousel extends React.Component {
                     this.previous(slidesHavePassed);
                 }
                 else {
-                    this.correctItemsPosition(this.state.itemWidth);
+                    this.correctItemsPosition(this.state.itemWidth, true);
                 }
             }
             this.resetMoveStatus();
@@ -116417,7 +116424,7 @@ Carousel.defaultProps = {
     keyBoardControl: true,
     autoPlaySpeed: 3000,
     shouldShowDots: false,
-    minimumTouchDrag: 50,
+    minimumTouchDrag: 80,
     dotListClassName: ""
 };
 exports.default = Carousel;
@@ -116476,6 +116483,10 @@ function getCounterPart(index, { slidesToShow, currentSlide, totalItems }, child
             return originalFirstSlide + index;
         }
         else {
+            // this means navigative value.
+            if (index - (childrenArr.length - slidesToShow * 2) < 0) {
+                return index * 2;
+            }
             return index - (childrenArr.length - slidesToShow * 2);
         }
     }
@@ -119675,7 +119686,7 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
 /*!*********************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fyi.a.zhuang%2FDesktop%2Fbackup%2Freact-multi-carousel%2Fexamples%2Fssr%2Fpages%2Findex.js ***!
   \*********************************************************************************************************************************************************************/
@@ -119698,5 +119709,5 @@ module.exports = dll_3681e7fd756237ce51c6;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js","styles"]]]));;
+},[[1,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=index.js.map

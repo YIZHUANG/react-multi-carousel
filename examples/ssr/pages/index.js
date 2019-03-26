@@ -130,6 +130,7 @@ class Index extends React.Component {
           */
           responsive={responsive}
           forSSR
+          shouldShowDots
           slidesToSlide={1}
           infinite
           containerClassName="container-with-dots"
