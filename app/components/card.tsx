@@ -22,9 +22,6 @@ function MediaCard(props) {
   const { classes, image, headline, index, description, isMoving } = props;
   return (
     <a onClick={(e) => {
-        if(isMoving) {
-          e.preventDefault();
-        }
         e.preventDefault();
       }} href='https://w3js.com' target="_blank">
     <Card className={classes.card}>

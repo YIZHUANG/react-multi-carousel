@@ -92,11 +92,11 @@ const responsive = {
   }
 };
 <Carousel
-  disableSwipeOnMobile
-  disableDrag
-  shouldShowDots={true}
+  swipeable={false}
+  draggable={false}
+  showDots={true}
   responsive={responsive}
-  forSSR
+  ssr={true} // means to render carousel on server-side.
   slidesToSlide={2}
   infinite={true}
   autoPlay={this.props.deviceType !== 'mobile' ? true : false}
@@ -104,12 +104,11 @@ const responsive = {
   keyBoardControl={true}
   customTransition='all .5'
   transitionDuration={500}
-  containerClassName='container-border-green'
+  containerClass='carousel-container'
   removeArrowOnDeviceType={['tablet', 'mobile']}
   deviceType={this.props.deviceType}
-  dotListClassName='custom-dot-list-style'
-  itemClassName='carousel-item-gutter-padding-left-40'
-  containerClassName='carousel-container-padding-bottom-80'
+  dotListClass='custom-dot-list-style'
+  itemClass='carousel-item-padding-40-px'
 >
 <div>Item 1</div>
 <div>Item 2</div>
@@ -156,7 +155,7 @@ const ButtonGroup = ({ next, previous, goToSlide ...rest }) => {
     </div>
   );
 };
-<Carousel removeArrow customButtonGroup={<ButtonGroup />}>
+<Carousel arrows={false} customButtonGroup={<ButtonGroup />}>
   <ItemOne>
   <ItemTwo>
 </Carousel>
@@ -214,40 +213,40 @@ const responsive = {
 </Carousel>
 ```
 
-## afterChanged callback.
+## afterChange callback.
 
 This is a callback function that is invoked each time when there has been a sliding.
 
 [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=afterChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 ```
-<Carousel afterChanged={(previousSlide, { currentSlide, onMove }) => {
+<Carousel afterChange={(previousSlide, { currentSlide, onMove }) => {
     doSpeicalThing()
   }}>
 </Carousel>
 ```
 
-## beforeChanged call back
+## beforeChange call back
 
 This is a callback function that is invoked each time before a sliding.
 
 [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=beforeChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 ```
-<Carousel beforeChanged={(nextSlide, { currentSlide, onMove }) => {
+<Carousel beforeChange={(nextSlide, { currentSlide, onMove }) => {
     doSpeicalThing()
   }}>
 </Carousel>
 ```
 
-## Combine beforeChanged and nextChanged, real usage.
+## Combine beforeChange and nextChange, real usage.
 
 They are very useful in the following cases:
 
 - The carousel item is clickable, but you don't want it to be clickable while the user is dragging it or swiping it.
 
 ```
-<Carousel beforeChanged={() => this.setState({ isMoving: true })} afterChanged={() => this.setState({ isMoving: false })}>
+<Carousel beforeChange={() => this.setState({ isMoving: true })} afterChange={() => this.setState({ isMoving: false })}>
   <a onClick={(e) => {
     if(this.state.isMoving) {
       e.preventDefault()
@@ -259,7 +258,7 @@ They are very useful in the following cases:
 - Preparing for the next slide.
 
 ```
-<Carousel beforeChanged={(nextSlide) => this.setState({ nextSlide: nextSlide })}>
+<Carousel beforeChange={(nextSlide) => this.setState({ nextSlide: nextSlide })}>
   <div>Initial slide</div>
   <div onClick={() => {
     if(this.state.nextSlide === 1) {
@@ -272,7 +271,7 @@ They are very useful in the following cases:
 ## Using ref.
 
 ```
-<Carousel ref={(el) => (this.Carousel = el)} removeArrow responsive={responsive}>
+<Carousel ref={(el) => (this.Carousel = el)} arrows={false} responsive={responsive}>
   <ItemOne />
   <ItemTwo />
 </Carousel>
@@ -289,11 +288,11 @@ They are very useful in the following cases:
 | :---------      | :--:          | :-----: | :----------- |
 | responsive      | `object`     | `{}` | Numbers of slides to show at each breakpoint |
 | deviceType      | `string`     | `''` | Only pass this when use for server-side rendering, what to pass can be found in the example folder  |
-| forSSR        | `boolean`     | `false` | Use in conjunction with responsive and deviceType prop |
+| ssr        | `boolean`     | `false` | Use in conjunction with responsive and deviceType prop |
 | slidesToSlide            | `Number`     | `1` | How many slides to slide. |
-| disableDrag            | `boolean`      | `false` | Optionally disable dragging on desktop |
-| disableSwipeOnMobile          | `boolean`     | `false` | Optionally disable swiping on mobile  |
-| removeArrow          | `boolean`      | `false` | Hide the default arrows |
+| draggable            | `boolean`      | `true` | Optionally disable/enable dragging on desktop |
+| swipeable          | `boolean`     | `true` | Optionally disable/enable swiping on mobile  |
+| arrows          | `boolean`      | `true` | Hide/Show the default arrows |
 | removeArrowOnDeviceType | `string or array`      | `''` | Hide the default arrows at different break point, should be used with `responsive` props. Value could be `mobile` or `['mobile', 'tablet'], can be a string or array` |
 | customLeftArrow         | `jsx`      | `null` | Replace the default arrow with your own |
 | customRightArrow        | `jsx`    | `null` | Replace the default arrow with your own |
@@ -301,16 +300,16 @@ They are very useful in the following cases:
 | customButtonGroup    | `jsx`    | null | Fully customize your own control functionality if you don't want arrows or dots |
 | infinite                 | `boolean`      | false | Infinite loop |
 | minimumTouchDrag     | `number`     | `50` | The amount of distance to drag / swipe in order to move to the next slide. |
-| afterChanged              | `function`     | `null` | A callback after sliding everytime. |
-| beforeChanged           | `function`     | `null` | A callback before sliding everytime. |
-| contentClassName              | `string`      | `'react-multi-carousel-track'` | Use this to style your own track list. |
-| itemClassName        | `string`      | `''` | Use this to style your own Carousel item. For example add padding-left and padding-right |
-| containerClassName  | `string`      | `'react-multi-carousel-list'` | Use this to style the whole container. For example add padding to allow the "dots" or "arrows" to go to other places without being overflown. |
-| dotListClassName             | `string`     | `'react-multi-carousel-dot-list'` | Use this to style the dot list. |
+| afterChange              | `function`     | `null` | A callback after sliding everytime. |
+| beforeChange           | `function`     | `null` | A callback before sliding everytime. |
+| sliderClass              | `string`      | `'react-multi-carousel-track'` | CSS class for inner slider div, use this to style your own track list. |
+| itemClass        | `string`      | `''` | CSS class for carousel item, use this to style your own Carousel item. For example add padding-left and padding-right |
+| containerClass  | `string`      | `'react-multi-carousel-list'` | Use this to style the whole container. For example add padding to allow the "dots" or "arrows" to go to other places without being overflown. |
+| dotListClass             | `string`     | `'react-multi-carousel-dot-list'` | Use this to style the dot list. |
 | keyBoardControl         | `boolean`     | `true` | Use keyboard to navigate to next/previous slide |
 | autoPlay          | `boolean`     | `false` | Auto play |
 | autoPlaySpeed       | `number` | 3000 | The unit is ms |  
-| shouldShowDots            | `boolean`     | `false` | Hide the default dot list |
+| showDots            | `boolean`     | `false` | Hide the default dot list |
 | partialVisbile | `boolean | string`      | `false` | Show partial prev/next slides. If `partialVisbile === 'right'` only show partial next slides, otherwise show both. This is use with the `responsive` prop, see example for details |
 | customTransition | `string`      | `transform 300ms ease-in-out` | Configure your own anaimation when sliding |
 | transitionDuration | `number     | `300` | The unit is ms, if you are using customTransition, make sure to put the duration here as this is needed for the resizing to work. |

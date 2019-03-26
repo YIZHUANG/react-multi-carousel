@@ -95,7 +95,7 @@ const responsiveImageHero = {
 storiesOf("Carousel", module)
   .addWithJSX("With infinite mode", () => (
     <Carousel
-      containerClassName="container-with-dots"
+      containerClass="container-with-dots"
       infinite={true}
       responsive={responsive}
     >
@@ -106,7 +106,7 @@ storiesOf("Carousel", module)
   ))
   .addWithJSX("Without infinite mode", () => {
     return (
-      <Carousel containerClassName="container" responsive={responsive}>
+      <Carousel containerClass="container" responsive={responsive}>
         {fakerData.map(card => {
           return <Card {...card} />;
         })}
@@ -117,7 +117,7 @@ storiesOf("Carousel", module)
     return (
       <Carousel
         infinite={true}
-        containerClassName="container"
+        containerClass="container"
         customLeftArrow={<CustomLeftArrow />}
         customRightArrow={<CustomRightArrow />}
         responsive={responsive}
@@ -131,8 +131,8 @@ storiesOf("Carousel", module)
   .addWithJSX("No drag on desktop", () => {
     return (
       <Carousel
-        containerClassName="container"
-        disableDrag
+        containerClass="container"
+        draggable={false}
         infinite={true}
         customLeftArrow={<CustomLeftArrow />}
         customRightArrow={<CustomRightArrow />}
@@ -147,8 +147,8 @@ storiesOf("Carousel", module)
   .addWithJSX("No swipe on mobile", () => {
     return (
       <Carousel
-        disableSwipeOnMobile
-        containerClassName="container"
+        swipeable={false}
+        containerClass="container"
         infinite={true}
         customLeftArrow={<CustomLeftArrow />}
         customRightArrow={<CustomRightArrow />}
@@ -163,7 +163,7 @@ storiesOf("Carousel", module)
   .addWithJSX("Slide two at a time", () => {
     return (
       <Carousel
-        containerClassName="container"
+        containerClass="container"
         slidesToSlide={2}
         responsive={responsive}
       >
@@ -179,7 +179,7 @@ storiesOf("Carousel", module)
         autoPlay
         infinite
         autoPlaySpeed={1000}
-        containerClassName="container-with-dots"
+        containerClass="container-with-dots"
         slidesToSlide={2}
         responsive={responsive}
       >
@@ -192,9 +192,9 @@ storiesOf("Carousel", module)
   .addWithJSX("With dots", () => {
     return (
       <Carousel
-        shouldShowDots
+        showDots
         infinite
-        containerClassName="container"
+        containerClass="container"
         slidesToSlide={1}
         responsive={responsiveImageHero}
       >
@@ -218,10 +218,10 @@ storiesOf("Carousel", module)
   .addWithJSX("Custom dots", () => {
     return (
       <Carousel
-        shouldShowDots
+        showDots
         customDot={<CustomDot />}
         infinite
-        containerClassName="container"
+        containerClass="container"
         slidesToSlide={1}
         responsive={responsiveImageHero}
       >
@@ -245,9 +245,9 @@ storiesOf("Carousel", module)
   .addWithJSX("With aria hidden, inspect me in the debugger", () => {
     return (
       <Carousel
-        shouldShowDots
+        showDots
         infinite
-        containerClassName="container"
+        containerClass="container"
         slidesToSlide={1}
         responsive={responsiveImageHero}
       >
@@ -257,14 +257,14 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX("With afterChanged function, a callback function", () => {
+  .addWithJSX("With afterChange function, a callback function", () => {
     return (
       <Carousel
-        shouldShowDots
+        showDots
         infinite
-        containerClassName="container"
+        containerClass="container"
         slidesToSlide={1}
-        afterChanged={(previousSlide, { currentSlide, onMove }) =>
+        afterChange={(previousSlide, { currentSlide, onMove }) =>
           alert(
             "previous slide is " +
               previousSlide +
@@ -280,14 +280,14 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX("With beforeChanged function, a callback function", () => {
+  .addWithJSX("With beforeChange function, a callback function", () => {
     return (
       <Carousel
-        shouldShowDots
+        showDots
         infinite
-        containerClassName="container"
+        containerClass="container"
         slidesToSlide={1}
-        beforeChanged={(nextSlide, { currentSlide, onMove }) =>
+        beforeChange={(nextSlide, { currentSlide, onMove }) =>
           alert(
             "previous slide is " + currentSlide + " nextSlide is " + nextSlide
           )
@@ -305,7 +305,7 @@ storiesOf("Carousel", module)
       <Carousel
         infinite
         partialVisbile="right"
-        containerClassName="container"
+        containerClass="container"
         responsive={responsive}
       >
         {fakerData.map(card => {
@@ -318,7 +318,7 @@ storiesOf("Carousel", module)
     return (
       <Carousel
         partialVisbile={true}
-        containerClassName="container"
+        containerClass="container"
         responsive={responsive}
       >
         {fakerData.map(card => {
@@ -330,8 +330,8 @@ storiesOf("Carousel", module)
   .addWithJSX("With custom button group", () => {
     return (
       <Carousel
-        removeArrow
-        containerClassName='container-padding-bottom'
+        arrows={false}
+        containerClass='container-padding-bottom'
         customButtonGroup={<CustomButtonGroup />}
         responsive={responsive}
       >

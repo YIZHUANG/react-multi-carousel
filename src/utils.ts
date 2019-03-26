@@ -124,7 +124,7 @@ function whenEnteredClones(
       nextPosition = -(itemWidth * nextSlide);
     }
     if (hasEnterClonedBefore) {
-      if (props.shouldShowDots) {
+      if (props.showDots) {
         nextSlide = childrenArr.length;
         nextPosition = -(itemWidth * nextSlide);
       } else {

@@ -16,14 +16,17 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public static defaultProps: any = {
     slidesToSlide: 1,
     infinite: false,
-    containerClassName: "",
-    contentClassName: "",
-    itemClassName: "",
+    draggable: true,
+    swipeable: true,
+    arrows: true,
+    containerClass: "",
+    sliderClass: "",
+    itemClass: "",
     keyBoardControl: true,
     autoPlaySpeed: 3000,
-    shouldShowDots: false,
+    showDots: false,
     minimumTouchDrag: 80,
-    dotListClassName: ""
+    dotListClass: ""
   };
   private readonly containerRef: React.RefObject<any>;
   public onMove: boolean;
@@ -252,7 +255,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public next(slidesHavePassed = 0): void {
     const { slidesToShow } = this.state;
-    const { slidesToSlide, infinite, afterChanged, beforeChanged } = this.props;
+    const { slidesToSlide, infinite, afterChange, beforeChange } = this.props;
     const nextMaximumSlides =
       this.state.currentSlide +
       1 +
@@ -264,8 +267,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const nextPosition = -(this.state.itemWidth * nextSlides);
     const previousSlide = this.state.currentSlide;
     if (nextMaximumSlides <= this.state.totalItems) {
-      if (typeof beforeChanged === "function") {
-        beforeChanged(nextSlides, this.getState());
+      if (typeof beforeChange === "function") {
+        beforeChange(nextSlides, this.getState());
       }
       this.isAnimationAllowed = true;
       this.setState(
@@ -276,9 +279,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         },
         () => {
           this.setState({ isSliding: false });
-          if (typeof afterChanged === "function") {
+          if (typeof afterChange === "function") {
             setTimeout(() => {
-              afterChanged(previousSlide, this.getState());
+              afterChange(previousSlide, this.getState());
             }, this.props.transitionDuration || defaultTransitionDuration);
           }
         }
@@ -290,8 +293,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       // prevent oversliding;
       const maxSlides = this.state.totalItems - slidesToShow;
       const maxPosition = -(this.state.itemWidth * maxSlides);
-      if (typeof beforeChanged === "function") {
-        beforeChanged(maxSlides, this.getState());
+      if (typeof beforeChange === "function") {
+        beforeChange(maxSlides, this.getState());
       }
       this.isAnimationAllowed = true;
       this.setState(
@@ -302,9 +305,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         },
         () => {
           this.setState({ isSliding: false });
-          if (typeof afterChanged === "function") {
+          if (typeof afterChange === "function") {
             setTimeout(() => {
-              afterChanged(previousSlide, this.getState());
+              afterChange(previousSlide, this.getState());
             }, this.props.transitionDuration || defaultTransitionDuration);
           }
         }
@@ -315,14 +318,14 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public previous(slidesHavePassed = 0): void {
     const { slidesToShow } = this.state;
-    const { slidesToSlide, infinite, afterChanged, beforeChanged } = this.props;
+    const { slidesToSlide, infinite, afterChange, beforeChange } = this.props;
     const nextSlides =
       this.state.currentSlide - slidesHavePassed - slidesToSlide;
     const nextPosition = -(this.state.itemWidth * nextSlides);
     const previousSlide = this.state.currentSlide;
     if (nextSlides >= 0) {
-      if (typeof beforeChanged === "function") {
-        beforeChanged(nextSlides, this.getState());
+      if (typeof beforeChange === "function") {
+        beforeChange(nextSlides, this.getState());
       }
       this.isAnimationAllowed = true;
       this.setState(
@@ -333,17 +336,17 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         },
         () => {
           this.setState({ isSliding: false });
-          if (typeof afterChanged === "function") {
+          if (typeof afterChange === "function") {
             setTimeout(() => {
-              afterChanged(previousSlide, this.getState());
+              afterChange(previousSlide, this.getState());
             }, this.props.transitionDuration || defaultTransitionDuration);
           }
         }
       );
     } else if (nextSlides < 0 && this.state.currentSlide !== 0) {
       // prevent oversliding.
-      if (typeof beforeChanged === "function") {
-        beforeChanged(0, this.getState());
+      if (typeof beforeChange === "function") {
+        beforeChange(0, this.getState());
       }
       this.isAnimationAllowed = true;
       this.setState(
@@ -354,9 +357,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         },
         () => {
           this.setState({ isSliding: false });
-          if (typeof afterChanged === "function") {
+          if (typeof afterChange === "function") {
             setTimeout(() => {
-              afterChanged(previousSlide, this.getState());
+              afterChange(previousSlide, this.getState());
             }, this.props.transitionDuration || defaultTransitionDuration);
           }
         }
@@ -365,8 +368,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       const maxSlides = this.state.totalItems - slidesToShow;
       const maxPosition = -(this.state.itemWidth * maxSlides);
       if (infinite) {
-        if (typeof beforeChanged === "function") {
-          beforeChanged(maxSlides, this.getState());
+        if (typeof beforeChange === "function") {
+          beforeChange(maxSlides, this.getState());
         }
         this.isAnimationAllowed = true;
         this.setState(
@@ -377,9 +380,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           },
           () => {
             this.setState({ isSliding: false });
-            if (typeof afterChanged === "function") {
+            if (typeof afterChange === "function") {
               setTimeout(() => {
-                afterChanged(previousSlide, this.getState());
+                afterChange(previousSlide, this.getState());
               }, this.props.transitionDuration || defaultTransitionDuration);
             }
           }
@@ -405,8 +408,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public handleDown(e: any): void {
     if (
-      (e.touches && this.props.disableSwipeOnMobile) ||
-      (e && !e.touches && this.props.disableDrag)
+      (e.touches && !this.props.swipeable) ||
+      (e && !e.touches && !this.props.draggable)
     ) {
       return;
     }
@@ -418,8 +421,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public handleMove(e: any): void {
     if (
-      (e.touches && this.props.disableSwipeOnMobile) ||
-      (e && !e.touches && this.props.disableDrag)
+      (e.touches && !this.props.swipeable) ||
+      (e && !e.touches && !this.props.draggable)
     ) {
       return;
     }
@@ -478,10 +481,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
     const shouldDisableOnMobile =
-      e.type === "touchend" && this.props.disableSwipeOnMobile;
+      e.type === "touchend" && !this.props.swipeable;
     const shouldDisableOnDesktop =
       (e.type === "mouseleave" || e.type === "mouseup") &&
-      this.props.disableDrag;
+      !this.props.draggable;
     if (shouldDisableOnMobile || shouldDisableOnDesktop) {
       return;
     }
@@ -532,10 +535,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
 
   public goToSlide(slide: number): void {
     const { itemWidth } = this.state;
-    const { afterChanged, beforeChanged } = this.props;
+    const { afterChange, beforeChange } = this.props;
     const previousSlide = this.state.currentSlide;
-    if (typeof beforeChanged === "function") {
-      beforeChanged(slide, this.getState());
+    if (typeof beforeChange === "function") {
+      beforeChange(slide, this.getState());
     }
     this.isAnimationAllowed = true;
     this.setState(
@@ -547,9 +550,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         if (this.props.infinite) {
           this.correctClonesPosition({ domLoaded: true, isSliding: true });
         }
-        if (typeof afterChanged === "function") {
+        if (typeof afterChange === "function") {
           setTimeout(() => {
-            afterChanged(previousSlide, this.getState());
+            afterChange(previousSlide, this.getState());
           }, this.props.transitionDuration || defaultTransitionDuration);
         }
       }
@@ -608,11 +611,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
 
   public renderDotsList(): React.ReactElement<any> {
-    const { customDot, dotListClassName, infinite } = this.props;
+    const { customDot, dotListClass, infinite } = this.props;
     // getPureItemsWithoutClone
     const childrenArr = React.Children.toArray(this.props.children);
     return (
-      <ul className={`react-multi-carousel-dot-list ${dotListClassName}`}>
+      <ul className={`react-multi-carousel-dot-list ${dotListClass}`}>
         {Array(childrenArr.length)
           .fill(0)
           .map((item, index) => {
@@ -653,15 +656,15 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
 
   public getServerSideState(): any {
     const { domLoaded, slidesToShow, containerWidth, itemWidth } = this.state;
-    const { deviceType, responsive, forSSR, partialVisbile } = this.props;
+    const { deviceType, responsive, ssr, partialVisbile } = this.props;
     let flexBisis: number | string | undefined;
     const domFullyLoaded =
       domLoaded && slidesToShow && containerWidth && itemWidth;
-    if (forSSR && deviceType && !domFullyLoaded) {
+    if (ssr && deviceType && !domFullyLoaded) {
       flexBisis = guessWidthFromDeviceType(deviceType, responsive);
     }
     const shouldRenderOnSSR =
-      forSSR && deviceType && !domFullyLoaded && flexBisis;
+      ssr && deviceType && !domFullyLoaded && flexBisis;
     const paritialVisibilityGutter = getParitialVisibilityGutter(
       responsive,
       partialVisbile,
@@ -678,7 +681,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
 
   public renderCarouselItems(): any {
     const { itemWidth } = this.state;
-    const { children, infinite, itemClassName, partialVisbile } = this.props;
+    const { children, infinite, itemClass, partialVisbile } = this.props;
     const {
       flexBisis,
       shouldRenderOnSSR,
@@ -702,7 +705,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
                 }px`
               : "auto"
           }}
-          className={itemClassName}
+          className={itemClass}
         >
           {child}
         </li>
@@ -724,7 +727,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
               }px`
             : "auto"
         }}
-        className={itemClassName}
+        className={itemClass}
       >
         {child}
       </li>
@@ -736,11 +739,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const {
       deviceType,
       slidesToSlide,
-      removeArrow,
+      arrows,
       removeArrowOnDeviceType,
       infinite,
-      containerClassName,
-      contentClassName,
+      containerClass,
+      sliderClass,
       customTransition,
       partialVisbile
     } = this.props;
@@ -754,7 +757,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.state.totalItems
     );
     const shouldShowArrows =
-      !removeArrow &&
+      arrows &&
       !(
         removeArrowOnDeviceType &&
         ((deviceType && removeArrowOnDeviceType.indexOf(deviceType) > -1) ||
@@ -778,11 +781,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         : this.state.transform;
     return (
       <div
-        className={`react-multi-carousel-list ${containerClassName}`}
+        className={`react-multi-carousel-list ${containerClass}`}
         ref={this.containerRef}
       >
         <ul
-          className={`react-multi-carousel-track ${contentClassName}`}
+          className={`react-multi-carousel-track ${sliderClass}`}
           // @ts-ignore
           style={{
             transition: this.isAnimationAllowed
@@ -805,7 +808,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         {shouldShowArrows && !disableLeftArrow && this.renderLeftArrow()}
         {shouldShowArrows && !disableRightArrow && this.renderRightArrow()}
         {this.renderButtonGroups()}
-        {this.props.shouldShowDots && this.renderDotsList()}
+        {this.props.showDots && this.renderDotsList()}
       </div>
     );
   }

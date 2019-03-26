@@ -106,15 +106,15 @@ class Index extends React.Component {
         </Typography>
         <Carousel
           /*
-          disableSwipeOnMobile
-          disableDrag
+          swipeable={false}
+          draggable={false}
           */
           responsive={responsive}
-          forSSR
+          ssr
           infinite={false}
-          beforeChanged={() => this.setState({ isMoving: true })}
-          afterChanged={() => this.setState({ isMoving: false })}
-          containerClassName="first-carousel-container container"
+          beforeChange={() => this.setState({ isMoving: true })}
+          afterChange={() => this.setState({ isMoving: false })}
+          containerClass="first-carousel-container container"
           slidesToSlide={1}
           deviceType={this.props.deviceType}
         >
@@ -125,16 +125,16 @@ class Index extends React.Component {
 
         <Carousel
           /*
-          disableSwipeOnMobile
-          disableDrag
+          swipeable={false}
+          draggable={false}
           */
           responsive={responsive}
-          forSSR
-          shouldShowDots
+          ssr
+          showDots
           slidesToSlide={1}
           infinite
-          containerClassName="container-with-dots"
-          itemClassName="image-item"
+          containerClass="container-with-dots"
+          itemClass="image-item"
           deviceType={this.props.deviceType}
         >
           {fakerData.slice(0,5).map(card => {
