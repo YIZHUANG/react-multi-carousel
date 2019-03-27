@@ -141,7 +141,7 @@ function whenEnteredClones(
   };
 }
 
-const throttle = (func: any, limit: number): any => {
+const throttle = (func: any, limit: number, setIsInThrottle?: any): any => {
   let inThrottle: boolean;
   return function() {
     const args = arguments;
@@ -149,7 +149,15 @@ const throttle = (func: any, limit: number): any => {
     if (!inThrottle) {
       func.apply(context, args);
       inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
+      if(typeof setIsInThrottle === 'function') {
+        setIsInThrottle(true)
+      }
+      setTimeout(() => {
+        inThrottle = false;
+        if(typeof setIsInThrottle === 'function') {
+          setIsInThrottle(false)
+        }
+      }, limit);
     }
   };
 };

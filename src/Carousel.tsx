@@ -35,6 +35,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public isAnimationAllowed: boolean;
   public direction: string;
   public autoPlay?: any;
+  public isInThrottle?: boolean;
   constructor(props: CarouselProps) {
     super(props);
     this.containerRef = React.createRef();
@@ -57,19 +58,22 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.handleOut = this.handleOut.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
     this.handleEnter = this.handleEnter.bind(this);
+    this.setIsInThrottle = this.setIsInThrottle.bind(this);
     /*
     The reason of using throttle its because of cloning elemnts for inifinite mode.
     */
     this.next = infinite
       ? throttle(
           this.next.bind(this),
-          props.transitionDuration || defaultTransitionDuration
+          props.transitionDuration || defaultTransitionDuration,
+          this.setIsInThrottle
         )
       : this.next.bind(this);
     this.previous = infinite
       ? throttle(
           this.previous.bind(this),
-          props.transitionDuration || defaultTransitionDuration
+          props.transitionDuration || defaultTransitionDuration,
+          this.setIsInThrottle
         )
       : this.previous.bind(this);
     this.goToSlide = infinite
@@ -84,6 +88,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.lastPosition = 0;
     this.isAnimationAllowed = false;
     this.direction = "";
+    this.isInThrottle = false;
+  }
+  public setIsInThrottle(isInThrottle:boolean = false):void {
+    this.isInThrottle = isInThrottle;
   }
   public componentDidMount(): void {
     this.setState({ domLoaded: true });
@@ -160,15 +168,18 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }
     }
   }
-  public correctItemsPosition(itemWidth: number, isAnimationAllowed?: boolean): void {
+  public correctItemsPosition(
+    itemWidth: number,
+    isAnimationAllowed?: boolean
+  ): void {
     /*
     For swipe, drag and resizing, they changed the position of the carousel, but the position are not always correct.
     Hence, this is to make sure our items are in the correct place.
     */
-    if(isAnimationAllowed) {
+    if (isAnimationAllowed) {
       this.isAnimationAllowed = true;
     }
-    if(!isAnimationAllowed && this.isAnimationAllowed) {
+    if (!isAnimationAllowed && this.isAnimationAllowed) {
       this.isAnimationAllowed = false;
     }
     this.setState({
@@ -261,9 +272,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       1 +
       slidesHavePassed +
       slidesToShow +
-      slidesToSlide;
+      (slidesHavePassed > 0 ? 0 : slidesToSlide);
     const nextSlides =
-      this.state.currentSlide + slidesHavePassed + slidesToSlide;
+      this.state.currentSlide + slidesHavePassed + (slidesHavePassed > 0 ? 0 : slidesToSlide);
     const nextPosition = -(this.state.itemWidth * nextSlides);
     const previousSlide = this.state.currentSlide;
     if (nextMaximumSlides <= this.state.totalItems) {
@@ -320,7 +331,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const { slidesToShow } = this.state;
     const { slidesToSlide, infinite, afterChange, beforeChange } = this.props;
     const nextSlides =
-      this.state.currentSlide - slidesHavePassed - slidesToSlide;
+      this.state.currentSlide -
+      slidesHavePassed -
+      (slidesHavePassed > 0 ? 0 : slidesToSlide);
     const nextPosition = -(this.state.itemWidth * nextSlides);
     const previousSlide = this.state.currentSlide;
     if (nextSlides >= 0) {
@@ -409,7 +422,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public handleDown(e: any): void {
     if (
       (e.touches && !this.props.swipeable) ||
-      (e && !e.touches && !this.props.draggable)
+      (e && !e.touches && !this.props.draggable) || (this.isInThrottle && this.props.infinite)
     ) {
       return;
     }
@@ -663,8 +676,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (ssr && deviceType && !domFullyLoaded) {
       flexBisis = guessWidthFromDeviceType(deviceType, responsive);
     }
-    const shouldRenderOnSSR =
-      ssr && deviceType && !domFullyLoaded && flexBisis;
+    const shouldRenderOnSSR = ssr && deviceType && !domFullyLoaded && flexBisis;
     const paritialVisibilityGutter = getParitialVisibilityGutter(
       responsive,
       partialVisbile,

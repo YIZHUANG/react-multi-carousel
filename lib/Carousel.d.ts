@@ -9,7 +9,9 @@ declare class Carousel extends React.Component<CarouselProps, CarouselInternalSt
     isAnimationAllowed: boolean;
     direction: string;
     autoPlay?: any;
+    isInThrottle?: boolean;
     constructor(props: CarouselProps);
+    setIsInThrottle(isInThrottle?: boolean): void;
     componentDidMount(): void;
     setClones(slidesToShow: number, itemWidth?: number, forResizing?: boolean): void;
     setItemsToShow(shouldCorrectItemPosition?: boolean): void;

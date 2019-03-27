@@ -16,5 +16,5 @@ declare function whenEnteredClones({ currentSlide, slidesToShow, itemWidth, tota
     nextSlide: number;
     nextPosition: number;
 };
-declare const throttle: (func: any, limit: number) => any;
+declare const throttle: (func: any, limit: number, setIsInThrottle?: any) => any;
 export { guessWidthFromDeviceType, getParitialVisibilityGutter, getClones, whenEnteredClones, throttle, getCounterPart };
