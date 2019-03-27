@@ -32,12 +32,12 @@ describe("Carousel", () => {
   test("it renders", () => {
     const wrapper = mount(
       <Carousel
-        disableSwipeOnMobile
-        disableDrag
+        swipeable={false}
+        draggable={false}
         responsive={responsive}
         slidesToSlide={2}
         infinite={true}
-        containerClassName="test-class"
+        containerClass="test-class"
         responsive={responsive}
         minimumTouchDrag={0}
       >
@@ -51,14 +51,14 @@ describe("Carousel", () => {
   test('can pass custom arrows', () => {
     const wrapper = mount(
       <Carousel
-        forSSR
+        ssr
         customLeftArrow={<CustomLeftArrow />}
         customRightArrow={<CustomRightArrow />}
         responsive={responsive}
         slidesToSlide={2}
         infinite={true}
         minimumTouchDrag={0}
-        containerClassName="test-class"
+        containerClass="test-class"
         responsive={responsive}
       >
         <div>1</div>
@@ -74,13 +74,13 @@ describe("Carousel", () => {
   test('Has the correct initial state', () => {
     const wrapper = mount(
       <Carousel
-        forSSR
+        ssr
         customLeftArrow={<CustomLeftArrow />}
         customRightArrow={<CustomRightArrow />}
         responsive={responsive}
         slidesToSlide={2}
         infinite={true}
-        containerClassName="test-class"
+        containerClass="test-class"
         responsive={responsive}
         minimumTouchDrag={0}
       >
