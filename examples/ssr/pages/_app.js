@@ -5,9 +5,14 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import JssProvider from 'react-jss/lib/JssProvider';
 import Typography from '@material-ui/core/Typography';
-
+import ReactGA from "react-ga";
 import Menu from '../components/menu';
 import getPageContext from '../src/getPageContext';
+
+if (typeof window !== "undefined") {
+  ReactGA.initialize("UA-135638821-1");
+  ReactGA.pageview(window.location.pathname + window.location.search);
+}
 
 class MyApp extends App {
   constructor() {

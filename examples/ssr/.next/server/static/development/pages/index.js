@@ -1712,24 +1712,24 @@ function (_React$Component) {
         __self: this
       }, "This is the server-side rendering demo of the libiary, try to disable the JavaScript in your browser, you will still see our Carousel renders nicely")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_16___default.a
       /*
-      disableSwipeOnMobile
-      disableDrag
+      swipeable={false}
+      draggable={false}
       */
       , {
         responsive: responsive,
-        forSSR: true,
+        ssr: true,
         infinite: false,
-        beforeChanged: function beforeChanged() {
+        beforeChange: function beforeChange() {
           return _this2.setState({
             isMoving: true
           });
         },
-        afterChanged: function afterChanged() {
+        afterChange: function afterChange() {
           return _this2.setState({
             isMoving: false
           });
         },
-        containerClassName: "first-carousel-container container",
+        containerClass: "first-carousel-container container",
         slidesToSlide: 1,
         deviceType: this.props.deviceType,
         __source: {
@@ -1749,17 +1749,17 @@ function (_React$Component) {
         }));
       })), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_16___default.a
       /*
-      disableSwipeOnMobile
-      disableDrag
+      swipeable={false}
+      draggable={false}
       */
       , {
         responsive: responsive,
-        forSSR: true,
-        shouldShowDots: true,
+        ssr: true,
+        showDots: true,
         slidesToSlide: 1,
         infinite: true,
-        containerClassName: "container-with-dots",
-        itemClassName: "image-item",
+        containerClass: "container-with-dots",
+        itemClass: "image-item",
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,

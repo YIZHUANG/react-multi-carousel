@@ -1932,8 +1932,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jss_lib_JssProvider__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_jss_lib_JssProvider__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Typography */ "@material-ui/core/Typography");
 /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _components_menu__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/menu */ "./components/menu.js");
-/* harmony import */ var _src_getPageContext__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../src/getPageContext */ "./src/getPageContext.js");
+/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-ga */ "react-ga");
+/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_ga__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _components_menu__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/menu */ "./components/menu.js");
+/* harmony import */ var _src_getPageContext__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../src/getPageContext */ "./src/getPageContext.js");
 
 
 
@@ -1951,6 +1953,12 @@ var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examp
 
 
 
+
+if (typeof window !== "undefined") {
+  react_ga__WEBPACK_IMPORTED_MODULE_13___default.a.initialize("UA-135638821-1");
+  react_ga__WEBPACK_IMPORTED_MODULE_13___default.a.pageview(window.location.pathname + window.location.search);
+}
+
 var MyApp =
 /*#__PURE__*/
 function (_App) {
@@ -1962,7 +1970,7 @@ function (_App) {
     Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, MyApp);
 
     _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(MyApp).call(this));
-    _this.pageContext = Object(_src_getPageContext__WEBPACK_IMPORTED_MODULE_14__["default"])();
+    _this.pageContext = Object(_src_getPageContext__WEBPACK_IMPORTED_MODULE_15__["default"])();
     return _this;
   }
 
@@ -1985,19 +1993,19 @@ function (_App) {
       return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(next_app__WEBPACK_IMPORTED_MODULE_7__["Container"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 29
+          lineNumber: 34
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(next_server_head__WEBPACK_IMPORTED_MODULE_8___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 30
+          lineNumber: 35
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("title", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 31
+          lineNumber: 36
         },
         __self: this
       }, "React-multi-carousel  - w3js")), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_jss_lib_JssProvider__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -2005,7 +2013,7 @@ function (_App) {
         generateClassName: this.pageContext.generateClassName,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 34
+          lineNumber: 39
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_9__["MuiThemeProvider"], {
@@ -2013,19 +2021,19 @@ function (_App) {
         sheetsManager: this.pageContext.sheetsManager,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 40
+          lineNumber: 45
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_10___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 45
+          lineNumber: 50
         },
         __self: this
-      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_menu__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_components_menu__WEBPACK_IMPORTED_MODULE_14__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 48
+          lineNumber: 53
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
@@ -2033,7 +2041,7 @@ function (_App) {
       }, pageProps, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 49
+          lineNumber: 54
         },
         __self: this
       })))));
@@ -2516,6 +2524,17 @@ module.exports = require("prop-types");
 /***/ (function(module, exports) {
 
 module.exports = require("react");
+
+/***/ }),
+
+/***/ "react-ga":
+/*!***************************!*\
+  !*** external "react-ga" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-ga");
 
 /***/ }),
 
