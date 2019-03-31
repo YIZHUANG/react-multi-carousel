@@ -8,25 +8,48 @@ import Card from "./card";
 import Markdown from "./Markdown";
 import "./carousel-with-custom-dots.css";
 
-const Tag = ({ name, link }) => {
-  return (
-    <a href={link}>
-      <span>{name}</span>
-    </a>
-  );
+const responsive = {
+  desktop: {
+    breakpoint: {
+      max: 3000,
+      min: 1024
+    },
+    items: 3,
+    paritialVisibilityGutter: 40
+  },
+  mobile: {
+    breakpoint: {
+      max: 464,
+      min: 0
+    },
+    items: 2,
+    paritialVisibilityGutter: 30
+  },
+  tablet: {
+    breakpoint: {
+      max: 1024,
+      min: 200
+    },
+    items: 1,
+    paritialVisibilityGutter: 30
+  }
 };
+
 const ArticleCard = ({ date, imageUrl, link, title, tags, content }) => {
   return <Card link={link} image={imageUrl} headline={title} />;
 };
+
 class CarouselWithCustomDots extends React.PureComponent {
   render() {
     const { deviceType } = this.props;
     const children = articles
       .slice(0, 6)
       .map(article => <ArticleCard key={article.title} {...article} />);
+
     const images = articles.map(article => (
       <Avatar key={article.title} src={article.imageUrl} />
     ));
+
     const CustomDot = ({
       index,
       onClick,
@@ -46,32 +69,6 @@ class CarouselWithCustomDots extends React.PureComponent {
           {React.Children.toArray(images)[index]}
         </button>
       );
-    };
-    const responsive = {
-      desktop: {
-        breakpoint: {
-          max: 3000,
-          min: 1024
-        },
-        items: 3,
-        paritialVisibilityGutter: 40
-      },
-      mobile: {
-        breakpoint: {
-          max: 464,
-          min: 0
-        },
-        items: 2,
-        paritialVisibilityGutter: 30
-      },
-      tablet: {
-        breakpoint: {
-          max: 1024,
-          min: 200
-        },
-        items: 1,
-        paritialVisibilityGutter: 30
-      }
     };
     return (
       <Carousel
