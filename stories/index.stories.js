@@ -15,6 +15,7 @@ import {
   CustomRightArrow,
   CustomButtonGroup
 } from "./CustomArrows";
+import CarouselWithCustomDots from './carousel-with-custom-dots';
 import CustomDot from "./CustomDot";
 import Image from "./CustomImage";
 import Carousel from "../src";
@@ -240,6 +241,11 @@ storiesOf("Carousel", module)
           );
         })}
       </Carousel>
+    );
+  })
+  .addWithJSX("Copy of Carousel items as Custom dots", () => {
+    return (
+      <CarouselWithCustomDots />
     );
   })
   .addWithJSX("With aria hidden, inspect me in the debugger", () => {

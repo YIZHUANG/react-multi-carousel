@@ -68,6 +68,7 @@
     "@types/react-dom": "^16.8.2",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.5",
+    "classnames": "^2.2.6",
     "copyfiles": "^2.1.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",

@@ -1,0 +1,559 @@
+[
+  {
+    "imageUrl": "https://w3js.com/wp-content/uploads/2019/03/Similar-Cloud-Services-in-AWS-and-Azure-.png",
+    "link": "https://w3js.com/index.php/what-aws-lambda-users-should-know-about-azure-functions-and-vice-versa/",
+    "date": "29.3.2019",
+    "tags": [
+      {
+        "id": 64,
+        "count": 5,
+        "description": "",
+        "link": "https://w3js.com/index.php/tag/aws/",
+        "name": "Aws",
+        "slug": "aws",
+        "taxonomy": "post_tag",
+        "meta": [],
+        "_links": {
+          "self": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags/64"
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 74,
+        "count": 1,
+        "description": "",
+        "link": "https://w3js.com/index.php/tag/azure/",
+        "name": "Azure",
+        "slug": "azure",
+        "taxonomy": "post_tag",
+        "meta": [],
+        "_links": {
+          "self": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags/74"
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/posts?tags=74"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      }
+    ],
+    "title": "What AWS Lambda Users Should Know About Azure Functions, and Vice Versa.",
+    "content": "<p>In&nbsp;my previous post, I explained about my painful multi-cloud experience and lessons that I learned. Regardless of which cloud platform you are using, I recommend you to read it to avoid our mistakes. I’ve encountered a surprising high number of Cloud developers who have never tried other providers. That’s why in this post, I would [&hellip;]</p>\n"
+  },
+  {
+    "imageUrl": "https://w3js.com/wp-content/uploads/2019/03/migrating-legacy-back-ends-to-serverless-14-638.jpg",
+    "link": "https://w3js.com/index.php/lessons-learned-from-a-legacy-serverless-app/",
+    "date": "29.3.2019",
+    "tags": [{}],
+    "title": "Lessons Learned From a Legacy Serverless App",
+    "content": "<p>Feeping in mind the growing multi-cloud trend, developers should start working with more than one provider. However, this can mean leaving your comfort zone, and not everyone likes the idea of doing that. Recently, I’ve done this and would like to share my experiences with you. I believe they are useful, regardless of whatever cloud platform [&hellip;]</p>\n"
+  },
+  {
+    "imageUrl": "https://w3js.com/wp-content/uploads/2019/03/1_g_0RpVhugETqQt_zriSebQ.png",
+    "link": "https://w3js.com/index.php/implementing-infinite-mode-in-a-carousel-that-rocks-by-putting-your-algorithm-knowledge-into-use-part-one/",
+    "date": "27.3.2019",
+    "tags": [],
+    "title": "Implementing infinite mode in a Carousel that rocks by putting your algorithm knowledge into use  &#8211; part one.",
+    "content": "<p>Hello, this is part one of the series &#8211; Implementing infinite mode in a Carousel that rocks by putting your algorithm knowledge into use. A while back i built a fully customizable Carousel library called react-multi-carousel which you can find on github or the npm registry that supports multiple items and server-side rendering. Everything was [&hellip;]</p>\n"
+  },
+  {
+    "imageUrl": "https://w3js.com/wp-content/uploads/2019/03/1_y8bT4O5fXWXC140iiTRYPQ.png",
+    "link": "https://w3js.com/index.php/how-to-integrate-an-amazon-lex-chatbot-with-facebook-messenger/",
+    "date": "27.3.2019",
+    "tags": [
+      {
+        "id": 64,
+        "count": 5,
+        "description": "",
+        "link": "https://w3js.com/index.php/tag/aws/",
+        "name": "Aws",
+        "slug": "aws",
+        "taxonomy": "post_tag",
+        "meta": [],
+        "_links": {
+          "self": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags/64"
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 72,
+        "count": 1,
+        "description": "",
+        "link": "https://w3js.com/index.php/tag/chatbots/",
+        "name": "Chatbots",
+        "slug": "chatbots",
+        "taxonomy": "post_tag",
+        "meta": [],
+        "_links": {
+          "self": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags/72"
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/posts?tags=72"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      }
+    ],
+    "title": "How to integrate an Amazon Lex chatbot with Facebook Messenger",
+    "content": "<p>Amazon Lex enables you to quickly build a chatbot in a few minutes. A few months ago, I tried to integrate a Lex chatbot with Facebook — and spent way too long because of the poor documentation and guidance. To help save you some time and effort, this blog explains how the integration works and provides a [&hellip;]</p>\n"
+  },
+  {
+    "imageUrl": "https://w3js.com/wp-content/uploads/2019/03/Benchmarked-Serverless-observability-tools-got-very-disappointed2.png",
+    "link": "https://w3js.com/index.php/benchmarked-serverless-observability-tools-got-very-disappointed/",
+    "date": "26.3.2019",
+    "tags": [
+      {
+        "id": 64,
+        "count": 5,
+        "description": "",
+        "link": "https://w3js.com/index.php/tag/aws/",
+        "name": "Aws",
+        "slug": "aws",
+        "taxonomy": "post_tag",
+        "meta": [],
+        "_links": {
+          "self": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags/64"
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {}
+    ],
+    "title": "Benchmarked Serverless observability tools, got very disappointed",
+    "content": "<p>Observability is about the ability to troubleshoot unknown issues that might happen in your application. If you are not familiar with it, I recommend you to watch&nbsp;How to Build Observable Distributed Systems&nbsp;and&nbsp;The Present and Future of Serverless Observability&nbsp;from QCon 2018. In this article, I’m going to explain you how some of the most prominent Serverless [&hellip;]</p>\n"
+  },
+  {
+    "imageUrl": "https://w3js.com/wp-content/uploads/2019/03/Overcome-X-Ray’s-issue-for-Lambda-debugging.png",
+    "link": "https://w3js.com/index.php/overcome-x-rays-issue-for-lambda-debugging/",
+    "date": "25.3.2019",
+    "tags": [
+      {
+        "id": 64,
+        "count": 5,
+        "description": "",
+        "link": "https://w3js.com/index.php/tag/aws/",
+        "name": "Aws",
+        "slug": "aws",
+        "taxonomy": "post_tag",
+        "meta": [],
+        "_links": {
+          "self": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags/64"
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {}
+    ],
+    "title": "Overcome X-Ray’s issue for Lambda debugging",
+    "content": "<p>Tracing is one of the pillars of Observebility, according to Twitter. AWS X-Ray helps you to get an overview of your distributed application, to find bottlenecks and to tune its critical path. Also, it&nbsp;provides&nbsp;you&nbsp;with the ability to&nbsp;trace your&nbsp;requests, so you can see which journey, any single request goes through when it enters your application. AWS [&hellip;]</p>\n"
+  },
+  {
+    "imageUrl": "https://w3js.com/wp-content/uploads/2019/03/Worrying-and-promising-signals-from-serverless-community.jpeg",
+    "link": "https://w3js.com/index.php/worrying-and-promising-signals-from-serverless-community/",
+    "date": "25.3.2019",
+    "tags": [
+      {
+        "id": 64,
+        "count": 5,
+        "description": "",
+        "link": "https://w3js.com/index.php/tag/aws/",
+        "name": "Aws",
+        "slug": "aws",
+        "taxonomy": "post_tag",
+        "meta": [],
+        "_links": {
+          "self": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags/64"
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 62,
+        "count": 1,
+        "description": "",
+        "link": "https://w3js.com/index.php/tag/cloud-computing/",
+        "name": "Cloud Computing",
+        "slug": "cloud-computing",
+        "taxonomy": "post_tag",
+        "meta": [],
+        "_links": {
+          "self": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags/62"
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/posts?tags=62"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      }
+    ],
+    "title": "Worrying and promising signals from serverless community",
+    "content": "<p>Recently, I attended AWS Community Days in Frankfurt — Serverless Computing track, while I was one of its speakers. Having 400 attendees, it’s the biggest AWS community event in Germany. Even though not a definite indicator, but it can reflect skill level of serverless community in the region. I would like to share my assessment about Germany’s serverless community’s level with you. Some of them are good (indicated as “promising”) and some of them require attention (indicated as “worrying”). Here is table of content:</p>\n"
+  },
+  {
+    "imageUrl": "https://w3js.com/wp-content/uploads/2019/03/pre.png",
+    "link": "https://w3js.com/index.php/appending-currency-sign-to-a-purchase-form-in-your-e-commerce-site/",
+    "date": "14.3.2019",
+    "tags": [{}, {}],
+    "title": "Appending currency sign to a purchase form in your e-commerce site using plain JavaScript.",
+    "content": "<p>Here is the code snippet on how to append currency sign to a purchase form in your e-commerce site. For example, you have an input that allows user to put in the amount of money to filter out some certain products at different price range, you might also want to remind the user of the [&hellip;]</p>\n"
+  },
+  {
+    "imageUrl": "https://w3js.com/wp-content/uploads/2019/03/1_kFaSuc5rVdJ_fM2c_bHszQ.png",
+    "link": "https://w3js.com/index.php/fixing-css-loaded-order-style-chunk-incorrect-in-nextjs/",
+    "date": "14.3.2019",
+    "tags": [
+      {
+        "id": 52,
+        "count": 1,
+        "description": "",
+        "link": "https://w3js.com/index.php/tag/css/",
+        "name": "CSS",
+        "slug": "css",
+        "taxonomy": "post_tag",
+        "meta": [],
+        "_links": {
+          "self": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags/52"
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/posts?tags=52"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 57,
+        "count": 1,
+        "description": "",
+        "link": "https://w3js.com/index.php/tag/css-order/",
+        "name": "CSS order",
+        "slug": "css-order",
+        "taxonomy": "post_tag",
+        "meta": [],
+        "_links": {
+          "self": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags/57"
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/posts?tags=57"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      }
+    ],
+    "title": "Fixing CSS load order/style.chunk.css incorrect in Nextjs",
+    "content": "<p>Introduction For Nextjs developers, if you are using a third-party UI library for example Material-ui or Semantic-ui, you might end up overriding a lot of the existing styles with your own CSS. That brings to us the importance of the order of which CSS file gets loaded first and after. If your own CSS gets [&hellip;]</p>\n"
+  },
+  {
+    "imageUrl": "https://w3js.com/wp-content/uploads/2019/03/Learn-How-to-Create-A-Simple-Carousel-with-React-e1503928616477.jpg",
+    "link": "https://w3js.com/index.php/react-carousel-with-server-side-rendering-support-part-2/",
+    "date": "20.3.2019",
+    "tags": [
+      {
+        "id": 47,
+        "count": 1,
+        "description": "",
+        "link": "https://w3js.com/index.php/tag/carousel/",
+        "name": "Carousel",
+        "slug": "carousel",
+        "taxonomy": "post_tag",
+        "meta": [],
+        "_links": {
+          "self": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags/47"
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/posts?tags=47"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      {
+        "id": 50,
+        "count": 1,
+        "description": "",
+        "link": "https://w3js.com/index.php/tag/dom/",
+        "name": "DOM",
+        "slug": "dom",
+        "taxonomy": "post_tag",
+        "meta": [],
+        "_links": {
+          "self": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags/50"
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/tags"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"
+            }
+          ],
+          "wp:post_type": [
+            {
+              "href": "https://w3js.com/index.php/wp-json/wp/v2/posts?tags=50"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      }
+    ],
+    "title": "React Carousel with Server Side Rendering Support &#8211; Part 2",
+    "content": "<p>With this article I am going to show you how you can create your own Carousel component using React that supports multiple items and server-side rendering and add testing to it and finally publish to NPM. This is part one of the series &#8220;React Carousel with Server Side Rendering Support&#8221;. Part two can be found [&hellip;]</p>\n"
+  }
+]
