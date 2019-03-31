@@ -163,7 +163,11 @@ const ButtonGroup = ({ next, previous, goToSlide ...rest }) => {
 
 ## Custom dots.
 
-You can pass your own custom dots to replace the default one
+You can pass your own custom dots to replace the default one.
+
+Custom dots can also be a copy or an image of your carousel item. See example in this [One](https://react-multi-carousel.now.sh/)
+
+The codes for this [example](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/components/carousel-with-custom-dots.js)
 
 You custom dots will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
 
@@ -173,11 +177,20 @@ You custom dots will receive a list of props/state that's passed back by the car
 
 ```
 const CustomDot = ({ onClick, ...rest }) => {
-  const { onMove, index, carouselState: { currentSlide, deviceType }  } = rest;
+  const { onMove, index, slideIndex, carouselState: { currentSlide, deviceType }  } = rest;
+  const carouselItems = [<CarouselItem1, CaourselItem2, CarouselItem3];
   // onMove means if dragging or swiping in progress.
-  return <button className={currentSlide === index ? 'active' : 'inactive'} onClick={() => onClick()} />
+  // slideIndex is provided by this lib for checking if the item is actie or not.
+  // anything else should be done with the index, see below.
+  return (
+    <button className={currentSlide === slideIndex ? 'active' : 'inactive'} onClick={() => onClick()}>
+      {React.Children.toArray(carouselItems)[index]}
+    </button>
+    )
 }
-<Carousel shouldShowDots customDot={<CustomDot />} />
+<Carousel shouldShowDots customDot={<CustomDot />}>
+{carouselItems}
+</Carousel>
 ```
 
 ## ParitialVisibile props.

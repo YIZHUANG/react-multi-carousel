@@ -19,13 +19,13 @@ const styles = {
 };
 
 function MediaCard(props) {
-  const { classes, image, headline, description, isMoving } = props;
+  const { classes, image, headline, description, isMoving, link } = props;
   return (
     <a onClick={(e) => {
         if(isMoving) {
           e.preventDefault();
         }
-      }} href='https://w3js.com' target="_blank">
+      }} href={link || 'https://w3js.com'} target="_blank">
     <Card className={classes.card}>
       <CardActionArea>
         <CardMedia className={classes.media} image={image} title={headline} />

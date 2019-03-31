@@ -93,6 +93,113 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./components/Markdown/img.js":
+/*!************************************!*\
+  !*** ./components/Markdown/img.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/components/Markdown/img.js";
+
+
+var Img = function Img(props) {
+  var src = props.src,
+      alt = props.alt;
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    src: src
+  }, props, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 7
+    },
+    __self: this
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Img);
+
+/***/ }),
+
+/***/ "./components/Markdown/index.js":
+/*!**************************************!*\
+  !*** ./components/Markdown/index.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var markdown_to_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! markdown-to-jsx */ "markdown-to-jsx");
+/* harmony import */ var markdown_to_jsx__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(markdown_to_jsx__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./img */ "./components/Markdown/img.js");
+/* harmony import */ var _paragraph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./paragraph */ "./components/Markdown/paragraph.js");
+var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/components/Markdown/index.js";
+
+
+
+
+var options = {
+  forceBlock: true,
+  overrides: {
+    img: _img__WEBPACK_IMPORTED_MODULE_2__["default"],
+    p: _paragraph__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }
+};
+
+var MarkdownContent = function MarkdownContent(_ref) {
+  var content = _ref.content;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(markdown_to_jsx__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    options: options,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16
+    },
+    __self: this
+  }, content);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MarkdownContent);
+
+/***/ }),
+
+/***/ "./components/Markdown/paragraph.js":
+/*!******************************************!*\
+  !*** ./components/Markdown/paragraph.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/components/Markdown/paragraph.js";
+
+
+var Paragraph = function Paragraph(_ref) {
+  var children = _ref.children;
+  return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 4
+    },
+    __self: this
+  }, children);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Paragraph);
+
+/***/ }),
+
 /***/ "./components/card.js":
 /*!****************************!*\
   !*** ./components/card.js ***!
@@ -144,14 +251,15 @@ function MediaCard(props) {
       image = props.image,
       headline = props.headline,
       description = props.description,
-      isMoving = props.isMoving;
+      isMoving = props.isMoving,
+      link = props.link;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     onClick: function onClick(e) {
       if (isMoving) {
         e.preventDefault();
       }
     },
-    href: "https://w3js.com",
+    href: link || 'https://w3js.com',
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
@@ -228,6 +336,229 @@ function MediaCard(props) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["withStyles"])(styles)(MediaCard));
+
+/***/ }),
+
+/***/ "./components/carousel-with-custom-dots.css":
+/*!**************************************************!*\
+  !*** ./components/carousel-with-custom-dots.css ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./components/carousel-with-custom-dots.js":
+/*!*************************************************!*\
+  !*** ./components/carousel-with-custom-dots.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/createClass */ "./node_modules/@babel/runtime-corejs2/helpers/esm/createClass.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime-corejs2/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime-corejs2/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/inherits */ "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-multi-carousel */ "react-multi-carousel");
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! classnames */ "classnames");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Avatar */ "@material-ui/core/Avatar");
+/* harmony import */ var _material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _data_json__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./data.json */ "./components/data.json");
+var _data_json__WEBPACK_IMPORTED_MODULE_10___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./data.json */ "./components/data.json", 1);
+/* harmony import */ var _card__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./card */ "./components/card.js");
+/* harmony import */ var _Markdown__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Markdown */ "./components/Markdown/index.js");
+/* harmony import */ var _carousel_with_custom_dots_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./carousel-with-custom-dots.css */ "./components/carousel-with-custom-dots.css");
+/* harmony import */ var _carousel_with_custom_dots_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_carousel_with_custom_dots_css__WEBPACK_IMPORTED_MODULE_13__);
+
+
+
+
+
+
+var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/components/carousel-with-custom-dots.js";
+
+
+
+
+
+
+
+
+
+var Tag = function Tag(_ref) {
+  var name = _ref.name,
+      link = _ref.link;
+  return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("a", {
+    href: link,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: this
+  }, name));
+};
+
+var ArticleCard = function ArticleCard(_ref2) {
+  var date = _ref2.date,
+      imageUrl = _ref2.imageUrl,
+      link = _ref2.link,
+      title = _ref2.title,
+      tags = _ref2.tags,
+      content = _ref2.content;
+  return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_card__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    link: link,
+    image: imageUrl,
+    headline: title,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19
+    },
+    __self: this
+  });
+};
+
+var CarouselWithCustomDots =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(CarouselWithCustomDots, _React$PureComponent);
+
+  function CarouselWithCustomDots() {
+    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, CarouselWithCustomDots);
+
+    return Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(CarouselWithCustomDots).apply(this, arguments));
+  }
+
+  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(CarouselWithCustomDots, [{
+    key: "render",
+    value: function render() {
+      var deviceType = this.props.deviceType;
+      var children = _data_json__WEBPACK_IMPORTED_MODULE_10__.slice(0, 6).map(function (article) {
+        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(ArticleCard, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+          key: article.title
+        }, article, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 26
+          },
+          __self: this
+        }));
+      });
+      var images = _data_json__WEBPACK_IMPORTED_MODULE_10__.map(function (article) {
+        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_9___default.a, {
+          key: article.title,
+          src: article.imageUrl,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 28
+          },
+          __self: this
+        });
+      });
+
+      var CustomDot = function CustomDot(_ref3) {
+        var index = _ref3.index,
+            _onClick = _ref3.onClick,
+            slideIndex = _ref3.slideIndex,
+            currentSlide = _ref3.carouselState.currentSlide;
+        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("button", {
+          onClick: function onClick(e) {
+            _onClick();
+
+            e.preventDefault();
+          },
+          className: classnames__WEBPACK_IMPORTED_MODULE_8___default()("custom-dot", {
+            "custom-dot--active": currentSlide === slideIndex
+          }),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 37
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_6___default.a.Children.toArray(images)[index]);
+      };
+
+      var responsive = {
+        desktop: {
+          breakpoint: {
+            max: 3000,
+            min: 1024
+          },
+          items: 3,
+          paritialVisibilityGutter: 40
+        },
+        mobile: {
+          breakpoint: {
+            max: 464,
+            min: 0
+          },
+          items: 2,
+          paritialVisibilityGutter: 30
+        },
+        tablet: {
+          breakpoint: {
+            max: 1024,
+            min: 200
+          },
+          items: 1,
+          paritialVisibilityGutter: 30
+        }
+      };
+      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_7___default.a, {
+        showDots: true,
+        deviceType: deviceType,
+        ssr: true,
+        slidesToSlide: 1,
+        containerClass: "carousel-with-custom-dots",
+        responsive: responsive,
+        partialVisbile: "right",
+        infinite: true,
+        customDot: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(CustomDot, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 86
+          },
+          __self: this
+        }),
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 77
+        },
+        __self: this
+      }, children);
+    }
+  }]);
+
+  return CarouselWithCustomDots;
+}(react__WEBPACK_IMPORTED_MODULE_6___default.a.PureComponent);
+
+/* harmony default export */ __webpack_exports__["default"] = (CarouselWithCustomDots);
+
+/***/ }),
+
+/***/ "./components/data.json":
+/*!******************************!*\
+  !*** ./components/data.json ***!
+  \******************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, default */
+/***/ (function(module) {
+
+module.exports = [{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/Similar-Cloud-Services-in-AWS-and-Azure-.png","link":"https://w3js.com/index.php/what-aws-lambda-users-should-know-about-azure-functions-and-vice-versa/","date":"29.3.2019","tags":[{"id":64,"count":5,"description":"","link":"https://w3js.com/index.php/tag/aws/","name":"Aws","slug":"aws","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/64"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{"id":74,"count":1,"description":"","link":"https://w3js.com/index.php/tag/azure/","name":"Azure","slug":"azure","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/74"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=74"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}}],"title":"What AWS Lambda Users Should Know About Azure Functions, and Vice Versa.","content":"<p>In&nbsp;my previous post, I explained about my painful multi-cloud experience and lessons that I learned. Regardless of which cloud platform you are using, I recommend you to read it to avoid our mistakes. I’ve encountered a surprising high number of Cloud developers who have never tried other providers. That’s why in this post, I would [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/migrating-legacy-back-ends-to-serverless-14-638.jpg","link":"https://w3js.com/index.php/lessons-learned-from-a-legacy-serverless-app/","date":"29.3.2019","tags":[{}],"title":"Lessons Learned From a Legacy Serverless App","content":"<p>Feeping in mind the growing multi-cloud trend, developers should start working with more than one provider. However, this can mean leaving your comfort zone, and not everyone likes the idea of doing that. Recently, I’ve done this and would like to share my experiences with you. I believe they are useful, regardless of whatever cloud platform [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/1_g_0RpVhugETqQt_zriSebQ.png","link":"https://w3js.com/index.php/implementing-infinite-mode-in-a-carousel-that-rocks-by-putting-your-algorithm-knowledge-into-use-part-one/","date":"27.3.2019","tags":[],"title":"Implementing infinite mode in a Carousel that rocks by putting your algorithm knowledge into use  &#8211; part one.","content":"<p>Hello, this is part one of the series &#8211; Implementing infinite mode in a Carousel that rocks by putting your algorithm knowledge into use. A while back i built a fully customizable Carousel library called react-multi-carousel which you can find on github or the npm registry that supports multiple items and server-side rendering. Everything was [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/1_y8bT4O5fXWXC140iiTRYPQ.png","link":"https://w3js.com/index.php/how-to-integrate-an-amazon-lex-chatbot-with-facebook-messenger/","date":"27.3.2019","tags":[{"id":64,"count":5,"description":"","link":"https://w3js.com/index.php/tag/aws/","name":"Aws","slug":"aws","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/64"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{"id":72,"count":1,"description":"","link":"https://w3js.com/index.php/tag/chatbots/","name":"Chatbots","slug":"chatbots","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/72"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=72"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}}],"title":"How to integrate an Amazon Lex chatbot with Facebook Messenger","content":"<p>Amazon Lex enables you to quickly build a chatbot in a few minutes. A few months ago, I tried to integrate a Lex chatbot with Facebook — and spent way too long because of the poor documentation and guidance. To help save you some time and effort, this blog explains how the integration works and provides a [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/Benchmarked-Serverless-observability-tools-got-very-disappointed2.png","link":"https://w3js.com/index.php/benchmarked-serverless-observability-tools-got-very-disappointed/","date":"26.3.2019","tags":[{"id":64,"count":5,"description":"","link":"https://w3js.com/index.php/tag/aws/","name":"Aws","slug":"aws","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/64"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{}],"title":"Benchmarked Serverless observability tools, got very disappointed","content":"<p>Observability is about the ability to troubleshoot unknown issues that might happen in your application. If you are not familiar with it, I recommend you to watch&nbsp;How to Build Observable Distributed Systems&nbsp;and&nbsp;The Present and Future of Serverless Observability&nbsp;from QCon 2018. In this article, I’m going to explain you how some of the most prominent Serverless [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/Overcome-X-Ray’s-issue-for-Lambda-debugging.png","link":"https://w3js.com/index.php/overcome-x-rays-issue-for-lambda-debugging/","date":"25.3.2019","tags":[{"id":64,"count":5,"description":"","link":"https://w3js.com/index.php/tag/aws/","name":"Aws","slug":"aws","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/64"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{}],"title":"Overcome X-Ray’s issue for Lambda debugging","content":"<p>Tracing is one of the pillars of Observebility, according to Twitter. AWS X-Ray helps you to get an overview of your distributed application, to find bottlenecks and to tune its critical path. Also, it&nbsp;provides&nbsp;you&nbsp;with the ability to&nbsp;trace your&nbsp;requests, so you can see which journey, any single request goes through when it enters your application. AWS [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/Worrying-and-promising-signals-from-serverless-community.jpeg","link":"https://w3js.com/index.php/worrying-and-promising-signals-from-serverless-community/","date":"25.3.2019","tags":[{"id":64,"count":5,"description":"","link":"https://w3js.com/index.php/tag/aws/","name":"Aws","slug":"aws","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/64"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{"id":62,"count":1,"description":"","link":"https://w3js.com/index.php/tag/cloud-computing/","name":"Cloud Computing","slug":"cloud-computing","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/62"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=62"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}}],"title":"Worrying and promising signals from serverless community","content":"<p>Recently, I attended AWS Community Days in Frankfurt — Serverless Computing track, while I was one of its speakers. Having 400 attendees, it’s the biggest AWS community event in Germany. Even though not a definite indicator, but it can reflect skill level of serverless community in the region. I would like to share my assessment about Germany’s serverless community’s level with you. Some of them are good (indicated as “promising”) and some of them require attention (indicated as “worrying”). Here is table of content:</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/pre.png","link":"https://w3js.com/index.php/appending-currency-sign-to-a-purchase-form-in-your-e-commerce-site/","date":"14.3.2019","tags":[{},{}],"title":"Appending currency sign to a purchase form in your e-commerce site using plain JavaScript.","content":"<p>Here is the code snippet on how to append currency sign to a purchase form in your e-commerce site. For example, you have an input that allows user to put in the amount of money to filter out some certain products at different price range, you might also want to remind the user of the [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/1_kFaSuc5rVdJ_fM2c_bHszQ.png","link":"https://w3js.com/index.php/fixing-css-loaded-order-style-chunk-incorrect-in-nextjs/","date":"14.3.2019","tags":[{"id":52,"count":1,"description":"","link":"https://w3js.com/index.php/tag/css/","name":"CSS","slug":"css","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/52"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=52"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{"id":57,"count":1,"description":"","link":"https://w3js.com/index.php/tag/css-order/","name":"CSS order","slug":"css-order","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/57"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=57"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}}],"title":"Fixing CSS load order/style.chunk.css incorrect in Nextjs","content":"<p>Introduction For Nextjs developers, if you are using a third-party UI library for example Material-ui or Semantic-ui, you might end up overriding a lot of the existing styles with your own CSS. That brings to us the importance of the order of which CSS file gets loaded first and after. If your own CSS gets [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/Learn-How-to-Create-A-Simple-Carousel-with-React-e1503928616477.jpg","link":"https://w3js.com/index.php/react-carousel-with-server-side-rendering-support-part-2/","date":"20.3.2019","tags":[{"id":47,"count":1,"description":"","link":"https://w3js.com/index.php/tag/carousel/","name":"Carousel","slug":"carousel","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/47"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=47"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{"id":50,"count":1,"description":"","link":"https://w3js.com/index.php/tag/dom/","name":"DOM","slug":"dom","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/50"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=50"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}}],"title":"React Carousel with Server Side Rendering Support &#8211; Part 2","content":"<p>With this article I am going to show you how you can create your own Carousel component using React that supports multiple items and server-side rendering and add testing to it and finally publish to NPM. This is part one of the series &#8220;React Carousel with Server Side Rendering Support&#8221;. Part two can be found [&hellip;]</p>\n"}];
 
 /***/ }),
 
@@ -1565,12 +1896,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_image__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/image */ "./components/image.js");
 /* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-multi-carousel */ "react-multi-carousel");
 /* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../style.css */ "./style.css");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
-/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _components_carousel_with_custom_dots__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/carousel-with-custom-dots */ "./components/carousel-with-custom-dots.js");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../style.css */ "./style.css");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_20__);
 
 
 
@@ -1580,6 +1912,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/pages/index.js";
+
 
 
 
@@ -1642,7 +1975,7 @@ function (_React$Component) {
       var fakerData = Array(12).fill(0).map(function (item, index) {
         return {
           image: images[index],
-          headline: 'w3js -> web front-end studio',
+          headline: "w3js -> web front-end studio",
           description: texts[index] || texts[0]
         };
       });
@@ -1673,7 +2006,7 @@ function (_React$Component) {
         className: classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 94
+          lineNumber: 95
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -1682,7 +2015,7 @@ function (_React$Component) {
         color: "grey",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 95
+          lineNumber: 96
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
@@ -1690,7 +2023,7 @@ function (_React$Component) {
         href: "https://w3js.com/",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 96
+          lineNumber: 97
         },
         __self: this
       }, "A Carousel supports multiple items and server-side rendering")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -1699,7 +2032,7 @@ function (_React$Component) {
         color: "grey",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 100
+          lineNumber: 101
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
@@ -1707,7 +2040,7 @@ function (_React$Component) {
         href: "https://w3js.com/",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 101
+          lineNumber: 102
         },
         __self: this
       }, "This is the server-side rendering demo of the libiary, try to disable the JavaScript in your browser, you will still see our Carousel renders nicely")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_16___default.a
@@ -1734,7 +2067,7 @@ function (_React$Component) {
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 107
+          lineNumber: 108
         },
         __self: this
       }, fakerData.map(function (card) {
@@ -1743,7 +2076,7 @@ function (_React$Component) {
         }, card, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 122
+            lineNumber: 123
           },
           __self: this
         }));
@@ -1763,7 +2096,7 @@ function (_React$Component) {
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 126
+          lineNumber: 127
         },
         __self: this
       }, fakerData.slice(0, 5).map(function (card) {
@@ -1772,11 +2105,18 @@ function (_React$Component) {
           alt: card.headline,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 141
+            lineNumber: 142
           },
           __self: this
         });
-      })));
+      })), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_carousel_with_custom_dots__WEBPACK_IMPORTED_MODULE_17__["default"], {
+        deviceType: this.props.deviceType,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 145
+        },
+        __self: this
+      }));
     }
   }], [{
     key: "getInitialProps",
@@ -1835,6 +2175,17 @@ function (_React$Component) {
 
 module.exports = __webpack_require__(/*! /Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/pages/index.js */"./pages/index.js");
 
+
+/***/ }),
+
+/***/ "@material-ui/core/Avatar":
+/*!*******************************************!*\
+  !*** external "@material-ui/core/Avatar" ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Avatar");
 
 /***/ }),
 
@@ -1923,6 +2274,17 @@ module.exports = require("@material-ui/core/Typography");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/styles");
+
+/***/ }),
+
+/***/ "classnames":
+/*!*****************************!*\
+  !*** external "classnames" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("classnames");
 
 /***/ }),
 
@@ -2033,6 +2395,17 @@ module.exports = require("core-js/library/fn/symbol/iterator");
 /***/ (function(module, exports) {
 
 module.exports = require("faker");
+
+/***/ }),
+
+/***/ "markdown-to-jsx":
+/*!**********************************!*\
+  !*** external "markdown-to-jsx" ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("markdown-to-jsx");
 
 /***/ }),
 

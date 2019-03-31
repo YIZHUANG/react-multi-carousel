@@ -1,3 +1,17 @@
+.carousel-with-custom-dots {
+  margin-top: 100px;
+  padding-bottom: 100px;
+}
+.custom-dot {
+  border: none;
+  margin: 10px;
+  outline: none;
+}
+.custom-dot--active {
+  transform: scale(1.3);
+  outline: auto;
+}
+
 .image-item {
   padding: 10px;
 }

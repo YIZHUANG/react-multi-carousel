@@ -1,5 +1,111 @@
 ((window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/index.js"],{
 
+/***/ "./components/Markdown/img.js":
+/*!************************************!*\
+  !*** ./components/Markdown/img.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/components/Markdown/img.js";
+
+
+var Img = function Img(props) {
+  var src = props.src,
+      alt = props.alt;
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    src: src
+  }, props, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 7
+    },
+    __self: this
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Img);
+
+/***/ }),
+
+/***/ "./components/Markdown/index.js":
+/*!**************************************!*\
+  !*** ./components/Markdown/index.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var markdown_to_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! markdown-to-jsx */ "./node_modules/markdown-to-jsx/dist/esm.js");
+/* harmony import */ var _img__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./img */ "./components/Markdown/img.js");
+/* harmony import */ var _paragraph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./paragraph */ "./components/Markdown/paragraph.js");
+var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/components/Markdown/index.js";
+
+
+
+
+var options = {
+  forceBlock: true,
+  overrides: {
+    img: _img__WEBPACK_IMPORTED_MODULE_2__["default"],
+    p: _paragraph__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }
+};
+
+var MarkdownContent = function MarkdownContent(_ref) {
+  var content = _ref.content;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(markdown_to_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    options: options,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16
+    },
+    __self: this
+  }, content);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MarkdownContent);
+
+/***/ }),
+
+/***/ "./components/Markdown/paragraph.js":
+/*!******************************************!*\
+  !*** ./components/Markdown/paragraph.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/components/Markdown/paragraph.js";
+
+
+var Paragraph = function Paragraph(_ref) {
+  var children = _ref.children;
+  return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 4
+    },
+    __self: this
+  }, children);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Paragraph);
+
+/***/ }),
+
 /***/ "./components/card.js":
 /*!****************************!*\
   !*** ./components/card.js ***!
@@ -51,14 +157,15 @@ function MediaCard(props) {
       image = props.image,
       headline = props.headline,
       description = props.description,
-      isMoving = props.isMoving;
+      isMoving = props.isMoving,
+      link = props.link;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     onClick: function onClick(e) {
       if (isMoving) {
         e.preventDefault();
       }
     },
-    href: "https://w3js.com",
+    href: link || 'https://w3js.com',
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
@@ -135,6 +242,218 @@ function MediaCard(props) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["withStyles"])(styles)(MediaCard));
+
+/***/ }),
+
+/***/ "./components/carousel-with-custom-dots.js":
+/*!*************************************************!*\
+  !*** ./components/carousel-with-custom-dots.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/createClass */ "./node_modules/@babel/runtime-corejs2/helpers/esm/createClass.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime-corejs2/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime-corejs2/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/inherits */ "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Avatar */ "./node_modules/@material-ui/core/Avatar/index.js");
+/* harmony import */ var _material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _data_json__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./data.json */ "./components/data.json");
+var _data_json__WEBPACK_IMPORTED_MODULE_10___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./data.json */ "./components/data.json", 1);
+/* harmony import */ var _card__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./card */ "./components/card.js");
+/* harmony import */ var _Markdown__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Markdown */ "./components/Markdown/index.js");
+/* harmony import */ var _carousel_with_custom_dots_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./carousel-with-custom-dots.css */ "./components/carousel-with-custom-dots.css");
+/* harmony import */ var _carousel_with_custom_dots_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_carousel_with_custom_dots_css__WEBPACK_IMPORTED_MODULE_13__);
+
+
+
+
+
+
+var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/components/carousel-with-custom-dots.js";
+
+
+
+
+
+
+
+
+
+var Tag = function Tag(_ref) {
+  var name = _ref.name,
+      link = _ref.link;
+  return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("a", {
+    href: link,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 13
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: this
+  }, name));
+};
+
+var ArticleCard = function ArticleCard(_ref2) {
+  var date = _ref2.date,
+      imageUrl = _ref2.imageUrl,
+      link = _ref2.link,
+      title = _ref2.title,
+      tags = _ref2.tags,
+      content = _ref2.content;
+  return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_card__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    link: link,
+    image: imageUrl,
+    headline: title,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19
+    },
+    __self: this
+  });
+};
+
+var CarouselWithCustomDots =
+/*#__PURE__*/
+function (_React$PureComponent) {
+  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(CarouselWithCustomDots, _React$PureComponent);
+
+  function CarouselWithCustomDots() {
+    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__["default"])(this, CarouselWithCustomDots);
+
+    return Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__["default"])(CarouselWithCustomDots).apply(this, arguments));
+  }
+
+  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(CarouselWithCustomDots, [{
+    key: "render",
+    value: function render() {
+      var deviceType = this.props.deviceType;
+      var children = _data_json__WEBPACK_IMPORTED_MODULE_10__.slice(0, 6).map(function (article) {
+        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(ArticleCard, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+          key: article.title
+        }, article, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 26
+          },
+          __self: this
+        }));
+      });
+      var images = _data_json__WEBPACK_IMPORTED_MODULE_10__.map(function (article) {
+        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_9___default.a, {
+          key: article.title,
+          src: article.imageUrl,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 28
+          },
+          __self: this
+        });
+      });
+
+      var CustomDot = function CustomDot(_ref3) {
+        var index = _ref3.index,
+            _onClick = _ref3.onClick,
+            slideIndex = _ref3.slideIndex,
+            currentSlide = _ref3.carouselState.currentSlide;
+        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("button", {
+          onClick: function onClick(e) {
+            _onClick();
+
+            e.preventDefault();
+          },
+          className: classnames__WEBPACK_IMPORTED_MODULE_8___default()("custom-dot", {
+            "custom-dot--active": currentSlide === slideIndex
+          }),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 37
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_6___default.a.Children.toArray(images)[index]);
+      };
+
+      var responsive = {
+        desktop: {
+          breakpoint: {
+            max: 3000,
+            min: 1024
+          },
+          items: 3,
+          paritialVisibilityGutter: 40
+        },
+        mobile: {
+          breakpoint: {
+            max: 464,
+            min: 0
+          },
+          items: 2,
+          paritialVisibilityGutter: 30
+        },
+        tablet: {
+          breakpoint: {
+            max: 1024,
+            min: 200
+          },
+          items: 1,
+          paritialVisibilityGutter: 30
+        }
+      };
+      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_7___default.a, {
+        showDots: true,
+        deviceType: deviceType,
+        ssr: true,
+        slidesToSlide: 1,
+        containerClass: "carousel-with-custom-dots",
+        responsive: responsive,
+        partialVisbile: "right",
+        infinite: true,
+        customDot: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(CustomDot, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 86
+          },
+          __self: this
+        }),
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 77
+        },
+        __self: this
+      }, children);
+    }
+  }]);
+
+  return CarouselWithCustomDots;
+}(react__WEBPACK_IMPORTED_MODULE_6___default.a.PureComponent);
+
+/* harmony default export */ __webpack_exports__["default"] = (CarouselWithCustomDots);
+
+/***/ }),
+
+/***/ "./components/data.json":
+/*!******************************!*\
+  !*** ./components/data.json ***!
+  \******************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, default */
+/***/ (function(module) {
+
+module.exports = [{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/Similar-Cloud-Services-in-AWS-and-Azure-.png","link":"https://w3js.com/index.php/what-aws-lambda-users-should-know-about-azure-functions-and-vice-versa/","date":"29.3.2019","tags":[{"id":64,"count":5,"description":"","link":"https://w3js.com/index.php/tag/aws/","name":"Aws","slug":"aws","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/64"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{"id":74,"count":1,"description":"","link":"https://w3js.com/index.php/tag/azure/","name":"Azure","slug":"azure","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/74"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=74"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}}],"title":"What AWS Lambda Users Should Know About Azure Functions, and Vice Versa.","content":"<p>In&nbsp;my previous post, I explained about my painful multi-cloud experience and lessons that I learned. Regardless of which cloud platform you are using, I recommend you to read it to avoid our mistakes. I’ve encountered a surprising high number of Cloud developers who have never tried other providers. That’s why in this post, I would [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/migrating-legacy-back-ends-to-serverless-14-638.jpg","link":"https://w3js.com/index.php/lessons-learned-from-a-legacy-serverless-app/","date":"29.3.2019","tags":[{}],"title":"Lessons Learned From a Legacy Serverless App","content":"<p>Feeping in mind the growing multi-cloud trend, developers should start working with more than one provider. However, this can mean leaving your comfort zone, and not everyone likes the idea of doing that. Recently, I’ve done this and would like to share my experiences with you. I believe they are useful, regardless of whatever cloud platform [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/1_g_0RpVhugETqQt_zriSebQ.png","link":"https://w3js.com/index.php/implementing-infinite-mode-in-a-carousel-that-rocks-by-putting-your-algorithm-knowledge-into-use-part-one/","date":"27.3.2019","tags":[],"title":"Implementing infinite mode in a Carousel that rocks by putting your algorithm knowledge into use  &#8211; part one.","content":"<p>Hello, this is part one of the series &#8211; Implementing infinite mode in a Carousel that rocks by putting your algorithm knowledge into use. A while back i built a fully customizable Carousel library called react-multi-carousel which you can find on github or the npm registry that supports multiple items and server-side rendering. Everything was [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/1_y8bT4O5fXWXC140iiTRYPQ.png","link":"https://w3js.com/index.php/how-to-integrate-an-amazon-lex-chatbot-with-facebook-messenger/","date":"27.3.2019","tags":[{"id":64,"count":5,"description":"","link":"https://w3js.com/index.php/tag/aws/","name":"Aws","slug":"aws","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/64"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{"id":72,"count":1,"description":"","link":"https://w3js.com/index.php/tag/chatbots/","name":"Chatbots","slug":"chatbots","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/72"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=72"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}}],"title":"How to integrate an Amazon Lex chatbot with Facebook Messenger","content":"<p>Amazon Lex enables you to quickly build a chatbot in a few minutes. A few months ago, I tried to integrate a Lex chatbot with Facebook — and spent way too long because of the poor documentation and guidance. To help save you some time and effort, this blog explains how the integration works and provides a [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/Benchmarked-Serverless-observability-tools-got-very-disappointed2.png","link":"https://w3js.com/index.php/benchmarked-serverless-observability-tools-got-very-disappointed/","date":"26.3.2019","tags":[{"id":64,"count":5,"description":"","link":"https://w3js.com/index.php/tag/aws/","name":"Aws","slug":"aws","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/64"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{}],"title":"Benchmarked Serverless observability tools, got very disappointed","content":"<p>Observability is about the ability to troubleshoot unknown issues that might happen in your application. If you are not familiar with it, I recommend you to watch&nbsp;How to Build Observable Distributed Systems&nbsp;and&nbsp;The Present and Future of Serverless Observability&nbsp;from QCon 2018. In this article, I’m going to explain you how some of the most prominent Serverless [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/Overcome-X-Ray’s-issue-for-Lambda-debugging.png","link":"https://w3js.com/index.php/overcome-x-rays-issue-for-lambda-debugging/","date":"25.3.2019","tags":[{"id":64,"count":5,"description":"","link":"https://w3js.com/index.php/tag/aws/","name":"Aws","slug":"aws","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/64"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{}],"title":"Overcome X-Ray’s issue for Lambda debugging","content":"<p>Tracing is one of the pillars of Observebility, according to Twitter. AWS X-Ray helps you to get an overview of your distributed application, to find bottlenecks and to tune its critical path. Also, it&nbsp;provides&nbsp;you&nbsp;with the ability to&nbsp;trace your&nbsp;requests, so you can see which journey, any single request goes through when it enters your application. AWS [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/Worrying-and-promising-signals-from-serverless-community.jpeg","link":"https://w3js.com/index.php/worrying-and-promising-signals-from-serverless-community/","date":"25.3.2019","tags":[{"id":64,"count":5,"description":"","link":"https://w3js.com/index.php/tag/aws/","name":"Aws","slug":"aws","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/64"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=64"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{"id":62,"count":1,"description":"","link":"https://w3js.com/index.php/tag/cloud-computing/","name":"Cloud Computing","slug":"cloud-computing","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/62"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=62"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}}],"title":"Worrying and promising signals from serverless community","content":"<p>Recently, I attended AWS Community Days in Frankfurt — Serverless Computing track, while I was one of its speakers. Having 400 attendees, it’s the biggest AWS community event in Germany. Even though not a definite indicator, but it can reflect skill level of serverless community in the region. I would like to share my assessment about Germany’s serverless community’s level with you. Some of them are good (indicated as “promising”) and some of them require attention (indicated as “worrying”). Here is table of content:</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/pre.png","link":"https://w3js.com/index.php/appending-currency-sign-to-a-purchase-form-in-your-e-commerce-site/","date":"14.3.2019","tags":[{},{}],"title":"Appending currency sign to a purchase form in your e-commerce site using plain JavaScript.","content":"<p>Here is the code snippet on how to append currency sign to a purchase form in your e-commerce site. For example, you have an input that allows user to put in the amount of money to filter out some certain products at different price range, you might also want to remind the user of the [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/1_kFaSuc5rVdJ_fM2c_bHszQ.png","link":"https://w3js.com/index.php/fixing-css-loaded-order-style-chunk-incorrect-in-nextjs/","date":"14.3.2019","tags":[{"id":52,"count":1,"description":"","link":"https://w3js.com/index.php/tag/css/","name":"CSS","slug":"css","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/52"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=52"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{"id":57,"count":1,"description":"","link":"https://w3js.com/index.php/tag/css-order/","name":"CSS order","slug":"css-order","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/57"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=57"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}}],"title":"Fixing CSS load order/style.chunk.css incorrect in Nextjs","content":"<p>Introduction For Nextjs developers, if you are using a third-party UI library for example Material-ui or Semantic-ui, you might end up overriding a lot of the existing styles with your own CSS. That brings to us the importance of the order of which CSS file gets loaded first and after. If your own CSS gets [&hellip;]</p>\n"},{"imageUrl":"https://w3js.com/wp-content/uploads/2019/03/Learn-How-to-Create-A-Simple-Carousel-with-React-e1503928616477.jpg","link":"https://w3js.com/index.php/react-carousel-with-server-side-rendering-support-part-2/","date":"20.3.2019","tags":[{"id":47,"count":1,"description":"","link":"https://w3js.com/index.php/tag/carousel/","name":"Carousel","slug":"carousel","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/47"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=47"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}},{"id":50,"count":1,"description":"","link":"https://w3js.com/index.php/tag/dom/","name":"DOM","slug":"dom","taxonomy":"post_tag","meta":[],"_links":{"self":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags/50"}],"collection":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/tags"}],"about":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/taxonomies/post_tag"}],"wp:post_type":[{"href":"https://w3js.com/index.php/wp-json/wp/v2/posts?tags=50"}],"curies":[{"name":"wp","href":"https://api.w.org/{rel}","templated":true}]}}],"title":"React Carousel with Server Side Rendering Support &#8211; Part 2","content":"<p>With this article I am going to show you how you can create your own Carousel component using React that supports multiple items and server-side rendering and add testing to it and finally publish to NPM. This is part one of the series &#8220;React Carousel with Server Side Rendering Support&#8221;. Part two can be found [&hellip;]</p>\n"}];
 
 /***/ }),
 
@@ -1019,6 +1338,211 @@ module.exports = _typeof;
 
 module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime-module.js");
 
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/Avatar/Avatar.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@material-ui/core/Avatar/Avatar.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@material-ui/core/node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@material-ui/core/node_modules/@babel/runtime/helpers/defineProperty.js"));
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@material-ui/core/node_modules/@babel/runtime/helpers/extends.js"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@material-ui/core/node_modules/@babel/runtime/helpers/objectWithoutProperties.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+
+var _utils = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/index.es.js");
+
+var _withStyles = _interopRequireDefault(__webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/styles/withStyles.js"));
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: {
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexShrink: 0,
+      width: 40,
+      height: 40,
+      fontFamily: theme.typography.fontFamily,
+      fontSize: theme.typography.pxToRem(20),
+      borderRadius: '50%',
+      overflow: 'hidden',
+      userSelect: 'none'
+    },
+
+    /* Styles applied to the root element if there are children and not `src` or `srcSet`. */
+    colorDefault: {
+      color: theme.palette.background.default,
+      backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[400] : theme.palette.grey[600]
+    },
+
+    /* Styles applied to the img element if either `src` or `srcSet` is defined. */
+    img: {
+      width: '100%',
+      height: '100%',
+      textAlign: 'center',
+      // Handle non-square image. The property isn't supported by IE 11.
+      objectFit: 'cover'
+    }
+  };
+};
+
+exports.styles = styles;
+
+function Avatar(props) {
+  var alt = props.alt,
+      childrenProp = props.children,
+      childrenClassNameProp = props.childrenClassName,
+      classes = props.classes,
+      classNameProp = props.className,
+      Component = props.component,
+      imgProps = props.imgProps,
+      sizes = props.sizes,
+      src = props.src,
+      srcSet = props.srcSet,
+      other = (0, _objectWithoutProperties2.default)(props, ["alt", "children", "childrenClassName", "classes", "className", "component", "imgProps", "sizes", "src", "srcSet"]);
+  var children = null;
+  var img = src || srcSet;
+
+  if (img) {
+    children = _react.default.createElement("img", (0, _extends2.default)({
+      alt: alt,
+      src: src,
+      srcSet: srcSet,
+      sizes: sizes,
+      className: classes.img
+    }, imgProps));
+  } else if (childrenClassNameProp && _react.default.isValidElement(childrenProp)) {
+    children = _react.default.cloneElement(childrenProp, {
+      className: (0, _classnames.default)(childrenClassNameProp, childrenProp.props.className)
+    });
+  } else {
+    children = childrenProp;
+  }
+
+  return _react.default.createElement(Component, (0, _extends2.default)({
+    className: (0, _classnames.default)(classes.root, classes.system, (0, _defineProperty2.default)({}, classes.colorDefault, !img), classNameProp)
+  }, other), children);
+}
+
+ true ? Avatar.propTypes = {
+  /**
+   * Used in combination with `src` or `srcSet` to
+   * provide an alt attribute for the rendered `img` element.
+   */
+  alt: _propTypes.default.string,
+
+  /**
+   * Used to render icon or text elements inside the Avatar.
+   * `src` and `alt` props will not be used and no `img` will
+   * be rendered by default.
+   *
+   * This can be an element, or just a string.
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * @ignore
+   * The className of the child element.
+   * Used by Chip and ListItemIcon to style the Avatar icon.
+   */
+  childrenClassName: _propTypes.default.string,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css-api) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: _utils.componentPropType,
+
+  /**
+   * Attributes applied to the `img` element if the component
+   * is used to display an image.
+   */
+  imgProps: _propTypes.default.object,
+
+  /**
+   * The `sizes` attribute for the `img` element.
+   */
+  sizes: _propTypes.default.string,
+
+  /**
+   * The `src` attribute for the `img` element.
+   */
+  src: _propTypes.default.string,
+
+  /**
+   * The `srcSet` attribute for the `img` element.
+   */
+  srcSet: _propTypes.default.string
+} : undefined;
+Avatar.defaultProps = {
+  component: 'div'
+};
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiAvatar'
+})(Avatar);
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/Avatar/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@material-ui/core/Avatar/index.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@material-ui/core/node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function get() {
+    return _Avatar.default;
+  }
+});
+
+var _Avatar = _interopRequireDefault(__webpack_require__(/*! ./Avatar */ "./node_modules/@material-ui/core/Avatar/Avatar.js"));
 
 /***/ }),
 
@@ -110866,6 +111390,27 @@ module.exports = warning;
 
 /***/ }),
 
+/***/ "./node_modules/markdown-to-jsx/dist/esm.js":
+/*!**************************************************!*\
+  !*** ./node_modules/markdown-to-jsx/dist/esm.js ***!
+  \**************************************************/
+/*! exports provided: compiler, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "compiler", function() { return compiler; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Markdown; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var unquote__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! unquote */ "./node_modules/unquote/index.js");
+/* harmony import */ var unquote__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(unquote__WEBPACK_IMPORTED_MODULE_1__);
+var _extends=Object.assign||function(a){for(var b,c=1;c<arguments.length;c++)for(var d in b=arguments[c],b)Object.prototype.hasOwnProperty.call(b,d)&&(a[d]=b[d]);return a},_typeof=typeof Symbol=='function'&&typeof Symbol.iterator=='symbol'?function(a){return typeof a}:function(a){return a&&typeof Symbol=='function'&&a.constructor===Symbol&&a!==Symbol.prototype?'symbol':typeof a};function _objectWithoutProperties(a,b){var c={};for(var d in a)b.indexOf(d)>=0||Object.prototype.hasOwnProperty.call(a,d)&&(c[d]=a[d]);return c}var ATTRIBUTE_TO_JSX_PROP_MAP={accesskey:'accessKey',allowfullscreen:'allowFullScreen',allowtransparency:'allowTransparency',autocomplete:'autoComplete',autofocus:'autoFocus',autoplay:'autoPlay',cellpadding:'cellPadding',cellspacing:'cellSpacing',charset:'charSet',class:'className',classid:'classId',colspan:'colSpan',contenteditable:'contentEditable',contextmenu:'contextMenu',crossorigin:'crossOrigin',enctype:'encType',for:'htmlFor',formaction:'formAction',formenctype:'formEncType',formmethod:'formMethod',formnovalidate:'formNoValidate',formtarget:'formTarget',frameborder:'frameBorder',hreflang:'hrefLang',inputmode:'inputMode',keyparams:'keyParams',keytype:'keyType',marginheight:'marginHeight',marginwidth:'marginWidth',maxlength:'maxLength',mediagroup:'mediaGroup',minlength:'minLength',novalidate:'noValidate',radiogroup:'radioGroup',readonly:'readOnly',rowspan:'rowSpan',spellcheck:'spellCheck',srcdoc:'srcDoc',srclang:'srcLang',srcset:'srcSet',tabindex:'tabIndex',usemap:'useMap'},namedCodesToUnicode={amp:'&',apos:'\'',gt:'>',lt:'<',nbsp:'\xA0',quot:'\u201C'},DO_NOT_PROCESS_HTML_ELEMENTS=['style','script'],ATTR_EXTRACTOR_R=/([-A-Z0-9_:]+)(?:\s*=\s*(?:(?:"((?:\\.|[^"])*)")|(?:'((?:\\.|[^'])*)')|(?:\{((?:\\.|{[^}]*?}|[^}])*)\})))?/gi,AUTOLINK_MAILTO_CHECK_R=/mailto:/i,BLOCK_END_R=/\n{2,}$/,BLOCKQUOTE_R=/^( *>[^\n]+(\n[^\n]+)*\n*)+\n{2,}/,BLOCKQUOTE_TRIM_LEFT_MULTILINE_R=/^ *> ?/gm,BREAK_LINE_R=/^ {2,}\n/,BREAK_THEMATIC_R=/^(?:( *[-*_]) *){3,}(?:\n *)+\n/,CODE_BLOCK_FENCED_R=/^\s*(`{3,}|~{3,}) *(\S+)? *\n([\s\S]+?)\s*\1 *(?:\n *)+\n?/,CODE_BLOCK_R=/^(?: {4}[^\n]+\n*)+(?:\n *)+\n?/,CODE_INLINE_R=/^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,CONSECUTIVE_NEWLINE_R=/^(?:\n *)*\n/,CR_NEWLINE_R=/\r\n?/g,FOOTNOTE_R=/^\[\^(.*)\](:.*)\n/,FOOTNOTE_REFERENCE_R=/^\[\^(.*)\]/,FORMFEED_R=/\f/g,GFM_TASK_R=/^\s*?\[(x|\s)\]/,HEADING_R=/^ *(#{1,6}) *([^\n]+)\n{0,2}/,HEADING_SETEXT_R=/^([^\n]+)\n *(=|-){3,} *(?:\n *)+\n/,HTML_BLOCK_ELEMENT_R=/^ *(?!<[a-z][^ >/]* ?\/>)<([a-z][^ >/]*) ?([^>]*)\/{0}>\n?(\s*(?:<\1[^>]*?>[\s\S]*?<\/\1>|(?!<\1)[\s\S])*?)<\/\1>\n*/i,HTML_CHAR_CODE_R=/&([a-z]+);/g,HTML_COMMENT_R=/^<!--.*?-->/,HTML_CUSTOM_ATTR_R=/^(data|aria|x)-[a-z_][a-z\d_.-]*$/,HTML_SELF_CLOSING_ELEMENT_R=/^ *<([a-z][a-z0-9:]*)(?:\s+((?:<.*?>|[^>])*))?\/?>(?!<\/\1>)(\s*\n)?/i,INTERPOLATION_R=/^\{.*\}$/,LINK_AUTOLINK_BARE_URL_R=/^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/,LINK_AUTOLINK_MAILTO_R=/^<([^ >]+@[^ >]+)>/,LINK_AUTOLINK_R=/^<([^ >]+:\/[^ >]+)>/,LIST_ITEM_END_R=/ *\n+$/,LIST_LOOKBEHIND_R=/(?:^|\n)( *)$/,CAPTURE_LETTER_AFTER_HYPHEN=/-([a-z])?/gi,NP_TABLE_R=/^(.*\|?.*)\n *(\|? *[-:]+ *\|[-| :]*)\n((?:.*\|.*\n)*)\n?/,PARAGRAPH_R=/^((?:[^\n]|\n(?! *\n))+)(?:\n *)+\n/,REFERENCE_IMAGE_OR_LINK=/^\[([^\]]*)\]:\s*(\S+)\s*("([^"]*)")?/,REFERENCE_IMAGE_R=/^!\[([^\]]*)\] ?\[([^\]]*)\]/,REFERENCE_LINK_R=/^\[([^\]]*)\] ?\[([^\]]*)\]/,SQUARE_BRACKETS_R=/(\[|\])/g,SHOULD_RENDER_AS_BLOCK_R=/(\n|^[-*]\s|^#|^ {2,}|^-{2,}|^>\s)/,TAB_R=/\t/g,TABLE_TRIM_PIPES=/(^ *\||\| *$)/g,TABLE_CENTER_ALIGN=/^ *:-+: *$/,TABLE_LEFT_ALIGN=/^ *:-+ *$/,TABLE_RIGHT_ALIGN=/^ *-+: *$/,TABLE_ROW_SPLIT=/ *\| */,TEXT_BOLD_R=/^([*_])\1((?:\[.*?\][([].*?[)\]]|<.*?>(?:.*?<.*?>)?|`.*?`|~+.*?~+|.)*?)\1\1(?!\1)/,TEXT_EMPHASIZED_R=/^([*_])((?:\[.*?\][([].*?[)\]]|<.*?>(?:.*?<.*?>)?|`.*?`|~+.*?~+|.)*?)\1(?!\1)/,TEXT_STRIKETHROUGHED_R=/^~~((?:\[.*?\]|<.*?>(?:.*?<.*?>)?|`.*?`|.)*?)~~/,TEXT_ESCAPED_R=/^\\([^0-9A-Za-z\s])/,TEXT_PLAIN_R=/^[\s\S]+?(?=[^0-9A-Z\s\u00c0-\uffff&;.()'"]|\d+\.|\n\n| {2,}\n|\w+:\S|$)/i,TRIM_NEWLINES_AND_TRAILING_WHITESPACE_R=/(^\n+|(\n|\s)+$)/g,HTML_LEFT_TRIM_AMOUNT_R=/^([ \t]*)/,UNESCAPE_URL_R=/\\([^0-9A-Z\s])/gi,LIST_BULLET='(?:[*+-]|\\d+\\.)',LIST_ITEM_PREFIX='( *)((?:[*+-]|\\d+\\.)) +',LIST_ITEM_PREFIX_R=/^( *)((?:[*+-]|\d+\.)) +/,LIST_ITEM_R=/( *)((?:[*+-]|\d+\.)) +[^\n]*(?:\n(?!\1(?:[*+-]|\d+\.) )[^\n]*)*(\n|$)/gm,LIST_R=/^( *)((?:[*+-]|\d+\.)) [\s\S]+?(?:\n{2,}(?! )(?!\1(?:[*+-]|\d+\.) (?!(?:[*+-]|\d+\.) ))\n*|\s*\n*$)/,LINK_INSIDE='(?:\\[[^\\]]*\\]|[^\\[\\]]|\\](?=[^\\[]*\\]))*',LINK_HREF_AND_TITLE='\\s*<?((?:[^\\s\\\\]|\\\\.)*?)>?(?:\\s+[\'"]([\\s\\S]*?)[\'"])?\\s*',LINK_R=/^\[((?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*)\]\(\s*<?((?:[^\s\\]|\\.)*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*\)/,IMAGE_R=/^!\[((?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*)\]\(\s*<?((?:[^\s\\]|\\.)*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*\)/,BLOCK_SYNTAXES=[BLOCKQUOTE_R,CODE_BLOCK_R,CODE_BLOCK_FENCED_R,HEADING_R,HEADING_SETEXT_R,HTML_BLOCK_ELEMENT_R,HTML_COMMENT_R,HTML_SELF_CLOSING_ELEMENT_R,LIST_ITEM_R,LIST_R,NP_TABLE_R,PARAGRAPH_R];function containsBlockSyntax(a){return BLOCK_SYNTAXES.some(function(b){return b.test(a)})}function slugify(a){return a.replace(/[ÀÁÂÃÄÅàáâãäåæÆ]/g,'a').replace(/[çÇ]/g,'c').replace(/[ðÐ]/g,'d').replace(/[ÈÉÊËéèêë]/g,'e').replace(/[ÏïÎîÍíÌì]/g,'i').replace(/[Ññ]/g,'n').replace(/[øØœŒÕõÔôÓóÒò]/g,'o').replace(/[ÜüÛûÚúÙù]/g,'u').replace(/[ŸÿÝý]/g,'y').replace(/[^a-z0-9- ]/gi,'').replace(/ /gi,'-').toLowerCase()}function parseTableAlignCapture(a){if(TABLE_RIGHT_ALIGN.test(a))return'right';return TABLE_CENTER_ALIGN.test(a)?'center':TABLE_LEFT_ALIGN.test(a)?'left':null}function parseTableHeader(a,b,c){var d=a[1].replace(TABLE_TRIM_PIPES,'').trim().split(TABLE_ROW_SPLIT);return d.map(function(a){return b(a,c)})}function parseTableAlign(a){var b=a[2].replace(TABLE_TRIM_PIPES,'').trim().split(TABLE_ROW_SPLIT);return b.map(parseTableAlignCapture)}function parseTableCells(a,b,c){var d=a[3].replace(TABLE_TRIM_PIPES,'').trim().split('\n');return d.map(function(a){return a.replace(TABLE_TRIM_PIPES,'').split(TABLE_ROW_SPLIT).map(function(a){return b(a.trim(),c)})})}function parseTable(a,b,c){c.inline=!0;var d=parseTableHeader(a,b,c),e=parseTableAlign(a,b,c),f=parseTableCells(a,b,c);return c.inline=!1,{align:e,cells:f,header:d,type:'table'}}function getTableStyle(a,b){return a.align[b]==null?{}:{textAlign:a.align[b]}}function normalizeAttributeKey(a){var b=a.indexOf('-');return b!==-1&&a.match(HTML_CUSTOM_ATTR_R)===null&&(a=a.replace(CAPTURE_LETTER_AFTER_HYPHEN,function(a,b){return b.toUpperCase()})),a}function attributeValueToJSXPropValue(a,b){return a==='style'?b.split(/;\s?/).reduce(function(a,b){var c=b.slice(0,b.indexOf(':')),d=c.replace(/(-[a-z])/g,function(a){return a[1].toUpperCase()});return a[d]=b.slice(c.length+1).trim(),a},{}):(b.match(INTERPOLATION_R)&&(b=b.slice(1,b.length-1)),b==='true'||b!=='false'&&b)}function normalizeWhitespace(a){return a.replace(CR_NEWLINE_R,'\n').replace(FORMFEED_R,'').replace(TAB_R,'    ')}function parserFor(a){function b(d,e){for(var f=[],g='';d;)for(var l=0;l<c.length;){var h=c[l],j=a[h],k=j.match(d,e,g);if(k){var i=k[0];d=d.substring(i.length);var m=j.parse(k,b,e);m.type==null&&(m.type=h),f.push(m),g=i;break}l++}return f}var c=Object.keys(a);return  true&&c.forEach(function(b){var c=a[b].order; false||typeof c=='number'&&isFinite(c)||console.warn('markdown-to-jsx: Invalid order for rule `'+b+'`: '+c)}),c.sort(function(b,c){var d=a[b].order,e=a[c].order;return d===e?b<c?-1:1:d-e}),function(a,c){return b(normalizeWhitespace(a),c)}}function inlineRegex(a){return function(b,c){return c.inline?a.exec(b):null}}function simpleInlineRegex(a){return function(b,c){return c.inline||c.simple?a.exec(b):null}}function blockRegex(a){return function(b,c){return c.inline||c.simple?null:a.exec(b)}}function anyScopeRegex(a){return function(b){return a.exec(b)}}function reactFor(a){return function b(c,d){if(d=d||{},Array.isArray(c)){for(var e=d.key,f=[],g=!1,h=0;h<c.length;h++){d.key=h;var j=b(c[h],d),k=typeof j=='string';k&&g?f[f.length-1]+=j:f.push(j),g=k}return d.key=e,f}return a(c,b,d)}}function sanitizeUrl(a){try{var b=decodeURIComponent(a);if(b.match(/^\s*javascript:/i))return  true&&console.warn('Anchor URL contains an unsafe JavaScript expression, it will not be rendered.',b),null}catch(b){return  true&&console.warn('Anchor URL could not be decoded due to malformed syntax or characters, it will not be rendered.',a),null}return a}function unescapeUrl(a){return a.replace(UNESCAPE_URL_R,'$1')}function parseInline(a,b,c){var d=c.inline||!1,e=c.simple||!1;c.inline=!0,c.simple=!0;var f=a(b,c);return c.inline=d,c.simple=e,f}function parseSimpleInline(a,b,c){var d=c.inline||!1,e=c.simple||!1;c.inline=!1,c.simple=!0;var f=a(b,c);return c.inline=d,c.simple=e,f}function parseBlock(a,b,c){return c.inline=!1,a(b+'\n\n',c)}function parseCaptureInline(a,b,c){return{content:parseInline(b,a[1],c)}}function captureNothing(){return{}}function renderNothing(){return null}function ruleOutput(a){return function(b,c,d){return a[b.type].react(b,c,d)}}function cx(){for(var a=arguments.length,b=Array(a),c=0;c<a;c++)b[c]=arguments[c];return b.filter(Boolean).join(' ')}function get(a,b,c){for(var d=a,e=b.split('.');e.length&&(d=d[e[0]],d!==void 0);)e.shift();return d||c}function getTag(a,b){var c=get(b,a);return c?typeof c=='function'||(typeof c=='undefined'?'undefined':_typeof(c))==='object'&&'render'in c?c:get(b,a+'.component',a):a}var PARSE_PRIORITY_MAX=1,PARSE_PRIORITY_HIGH=2,PARSE_PRIORITY_MED=3,PARSE_PRIORITY_LOW=4,PARSE_PRIORITY_MIN=5;function compiler(a,b){function d(a,c){for(var d=get(b.overrides,a+'.props',{}),e=arguments.length,g=Array(e>2?e-2:0),h=2;h<e;h++)g[h-2]=arguments[h];return f.apply(void 0,[getTag(a,b.overrides),_extends({},c,d,{className:cx(c&&c.className,d.className)||void 0})].concat(g))}function c(a){var c=!1;b.forceInline?c=!0:!b.forceBlock&&(c=SHOULD_RENDER_AS_BLOCK_R.test(a)===!1);var e=k(j(c?a:a.replace(TRIM_NEWLINES_AND_TRAILING_WHITESPACE_R,'')+'\n\n',{inline:c})),f=void 0;return e.length>1?f=c?d('span',{key:'outer'},e):d('div',{key:'outer'},e):e.length===1?(f=e[0],typeof f=='string'&&(f=d('span',{key:'outer'},f))):f=d('span',{key:'outer'}),f}function e(a){var b=a.match(ATTR_EXTRACTOR_R);return b?b.reduce(function(a,b,d){var e=b.indexOf('=');if(e!==-1){var f=normalizeAttributeKey(b.slice(0,e)).trim(),g=unquote__WEBPACK_IMPORTED_MODULE_1___default()(b.slice(e+1).trim()),h=ATTRIBUTE_TO_JSX_PROP_MAP[f]||f,i=a[h]=attributeValueToJSXPropValue(f,g);(HTML_BLOCK_ELEMENT_R.test(i)||HTML_SELF_CLOSING_ELEMENT_R.test(i))&&(a[h]=react__WEBPACK_IMPORTED_MODULE_0___default.a.cloneElement(c(i.trim()),{key:d}))}else a[ATTRIBUTE_TO_JSX_PROP_MAP[b]||b]=!0;return a},{}):void 0}b=b||{},b.overrides=b.overrides||{},b.slugify=b.slugify||slugify;var f=b.createElement||react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;if(true){if(typeof a!='string')throw new Error('markdown-to-jsx: the first argument must be\n                             a string');if(Object.prototype.toString.call(b.overrides)!=='[object Object]')throw new Error('markdown-to-jsx: options.overrides (second argument property) must be\n                             undefined or an object literal with shape:\n                             {\n                                htmltagname: {\n                                    component: string|ReactComponent(optional),\n                                    props: object(optional)\n                                }\n                             }')}var g=[],h={},i={blockQuote:{match:blockRegex(BLOCKQUOTE_R),order:PARSE_PRIORITY_HIGH,parse:function d(a,b,c){return{content:b(a[0].replace(BLOCKQUOTE_TRIM_LEFT_MULTILINE_R,''),c)}},react:function e(a,b,c){return d('blockquote',{key:c.key},b(a.content,c))}},breakLine:{match:anyScopeRegex(BREAK_LINE_R),order:PARSE_PRIORITY_HIGH,parse:captureNothing,react:function e(a,b,c){return d('br',{key:c.key})}},breakThematic:{match:blockRegex(BREAK_THEMATIC_R),order:PARSE_PRIORITY_HIGH,parse:captureNothing,react:function e(a,b,c){return d('hr',{key:c.key})}},codeBlock:{match:blockRegex(CODE_BLOCK_R),order:PARSE_PRIORITY_MAX,parse:function c(a){var b=a[0].replace(/^ {4}/gm,'').replace(/\n+$/,'');return{content:b,lang:void 0}},react:function e(a,b,c){return d('pre',{key:c.key},d('code',{className:a.lang?'lang-'+a.lang:''},a.content))}},codeFenced:{match:blockRegex(CODE_BLOCK_FENCED_R),order:PARSE_PRIORITY_MAX,parse:function b(a){return{content:a[3],lang:a[2]||void 0,type:'codeBlock'}}},codeInline:{match:simpleInlineRegex(CODE_INLINE_R),order:PARSE_PRIORITY_LOW,parse:function b(a){return{content:a[2]}},react:function e(a,b,c){return d('code',{key:c.key},a.content)}},footnote:{match:blockRegex(FOOTNOTE_R),order:PARSE_PRIORITY_MAX,parse:function b(a){return g.push({footnote:a[2],identifier:a[1]}),{}},react:renderNothing},footnoteReference:{match:inlineRegex(FOOTNOTE_REFERENCE_R),order:PARSE_PRIORITY_HIGH,parse:function b(a){return{content:a[1],target:'#'+a[1]}},react:function e(a,b,c){return d('a',{key:c.key,href:sanitizeUrl(a.target)},d('sup',{key:c.key},a.content))}},gfmTask:{match:inlineRegex(GFM_TASK_R),order:PARSE_PRIORITY_HIGH,parse:function b(a){return{completed:a[1].toLowerCase()==='x'}},react:function e(a,b,c){return d('input',{checked:a.completed,key:c.key,readOnly:!0,type:'checkbox'})}},heading:{match:blockRegex(HEADING_R),order:PARSE_PRIORITY_HIGH,parse:function e(a,c,d){return{content:parseInline(c,a[2],d),id:b.slugify(a[2]),level:a[1].length}},react:function f(a,b,c){var e='h'+a.level;return d(e,{id:a.id,key:c.key},b(a.content,c))}},headingSetext:{match:blockRegex(HEADING_SETEXT_R),order:PARSE_PRIORITY_MAX,parse:function d(a,b,c){return{content:parseInline(b,a[1],c),level:a[2]==='='?1:2,type:'heading'}}},htmlBlock:{match:anyScopeRegex(HTML_BLOCK_ELEMENT_R),order:PARSE_PRIORITY_HIGH,parse:function k(a,b,c){var d=a[3].match(HTML_LEFT_TRIM_AMOUNT_R),f=d[1],g=new RegExp('^'+f,'gm'),h=a[3].replace(g,''),i=containsBlockSyntax(h)?parseBlock:parseInline,j=DO_NOT_PROCESS_HTML_ELEMENTS.indexOf(a[1])!==-1;return{attrs:e(a[2]),content:j?a[3]:i(b,h,c),noInnerParse:j,tag:a[1]}},react:function e(a,b,c){return d(a.tag,_extends({key:c.key},a.attrs),a.noInnerParse?a.content:b(a.content,c))}},htmlComment:{match:anyScopeRegex(HTML_COMMENT_R),order:PARSE_PRIORITY_HIGH,parse:function a(){return{}},react:renderNothing},htmlSelfClosing:{match:anyScopeRegex(HTML_SELF_CLOSING_ELEMENT_R),order:PARSE_PRIORITY_HIGH,parse:function b(a){return{attrs:e(a[2]||''),tag:a[1]}},react:function e(a,b,c){return d(a.tag,_extends({},a.attrs,{key:c.key}))}},image:{match:simpleInlineRegex(IMAGE_R),order:PARSE_PRIORITY_HIGH,parse:function b(a){return{alt:a[1],target:unescapeUrl(a[2]),title:a[3]}},react:function e(a,b,c){return d('img',{key:c.key,alt:a.alt||void 0,title:a.title||void 0,src:sanitizeUrl(a.target)})}},link:{match:inlineRegex(LINK_R,!1),order:PARSE_PRIORITY_LOW,parse:function d(a,b,c){return{content:parseSimpleInline(b,a[1],c),target:unescapeUrl(a[2]),title:a[3]}},react:function e(a,b,c){return d('a',{key:c.key,href:sanitizeUrl(a.target),title:a.title},b(a.content,c))}},linkAngleBraceStyleDetector:{match:inlineRegex(LINK_AUTOLINK_R),order:PARSE_PRIORITY_MAX,parse:function b(a){return{content:[{content:a[1],type:'text'}],target:a[1],type:'link'}}},linkBareUrlDetector:{match:inlineRegex(LINK_AUTOLINK_BARE_URL_R),order:PARSE_PRIORITY_MAX,parse:function b(a){return{content:[{content:a[1],type:'text'}],target:a[1],title:void 0,type:'link'}}},linkMailtoDetector:{match:inlineRegex(LINK_AUTOLINK_MAILTO_R),order:PARSE_PRIORITY_MAX,parse:function d(a){var b=a[1],c=a[1];return AUTOLINK_MAILTO_CHECK_R.test(c)||(c='mailto:'+c),{content:[{content:b.replace('mailto:',''),type:'text'}],target:c,type:'link'}}},list:{match:function f(a,b,c){var d=LIST_LOOKBEHIND_R.exec(c),e=b._list||!b.inline;return d&&e?(a=d[1]+a,LIST_R.exec(a)):null},order:PARSE_PRIORITY_HIGH,parse:function j(a,b,c){var d=a[2],e=d.length>1,f=e?+d:void 0,g=a[0].replace(BLOCK_END_R,'\n').match(LIST_ITEM_R),h=!1,i=g.map(function(a,d){var e=LIST_ITEM_PREFIX_R.exec(a)[0].length,f=new RegExp('^ {1,'+e+'}','gm'),i=a.replace(f,'').replace(LIST_ITEM_PREFIX_R,''),j=d===g.length-1,k=i.indexOf('\n\n')!==-1,l=k||j&&h;h=l;var m=c.inline,n=c._list;c._list=!0;var o;l?(c.inline=!1,o=i.replace(LIST_ITEM_END_R,'\n\n')):(c.inline=!0,o=i.replace(LIST_ITEM_END_R,''));var p=b(o,c);return c.inline=m,c._list=n,p});return{items:i,ordered:e,start:f}},react:function f(a,b,c){var e=a.ordered?'ol':'ul';return d(e,{key:c.key,start:a.start},a.items.map(function(a,e){return d('li',{key:e},b(a,c))}))}},newlineCoalescer:{match:blockRegex(CONSECUTIVE_NEWLINE_R),order:PARSE_PRIORITY_LOW,parse:captureNothing,react:function a(){return'\n'}},paragraph:{match:blockRegex(PARAGRAPH_R),order:PARSE_PRIORITY_LOW,parse:parseCaptureInline,react:function e(a,b,c){return d('p',{key:c.key},b(a.content,c))}},ref:{match:inlineRegex(REFERENCE_IMAGE_OR_LINK),order:PARSE_PRIORITY_MAX,parse:function b(a){return h[a[1]]={target:a[2],title:a[4]},{}},react:renderNothing},refImage:{match:simpleInlineRegex(REFERENCE_IMAGE_R),order:PARSE_PRIORITY_MAX,parse:function b(a){return{alt:a[1]||void 0,ref:a[2]}},react:function e(a,b,c){return d('img',{key:c.key,alt:a.alt,src:sanitizeUrl(h[a.ref].target),title:h[a.ref].title})}},refLink:{match:inlineRegex(REFERENCE_LINK_R),order:PARSE_PRIORITY_MAX,parse:function d(a,b,c){return{content:b(a[1],c),fallbackContent:b(a[0].replace(SQUARE_BRACKETS_R,'\\$1'),c),ref:a[2]}},react:function e(a,b,c){return h[a.ref]?d('a',{key:c.key,href:sanitizeUrl(h[a.ref].target),title:h[a.ref].title},b(a.content,c)):d('span',{key:c.key},b(a.fallbackContent,c))}},table:{match:blockRegex(NP_TABLE_R),order:PARSE_PRIORITY_HIGH,parse:parseTable,react:function f(a,b,e){return d('table',{key:e.key},d('thead',null,d('tr',null,a.header.map(function(c,f){return d('th',{key:f,style:getTableStyle(a,f)},b(c,e))}))),d('tbody',null,a.cells.map(function(c,f){return d('tr',{key:f},c.map(function(f,g){return d('td',{key:g,style:getTableStyle(a,g)},b(f,e))}))})))}},text:{match:anyScopeRegex(TEXT_PLAIN_R),order:PARSE_PRIORITY_MIN,parse:function b(a){return{content:a[0].replace(HTML_CHAR_CODE_R,function(a,b){return namedCodesToUnicode[b]?namedCodesToUnicode[b]:a})}},react:function b(a){return a.content}},textBolded:{match:simpleInlineRegex(TEXT_BOLD_R),order:PARSE_PRIORITY_MED,parse:function d(a,b,c){return{content:b(a[2],c)}},react:function e(a,b,c){return d('strong',{key:c.key},b(a.content,c))}},textEmphasized:{match:simpleInlineRegex(TEXT_EMPHASIZED_R),order:PARSE_PRIORITY_LOW,parse:function d(a,b,c){return{content:b(a[2],c)}},react:function e(a,b,c){return d('em',{key:c.key},b(a.content,c))}},textEscaped:{match:simpleInlineRegex(TEXT_ESCAPED_R),order:PARSE_PRIORITY_HIGH,parse:function b(a){return{content:a[1],type:'text'}}},textStrikethroughed:{match:simpleInlineRegex(TEXT_STRIKETHROUGHED_R),order:PARSE_PRIORITY_LOW,parse:parseCaptureInline,react:function e(a,b,c){return d('del',{key:c.key},b(a.content,c))}}},j=parserFor(i),k=reactFor(ruleOutput(i)),l=c(a);return g.length&&l.props.children.push(d('footer',{key:'footer'},g.map(function(a){return d('div',{id:a.identifier,key:a.identifier},a.identifier,k(j(a.footnote,{inline:!0})))}))),l}function Markdown(a){var b=a.children,c=a.options,d=_objectWithoutProperties(a,['children','options']);return react__WEBPACK_IMPORTED_MODULE_0___default.a.cloneElement(compiler(b,c),d)}if(true){var PropTypes=__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");Markdown.propTypes={children:PropTypes.string.isRequired,options:PropTypes.object}}
+
+//# sourceMappingURL=esm.js.map
+
+/***/ }),
+
 /***/ "./node_modules/mobile-detect/mobile-detect.js":
 /*!*****************************************************!*\
   !*** ./node_modules/mobile-detect/mobile-detect.js ***!
@@ -116333,7 +116878,8 @@ class Carousel extends React.Component {
             // console.log(getCounterPart(this.state.currentSlide, this.state, childrenArr), slideIndex);
             if (customDot) {
                 return React.cloneElement(customDot, {
-                    index: slideIndex,
+                    index,
+                    slideIndex,
                     onClick: () => this.goToSlide(slideIndex),
                     carouselState: this.getState()
                 });
@@ -118501,6 +119047,31 @@ function symbolObservablePonyfill(root) {
 
 /***/ }),
 
+/***/ "./node_modules/unquote/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/unquote/index.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var reg = /[\'\"]/
+
+module.exports = function unquote(str) {
+  if (!str) {
+    return ''
+  }
+  if (reg.test(str.charAt(0))) {
+    str = str.substr(1)
+  }
+  if (reg.test(str.charAt(str.length - 1))) {
+    str = str.substr(0, str.length - 1)
+  }
+  return str
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/url/url.js":
 /*!*********************************!*\
   !*** ./node_modules/url/url.js ***!
@@ -119473,12 +120044,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_image__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/image */ "./components/image.js");
 /* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
 /* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../style.css */ "./style.css");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
-/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _components_carousel_with_custom_dots__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/carousel-with-custom-dots */ "./components/carousel-with-custom-dots.js");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../style.css */ "./style.css");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_20__);
 
 
 
@@ -119488,6 +120060,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examples/ssr/pages/index.js";
+
 
 
 
@@ -119550,7 +120123,7 @@ function (_React$Component) {
       var fakerData = Array(12).fill(0).map(function (item, index) {
         return {
           image: images[index],
-          headline: 'w3js -> web front-end studio',
+          headline: "w3js -> web front-end studio",
           description: texts[index] || texts[0]
         };
       });
@@ -119581,7 +120154,7 @@ function (_React$Component) {
         className: classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 94
+          lineNumber: 95
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -119590,7 +120163,7 @@ function (_React$Component) {
         color: "grey",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 95
+          lineNumber: 96
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
@@ -119598,7 +120171,7 @@ function (_React$Component) {
         href: "https://w3js.com/",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 96
+          lineNumber: 97
         },
         __self: this
       }, "A Carousel supports multiple items and server-side rendering")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -119607,7 +120180,7 @@ function (_React$Component) {
         color: "grey",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 100
+          lineNumber: 101
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
@@ -119615,7 +120188,7 @@ function (_React$Component) {
         href: "https://w3js.com/",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 101
+          lineNumber: 102
         },
         __self: this
       }, "This is the server-side rendering demo of the libiary, try to disable the JavaScript in your browser, you will still see our Carousel renders nicely")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_16___default.a
@@ -119642,7 +120215,7 @@ function (_React$Component) {
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 107
+          lineNumber: 108
         },
         __self: this
       }, fakerData.map(function (card) {
@@ -119651,7 +120224,7 @@ function (_React$Component) {
         }, card, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 122
+            lineNumber: 123
           },
           __self: this
         }));
@@ -119671,7 +120244,7 @@ function (_React$Component) {
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 126
+          lineNumber: 127
         },
         __self: this
       }, fakerData.slice(0, 5).map(function (card) {
@@ -119680,11 +120253,18 @@ function (_React$Component) {
           alt: card.headline,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 141
+            lineNumber: 142
           },
           __self: this
         });
-      })));
+      })), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_carousel_with_custom_dots__WEBPACK_IMPORTED_MODULE_17__["default"], {
+        deviceType: this.props.deviceType,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 145
+        },
+        __self: this
+      }));
     }
   }], [{
     key: "getInitialProps",

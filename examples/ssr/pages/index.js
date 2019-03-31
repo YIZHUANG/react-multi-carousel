@@ -8,6 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "../components/card";
 import Image from "../components/image";
 import Carousel from "react-multi-carousel";
+import CarouselWithCustomDots from "../components/carousel-with-custom-dots";
 import "../style.css";
 import "react-multi-carousel/lib/styles.css";
 
@@ -43,7 +44,7 @@ class Index extends React.Component {
     }
     return { deviceType };
   }
-  state = { isMoving: false }
+  state = { isMoving: false };
   render() {
     const { classes } = this.props;
     const images = [
@@ -72,7 +73,7 @@ class Index extends React.Component {
       .map((item, index) => {
         return {
           image: images[index],
-          headline: 'w3js -> web front-end studio',
+          headline: "w3js -> web front-end studio",
           description: texts[index] || texts[0]
         };
       });
@@ -137,10 +138,11 @@ class Index extends React.Component {
           itemClass="image-item"
           deviceType={this.props.deviceType}
         >
-          {fakerData.slice(0,5).map(card => {
+          {fakerData.slice(0, 5).map(card => {
             return <Image url={card.image} alt={card.headline} />;
           })}
         </Carousel>
+        <CarouselWithCustomDots deviceType={this.props.deviceType} />
       </div>
     );
   }

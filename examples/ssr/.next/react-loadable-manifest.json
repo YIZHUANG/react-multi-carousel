@@ -7,15 +7,21 @@
       "publicPath": "static/chunks/0.js"
     }
   ],
-  "../style.css": [
+  "./carousel-with-custom-dots.css": [
     {
-      "id": "./style.css",
-      "name": "./style.css",
+      "id": "./components/carousel-with-custom-dots.css",
+      "name": "./components/carousel-with-custom-dots.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
   ],
   "undefined": [
+    {
+      "id": 5,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
     {
       "id": 2,
       "name": null,
@@ -25,6 +31,14 @@
     {
       "id": 3,
       "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "../style.css": [
+    {
+      "id": "./style.css",
+      "name": "./style.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
