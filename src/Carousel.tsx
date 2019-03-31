@@ -639,6 +639,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
             if (customDot) {
               return React.cloneElement(customDot, {
                 index,
+                slideIndex,
                 onClick: () => this.goToSlide(slideIndex),
                 carouselState: this.getState()
               });
