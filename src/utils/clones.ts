@@ -36,6 +36,12 @@ function getCounterPart(
   }
 }
 
+/*
+The current setting is if the length of the carousel item is larger than "slidesToShow * 2",
+then we clone "slidesToShow * 2" amount of beginning and end items.
+
+Otherwise, it means we only have a few items. Then we clone it 3 times.
+*/
 function getClones(slidesToShow: number, childrenArr: any[]) {
   let initialSlide;
   let clones;
@@ -62,6 +68,8 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
 /*
 When the user sees the clones, we need to reset the position, and cancel the animation so that it
 creates the infinite effects.
+
+The if else statement here is based on the getClones method. Because it decides how many items we are cloning.
 */
 function whenEnteredClones(
   { currentSlide, slidesToShow, itemWidth, totalItems }: CarouselInternalState,
