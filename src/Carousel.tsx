@@ -282,6 +282,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const nextPosition = -(this.state.itemWidth * nextSlides);
     const previousSlide = this.state.currentSlide;
     if (nextMaximumSlides <= this.state.totalItems) {
+      // It means if we have next slides go back to on the right-hand side.
       if (typeof beforeChange === "function") {
         beforeChange(nextSlides, this.getState());
       }
@@ -305,7 +306,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       nextMaximumSlides > this.state.totalItems &&
       this.state.currentSlide !== this.state.totalItems - slidesToShow
     ) {
-      // prevent oversliding;
+      // This is to prevent oversliding
+      // This is not for inifinite mode as for inifinite mode is never over-sliding.
       const maxSlides = this.state.totalItems - slidesToShow;
       const maxPosition = -(this.state.itemWidth * maxSlides);
       if (typeof beforeChange === "function") {
@@ -341,6 +343,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const nextPosition = -(this.state.itemWidth * nextSlides);
     const previousSlide = this.state.currentSlide;
     if (nextSlides >= 0) {
+      // It means if we have next slides go back to on the left-hand side.
       if (typeof beforeChange === "function") {
         beforeChange(nextSlides, this.getState());
       }
@@ -362,6 +365,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       );
     } else if (nextSlides < 0 && this.state.currentSlide !== 0) {
       // prevent oversliding.
+      // it means the user has almost scrolling over to what we have.
+      // this is not for infinite mode as infinite mode always has items to go back to.
       if (typeof beforeChange === "function") {
         beforeChange(0, this.getState());
       }
@@ -382,29 +387,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         }
       );
     } else {
-      const maxSlides = this.state.totalItems - slidesToShow;
-      const maxPosition = -(this.state.itemWidth * maxSlides);
-      if (infinite) {
-        if (typeof beforeChange === "function") {
-          beforeChange(maxSlides, this.getState());
-        }
-        this.isAnimationAllowed = true;
-        this.setState(
-          {
-            isSliding: true,
-            transform: maxPosition,
-            currentSlide: maxSlides
-          },
-          () => {
-            this.setState({ isSliding: false });
-            if (typeof afterChange === "function") {
-              setTimeout(() => {
-                afterChange(previousSlide, this.getState());
-              }, this.props.transitionDuration || defaultTransitionDuration);
-            }
-          }
-        );
-      }
+      return;
     }
   }
   public componentWillUnmount(): void {
@@ -450,9 +433,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = undefined;
     }
     if (this.onMove) {
+      // making sure we have items to slide back to, prevent oversliding.
       const slidesHavePassedRight = Math.round(
         (this.initialPosition - this.lastPosition) / this.state.itemWidth
       );
+      // making sure we have items to slide back to, prevent oversliding.
       const slidesHavePassedLeft = Math.round(
         (this.lastPosition - this.initialPosition) / this.state.itemWidth
       );
