@@ -2,13 +2,16 @@ import * as React from "react";
 
 import {
   throttle,
-  guessWidthFromDeviceType,
+  getWidthFromDeviceType,
   getParitialVisibilityGutter,
   getClones,
   whenEnteredClones,
-  getCounterPart
+  getInitialState
 } from "./utils";
 import { CarouselInternalState, CarouselProps } from "./types";
+import Dots from "./Dots";
+import { LeftArrow, RightArrow } from "./Arrows";
+import CarouselItems from "./CarouselItems";
 
 const defaultTransitionDuration = 400;
 const defaultTransition = "transform 400ms ease-in-out";
@@ -82,7 +85,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           props.transitionDuration || defaultTransitionDuration
         )
       : this.goToSlide.bind(this);
-    this.getIfSlideIsVisbile = this.getIfSlideIsVisbile.bind(this);
     this.onMove = false;
     this.initialPosition = 0;
     this.lastPosition = 0;
@@ -90,7 +92,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.direction = "";
     this.isInThrottle = false;
   }
-  public setIsInThrottle(isInThrottle:boolean = false):void {
+  public setIsInThrottle(isInThrottle: boolean = false): void {
     this.isInThrottle = isInThrottle;
   }
   public componentDidMount(): void {
@@ -274,7 +276,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       slidesToShow +
       (slidesHavePassed > 0 ? 0 : slidesToSlide);
     const nextSlides =
-      this.state.currentSlide + slidesHavePassed + (slidesHavePassed > 0 ? 0 : slidesToSlide);
+      this.state.currentSlide +
+      slidesHavePassed +
+      (slidesHavePassed > 0 ? 0 : slidesToSlide);
     const nextPosition = -(this.state.itemWidth * nextSlides);
     const previousSlide = this.state.currentSlide;
     if (nextMaximumSlides <= this.state.totalItems) {
@@ -422,7 +426,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public handleDown(e: any): void {
     if (
       (e.touches && !this.props.swipeable) ||
-      (e && !e.touches && !this.props.draggable) || (this.isInThrottle && this.props.infinite)
+      (e && !e.touches && !this.props.draggable) ||
+      (this.isInThrottle && this.props.infinite)
     ) {
       return;
     }
@@ -578,37 +583,25 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       direction: this.direction
     };
   }
-  public renderLeftArrow(): React.ReactElement<any> {
+  public renderLeftArrow(): React.ReactNode {
     const { customLeftArrow } = this.props;
-    if (customLeftArrow) {
-      return React.cloneElement(customLeftArrow, {
-        onClick: () => this.previous(),
-        carouselState: this.getState()
-      });
-    } else {
-      return (
-        <button
-          className="react-multiple-carousel__arrow react-multiple-carousel__arrow--left"
-          onClick={() => this.previous()}
-        />
-      );
-    }
+    return (
+      <LeftArrow
+        customLeftArrow={customLeftArrow}
+        getState={this.getState}
+        previous={this.previous}
+      />
+    );
   }
-  public renderRightArrow(): React.ReactElement<any> {
+  public renderRightArrow(): React.ReactNode {
     const { customRightArrow } = this.props;
-    if (customRightArrow) {
-      return React.cloneElement(customRightArrow, {
-        onClick: () => this.next(),
-        carouselState: this.getState()
-      });
-    } else {
-      return (
-        <button
-          className="react-multiple-carousel__arrow react-multiple-carousel__arrow--right"
-          onClick={() => this.next()}
-        />
-      );
-    }
+    return (
+      <RightArrow
+        customRightArrow={customRightArrow}
+        getState={this.getState}
+        next={this.next}
+      />
+    );
   }
   public renderButtonGroups(): React.ReactElement<any> | null {
     const { customButtonGroup } = this.props;
@@ -622,129 +615,19 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
     return null;
   }
-
-  public renderDotsList(): React.ReactElement<any> {
-    const { customDot, dotListClass, infinite } = this.props;
-    // getPureItemsWithoutClone
-    const childrenArr = React.Children.toArray(this.props.children);
+  public renderDotsList(): React.ReactElement<any> | null {
     return (
-      <ul className={`react-multi-carousel-dot-list ${dotListClass}`}>
-        {Array(childrenArr.length)
-          .fill(0)
-          .map((item, index) => {
-            const slideIndex = infinite
-              ? getCounterPart(index, this.state, childrenArr)
-              : index;
-            // console.log(getCounterPart(this.state.currentSlide, this.state, childrenArr), slideIndex);
-            if (customDot) {
-              return React.cloneElement(customDot, {
-                index,
-                slideIndex,
-                onClick: () => this.goToSlide(slideIndex),
-                carouselState: this.getState()
-              });
-            }
-            return (
-              <li
-                key={index}
-                className={`react-multi-carousel-dot ${
-                  this.state.currentSlide === slideIndex
-                    ? "react-multi-carousel-dot--active"
-                    : ""
-                }`}
-              >
-                <button onClick={() => this.goToSlide(slideIndex)} />
-              </li>
-            );
-          })}
-      </ul>
+      <Dots
+        state={this.state}
+        props={this.props}
+        goToSlide={this.goToSlide}
+        getState={this.getState}
+      />
     );
-  }
-
-  public getIfSlideIsVisbile(index: number): boolean {
-    return (
-      index >= this.state.currentSlide &&
-      index < this.state.currentSlide + this.state.slidesToShow
-    );
-  }
-
-  public getServerSideState(): any {
-    const { domLoaded, slidesToShow, containerWidth, itemWidth } = this.state;
-    const { deviceType, responsive, ssr, partialVisbile } = this.props;
-    let flexBisis: number | string | undefined;
-    const domFullyLoaded =
-      domLoaded && slidesToShow && containerWidth && itemWidth;
-    if (ssr && deviceType && !domFullyLoaded) {
-      flexBisis = guessWidthFromDeviceType(deviceType, responsive);
-    }
-    const shouldRenderOnSSR = ssr && deviceType && !domFullyLoaded && flexBisis;
-    const paritialVisibilityGutter = getParitialVisibilityGutter(
-      responsive,
-      partialVisbile,
-      deviceType,
-      this.state.deviceType
-    );
-    return {
-      shouldRenderOnSSR,
-      flexBisis,
-      domFullyLoaded,
-      paritialVisibilityGutter
-    };
   }
 
   public renderCarouselItems(): any {
-    const { itemWidth } = this.state;
-    const { children, infinite, itemClass, partialVisbile } = this.props;
-    const {
-      flexBisis,
-      shouldRenderOnSSR,
-      domFullyLoaded,
-      paritialVisibilityGutter
-    } = this.getServerSideState();
-    if (infinite) {
-      return this.state.clones.map((child: any, index: number) => (
-        <li
-          key={index}
-          aria-hidden={this.getIfSlideIsVisbile(index) ? "false" : "true"}
-          data-index={index}
-          style={{
-            flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
-            position: "relative",
-            width: domFullyLoaded
-              ? `${
-                  partialVisbile && paritialVisibilityGutter
-                    ? itemWidth - paritialVisibilityGutter
-                    : itemWidth
-                }px`
-              : "auto"
-          }}
-          className={itemClass}
-        >
-          {child}
-        </li>
-      ));
-    }
-    return React.Children.toArray(children).map((child, index) => (
-      <li
-        key={index}
-        data-index={index}
-        aria-hidden={this.getIfSlideIsVisbile(index) ? "false" : "true"}
-        style={{
-          flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
-          position: "relative",
-          width: domFullyLoaded
-            ? `${
-                partialVisbile && paritialVisibilityGutter
-                  ? itemWidth - paritialVisibilityGutter
-                  : itemWidth
-              }px`
-            : "auto"
-        }}
-        className={itemClass}
-      >
-        {child}
-      </li>
-    ));
+    return <CarouselItems state={this.state} props={this.props} />;
   }
 
   public render(): React.ReactNode {
@@ -760,10 +643,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       customTransition,
       partialVisbile
     } = this.props;
-    const {
-      shouldRenderOnSSR,
-      paritialVisibilityGutter
-    } = this.getServerSideState();
+    const { shouldRenderOnSSR, paritialVisibilityGutter } = getInitialState(
+      this.state,
+      this.props
+    );
     const isLeftEndReach = !(this.state.currentSlide - slidesToSlide >= 0);
     const isRightEndReach = !(
       this.state.currentSlide + 1 + slidesToShow <=
@@ -821,7 +704,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         {shouldShowArrows && !disableLeftArrow && this.renderLeftArrow()}
         {shouldShowArrows && !disableRightArrow && this.renderRightArrow()}
         {this.renderButtonGroups()}
-        {this.props.showDots && this.renderDotsList()}
+        {this.renderDotsList()}
       </div>
     );
   }

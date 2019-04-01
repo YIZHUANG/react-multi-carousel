@@ -1,31 +1,4 @@
-import { responsiveType, CarouselInternalState, CarouselProps } from "./types";
-
-function guessWidthFromDeviceType(
-  deviceType: string,
-  responsive: responsiveType
-): number | string | undefined {
-  let itemWidth;
-  if (responsive[deviceType]) {
-    const { items } = responsive[deviceType];
-    itemWidth = (100 / items).toFixed(1);
-  }
-  return itemWidth;
-}
-
-function getParitialVisibilityGutter(
-  responsive: responsiveType,
-  partialVisbile?: string | boolean,
-  serverSideDeviceType?: string | undefined,
-  clientSideDeviceType?: string | undefined
-): number | undefined {
-  let gutter: number | undefined = 0;
-  const deviceType = clientSideDeviceType || serverSideDeviceType;
-  if (partialVisbile && deviceType) {
-    gutter = responsive[deviceType].paritialVisibilityGutter;
-  }
-  return gutter;
-}
-
+import { CarouselInternalState, CarouselProps } from "../types";
 
 /*
 getCounterPart gets the index of the clones.
@@ -141,32 +114,4 @@ function whenEnteredClones(
   };
 }
 
-const throttle = (func: any, limit: number, setIsInThrottle?: any): any => {
-  let inThrottle: boolean;
-  return function() {
-    const args = arguments;
-    const context = this;
-    if (!inThrottle) {
-      func.apply(context, args);
-      inThrottle = true;
-      if(typeof setIsInThrottle === 'function') {
-        setIsInThrottle(true)
-      }
-      setTimeout(() => {
-        inThrottle = false;
-        if(typeof setIsInThrottle === 'function') {
-          setIsInThrottle(false)
-        }
-      }, limit);
-    }
-  };
-};
-
-export {
-  guessWidthFromDeviceType,
-  getParitialVisibilityGutter,
-  getClones,
-  whenEnteredClones,
-  throttle,
-  getCounterPart
-};
+export { getCounterPart, getClones, whenEnteredClones };
