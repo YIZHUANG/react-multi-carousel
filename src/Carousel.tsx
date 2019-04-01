@@ -588,7 +588,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     return (
       <LeftArrow
         customLeftArrow={customLeftArrow}
-        getState={this.getState}
+        getState={() => this.getState()}
         previous={this.previous}
       />
     );
@@ -598,7 +598,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     return (
       <RightArrow
         customRightArrow={customRightArrow}
-        getState={this.getState}
+        getState={() => this.getState()}
         next={this.next}
       />
     );
@@ -621,11 +621,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         state={this.state}
         props={this.props}
         goToSlide={this.goToSlide}
-        getState={this.getState}
+        getState={() => this.getState()}
       />
     );
   }
-
   public renderCarouselItems(): any {
     return <CarouselItems state={this.state} props={this.props} />;
   }
@@ -663,7 +662,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const disableLeftArrow = !infinite && isLeftEndReach;
     const disableRightArrow = !infinite && isRightEndReach;
 
-    // this is the perfect formular, the perfect code.
+    // this is formular will be fixed once i find a better way.
     const currentTransform =
       paritialVisibilityGutter && partialVisbile
         ? partialVisbile === "right"

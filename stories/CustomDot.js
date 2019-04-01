@@ -1,11 +1,11 @@
 import * as React from "react";
 
-const CustomDot = ({ onClick, index, carouselState }) => {
+const CustomDot = ({ onClick, slideIndex, index, carouselState }) => {
   const { currentSlide } = carouselState;
   return (
-    <li style={{ background: index === currentSlide ? "grey" : "initial" }}>
+    <li style={{ background: slideIndex === currentSlide ? "grey" : "initial" }}>
       <button
-        style={{ background: index === currentSlide ? "grey" : "initial" }}
+        style={{ background: slideIndex === currentSlide ? "grey" : "initial" }}
         onClick={() => onClick()}
       />
     </li>

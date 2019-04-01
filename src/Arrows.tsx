@@ -26,7 +26,6 @@ const LeftArrow = ({ customLeftArrow, getState, previous }:LeftArrowProps): Reac
     />
   )
 }
-
 const RightArrow = ({ customRightArrow, next, getState }:RightArrowProps): React.ReactElement<any> => {
   if (customRightArrow) {
     return React.cloneElement(customRightArrow, {

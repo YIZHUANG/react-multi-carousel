@@ -34,12 +34,10 @@ declare class Carousel extends React.Component<CarouselProps, CarouselInternalSt
     handleEnter(): void;
     goToSlide(slide: number): void;
     getState(): any;
-    renderLeftArrow(): React.ReactElement<any>;
-    renderRightArrow(): React.ReactElement<any>;
+    renderLeftArrow(): React.ReactNode;
+    renderRightArrow(): React.ReactNode;
     renderButtonGroups(): React.ReactElement<any> | null;
-    renderDotsList(): React.ReactElement<any>;
-    getIfSlideIsVisbile(index: number): boolean;
-    getServerSideState(): any;
+    renderDotsList(): React.ReactElement<any> | null;
     renderCarouselItems(): any;
     render(): React.ReactNode;
 }
