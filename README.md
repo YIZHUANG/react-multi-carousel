@@ -177,13 +177,12 @@ You custom dots will receive a list of props/state that's passed back by the car
 
 ```
 const CustomDot = ({ onClick, ...rest }) => {
-  const { onMove, index, slideIndex, carouselState: { currentSlide, deviceType }  } = rest;
+  const { onMove, index, active, carouselState: { currentSlide, deviceType }  } = rest;
   const carouselItems = [<CarouselItem1, CaourselItem2, CarouselItem3];
   // onMove means if dragging or swiping in progress.
-  // slideIndex is provided by this lib for checking if the item is actie or not.
-  // anything else should be done with the index, see below.
+  // active is provided by this lib for checking if the item is active or not.
   return (
-    <button className={currentSlide === slideIndex ? 'active' : 'inactive'} onClick={() => onClick()}>
+    <button className={active ? 'active' : 'inactive'} onClick={() => onClick()}>
       {React.Children.toArray(carouselItems)[index]}
     </button>
     )

@@ -1,12 +1,13 @@
 import { CarouselInternalState, CarouselProps } from "../types";
 
 /*
-getCounterPart gets the index of the clones.
+getOriginalCounterPart gets the index of the original children.
 For example, we have an array [clones, originalChildren, clones];
-And we want to get the counter part index of the clones for the originalChildren.
-And this does that.
+Before making the clones, an item's index is 0, but after the clone,
+the index is different it could be 4, because we added clones to the array after "componentDidMount".
+And this function gets the "index" of the item after the clones.
 */
-function getCounterPart(
+function getOriginalCounterPart(
   index: number,
   {
     slidesToShow,
@@ -16,17 +17,8 @@ function getCounterPart(
   childrenArr: any[]
 ): number {
   if (childrenArr.length > slidesToShow * 2) {
-    const originalFirstSlide =
-      childrenArr.length - (childrenArr.length - slidesToShow * 2);
-    if (index < currentSlide) {
-      return originalFirstSlide + index;
-    } else {
-      // this means navigative value.
-      if (index - (childrenArr.length - slidesToShow * 2) < 0) {
-        return index * 2;
-      }
-      return index - (childrenArr.length - slidesToShow * 2);
-    }
+    const originalCouterPart = index + slidesToShow * 2;
+    return originalCouterPart;
   } else {
     if (currentSlide >= childrenArr.length) {
       return childrenArr.length + index;
@@ -34,6 +26,30 @@ function getCounterPart(
       return index;
     }
   }
+}
+
+/*
+getCloneCounterPart.
+For example, before we make the clones, an item's index is 0, but after the clones
+we have we have an array like this [clones, originalChildren, clones] and the index of item we were talking about becomes 4,
+because we change the array by adding clones to it. However, we want to get the clone counter part of this item that's at index 4.
+And this gets the exact clone that is exactly the same as item at index 4. (Node: This item belongs to the originalChildren)
+
+We only need this if (childrenArr.length > slidesToShow * 2) as defined in the getClones function.
+*/
+function getCloneCounterPart(
+  index: number,
+  {
+    slidesToShow,
+    totalItems
+  }: { slidesToShow: number; currentSlide: number; totalItems: number },
+  childrenArr: any[]
+): number | null {
+  if (childrenArr.length > slidesToShow * 2) {
+    const cloneCouterPart = index - (childrenArr.length - slidesToShow * 2);
+    return cloneCouterPart;
+  }
+  return null;
 }
 
 /*
@@ -122,4 +138,9 @@ function whenEnteredClones(
   };
 }
 
-export { getCounterPart, getClones, whenEnteredClones };
+export {
+  getOriginalCounterPart,
+  getCloneCounterPart,
+  getClones,
+  whenEnteredClones
+};

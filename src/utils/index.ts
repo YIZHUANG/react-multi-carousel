@@ -1,4 +1,5 @@
-import { getCounterPart, getClones, whenEnteredClones } from "./clones";
+import { getOriginalCounterPart,
+getCloneCounterPart, getClones, whenEnteredClones } from "./clones";
 import {
   getWidthFromDeviceType,
   getParitialVisibilityGutter
@@ -7,7 +8,8 @@ import { getInitialState, getIfSlideIsVisbile } from './common';
 import throttle from "./throttle";
 
 export {
-  getCounterPart,
+  getOriginalCounterPart,
+  getCloneCounterPart,
   getClones,
   getWidthFromDeviceType,
   whenEnteredClones,

@@ -124,7 +124,7 @@ class Index extends React.Component {
           itemClass="image-item"
           deviceType={this.props.deviceType}
         >
-          {fakerData.slice(0,9).map(card => {
+          {fakerData.slice(0,8).map(card => {
             return <Image url={card.image} alt={card.headline} />;
           })}
         </Carousel>
