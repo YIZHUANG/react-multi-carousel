@@ -53,7 +53,7 @@ class CarouselWithCustomDots extends React.PureComponent {
     const CustomDot = ({
       index,
       onClick,
-      slideIndex,
+      active,
       carouselState: { currentSlide }
     }) => {
       return (
@@ -63,7 +63,7 @@ class CarouselWithCustomDots extends React.PureComponent {
             e.preventDefault();
           }}
           className={classNames("custom-dot", {
-            "custom-dot--active": currentSlide === slideIndex
+            "custom-dot--active": active
           })}
         >
           {React.Children.toArray(images)[index]}
