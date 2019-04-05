@@ -42,7 +42,7 @@ const CarouselItems = ({ props, state }:CarouselItemsProps):any => {
               }px`
             : "auto"
         }}
-        className={itemClass}
+        className={`react-multi-carousel-item ${itemClass}`}
       >
         {child}
       </li>
@@ -64,7 +64,7 @@ const CarouselItems = ({ props, state }:CarouselItemsProps):any => {
             }px`
           : "auto"
       }}
-      className={itemClass}
+      className={`react-multi-carousel-item ${itemClass}`}
     >
       {child}
     </li>
