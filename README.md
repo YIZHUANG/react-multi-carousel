@@ -73,7 +73,7 @@ Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/
 
 ## Usage
 
-```
+```js
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -127,7 +127,7 @@ You custom arrows will receive a list of props/state that's passed back by the c
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomArrows.js)
 
-```
+```js
 const CustomRightArrow = ({ onClick, ...rest }) => {
   const { onMove, state: {  currentSlide, deviceType }  } = rest;
   // onMove means if dragging or swiping in progress.
@@ -144,7 +144,7 @@ This is very useful if you don't want the dots, or arrows and you want to fully 
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomArrows.js)
 
-```
+```js
 const ButtonGroup = ({ next, previous, goToSlide ...rest }) => {
   const { carouselState: { currentSlide } } = rest;
   return (
@@ -175,7 +175,7 @@ You custom dots will receive a list of props/state that's passed back by the car
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomDot.js)
 
-```
+```js
 const CustomDot = ({ onClick, ...rest }) => {
   const { onMove, index, active, carouselState: { currentSlide, deviceType }  } = rest;
   const carouselItems = [<CarouselItem1, CaourselItem2, CarouselItem3];
@@ -201,7 +201,7 @@ paritialVisibile = {true} means showing both.
 
 [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=paritially%20visibie%20on%20next%20items&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
-```
+```js
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
@@ -231,7 +231,7 @@ This is a callback function that is invoked each time when there has been a slid
 
 [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=afterChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
-```
+```js
 <Carousel afterChange={(previousSlide, { currentSlide, onMove }) => {
     doSpeicalThing()
   }}>
@@ -244,7 +244,7 @@ This is a callback function that is invoked each time before a sliding.
 
 [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=beforeChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
-```
+```js
 <Carousel beforeChange={(nextSlide, { currentSlide, onMove }) => {
     doSpeicalThing()
   }}>
@@ -257,7 +257,7 @@ They are very useful in the following cases:
 
 - The carousel item is clickable, but you don't want it to be clickable while the user is dragging it or swiping it.
 
-```
+```js
 <Carousel beforeChange={() => this.setState({ isMoving: true })} afterChange={() => this.setState({ isMoving: false })}>
   <a onClick={(e) => {
     if(this.state.isMoving) {
@@ -269,7 +269,7 @@ They are very useful in the following cases:
 
 - Preparing for the next slide.
 
-```
+```js
 <Carousel beforeChange={(nextSlide) => this.setState({ nextSlide: nextSlide })}>
   <div>Initial slide</div>
   <div onClick={() => {
@@ -282,7 +282,7 @@ They are very useful in the following cases:
 
 ## Using ref.
 
-```
+```js
 <Carousel ref={(el) => (this.Carousel = el)} arrows={false} responsive={responsive}>
   <ItemOne />
   <ItemTwo />
