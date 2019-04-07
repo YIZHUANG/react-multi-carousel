@@ -12,11 +12,20 @@
     "export": "build-storybook -c .storybook -o .out",
     "build-storybook": "build-storybook",
     "after-build": "cd src && copyfiles -f assets/* ../lib",
-    "publish-ssr": "cd examples/ssr && now && now alias react-multi-carousel.now.sh"
+    "publish-ssr": "cd examples/ssr && now && now alias react-multi-carousel.now.sh",
+    "prettier": "prettier --write {examples,src,stories,test}/**/*.{js,ts,tsx}",
+    "lint-staged": "lint-staged",
+    "precommit": "lint-staged"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/YIZHUANG/react-multi-carousel.git"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "keywords": [
     "react",
@@ -74,7 +83,10 @@
     "enzyme-adapter-react-16": "^1.10.0",
     "enzyme-to-json": "^3.3.5",
     "faker": "^4.1.0",
+    "husky": "^1.3.1",
     "jest": "^24.1.0",
+    "lint-staged": "^8.1.5",
+    "prettier": "^1.16.4",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-ga": "^2.5.7",
