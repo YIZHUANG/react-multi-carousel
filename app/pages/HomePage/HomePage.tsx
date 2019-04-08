@@ -97,6 +97,8 @@ class Index extends React.Component {
           */
           responsive={responsive}
           ssr
+          showDots
+          arrows={false}
           infinite={false}
           beforeChange={() => this.setState({ isMoving: true })}
           afterChange={() => this.setState({ isMoving: false })}
@@ -124,7 +126,7 @@ class Index extends React.Component {
           itemClass="image-item"
           deviceType={this.props.deviceType}
         >
-          {fakerData.slice(0,8).map(card => {
+          {fakerData.slice(0,7).map(card => {
             return <Image url={card.image} alt={card.headline} />;
           })}
         </Carousel>

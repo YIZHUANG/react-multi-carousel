@@ -44,10 +44,7 @@ const CarouselItems = ({ props, state }: CarouselItemsProps): any => {
         }}
         className={`react-multi-carousel-item ${itemClass}`}
       >
-        {React.cloneElement(child, {
-          isvisible: getIfSlideIsVisbile(index, state),
-          active: currentSlide === index
-        })}
+        {child}
       </li>
     ));
   }
@@ -69,10 +66,7 @@ const CarouselItems = ({ props, state }: CarouselItemsProps): any => {
       }}
       className={`react-multi-carousel-item ${itemClass}`}
     >
-      {React.cloneElement(child, {
-        isvisible: getIfSlideIsVisbile(index, state),
-        active: currentSlide === index
-      })}
+      {child}
     </li>
   ));
 };

@@ -4,7 +4,7 @@ declare function getOriginalCounterPart(index: number, { slidesToShow, currentSl
     currentSlide: number;
     totalItems: number;
 }, childrenArr: any[]): number;
-declare function getCloneCounterPart(index: number, { slidesToShow, totalItems }: {
+declare function getCloneCounterPart(index: number, { slidesToShow, totalItems, currentSlide }: {
     slidesToShow: number;
     currentSlide: number;
     totalItems: number;

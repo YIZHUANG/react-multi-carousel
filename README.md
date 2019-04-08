@@ -115,35 +115,6 @@ const responsive = {
 </Carousel>;
 ```
 
-## Children
-
-A list of children you pass to the carousel will receive 'active' and 'isvisibile' props.
-This is very useful if you want to scale out the item if its active, or your carousel items are videos, and you want them to auto play when its visible on the screen.
-
-```js
-const CarouselItem = ({ active, isvisibile }) => {
-  return <img style={{ transform: active ? 'scale(1.2)' : 'none' }}></img>
-}
-class Video extends React.Component {
-  componentDidUpdate({ isvisibile }) {
-    if(!isvisibile && this.props.isvisibile) {
-      this.video.current.play();
-    }
-  }
-  render() {
-    return <video ref={node => this.video = node} autoplay={false} />
-  }
-}
-// your carousel component
-return (
-  <Carousel>
-    <CarouselItem />
-    <CarouselItem />
-    <Video />
-  <Carousel>
-)
-```
-
 ## Custom Arrows.
 
 You can pass your own custom arrows to make it the way you want, the same for the position. For example, add media query for the arrows to go under when on smaller screens.
