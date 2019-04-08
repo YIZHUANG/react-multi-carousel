@@ -91,6 +91,46 @@ class Index extends React.Component {
     };
     return (
       <div className={classes.root}>
+        <Carousel
+          /*
+          disableSwipeOnMobile
+          disableDrag
+          */
+          responsive={responsive}
+          ssr
+          showDots
+          arrows={false}
+          infinite={true}
+          beforeChange={() => this.setState({ isMoving: true })}
+          afterChange={() => this.setState({ isMoving: false })}
+          containerClass="first-carousel-container container"
+          slidesToSlide={1}
+          deviceType={this.props.deviceType}
+        >
+          {fakerData.map((card, index) => {
+            return <Card index={index} isMoving={this.state.isMoving} {...card} />;
+          })}
+        </Carousel>
+
+        <Carousel
+          /*
+          disableSwipeOnMobile
+          disableDrag
+          */
+          responsive={responsive}
+          ssr
+          showDots
+          minimumTouchDrag={80}
+          slidesToSlide={1}
+          infinite={true}
+          containerClass="container-with-dots"
+          itemClass="image-item"
+          deviceType={this.props.deviceType}
+        >
+          {fakerData.slice(0,3).map(card => {
+            return <Image url={card.image} alt={card.headline} />;
+          })}
+        </Carousel>
         <CarouselWithCustomDots />
       </div>
     );

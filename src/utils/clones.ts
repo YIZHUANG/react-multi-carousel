@@ -16,6 +16,7 @@ function getOriginalCounterPart(
   }: { slidesToShow: number; currentSlide: number; totalItems: number },
   childrenArr: any[]
 ): number {
+  // this function is only used for "infinite and showDots are true";
   if (childrenArr.length > slidesToShow * 2) {
     const originalCouterPart = index + slidesToShow * 2;
     return originalCouterPart;
@@ -46,11 +47,36 @@ function getCloneCounterPart(
   }: { slidesToShow: number; currentSlide: number; totalItems: number },
   childrenArr: any[]
 ): number | undefined {
+  // this function is only used for "infinite and showDots are true";
   if (childrenArr.length > slidesToShow * 2) {
+    if (index === 0) {
+      // if (childrenArr.length > slidesToShow * 2) it means our data structure is like the following:
+      /*
+      const carouselItems = [
+        ...childrenArr.slice(
+          childrenArr.length - slidesToShow * 2,
+          childrenArr.length
+        ),
+        ...childrenArr,
+        ...childrenArr.slice(0, slidesToShow * 2)
+      ]
+      As you can see its being clone (childrenArr.length - slidesToShow * 2) times,
+      so the couter part index for 0 is (childrenArr.length + slidesToShow * 2)
+      */
+      return childrenArr.length + slidesToShow * 2;
+    }
     const cloneCouterPart = index - (childrenArr.length - slidesToShow * 2);
     return cloneCouterPart;
   } else {
-    return undefined
+    if (index === 0) {
+      // if !(childrenArr.length > slidesToShow * 2) it means our data structure is like the following:
+      /*
+      const carouselItems = [...children, ...children, ...children]
+      As you can see its being clone 3 times, so the couter part index for 0 is childrenArr.length * 2
+      */
+      return childrenArr.length * 2;
+    }
+    return undefined;
   }
 }
 
