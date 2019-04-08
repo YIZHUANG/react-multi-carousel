@@ -289,40 +289,47 @@ var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examp
 
 
 
-
-var Tag = function Tag(_ref) {
-  var name = _ref.name,
-      link = _ref.link;
-  return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("a", {
-    href: link,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 13
+var responsive = {
+  desktop: {
+    breakpoint: {
+      max: 3000,
+      min: 1024
     },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 14
+    items: 3,
+    paritialVisibilityGutter: 40
+  },
+  mobile: {
+    breakpoint: {
+      max: 464,
+      min: 0
     },
-    __self: this
-  }, name));
+    items: 2,
+    paritialVisibilityGutter: 30
+  },
+  tablet: {
+    breakpoint: {
+      max: 1024,
+      min: 200
+    },
+    items: 1,
+    paritialVisibilityGutter: 30
+  }
 };
 
-var ArticleCard = function ArticleCard(_ref2) {
-  var date = _ref2.date,
-      imageUrl = _ref2.imageUrl,
-      link = _ref2.link,
-      title = _ref2.title,
-      tags = _ref2.tags,
-      content = _ref2.content;
+var ArticleCard = function ArticleCard(_ref) {
+  var date = _ref.date,
+      imageUrl = _ref.imageUrl,
+      link = _ref.link,
+      title = _ref.title,
+      tags = _ref.tags,
+      content = _ref.content;
   return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_card__WEBPACK_IMPORTED_MODULE_11__["default"], {
     link: link,
     image: imageUrl,
     headline: title,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 39
     },
     __self: this
   });
@@ -349,7 +356,7 @@ function (_React$PureComponent) {
         }, article, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 26
+            lineNumber: 47
           },
           __self: this
         }));
@@ -360,17 +367,17 @@ function (_React$PureComponent) {
           src: article.imageUrl,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 28
+            lineNumber: 50
           },
           __self: this
         });
       });
 
-      var CustomDot = function CustomDot(_ref3) {
-        var index = _ref3.index,
-            _onClick = _ref3.onClick,
-            slideIndex = _ref3.slideIndex,
-            currentSlide = _ref3.carouselState.currentSlide;
+      var CustomDot = function CustomDot(_ref2) {
+        var index = _ref2.index,
+            _onClick = _ref2.onClick,
+            active = _ref2.active,
+            currentSlide = _ref2.carouselState.currentSlide;
         return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("button", {
           onClick: function onClick(e) {
             _onClick();
@@ -378,42 +385,16 @@ function (_React$PureComponent) {
             e.preventDefault();
           },
           className: classnames__WEBPACK_IMPORTED_MODULE_8___default()("custom-dot", {
-            "custom-dot--active": currentSlide === slideIndex
+            "custom-dot--active": active
           }),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 37
+            lineNumber: 60
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_6___default.a.Children.toArray(images)[index]);
       };
 
-      var responsive = {
-        desktop: {
-          breakpoint: {
-            max: 3000,
-            min: 1024
-          },
-          items: 3,
-          paritialVisibilityGutter: 40
-        },
-        mobile: {
-          breakpoint: {
-            max: 464,
-            min: 0
-          },
-          items: 2,
-          paritialVisibilityGutter: 30
-        },
-        tablet: {
-          breakpoint: {
-            max: 1024,
-            min: 200
-          },
-          items: 1,
-          paritialVisibilityGutter: 30
-        }
-      };
       return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_7___default.a, {
         showDots: true,
         deviceType: deviceType,
@@ -426,13 +407,13 @@ function (_React$PureComponent) {
         customDot: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(CustomDot, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 86
+            lineNumber: 83
           },
           __self: this
         }),
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 77
+          lineNumber: 74
         },
         __self: this
       }, children);
@@ -116373,6 +116354,43 @@ module.exports = __webpack_require__(/*! ./lib */ "./node_modules/react-multi-ca
 
 /***/ }),
 
+/***/ "./node_modules/react-multi-carousel/lib/Arrows.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/react-multi-carousel/lib/Arrows.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var LeftArrow = function (_a) {
+    var customLeftArrow = _a.customLeftArrow, getState = _a.getState, previous = _a.previous;
+    if (customLeftArrow) {
+        return React.cloneElement(customLeftArrow, {
+            onClick: function () { return previous(); },
+            carouselState: getState()
+        });
+    }
+    return (React.createElement("button", { className: "react-multiple-carousel__arrow react-multiple-carousel__arrow--left", onClick: function () { return previous(); } }));
+};
+exports.LeftArrow = LeftArrow;
+var RightArrow = function (_a) {
+    var customRightArrow = _a.customRightArrow, next = _a.next, getState = _a.getState;
+    if (customRightArrow) {
+        return React.cloneElement(customRightArrow, {
+            onClick: function () { return next(); },
+            carouselState: getState()
+        });
+    }
+    return (React.createElement("button", { className: "react-multiple-carousel__arrow react-multiple-carousel__arrow--right", onClick: function () { return next(); } }));
+};
+exports.RightArrow = RightArrow;
+//# sourceMappingURL=Arrows.js.map
+
+/***/ }),
+
 /***/ "./node_modules/react-multi-carousel/lib/Carousel.js":
 /*!***********************************************************!*\
   !*** ./node_modules/react-multi-carousel/lib/Carousel.js ***!
@@ -116382,16 +116400,44 @@ module.exports = __webpack_require__(/*! ./lib */ "./node_modules/react-multi-ca
 
 "use strict";
 
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/react-multi-carousel/lib/utils.js");
-const defaultTransitionDuration = 400;
-const defaultTransition = "transform 400ms ease-in-out";
-class Carousel extends React.Component {
-    constructor(props) {
-        super(props);
-        this.containerRef = React.createRef();
-        this.state = {
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/react-multi-carousel/lib/utils/index.js");
+var Dots_1 = __webpack_require__(/*! ./Dots */ "./node_modules/react-multi-carousel/lib/Dots.js");
+var Arrows_1 = __webpack_require__(/*! ./Arrows */ "./node_modules/react-multi-carousel/lib/Arrows.js");
+var CarouselItems_1 = __webpack_require__(/*! ./CarouselItems */ "./node_modules/react-multi-carousel/lib/CarouselItems.js");
+var defaultTransitionDuration = 400;
+var defaultTransition = "transform 400ms ease-in-out";
+var Carousel = /** @class */ (function (_super) {
+    __extends(Carousel, _super);
+    function Carousel(props) {
+        var _this = _super.call(this, props) || this;
+        _this.containerRef = React.createRef();
+        _this.state = {
             itemWidth: 0,
             slidesToShow: 0,
             currentSlide: 0,
@@ -116403,38 +116449,39 @@ class Carousel extends React.Component {
             containerWidth: 0,
             isSliding: false
         };
-        const { infinite, transitionDuration } = props;
-        this.onResize = this.onResize.bind(this);
-        this.handleDown = this.handleDown.bind(this);
-        this.handleMove = this.handleMove.bind(this);
-        this.handleOut = this.handleOut.bind(this);
-        this.onKeyUp = this.onKeyUp.bind(this);
-        this.handleEnter = this.handleEnter.bind(this);
-        this.setIsInThrottle = this.setIsInThrottle.bind(this);
+        var infinite = props.infinite, transitionDuration = props.transitionDuration;
+        _this.onResize = _this.onResize.bind(_this);
+        _this.handleDown = _this.handleDown.bind(_this);
+        _this.handleMove = _this.handleMove.bind(_this);
+        _this.handleOut = _this.handleOut.bind(_this);
+        _this.onKeyUp = _this.onKeyUp.bind(_this);
+        _this.handleEnter = _this.handleEnter.bind(_this);
+        _this.setIsInThrottle = _this.setIsInThrottle.bind(_this);
         /*
         The reason of using throttle its because of cloning elemnts for inifinite mode.
         */
-        this.next = infinite
-            ? utils_1.throttle(this.next.bind(this), props.transitionDuration || defaultTransitionDuration, this.setIsInThrottle)
-            : this.next.bind(this);
-        this.previous = infinite
-            ? utils_1.throttle(this.previous.bind(this), props.transitionDuration || defaultTransitionDuration, this.setIsInThrottle)
-            : this.previous.bind(this);
-        this.goToSlide = infinite
-            ? utils_1.throttle(this.goToSlide.bind(this), props.transitionDuration || defaultTransitionDuration)
-            : this.goToSlide.bind(this);
-        this.getIfSlideIsVisbile = this.getIfSlideIsVisbile.bind(this);
-        this.onMove = false;
-        this.initialPosition = 0;
-        this.lastPosition = 0;
-        this.isAnimationAllowed = false;
-        this.direction = "";
-        this.isInThrottle = false;
+        _this.next = infinite
+            ? utils_1.throttle(_this.next.bind(_this), props.transitionDuration || defaultTransitionDuration, _this.setIsInThrottle)
+            : _this.next.bind(_this);
+        _this.previous = infinite
+            ? utils_1.throttle(_this.previous.bind(_this), props.transitionDuration || defaultTransitionDuration, _this.setIsInThrottle)
+            : _this.previous.bind(_this);
+        _this.goToSlide = infinite
+            ? utils_1.throttle(_this.goToSlide.bind(_this), props.transitionDuration || defaultTransitionDuration)
+            : _this.goToSlide.bind(_this);
+        _this.onMove = false;
+        _this.initialPosition = 0;
+        _this.lastPosition = 0;
+        _this.isAnimationAllowed = false;
+        _this.direction = "";
+        _this.isInThrottle = false;
+        return _this;
     }
-    setIsInThrottle(isInThrottle = false) {
+    Carousel.prototype.setIsInThrottle = function (isInThrottle) {
+        if (isInThrottle === void 0) { isInThrottle = false; }
         this.isInThrottle = isInThrottle;
-    }
-    componentDidMount() {
+    };
+    Carousel.prototype.componentDidMount = function () {
         this.setState({ domLoaded: true });
         this.setItemsToShow();
         window.addEventListener("resize", this.onResize);
@@ -116445,52 +116492,55 @@ class Carousel extends React.Component {
         if (this.props.autoPlay && this.props.autoPlaySpeed) {
             this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
         }
-    }
+    };
     /*
     We only want to set the clones on the client-side cause it relies on getting the width of the carousel items.
     */
-    setClones(slidesToShow, itemWidth, forResizing) {
+    Carousel.prototype.setClones = function (slidesToShow, itemWidth, forResizing) {
+        var _this = this;
         this.isAnimationAllowed = false;
-        const childrenArr = React.Children.toArray(this.props.children);
-        const { clones, initialSlide } = utils_1.getClones(this.state.slidesToShow, childrenArr);
+        var childrenArr = React.Children.toArray(this.props.children);
+        var _a = utils_1.getClones(this.state.slidesToShow, childrenArr), clones = _a.clones, initialSlide = _a.initialSlide;
         this.setState({
-            clones,
+            clones: clones,
             totalItems: clones.length,
             currentSlide: forResizing ? this.state.currentSlide : initialSlide
-        }, () => {
-            this.correctItemsPosition(itemWidth || this.state.itemWidth);
+        }, function () {
+            _this.correctItemsPosition(itemWidth || _this.state.itemWidth);
         });
-    }
-    setItemsToShow(shouldCorrectItemPosition) {
-        const { responsive, infinite } = this.props;
-        Object.keys(responsive).forEach(item => {
-            const { breakpoint, items } = responsive[item];
-            const { max, min } = breakpoint;
+    };
+    Carousel.prototype.setItemsToShow = function (shouldCorrectItemPosition) {
+        var _this = this;
+        var _a = this.props, responsive = _a.responsive, infinite = _a.infinite;
+        Object.keys(responsive).forEach(function (item) {
+            var _a = responsive[item], breakpoint = _a.breakpoint, items = _a.items;
+            var max = breakpoint.max, min = breakpoint.min;
             if (window.innerWidth >= min && window.innerWidth <= max) {
-                this.setState({ slidesToShow: items, deviceType: item });
-                this.setContainerAndItemWidth(items, shouldCorrectItemPosition);
+                _this.setState({ slidesToShow: items, deviceType: item });
+                _this.setContainerAndItemWidth(items, shouldCorrectItemPosition);
             }
         });
-    }
+    };
     // this is for resizing.
-    setContainerAndItemWidth(slidesToShow, shouldCorrectItemPosition) {
+    Carousel.prototype.setContainerAndItemWidth = function (slidesToShow, shouldCorrectItemPosition) {
+        var _this = this;
         if (this.containerRef && this.containerRef.current) {
-            const containerWidth = this.containerRef.current.offsetWidth;
-            const itemWidth = Math.round(this.containerRef.current.offsetWidth / slidesToShow);
+            var containerWidth = this.containerRef.current.offsetWidth;
+            var itemWidth_1 = Math.round(this.containerRef.current.offsetWidth / slidesToShow);
             this.setState({
-                containerWidth,
-                itemWidth
-            }, () => {
-                if (this.props.infinite) {
-                    this.setClones(slidesToShow, itemWidth, shouldCorrectItemPosition);
+                containerWidth: containerWidth,
+                itemWidth: itemWidth_1
+            }, function () {
+                if (_this.props.infinite) {
+                    _this.setClones(slidesToShow, itemWidth_1, shouldCorrectItemPosition);
                 }
             });
             if (shouldCorrectItemPosition) {
-                this.correctItemsPosition(itemWidth);
+                this.correctItemsPosition(itemWidth_1);
             }
         }
-    }
-    correctItemsPosition(itemWidth, isAnimationAllowed) {
+    };
+    Carousel.prototype.correctItemsPosition = function (itemWidth, isAnimationAllowed) {
         /*
         For swipe, drag and resizing, they changed the position of the carousel, but the position are not always correct.
         Hence, this is to make sure our items are in the correct place.
@@ -116504,13 +116554,13 @@ class Carousel extends React.Component {
         this.setState({
             transform: -(itemWidth * this.state.currentSlide)
         });
-    }
-    onResize(value) {
+    };
+    Carousel.prototype.onResize = function (value) {
         // value here can be html event or a boolean.
         // if its in infinite mode, we want to keep the current slide index no matter what.
         // if its not infinite mode, keeping the current slide index has already been taken care of
-        const { infinite } = this.props;
-        let shouldCorrectItemPosition;
+        var infinite = this.props.infinite;
+        var shouldCorrectItemPosition;
         if (!infinite) {
             shouldCorrectItemPosition = false;
         }
@@ -116523,14 +116573,17 @@ class Carousel extends React.Component {
             }
         }
         this.setItemsToShow(shouldCorrectItemPosition);
-    }
-    componentDidUpdate({ keyBoardControl, autoPlay }, { containerWidth, domLoaded, isSliding }) {
+    };
+    Carousel.prototype.componentDidUpdate = function (_a, _b) {
+        var _this = this;
+        var keyBoardControl = _a.keyBoardControl, autoPlay = _a.autoPlay;
+        var containerWidth = _b.containerWidth, domLoaded = _b.domLoaded, isSliding = _b.isSliding;
         if (this.containerRef &&
             this.containerRef.current &&
             this.containerRef.current.offsetWidth !== containerWidth) {
             // this is for handing resizing.
-            setTimeout(() => {
-                this.setItemsToShow(true);
+            setTimeout(function () {
+                _this.setItemsToShow(true);
             }, this.props.transitionDuration || defaultTransitionDuration);
         }
         if (keyBoardControl && !this.props.keyBoardControl) {
@@ -116545,12 +116598,14 @@ class Carousel extends React.Component {
         }
         if (this.props.infinite) {
             // this is to quicly cancel the animation and move the items position to create the infinite effects.
-            this.correctClonesPosition({ domLoaded, isSliding });
+            this.correctClonesPosition({ domLoaded: domLoaded, isSliding: isSliding });
         }
-    }
-    correctClonesPosition({ domLoaded, isSliding }) {
-        const childrenArr = React.Children.toArray(this.props.children);
-        const { hasEnterClonedAfter, hasEnterClonedBefore, nextSlide, nextPosition } = utils_1.whenEnteredClones(this.state, childrenArr, this.props);
+    };
+    Carousel.prototype.correctClonesPosition = function (_a) {
+        var _this = this;
+        var domLoaded = _a.domLoaded, isSliding = _a.isSliding;
+        var childrenArr = React.Children.toArray(this.props.children);
+        var _b = utils_1.whenEnteredClones(this.state, childrenArr, this.props), hasEnterClonedAfter = _b.hasEnterClonedAfter, hasEnterClonedBefore = _b.hasEnterClonedBefore, nextSlide = _b.nextSlide, nextPosition = _b.nextPosition;
         if (
         // this is to prevent this gets called on the server-side.
         this.state.domLoaded &&
@@ -116559,27 +116614,32 @@ class Carousel extends React.Component {
             !this.state.isSliding) {
             if (hasEnterClonedAfter || hasEnterClonedBefore) {
                 this.isAnimationAllowed = false;
-                setTimeout(() => {
-                    this.setState({
+                setTimeout(function () {
+                    _this.setState({
                         transform: nextPosition,
                         currentSlide: nextSlide
                     });
                 }, this.props.transitionDuration || defaultTransitionDuration);
             }
         }
-    }
-    next(slidesHavePassed = 0) {
-        const { slidesToShow } = this.state;
-        const { slidesToSlide, infinite, afterChange, beforeChange } = this.props;
-        const nextMaximumSlides = this.state.currentSlide +
+    };
+    Carousel.prototype.next = function (slidesHavePassed) {
+        var _this = this;
+        if (slidesHavePassed === void 0) { slidesHavePassed = 0; }
+        var slidesToShow = this.state.slidesToShow;
+        var _a = this.props, slidesToSlide = _a.slidesToSlide, infinite = _a.infinite, afterChange = _a.afterChange, beforeChange = _a.beforeChange;
+        var nextMaximumSlides = this.state.currentSlide +
             1 +
             slidesHavePassed +
             slidesToShow +
             (slidesHavePassed > 0 ? 0 : slidesToSlide);
-        const nextSlides = this.state.currentSlide + slidesHavePassed + (slidesHavePassed > 0 ? 0 : slidesToSlide);
-        const nextPosition = -(this.state.itemWidth * nextSlides);
-        const previousSlide = this.state.currentSlide;
+        var nextSlides = this.state.currentSlide +
+            slidesHavePassed +
+            (slidesHavePassed > 0 ? 0 : slidesToSlide);
+        var nextPosition = -(this.state.itemWidth * nextSlides);
+        var previousSlide = this.state.currentSlide;
         if (nextMaximumSlides <= this.state.totalItems) {
+            // It means if we have next slides go back to on the right-hand side.
             if (typeof beforeChange === "function") {
                 beforeChange(nextSlides, this.getState());
             }
@@ -116588,20 +116648,21 @@ class Carousel extends React.Component {
                 isSliding: true,
                 transform: nextPosition,
                 currentSlide: nextSlides
-            }, () => {
-                this.setState({ isSliding: false });
+            }, function () {
+                _this.setState({ isSliding: false });
                 if (typeof afterChange === "function") {
-                    setTimeout(() => {
-                        afterChange(previousSlide, this.getState());
-                    }, this.props.transitionDuration || defaultTransitionDuration);
+                    setTimeout(function () {
+                        afterChange(previousSlide, _this.getState());
+                    }, _this.props.transitionDuration || defaultTransitionDuration);
                 }
             });
         }
         else if (nextMaximumSlides > this.state.totalItems &&
             this.state.currentSlide !== this.state.totalItems - slidesToShow) {
-            // prevent oversliding;
-            const maxSlides = this.state.totalItems - slidesToShow;
-            const maxPosition = -(this.state.itemWidth * maxSlides);
+            // This is to prevent oversliding
+            // This is not for inifinite mode as for inifinite mode is never over-sliding.
+            var maxSlides = this.state.totalItems - slidesToShow;
+            var maxPosition = -(this.state.itemWidth * maxSlides);
             if (typeof beforeChange === "function") {
                 beforeChange(maxSlides, this.getState());
             }
@@ -116610,28 +116671,31 @@ class Carousel extends React.Component {
                 isSliding: true,
                 transform: maxPosition,
                 currentSlide: maxSlides
-            }, () => {
-                this.setState({ isSliding: false });
+            }, function () {
+                _this.setState({ isSliding: false });
                 if (typeof afterChange === "function") {
-                    setTimeout(() => {
-                        afterChange(previousSlide, this.getState());
-                    }, this.props.transitionDuration || defaultTransitionDuration);
+                    setTimeout(function () {
+                        afterChange(previousSlide, _this.getState());
+                    }, _this.props.transitionDuration || defaultTransitionDuration);
                 }
             });
         }
         else {
             return;
         }
-    }
-    previous(slidesHavePassed = 0) {
-        const { slidesToShow } = this.state;
-        const { slidesToSlide, infinite, afterChange, beforeChange } = this.props;
-        const nextSlides = this.state.currentSlide -
+    };
+    Carousel.prototype.previous = function (slidesHavePassed) {
+        var _this = this;
+        if (slidesHavePassed === void 0) { slidesHavePassed = 0; }
+        var slidesToShow = this.state.slidesToShow;
+        var _a = this.props, slidesToSlide = _a.slidesToSlide, infinite = _a.infinite, afterChange = _a.afterChange, beforeChange = _a.beforeChange;
+        var nextSlides = this.state.currentSlide -
             slidesHavePassed -
             (slidesHavePassed > 0 ? 0 : slidesToSlide);
-        const nextPosition = -(this.state.itemWidth * nextSlides);
-        const previousSlide = this.state.currentSlide;
+        var nextPosition = -(this.state.itemWidth * nextSlides);
+        var previousSlide = this.state.currentSlide;
         if (nextSlides >= 0) {
+            // It means if we have next slides go back to on the left-hand side.
             if (typeof beforeChange === "function") {
                 beforeChange(nextSlides, this.getState());
             }
@@ -116640,17 +116704,19 @@ class Carousel extends React.Component {
                 isSliding: true,
                 transform: nextPosition,
                 currentSlide: nextSlides
-            }, () => {
-                this.setState({ isSliding: false });
+            }, function () {
+                _this.setState({ isSliding: false });
                 if (typeof afterChange === "function") {
-                    setTimeout(() => {
-                        afterChange(previousSlide, this.getState());
-                    }, this.props.transitionDuration || defaultTransitionDuration);
+                    setTimeout(function () {
+                        afterChange(previousSlide, _this.getState());
+                    }, _this.props.transitionDuration || defaultTransitionDuration);
                 }
             });
         }
         else if (nextSlides < 0 && this.state.currentSlide !== 0) {
             // prevent oversliding.
+            // it means the user has almost scrolling over to what we have.
+            // this is not for infinite mode as infinite mode always has items to go back to.
             if (typeof beforeChange === "function") {
                 beforeChange(0, this.getState());
             }
@@ -116659,39 +116725,20 @@ class Carousel extends React.Component {
                 isSliding: true,
                 transform: 0,
                 currentSlide: 0
-            }, () => {
-                this.setState({ isSliding: false });
+            }, function () {
+                _this.setState({ isSliding: false });
                 if (typeof afterChange === "function") {
-                    setTimeout(() => {
-                        afterChange(previousSlide, this.getState());
-                    }, this.props.transitionDuration || defaultTransitionDuration);
+                    setTimeout(function () {
+                        afterChange(previousSlide, _this.getState());
+                    }, _this.props.transitionDuration || defaultTransitionDuration);
                 }
             });
         }
         else {
-            const maxSlides = this.state.totalItems - slidesToShow;
-            const maxPosition = -(this.state.itemWidth * maxSlides);
-            if (infinite) {
-                if (typeof beforeChange === "function") {
-                    beforeChange(maxSlides, this.getState());
-                }
-                this.isAnimationAllowed = true;
-                this.setState({
-                    isSliding: true,
-                    transform: maxPosition,
-                    currentSlide: maxSlides
-                }, () => {
-                    this.setState({ isSliding: false });
-                    if (typeof afterChange === "function") {
-                        setTimeout(() => {
-                            afterChange(previousSlide, this.getState());
-                        }, this.props.transitionDuration || defaultTransitionDuration);
-                    }
-                });
-            }
+            return;
         }
-    }
-    componentWillUnmount() {
+    };
+    Carousel.prototype.componentWillUnmount = function () {
         window.removeEventListener("resize", this.onResize);
         if (this.props.keyBoardControl) {
             window.removeEventListener("keyup", this.onKeyUp);
@@ -116700,44 +116747,47 @@ class Carousel extends React.Component {
             clearInterval(this.autoPlay);
             this.autoPlay = undefined;
         }
-    }
-    resetMoveStatus() {
+    };
+    Carousel.prototype.resetMoveStatus = function () {
         this.onMove = false;
         this.initialPosition = 0;
         this.lastPosition = 0;
         this.direction = "";
-    }
-    handleDown(e) {
+    };
+    Carousel.prototype.handleDown = function (e) {
         if ((e.touches && !this.props.swipeable) ||
-            (e && !e.touches && !this.props.draggable) || (this.isInThrottle && this.props.infinite)) {
+            (e && !e.touches && !this.props.draggable) ||
+            (this.isInThrottle && this.props.infinite)) {
             return;
         }
-        const { clientX } = e.touches ? e.touches[0] : e;
+        var clientX = (e.touches ? e.touches[0] : e).clientX;
         this.onMove = true;
         this.initialPosition = clientX;
         this.lastPosition = clientX;
         this.isAnimationAllowed = false;
-    }
-    handleMove(e) {
+    };
+    Carousel.prototype.handleMove = function (e) {
         if ((e.touches && !this.props.swipeable) ||
             (e && !e.touches && !this.props.draggable)) {
             return;
         }
-        const { clientX } = e.touches ? e.touches[0] : e;
+        var clientX = (e.touches ? e.touches[0] : e).clientX;
         if (e.touches && this.autoPlay && this.props.autoPlay) {
             clearInterval(this.autoPlay);
             this.autoPlay = undefined;
         }
         if (this.onMove) {
-            const slidesHavePassedRight = Math.round((this.initialPosition - this.lastPosition) / this.state.itemWidth);
-            const slidesHavePassedLeft = Math.round((this.lastPosition - this.initialPosition) / this.state.itemWidth);
+            // making sure we have items to slide back to, prevent oversliding.
+            var slidesHavePassedRight = Math.round((this.initialPosition - this.lastPosition) / this.state.itemWidth);
+            // making sure we have items to slide back to, prevent oversliding.
+            var slidesHavePassedLeft = Math.round((this.lastPosition - this.initialPosition) / this.state.itemWidth);
             if (this.initialPosition > clientX &&
                 slidesHavePassedRight <= this.state.slidesToShow) {
                 this.direction = "right";
-                const translateXLimit = Math.abs(-(this.state.itemWidth *
+                var translateXLimit = Math.abs(-(this.state.itemWidth *
                     (this.state.totalItems - this.state.slidesToShow)));
-                const nextTranslate = this.state.transform - (this.lastPosition - clientX);
-                const isLastSlide = this.state.currentSlide ===
+                var nextTranslate = this.state.transform - (this.lastPosition - clientX);
+                var isLastSlide = this.state.currentSlide ===
                     this.state.totalItems - this.state.slidesToShow;
                 if (Math.abs(nextTranslate) <= translateXLimit ||
                     (isLastSlide && this.props.infinite)) {
@@ -116747,28 +116797,28 @@ class Carousel extends React.Component {
             if (clientX > this.initialPosition &&
                 slidesHavePassedLeft <= this.state.slidesToShow) {
                 this.direction = "left";
-                const nextTranslate = this.state.transform + (clientX - this.lastPosition);
-                const isFirstSlide = this.state.currentSlide === 0;
+                var nextTranslate = this.state.transform + (clientX - this.lastPosition);
+                var isFirstSlide = this.state.currentSlide === 0;
                 if (nextTranslate <= 0 || (isFirstSlide && this.props.infinite)) {
                     this.setState({ transform: nextTranslate });
                 }
             }
             this.lastPosition = clientX;
         }
-    }
-    handleOut(e) {
+    };
+    Carousel.prototype.handleOut = function (e) {
         if (this.props.autoPlay && !this.autoPlay) {
             this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
         }
-        const shouldDisableOnMobile = e.type === "touchend" && !this.props.swipeable;
-        const shouldDisableOnDesktop = (e.type === "mouseleave" || e.type === "mouseup") &&
+        var shouldDisableOnMobile = e.type === "touchend" && !this.props.swipeable;
+        var shouldDisableOnDesktop = (e.type === "mouseleave" || e.type === "mouseup") &&
             !this.props.draggable;
         if (shouldDisableOnMobile || shouldDisableOnDesktop) {
             return;
         }
         if (this.onMove) {
             if (this.direction === "right") {
-                const slidesHavePassed = Math.round((this.initialPosition - this.lastPosition) / this.state.itemWidth);
+                var slidesHavePassed = Math.round((this.initialPosition - this.lastPosition) / this.state.itemWidth);
                 if (this.initialPosition - this.lastPosition >=
                     this.props.minimumTouchDrag) {
                     this.next(slidesHavePassed);
@@ -116778,7 +116828,7 @@ class Carousel extends React.Component {
                 }
             }
             if (this.direction === "left") {
-                const slidesHavePassed = Math.round((this.lastPosition - this.initialPosition) / this.state.itemWidth);
+                var slidesHavePassed = Math.round((this.lastPosition - this.initialPosition) / this.state.itemWidth);
                 if (this.lastPosition - this.initialPosition >
                     this.props.minimumTouchDrag) {
                     this.previous(slidesHavePassed);
@@ -116789,25 +116839,26 @@ class Carousel extends React.Component {
             }
             this.resetMoveStatus();
         }
-    }
-    onKeyUp(e) {
+    };
+    Carousel.prototype.onKeyUp = function (e) {
         switch (e.keyCode) {
             case 37:
                 return this.previous();
             case 39:
                 return this.next();
         }
-    }
-    handleEnter() {
+    };
+    Carousel.prototype.handleEnter = function () {
         if (this.autoPlay && this.props.autoPlay) {
             clearInterval(this.autoPlay);
             this.autoPlay = undefined;
         }
-    }
-    goToSlide(slide) {
-        const { itemWidth } = this.state;
-        const { afterChange, beforeChange } = this.props;
-        const previousSlide = this.state.currentSlide;
+    };
+    Carousel.prototype.goToSlide = function (slide) {
+        var _this = this;
+        var itemWidth = this.state.itemWidth;
+        var _a = this.props, afterChange = _a.afterChange, beforeChange = _a.beforeChange;
+        var previousSlide = this.state.currentSlide;
         if (typeof beforeChange === "function") {
             beforeChange(slide, this.getState());
         }
@@ -116815,143 +116866,66 @@ class Carousel extends React.Component {
         this.setState({
             currentSlide: slide,
             transform: -(itemWidth * slide)
-        }, () => {
-            if (this.props.infinite) {
-                this.correctClonesPosition({ domLoaded: true, isSliding: true });
+        }, function () {
+            if (_this.props.infinite) {
+                _this.correctClonesPosition({ domLoaded: true, isSliding: true });
             }
             if (typeof afterChange === "function") {
-                setTimeout(() => {
-                    afterChange(previousSlide, this.getState());
-                }, this.props.transitionDuration || defaultTransitionDuration);
+                setTimeout(function () {
+                    afterChange(previousSlide, _this.getState());
+                }, _this.props.transitionDuration || defaultTransitionDuration);
             }
         });
-    }
-    getState() {
-        return Object.assign({}, this.state, { onMove: this.onMove, direction: this.direction });
-    }
-    renderLeftArrow() {
-        const { customLeftArrow } = this.props;
-        if (customLeftArrow) {
-            return React.cloneElement(customLeftArrow, {
-                onClick: () => this.previous(),
-                carouselState: this.getState()
-            });
-        }
-        else {
-            return (React.createElement("button", { className: "react-multiple-carousel__arrow react-multiple-carousel__arrow--left", onClick: () => this.previous() }));
-        }
-    }
-    renderRightArrow() {
-        const { customRightArrow } = this.props;
-        if (customRightArrow) {
-            return React.cloneElement(customRightArrow, {
-                onClick: () => this.next(),
-                carouselState: this.getState()
-            });
-        }
-        else {
-            return (React.createElement("button", { className: "react-multiple-carousel__arrow react-multiple-carousel__arrow--right", onClick: () => this.next() }));
-        }
-    }
-    renderButtonGroups() {
-        const { customButtonGroup } = this.props;
+    };
+    Carousel.prototype.getState = function () {
+        return __assign({}, this.state, { onMove: this.onMove, direction: this.direction });
+    };
+    Carousel.prototype.renderLeftArrow = function () {
+        var _this = this;
+        var customLeftArrow = this.props.customLeftArrow;
+        return (React.createElement(Arrows_1.LeftArrow, { customLeftArrow: customLeftArrow, getState: function () { return _this.getState(); }, previous: this.previous }));
+    };
+    Carousel.prototype.renderRightArrow = function () {
+        var _this = this;
+        var customRightArrow = this.props.customRightArrow;
+        return (React.createElement(Arrows_1.RightArrow, { customRightArrow: customRightArrow, getState: function () { return _this.getState(); }, next: this.next }));
+    };
+    Carousel.prototype.renderButtonGroups = function () {
+        var _this = this;
+        var customButtonGroup = this.props.customButtonGroup;
         if (customButtonGroup) {
             return React.cloneElement(customButtonGroup, {
-                previous: () => this.previous(),
-                next: () => this.next(),
-                goToSlide: (slideIndex) => this.goToSlide(slideIndex),
+                previous: function () { return _this.previous(); },
+                next: function () { return _this.next(); },
+                goToSlide: function (slideIndex) { return _this.goToSlide(slideIndex); },
                 carouselState: this.getState()
             });
         }
         return null;
-    }
-    renderDotsList() {
-        const { customDot, dotListClass, infinite } = this.props;
-        // getPureItemsWithoutClone
-        const childrenArr = React.Children.toArray(this.props.children);
-        return (React.createElement("ul", { className: `react-multi-carousel-dot-list ${dotListClass}` }, Array(childrenArr.length)
-            .fill(0)
-            .map((item, index) => {
-            const slideIndex = infinite
-                ? utils_1.getCounterPart(index, this.state, childrenArr)
-                : index;
-            // console.log(getCounterPart(this.state.currentSlide, this.state, childrenArr), slideIndex);
-            if (customDot) {
-                return React.cloneElement(customDot, {
-                    index,
-                    slideIndex,
-                    onClick: () => this.goToSlide(slideIndex),
-                    carouselState: this.getState()
-                });
-            }
-            return (React.createElement("li", { key: index, className: `react-multi-carousel-dot ${this.state.currentSlide === slideIndex
-                    ? "react-multi-carousel-dot--active"
-                    : ""}` },
-                React.createElement("button", { onClick: () => this.goToSlide(slideIndex) })));
-        })));
-    }
-    getIfSlideIsVisbile(index) {
-        return (index >= this.state.currentSlide &&
-            index < this.state.currentSlide + this.state.slidesToShow);
-    }
-    getServerSideState() {
-        const { domLoaded, slidesToShow, containerWidth, itemWidth } = this.state;
-        const { deviceType, responsive, ssr, partialVisbile } = this.props;
-        let flexBisis;
-        const domFullyLoaded = domLoaded && slidesToShow && containerWidth && itemWidth;
-        if (ssr && deviceType && !domFullyLoaded) {
-            flexBisis = utils_1.guessWidthFromDeviceType(deviceType, responsive);
-        }
-        const shouldRenderOnSSR = ssr && deviceType && !domFullyLoaded && flexBisis;
-        const paritialVisibilityGutter = utils_1.getParitialVisibilityGutter(responsive, partialVisbile, deviceType, this.state.deviceType);
-        return {
-            shouldRenderOnSSR,
-            flexBisis,
-            domFullyLoaded,
-            paritialVisibilityGutter
-        };
-    }
-    renderCarouselItems() {
-        const { itemWidth } = this.state;
-        const { children, infinite, itemClass, partialVisbile } = this.props;
-        const { flexBisis, shouldRenderOnSSR, domFullyLoaded, paritialVisibilityGutter } = this.getServerSideState();
-        if (infinite) {
-            return this.state.clones.map((child, index) => (React.createElement("li", { key: index, "aria-hidden": this.getIfSlideIsVisbile(index) ? "false" : "true", "data-index": index, style: {
-                    flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
-                    position: "relative",
-                    width: domFullyLoaded
-                        ? `${partialVisbile && paritialVisibilityGutter
-                            ? itemWidth - paritialVisibilityGutter
-                            : itemWidth}px`
-                        : "auto"
-                }, className: itemClass }, child)));
-        }
-        return React.Children.toArray(children).map((child, index) => (React.createElement("li", { key: index, "data-index": index, "aria-hidden": this.getIfSlideIsVisbile(index) ? "false" : "true", style: {
-                flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
-                position: "relative",
-                width: domFullyLoaded
-                    ? `${partialVisbile && paritialVisibilityGutter
-                        ? itemWidth - paritialVisibilityGutter
-                        : itemWidth}px`
-                    : "auto"
-            }, className: itemClass }, child)));
-    }
-    render() {
-        const { slidesToShow } = this.state;
-        const { deviceType, slidesToSlide, arrows, removeArrowOnDeviceType, infinite, containerClass, sliderClass, customTransition, partialVisbile } = this.props;
-        const { shouldRenderOnSSR, paritialVisibilityGutter } = this.getServerSideState();
-        const isLeftEndReach = !(this.state.currentSlide - slidesToSlide >= 0);
-        const isRightEndReach = !(this.state.currentSlide + 1 + slidesToShow <=
+    };
+    Carousel.prototype.renderDotsList = function () {
+        var _this = this;
+        return (React.createElement(Dots_1.default, { state: this.state, props: this.props, goToSlide: this.goToSlide, getState: function () { return _this.getState(); } }));
+    };
+    Carousel.prototype.renderCarouselItems = function () {
+        return React.createElement(CarouselItems_1.default, { state: this.state, props: this.props });
+    };
+    Carousel.prototype.render = function () {
+        var slidesToShow = this.state.slidesToShow;
+        var _a = this.props, deviceType = _a.deviceType, slidesToSlide = _a.slidesToSlide, arrows = _a.arrows, removeArrowOnDeviceType = _a.removeArrowOnDeviceType, infinite = _a.infinite, containerClass = _a.containerClass, sliderClass = _a.sliderClass, customTransition = _a.customTransition, partialVisbile = _a.partialVisbile;
+        var _b = utils_1.getInitialState(this.state, this.props), shouldRenderOnSSR = _b.shouldRenderOnSSR, paritialVisibilityGutter = _b.paritialVisibilityGutter;
+        var isLeftEndReach = !(this.state.currentSlide - slidesToSlide >= 0);
+        var isRightEndReach = !(this.state.currentSlide + 1 + slidesToShow <=
             this.state.totalItems);
-        const shouldShowArrows = arrows &&
+        var shouldShowArrows = arrows &&
             !(removeArrowOnDeviceType &&
                 ((deviceType && removeArrowOnDeviceType.indexOf(deviceType) > -1) ||
                     (this.state.deviceType &&
                         removeArrowOnDeviceType.indexOf(this.state.deviceType) > -1)));
-        const disableLeftArrow = !infinite && isLeftEndReach;
-        const disableRightArrow = !infinite && isRightEndReach;
-        // this is the perfect formular, the perfect code.
-        const currentTransform = paritialVisibilityGutter && partialVisbile
+        var disableLeftArrow = !infinite && isLeftEndReach;
+        var disableRightArrow = !infinite && isRightEndReach;
+        // this is formular will be fixed once i find a better way.
+        var currentTransform = paritialVisibilityGutter && partialVisbile
             ? partialVisbile === "right"
                 ? this.state.transform +
                     this.state.currentSlide * paritialVisibilityGutter
@@ -116961,39 +116935,143 @@ class Carousel extends React.Component {
                         ? 0
                         : paritialVisibilityGutter + paritialVisibilityGutter / 2)
             : this.state.transform;
-        return (React.createElement("div", { className: `react-multi-carousel-list ${containerClass}`, ref: this.containerRef },
-            React.createElement("ul", { className: `react-multi-carousel-track ${sliderClass}`, 
+        return (React.createElement("div", { className: "react-multi-carousel-list " + containerClass, ref: this.containerRef },
+            React.createElement("ul", { className: "react-multi-carousel-track " + sliderClass, 
                 // @ts-ignore
                 style: {
                     transition: this.isAnimationAllowed
                         ? customTransition || defaultTransition
                         : "none",
                     overflow: shouldRenderOnSSR ? "hidden" : "unset",
-                    transform: `translate3d(${currentTransform}px,0,0)`
+                    transform: "translate3d(" + currentTransform + "px,0,0)"
                 }, onMouseMove: this.handleMove, onMouseDown: this.handleDown, onMouseUp: this.handleOut, onMouseEnter: this.handleEnter, onMouseLeave: this.handleOut, onTouchStart: this.handleDown, onTouchMove: this.handleMove, onTouchEnd: this.handleOut }, this.renderCarouselItems()),
             shouldShowArrows && !disableLeftArrow && this.renderLeftArrow(),
             shouldShowArrows && !disableRightArrow && this.renderRightArrow(),
             this.renderButtonGroups(),
-            this.props.showDots && this.renderDotsList()));
-    }
-}
-Carousel.defaultProps = {
-    slidesToSlide: 1,
-    infinite: false,
-    draggable: true,
-    swipeable: true,
-    arrows: true,
-    containerClass: "",
-    sliderClass: "",
-    itemClass: "",
-    keyBoardControl: true,
-    autoPlaySpeed: 3000,
-    showDots: false,
-    minimumTouchDrag: 80,
-    dotListClass: ""
-};
+            this.renderDotsList()));
+    };
+    Carousel.defaultProps = {
+        slidesToSlide: 1,
+        infinite: false,
+        draggable: true,
+        swipeable: true,
+        arrows: true,
+        containerClass: "",
+        sliderClass: "",
+        itemClass: "",
+        keyBoardControl: true,
+        autoPlaySpeed: 3000,
+        showDots: false,
+        minimumTouchDrag: 80,
+        dotListClass: ""
+    };
+    return Carousel;
+}(React.Component));
 exports.default = Carousel;
 //# sourceMappingURL=Carousel.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-multi-carousel/lib/CarouselItems.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/react-multi-carousel/lib/CarouselItems.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/react-multi-carousel/lib/utils/index.js");
+var CarouselItems = function (_a) {
+    var props = _a.props, state = _a.state;
+    var itemWidth = state.itemWidth, clones = state.clones, currentSlide = state.currentSlide;
+    var children = props.children, infinite = props.infinite, itemClass = props.itemClass, partialVisbile = props.partialVisbile;
+    var _b = utils_1.getInitialState(state, props), flexBisis = _b.flexBisis, shouldRenderOnSSR = _b.shouldRenderOnSSR, domFullyLoaded = _b.domFullyLoaded, paritialVisibilityGutter = _b.paritialVisibilityGutter;
+    if (infinite) {
+        return clones.map(function (child, index) { return (React.createElement("li", { key: index, "aria-hidden": utils_1.getIfSlideIsVisbile(index, state) ? "false" : "true", "data-index": index, style: {
+                flex: shouldRenderOnSSR ? "1 0 " + flexBisis + "%" : "auto",
+                position: "relative",
+                width: domFullyLoaded
+                    ? (partialVisbile && paritialVisibilityGutter
+                        ? itemWidth - paritialVisibilityGutter
+                        : itemWidth) + "px"
+                    : "auto"
+            }, className: "react-multi-carousel-item " + itemClass }, child)); });
+    }
+    return React.Children.toArray(children).map(function (child, index) { return (React.createElement("li", { key: index, "data-index": index, "aria-hidden": utils_1.getIfSlideIsVisbile(index, state) ? "false" : "true", style: {
+            flex: shouldRenderOnSSR ? "1 0 " + flexBisis + "%" : "auto",
+            position: "relative",
+            width: domFullyLoaded
+                ? (partialVisbile && paritialVisibilityGutter
+                    ? itemWidth - paritialVisibilityGutter
+                    : itemWidth) + "px"
+                : "auto"
+        }, className: "react-multi-carousel-item " + itemClass }, child)); });
+};
+exports.default = CarouselItems;
+//# sourceMappingURL=CarouselItems.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-multi-carousel/lib/Dots.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/react-multi-carousel/lib/Dots.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/react-multi-carousel/lib/utils/index.js");
+var Dots = function (_a) {
+    var props = _a.props, state = _a.state, goToSlide = _a.goToSlide, getState = _a.getState;
+    var showDots = props.showDots, customDot = props.customDot, dotListClass = props.dotListClass, infinite = props.infinite, children = props.children;
+    if (!showDots) {
+        return null;
+    }
+    var currentSlide = state.currentSlide;
+    var childrenArr = React.Children.toArray(children);
+    return (React.createElement("ul", { className: "react-multi-carousel-dot-list " + dotListClass }, Array(childrenArr.length)
+        .fill(0)
+        .map(function (item, index) {
+        var slideIndex = infinite
+            ? utils_1.getOriginalCounterPart(index, state, childrenArr)
+            : index;
+        var cloneIndex = infinite
+            ? utils_1.getCloneCounterPart(index, state, childrenArr)
+            : null;
+        var isActive;
+        // cloneIndex can be 0 and its true!
+        if (cloneIndex !== undefined) {
+            /*
+            It means we are in infinite mode, and the condition (childrenArr.length > slidesToShow * 2) is true.
+            Also there could be multiple items that are exactly the same but have different index due to the reasons that they are clones.
+            */
+            isActive =
+                currentSlide === cloneIndex || currentSlide === slideIndex;
+        }
+        else {
+            // we are not in infinite mode or we don't have duplicate clones.
+            isActive = currentSlide === slideIndex;
+        }
+        if (customDot) {
+            return React.cloneElement(customDot, {
+                index: index,
+                active: isActive,
+                onClick: function () { return goToSlide(slideIndex); },
+                carouselState: getState()
+            });
+        }
+        return (React.createElement("li", { "data-index": index, key: index, className: "react-multi-carousel-dot " + (isActive ? "react-multi-carousel-dot--active" : "") },
+            React.createElement("button", { onClick: function () { return goToSlide(slideIndex); } })));
+    })));
+};
+exports.default = Dots;
+//# sourceMappingURL=Dots.js.map
 
 /***/ }),
 
@@ -117007,59 +117085,34 @@ exports.default = Carousel;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Carousel_1 = __webpack_require__(/*! ./Carousel */ "./node_modules/react-multi-carousel/lib/Carousel.js");
+var Carousel_1 = __webpack_require__(/*! ./Carousel */ "./node_modules/react-multi-carousel/lib/Carousel.js");
 exports.default = Carousel_1.default;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ "./node_modules/react-multi-carousel/lib/utils.js":
-/*!********************************************************!*\
-  !*** ./node_modules/react-multi-carousel/lib/utils.js ***!
-  \********************************************************/
+/***/ "./node_modules/react-multi-carousel/lib/utils/clones.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/react-multi-carousel/lib/utils/clones.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-function guessWidthFromDeviceType(deviceType, responsive) {
-    let itemWidth;
-    if (responsive[deviceType]) {
-        const { items } = responsive[deviceType];
-        itemWidth = (100 / items).toFixed(1);
-    }
-    return itemWidth;
-}
-exports.guessWidthFromDeviceType = guessWidthFromDeviceType;
-function getParitialVisibilityGutter(responsive, partialVisbile, serverSideDeviceType, clientSideDeviceType) {
-    let gutter = 0;
-    const deviceType = clientSideDeviceType || serverSideDeviceType;
-    if (partialVisbile && deviceType) {
-        gutter = responsive[deviceType].paritialVisibilityGutter;
-    }
-    return gutter;
-}
-exports.getParitialVisibilityGutter = getParitialVisibilityGutter;
 /*
-getCounterPart gets the index of the clones.
+getOriginalCounterPart gets the index of the original children.
 For example, we have an array [clones, originalChildren, clones];
-And we want to get the counter part index of the clones for the originalChildren.
-And this does that.
+Before making the clones, an item's index is 0, but after the clone,
+the index is different it could be 4, because we added clones to the array after "componentDidMount".
+And this function gets the "index" of the item after the clones.
 */
-function getCounterPart(index, { slidesToShow, currentSlide, totalItems }, childrenArr) {
+function getOriginalCounterPart(index, _a, childrenArr) {
+    var slidesToShow = _a.slidesToShow, currentSlide = _a.currentSlide, totalItems = _a.totalItems;
     if (childrenArr.length > slidesToShow * 2) {
-        const originalFirstSlide = childrenArr.length - (childrenArr.length - slidesToShow * 2);
-        if (index < currentSlide) {
-            return originalFirstSlide + index;
-        }
-        else {
-            // this means navigative value.
-            if (index - (childrenArr.length - slidesToShow * 2) < 0) {
-                return index * 2;
-            }
-            return index - (childrenArr.length - slidesToShow * 2);
-        }
+        var originalCouterPart = index + slidesToShow * 2;
+        return originalCouterPart;
     }
     else {
         if (currentSlide >= childrenArr.length) {
@@ -117070,38 +117123,71 @@ function getCounterPart(index, { slidesToShow, currentSlide, totalItems }, child
         }
     }
 }
-exports.getCounterPart = getCounterPart;
-function getClones(slidesToShow, childrenArr) {
-    let initialSlide;
-    let clones;
+exports.getOriginalCounterPart = getOriginalCounterPart;
+/*
+getCloneCounterPart.
+For example, before we make the clones, an item's index is 0, but after the clones
+we have we have an array like this [clones, originalChildren, clones] and the index of item we were talking about becomes 4,
+because we change the array by adding clones to it. However, we want to get the clone counter part of this item that's at index 4.
+And this gets the exact clone that is exactly the same as item at index 4. (Node: This item belongs to the originalChildren)
+
+We only need this if (childrenArr.length > slidesToShow * 2) as defined in the getClones function.
+*/
+function getCloneCounterPart(index, _a, childrenArr) {
+    var slidesToShow = _a.slidesToShow, totalItems = _a.totalItems, currentSlide = _a.currentSlide;
     if (childrenArr.length > slidesToShow * 2) {
-        clones = [
-            ...childrenArr.slice(childrenArr.length - slidesToShow * 2, childrenArr.length),
-            ...childrenArr,
-            ...childrenArr.slice(0, slidesToShow * 2)
-        ];
+        if (index === 0) {
+            // 0 is a special case
+            return childrenArr.length + slidesToShow * 2;
+        }
+        var cloneCouterPart = index - (childrenArr.length - slidesToShow * 2);
+        return cloneCouterPart;
+    }
+    else {
+        if (index === 0) {
+            // 0 is a special case
+            return childrenArr.length + slidesToShow * 2 - 1;
+        }
+        return undefined;
+    }
+}
+exports.getCloneCounterPart = getCloneCounterPart;
+/*
+The current setting is if the length of the carousel item is larger than "slidesToShow * 2",
+then we clone "slidesToShow * 2" amount of beginning and end items.
+
+Otherwise, it means we only have a few items. Then we clone it 3 times.
+*/
+function getClones(slidesToShow, childrenArr) {
+    var initialSlide;
+    var clones;
+    if (childrenArr.length > slidesToShow * 2) {
+        clones = childrenArr.slice(childrenArr.length - slidesToShow * 2, childrenArr.length).concat(childrenArr, childrenArr.slice(0, slidesToShow * 2));
         initialSlide = slidesToShow * 2;
     }
     else {
-        clones = [...childrenArr, ...childrenArr, ...childrenArr];
+        clones = childrenArr.concat(childrenArr, childrenArr);
         initialSlide = childrenArr.length;
     }
     return {
-        clones,
-        initialSlide
+        clones: clones,
+        initialSlide: initialSlide
     };
 }
 exports.getClones = getClones;
 /*
 When the user sees the clones, we need to reset the position, and cancel the animation so that it
 creates the infinite effects.
+
+The if else statement here is based on the getClones method. Because it decides how many items we are cloning.
 */
-function whenEnteredClones({ currentSlide, slidesToShow, itemWidth, totalItems }, childrenArr, props) {
-    let nextSlide = 0;
-    let nextPosition = 0;
-    let hasEnterClonedAfter;
-    const hasEnterClonedBefore = currentSlide === 0;
-    const originalFirstSlide = childrenArr.length - (childrenArr.length - slidesToShow * 2);
+function whenEnteredClones(_a, childrenArr, props) {
+    var currentSlide = _a.currentSlide, slidesToShow = _a.slidesToShow, itemWidth = _a.itemWidth, totalItems = _a.totalItems;
+    var nextSlide = 0;
+    var nextPosition = 0;
+    var hasEnterClonedAfter;
+    var hasEnterClonedBefore = currentSlide === 0;
+    var originalFirstSlide = childrenArr.length - (childrenArr.length - slidesToShow * 2);
     if (childrenArr.length > slidesToShow * 2) {
         hasEnterClonedAfter =
             currentSlide >= originalFirstSlide + childrenArr.length;
@@ -117132,35 +117218,146 @@ function whenEnteredClones({ currentSlide, slidesToShow, itemWidth, totalItems }
         }
     }
     return {
-        hasEnterClonedAfter,
-        hasEnterClonedBefore,
-        nextSlide,
-        nextPosition
+        hasEnterClonedAfter: hasEnterClonedAfter,
+        hasEnterClonedBefore: hasEnterClonedBefore,
+        nextSlide: nextSlide,
+        nextPosition: nextPosition
     };
 }
 exports.whenEnteredClones = whenEnteredClones;
-const throttle = (func, limit, setIsInThrottle) => {
-    let inThrottle;
+//# sourceMappingURL=clones.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-multi-carousel/lib/utils/common.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/react-multi-carousel/lib/utils/common.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var elementWidth_1 = __webpack_require__(/*! ./elementWidth */ "./node_modules/react-multi-carousel/lib/utils/elementWidth.js");
+function getInitialState(state, props) {
+    var domLoaded = state.domLoaded, slidesToShow = state.slidesToShow, containerWidth = state.containerWidth, itemWidth = state.itemWidth;
+    var deviceType = props.deviceType, responsive = props.responsive, ssr = props.ssr, partialVisbile = props.partialVisbile;
+    var flexBisis;
+    var domFullyLoaded = Boolean(domLoaded && slidesToShow && containerWidth && itemWidth);
+    if (ssr && deviceType && !domFullyLoaded) {
+        flexBisis = elementWidth_1.getWidthFromDeviceType(deviceType, responsive);
+    }
+    var shouldRenderOnSSR = Boolean(ssr && deviceType && !domFullyLoaded && flexBisis);
+    var paritialVisibilityGutter = elementWidth_1.getParitialVisibilityGutter(responsive, partialVisbile, deviceType, state.deviceType);
+    return {
+        shouldRenderOnSSR: shouldRenderOnSSR,
+        flexBisis: flexBisis,
+        domFullyLoaded: domFullyLoaded,
+        paritialVisibilityGutter: paritialVisibilityGutter
+    };
+}
+exports.getInitialState = getInitialState;
+function getIfSlideIsVisbile(index, state) {
+    var currentSlide = state.currentSlide, slidesToShow = state.slidesToShow;
+    return index >= currentSlide && index < currentSlide + slidesToShow;
+}
+exports.getIfSlideIsVisbile = getIfSlideIsVisbile;
+//# sourceMappingURL=common.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-multi-carousel/lib/utils/elementWidth.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/react-multi-carousel/lib/utils/elementWidth.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+function getParitialVisibilityGutter(responsive, partialVisbile, serverSideDeviceType, clientSideDeviceType) {
+    var gutter = 0;
+    var deviceType = clientSideDeviceType || serverSideDeviceType;
+    if (partialVisbile && deviceType) {
+        gutter = responsive[deviceType].paritialVisibilityGutter;
+    }
+    return gutter;
+}
+exports.getParitialVisibilityGutter = getParitialVisibilityGutter;
+function getWidthFromDeviceType(deviceType, responsive) {
+    var itemWidth;
+    if (responsive[deviceType]) {
+        var items = responsive[deviceType].items;
+        itemWidth = (100 / items).toFixed(1);
+    }
+    return itemWidth;
+}
+exports.getWidthFromDeviceType = getWidthFromDeviceType;
+//# sourceMappingURL=elementWidth.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-multi-carousel/lib/utils/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/react-multi-carousel/lib/utils/index.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var clones_1 = __webpack_require__(/*! ./clones */ "./node_modules/react-multi-carousel/lib/utils/clones.js");
+exports.getOriginalCounterPart = clones_1.getOriginalCounterPart;
+exports.getCloneCounterPart = clones_1.getCloneCounterPart;
+exports.getClones = clones_1.getClones;
+exports.whenEnteredClones = clones_1.whenEnteredClones;
+var elementWidth_1 = __webpack_require__(/*! ./elementWidth */ "./node_modules/react-multi-carousel/lib/utils/elementWidth.js");
+exports.getWidthFromDeviceType = elementWidth_1.getWidthFromDeviceType;
+exports.getParitialVisibilityGutter = elementWidth_1.getParitialVisibilityGutter;
+var common_1 = __webpack_require__(/*! ./common */ "./node_modules/react-multi-carousel/lib/utils/common.js");
+exports.getInitialState = common_1.getInitialState;
+exports.getIfSlideIsVisbile = common_1.getIfSlideIsVisbile;
+var throttle_1 = __webpack_require__(/*! ./throttle */ "./node_modules/react-multi-carousel/lib/utils/throttle.js");
+exports.throttle = throttle_1.default;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-multi-carousel/lib/utils/throttle.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/react-multi-carousel/lib/utils/throttle.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var throttle = function (func, limit, setIsInThrottle) {
+    var inThrottle;
     return function () {
-        const args = arguments;
-        const context = this;
+        var args = arguments;
+        var context = this;
         if (!inThrottle) {
             func.apply(context, args);
             inThrottle = true;
-            if (typeof setIsInThrottle === 'function') {
+            if (typeof setIsInThrottle === "function") {
                 setIsInThrottle(true);
             }
-            setTimeout(() => {
+            setTimeout(function () {
                 inThrottle = false;
-                if (typeof setIsInThrottle === 'function') {
+                if (typeof setIsInThrottle === "function") {
                     setIsInThrottle(false);
                 }
             }, limit);
         }
     };
 };
-exports.throttle = throttle;
-//# sourceMappingURL=utils.js.map
+exports.default = throttle;
+//# sourceMappingURL=throttle.js.map
 
 /***/ }),
 

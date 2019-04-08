@@ -8,6 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "../../components/card";
 import Image from "../../components/image";
 import Carousel from "../../../src";
+import CarouselWithCustomDots from "./carousel-with-custom-dots";
 
 import Link from "next/link";
 
@@ -90,46 +91,7 @@ class Index extends React.Component {
     };
     return (
       <div className={classes.root}>
-        <Carousel
-          /*
-          disableSwipeOnMobile
-          disableDrag
-          */
-          responsive={responsive}
-          ssr
-          showDots
-          arrows={false}
-          infinite={false}
-          beforeChange={() => this.setState({ isMoving: true })}
-          afterChange={() => this.setState({ isMoving: false })}
-          containerClass="first-carousel-container container"
-          slidesToSlide={1}
-          deviceType={this.props.deviceType}
-        >
-          {fakerData.map((card, index) => {
-            return <Card index={index} isMoving={this.state.isMoving} {...card} />;
-          })}
-        </Carousel>
-
-        <Carousel
-          /*
-          disableSwipeOnMobile
-          disableDrag
-          */
-          responsive={responsive}
-          ssr
-          showDots
-          minimumTouchDrag={80}
-          slidesToSlide={1}
-          infinite={true}
-          containerClass="container-with-dots"
-          itemClass="image-item"
-          deviceType={this.props.deviceType}
-        >
-          {fakerData.slice(0,7).map(card => {
-            return <Image url={card.image} alt={card.headline} />;
-          })}
-        </Carousel>
+        <CarouselWithCustomDots />
       </div>
     );
   }

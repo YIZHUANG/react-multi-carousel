@@ -394,40 +394,47 @@ var _jsxFileName = "/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/examp
 
 
 
-
-var Tag = function Tag(_ref) {
-  var name = _ref.name,
-      link = _ref.link;
-  return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("a", {
-    href: link,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 13
+var responsive = {
+  desktop: {
+    breakpoint: {
+      max: 3000,
+      min: 1024
     },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 14
+    items: 3,
+    paritialVisibilityGutter: 40
+  },
+  mobile: {
+    breakpoint: {
+      max: 464,
+      min: 0
     },
-    __self: this
-  }, name));
+    items: 2,
+    paritialVisibilityGutter: 30
+  },
+  tablet: {
+    breakpoint: {
+      max: 1024,
+      min: 200
+    },
+    items: 1,
+    paritialVisibilityGutter: 30
+  }
 };
 
-var ArticleCard = function ArticleCard(_ref2) {
-  var date = _ref2.date,
-      imageUrl = _ref2.imageUrl,
-      link = _ref2.link,
-      title = _ref2.title,
-      tags = _ref2.tags,
-      content = _ref2.content;
+var ArticleCard = function ArticleCard(_ref) {
+  var date = _ref.date,
+      imageUrl = _ref.imageUrl,
+      link = _ref.link,
+      title = _ref.title,
+      tags = _ref.tags,
+      content = _ref.content;
   return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_card__WEBPACK_IMPORTED_MODULE_11__["default"], {
     link: link,
     image: imageUrl,
     headline: title,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 39
     },
     __self: this
   });
@@ -454,7 +461,7 @@ function (_React$PureComponent) {
         }, article, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 26
+            lineNumber: 47
           },
           __self: this
         }));
@@ -465,17 +472,17 @@ function (_React$PureComponent) {
           src: article.imageUrl,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 28
+            lineNumber: 50
           },
           __self: this
         });
       });
 
-      var CustomDot = function CustomDot(_ref3) {
-        var index = _ref3.index,
-            _onClick = _ref3.onClick,
-            slideIndex = _ref3.slideIndex,
-            currentSlide = _ref3.carouselState.currentSlide;
+      var CustomDot = function CustomDot(_ref2) {
+        var index = _ref2.index,
+            _onClick = _ref2.onClick,
+            active = _ref2.active,
+            currentSlide = _ref2.carouselState.currentSlide;
         return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("button", {
           onClick: function onClick(e) {
             _onClick();
@@ -483,42 +490,16 @@ function (_React$PureComponent) {
             e.preventDefault();
           },
           className: classnames__WEBPACK_IMPORTED_MODULE_8___default()("custom-dot", {
-            "custom-dot--active": currentSlide === slideIndex
+            "custom-dot--active": active
           }),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 37
+            lineNumber: 60
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_6___default.a.Children.toArray(images)[index]);
       };
 
-      var responsive = {
-        desktop: {
-          breakpoint: {
-            max: 3000,
-            min: 1024
-          },
-          items: 3,
-          paritialVisibilityGutter: 40
-        },
-        mobile: {
-          breakpoint: {
-            max: 464,
-            min: 0
-          },
-          items: 2,
-          paritialVisibilityGutter: 30
-        },
-        tablet: {
-          breakpoint: {
-            max: 1024,
-            min: 200
-          },
-          items: 1,
-          paritialVisibilityGutter: 30
-        }
-      };
       return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_7___default.a, {
         showDots: true,
         deviceType: deviceType,
@@ -531,13 +512,13 @@ function (_React$PureComponent) {
         customDot: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(CustomDot, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 86
+            lineNumber: 83
           },
           __self: this
         }),
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 77
+          lineNumber: 74
         },
         __self: this
       }, children);

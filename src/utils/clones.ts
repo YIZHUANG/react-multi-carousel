@@ -47,17 +47,9 @@ function getCloneCounterPart(
   childrenArr: any[]
 ): number | undefined {
   if (childrenArr.length > slidesToShow * 2) {
-    if(index === 0) {
-      // 0 is a special case
-      return childrenArr.length + slidesToShow * 2
-    }
     const cloneCouterPart = index - (childrenArr.length - slidesToShow * 2);
     return cloneCouterPart;
   } else {
-    if(index === 0) {
-      // 0 is a special case
-      return childrenArr.length + slidesToShow * 2 - 1
-    }
     return undefined
   }
 }

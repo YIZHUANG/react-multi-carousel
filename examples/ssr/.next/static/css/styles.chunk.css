@@ -140,5 +140,14 @@ a {
   background: #080808;
 }
 
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .react-multi-carousel-item {
+    flex-shrink: 0 !important;
+  }
+  .react-multi-carousel-track {
+    overflow: visible !important;
+  }
+}
+
 
 /*# sourceMappingURL=styles.chunk.css.map*/
