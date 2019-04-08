@@ -8,7 +8,7 @@ declare function getCloneCounterPart(index: number, { slidesToShow, totalItems }
     slidesToShow: number;
     currentSlide: number;
     totalItems: number;
-}, childrenArr: any[]): number | null;
+}, childrenArr: any[]): number | undefined;
 declare function getClones(slidesToShow: number, childrenArr: any[]): {
     clones: any[];
     initialSlide: number;

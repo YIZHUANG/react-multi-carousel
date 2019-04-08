@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1554658009290" clover="3.2.0">
-  <project timestamp="1554658009290" name="All files">
+<coverage generated="1554748265949" clover="3.2.0">
+  <project timestamp="1554748265949" name="All files">
     <metrics statements="497" coveredstatements="389" conditionals="363" coveredconditionals="228" methods="94" coveredmethods="60" elements="954" coveredelements="677" complexity="0" loc="497" ncloc="497" packages="4" files="14" classes="14"/>
     <package name="lib">
       <metrics statements="357" coveredstatements="282" conditionals="310" coveredconditionals="197" methods="70" coveredmethods="45"/>
@@ -345,8 +345,8 @@
         <line num="9" count="66" type="stmt"/>
         <line num="10" count="66" type="cond" truecount="2" falsecount="0"/>
         <line num="11" count="600" type="cond" truecount="2" falsecount="0"/>
-        <line num="21" count="384" type="cond" truecount="2" falsecount="0"/>
-        <line num="31" count="6" type="stmt"/>
+        <line num="24" count="384" type="cond" truecount="2" falsecount="0"/>
+        <line num="37" count="6" type="stmt"/>
       </file>
       <file name="Dots.js" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/lib/Dots.js">
         <metrics statements="22" coveredstatements="20" conditionals="14" coveredconditionals="14" methods="4" coveredmethods="2"/>
@@ -439,8 +439,8 @@
         <line num="13" count="132" type="stmt"/>
         <line num="14" count="132" type="stmt"/>
         <line num="21" count="6" type="stmt"/>
-        <line num="23" count="984" type="stmt"/>
-        <line num="24" count="984" type="cond" truecount="2" falsecount="0"/>
+        <line num="23" count="1968" type="stmt"/>
+        <line num="24" count="1968" type="cond" truecount="2" falsecount="0"/>
         <line num="26" count="6" type="stmt"/>
       </file>
       <file name="elementWidth.js" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/lib/utils/elementWidth.js">
@@ -539,8 +539,8 @@
         <line num="7" count="6" type="stmt"/>
         <line num="8" count="6" type="stmt"/>
         <line num="9" count="6" type="stmt"/>
-        <line num="21" count="271" type="stmt"/>
-        <line num="22" count="271" type="stmt"/>
+        <line num="21" count="984" type="stmt"/>
+        <line num="22" count="984" type="stmt"/>
         <line num="44" count="6" type="stmt"/>
       </file>
       <file name="CustomDot.tsx" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/test/components/CustomDot.tsx">

@@ -34,7 +34,8 @@ const Dots = ({
             ? getCloneCounterPart(index, state, childrenArr)
             : null;
           let isActive;
-          if (cloneIndex) {
+          // cloneIndex can be 0 and its true!
+          if (cloneIndex !== undefined) {
             /*
             It means we are in infinite mode, and the condition (childrenArr.length > slidesToShow * 2) is true.
             Also there could be multiple items that are exactly the same but have different index due to the reasons that they are clones.

@@ -44,12 +44,12 @@ function getCloneCounterPart(
     totalItems
   }: { slidesToShow: number; currentSlide: number; totalItems: number },
   childrenArr: any[]
-): number | null {
+): number | undefined {
   if (childrenArr.length > slidesToShow * 2) {
     const cloneCouterPart = index - (childrenArr.length - slidesToShow * 2);
     return cloneCouterPart;
   }
-  return null;
+  return undefined;
 }
 
 /*
