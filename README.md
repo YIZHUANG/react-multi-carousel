@@ -7,7 +7,6 @@ The technical details of this carousel can be found at [www.w3js.com -> react-mu
 [![npm version](https://badge.fury.io/js/react-multi-carousel.svg)](https://www.npmjs.com/package/react-multi-carousel)
 [![Build Status](https://api.travis-ci.org/YIZHUANG/react-multi-carousel.svg?branch=master)](https://travis-ci.org/YIZHUANG/react-multi-carousel)
 
-
 ### Features.
 
 - Server-side rendering
@@ -34,7 +33,7 @@ The technical details of this carousel can be found at [www.w3js.com -> react-mu
 
 Demo and documentation can be found at [here](https://w3js.com/react-multi-carousel/).
 
-Demo for the SSR  <https://react-multi-carousel.now.sh/>
+Demo for the SSR <https://react-multi-carousel.now.sh/>
 
 Try to disable JavaScript to test if it renders on the server-side.
 
@@ -70,12 +69,11 @@ Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/
 - Demo for the SSR are at [here](https://react-multi-carousel.now.sh/)
 - Try to disable JavaScript to test if it renders on the server-side.
 
-
 ## Usage
 
 ```js
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const responsive = {
   desktop: {
@@ -99,29 +97,58 @@ const responsive = {
   ssr={true} // means to render carousel on server-side.
   slidesToSlide={2}
   infinite={true}
-  autoPlay={this.props.deviceType !== 'mobile' ? true : false}
+  autoPlay={this.props.deviceType !== "mobile" ? true : false}
   autoPlaySpeed={1000}
   keyBoardControl={true}
-  customTransition='all .5'
+  customTransition="all .5"
   transitionDuration={500}
-  containerClass='carousel-container'
-  removeArrowOnDeviceType={['tablet', 'mobile']}
+  containerClass="carousel-container"
+  removeArrowOnDeviceType={["tablet", "mobile"]}
   deviceType={this.props.deviceType}
-  dotListClass='custom-dot-list-style'
-  itemClass='carousel-item-padding-40-px'
+  dotListClass="custom-dot-list-style"
+  itemClass="carousel-item-padding-40-px"
 >
-<div>Item 1</div>
-<div>Item 2</div>
-<div>Item 3</div>
-<div>Item 4</div>
-</Carousel>
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+  <div>Item 4</div>
+</Carousel>;
+```
+
+## Children
+
+A list of children you pass to the carousel will receive 'active' and 'isvisibile' props.
+This is very useful if you want to scale out the item if its active, or your carousel items are videos, and you want them to auto play when its visible on the screen.
+
+```js
+const CarouselItem = ({ active, isvisibile }) => {
+  return <img style={{ transform: active ? 'scale(1.2)' : 'none' }}></img>
+}
+class Video extends React.Component {
+  componentDidUpdate({ isvisibile }) {
+    if(!isvisibile && this.props.isvisibile) {
+      this.video.current.play();
+    }
+  }
+  render() {
+    return <video ref={node => this.video = node} autoplay={false} />
+  }
+}
+// your carousel component
+return (
+  <Carousel>
+    <CarouselItem />
+    <CarouselItem />
+    <Video />
+  <Carousel>
+)
 ```
 
 ## Custom Arrows.
 
 You can pass your own custom arrows to make it the way you want, the same for the position. For example, add media query for the arrows to go under when on smaller screens.
 
-You custom arrows will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.  
+You custom arrows will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
 
 [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=Custom%20arrow&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
@@ -129,11 +156,14 @@ You custom arrows will receive a list of props/state that's passed back by the c
 
 ```js
 const CustomRightArrow = ({ onClick, ...rest }) => {
-  const { onMove, state: {  currentSlide, deviceType }  } = rest;
+  const {
+    onMove,
+    state: { currentSlide, deviceType }
+  } = rest;
   // onMove means if dragging or swiping in progress.
-  return <button onClick={() => onClick()} />
-}
-<Carousel customRightArrow={<CustomRightArrow />} />
+  return <button onClick={() => onClick()} />;
+};
+<Carousel customRightArrow={<CustomRightArrow />} />;
 ```
 
 ## Custom button group.
@@ -232,10 +262,11 @@ This is a callback function that is invoked each time when there has been a slid
 [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=afterChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 ```js
-<Carousel afterChange={(previousSlide, { currentSlide, onMove }) => {
-    doSpeicalThing()
-  }}>
-</Carousel>
+<Carousel
+  afterChange={(previousSlide, { currentSlide, onMove }) => {
+    doSpeicalThing();
+  }}
+/>
 ```
 
 ## beforeChange call back
@@ -245,10 +276,11 @@ This is a callback function that is invoked each time before a sliding.
 [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=beforeChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 ```js
-<Carousel beforeChange={(nextSlide, { currentSlide, onMove }) => {
-    doSpeicalThing()
-  }}>
-</Carousel>
+<Carousel
+  beforeChange={(nextSlide, { currentSlide, onMove }) => {
+    doSpeicalThing();
+  }}
+/>
 ```
 
 ## Combine beforeChange and nextChange, real usage.
@@ -258,25 +290,37 @@ They are very useful in the following cases:
 - The carousel item is clickable, but you don't want it to be clickable while the user is dragging it or swiping it.
 
 ```js
-<Carousel beforeChange={() => this.setState({ isMoving: true })} afterChange={() => this.setState({ isMoving: false })}>
-  <a onClick={(e) => {
-    if(this.state.isMoving) {
-      e.preventDefault()
-    }
-    }} href='https://w3js.com'>Click me</a>
+<Carousel
+  beforeChange={() => this.setState({ isMoving: true })}
+  afterChange={() => this.setState({ isMoving: false })}
+>
+  <a
+    onClick={e => {
+      if (this.state.isMoving) {
+        e.preventDefault();
+      }
+    }}
+    href="https://w3js.com"
+  >
+    Click me
+  </a>
 </Carousel>
 ```
 
 - Preparing for the next slide.
 
 ```js
-<Carousel beforeChange={(nextSlide) => this.setState({ nextSlide: nextSlide })}>
+<Carousel beforeChange={nextSlide => this.setState({ nextSlide: nextSlide })}>
   <div>Initial slide</div>
-  <div onClick={() => {
-    if(this.state.nextSlide === 1) {
-      doVerySpecialThing();
-    }
-    }}>Second slide</div>
+  <div
+    onClick={() => {
+      if (this.state.nextSlide === 1) {
+        doVerySpecialThing();
+      }
+    }}
+  >
+    Second slide
+  </div>
 </Carousel>
 ```
 
@@ -296,44 +340,42 @@ They are very useful in the following cases:
 
 ## Specific Props
 
-| Name            | Type          | Default | Description |
-| :---------      | :--:          | :-----: | :----------- |
-| responsive      | `object`     | `{}` | Numbers of slides to show at each breakpoint |
-| deviceType      | `string`     | `''` | Only pass this when use for server-side rendering, what to pass can be found in the example folder  |
-| ssr        | `boolean`     | `false` | Use in conjunction with responsive and deviceType prop |
-| slidesToSlide            | `Number`     | `1` | How many slides to slide. |
-| draggable            | `boolean`      | `true` | Optionally disable/enable dragging on desktop |
-| swipeable          | `boolean`     | `true` | Optionally disable/enable swiping on mobile  |
-| arrows          | `boolean`      | `true` | Hide/Show the default arrows |
-| removeArrowOnDeviceType | `string or array`      | `''` | Hide the default arrows at different break point, should be used with `responsive` props. Value could be `mobile` or `['mobile', 'tablet'], can be a string or array` |
-| customLeftArrow         | `jsx`      | `null` | Replace the default arrow with your own |
-| customRightArrow        | `jsx`    | `null` | Replace the default arrow with your own |
-| customDot           | `jsx`    | null | Replace the default dots with your own |
-| customButtonGroup    | `jsx`    | null | Fully customize your own control functionality if you don't want arrows or dots |
-| infinite                 | `boolean`      | false | Infinite loop |
-| minimumTouchDrag     | `number`     | `50` | The amount of distance to drag / swipe in order to move to the next slide. |
-| afterChange              | `function`     | `null` | A callback after sliding everytime. |
-| beforeChange           | `function`     | `null` | A callback before sliding everytime. |
-| sliderClass              | `string`      | `'react-multi-carousel-track'` | CSS class for inner slider div, use this to style your own track list. |
-| itemClass        | `string`      | `''` | CSS class for carousel item, use this to style your own Carousel item. For example add padding-left and padding-right |
-| containerClass  | `string`      | `'react-multi-carousel-list'` | Use this to style the whole container. For example add padding to allow the "dots" or "arrows" to go to other places without being overflown. |
-| dotListClass             | `string`     | `'react-multi-carousel-dot-list'` | Use this to style the dot list. |
-| keyBoardControl         | `boolean`     | `true` | Use keyboard to navigate to next/previous slide |
-| autoPlay          | `boolean`     | `false` | Auto play |
-| autoPlaySpeed       | `number` | 3000 | The unit is ms |  
-| showDots            | `boolean`     | `false` | Hide the default dot list |
-| partialVisbile | `boolean | string`      | `false` | Show partial prev/next slides. If `partialVisbile === 'right'` only show partial next slides, otherwise show both. This is use with the `responsive` prop, see example for details |
-| customTransition | `string`      | `transform 300ms ease-in-out` | Configure your own anaimation when sliding |
-| transitionDuration | `number     | `300` | The unit is ms, if you are using customTransition, make sure to put the duration here as this is needed for the resizing to work. |
-
+| Name                    |                                                                        Type                                                                        |              Default              | Description                                                                                                                                                                        |
+| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| responsive              |                                                                      `object`                                                                      |               `{}`                | Numbers of slides to show at each breakpoint                                                                                                                                       |
+| deviceType              |                                                                      `string`                                                                      |               `''`                | Only pass this when use for server-side rendering, what to pass can be found in the example folder                                                                                 |
+| ssr                     |                                                                     `boolean`                                                                      |              `false`              | Use in conjunction with responsive and deviceType prop                                                                                                                             |
+| slidesToSlide           |                                                                      `Number`                                                                      |                `1`                | How many slides to slide.                                                                                                                                                          |
+| draggable               |                                                                     `boolean`                                                                      |              `true`               | Optionally disable/enable dragging on desktop                                                                                                                                      |
+| swipeable               |                                                                     `boolean`                                                                      |              `true`               | Optionally disable/enable swiping on mobile                                                                                                                                        |
+| arrows                  |                                                                     `boolean`                                                                      |              `true`               | Hide/Show the default arrows                                                                                                                                                       |
+| removeArrowOnDeviceType |                                                                 `string or array`                                                                  |               `''`                | Hide the default arrows at different break point, should be used with `responsive` props. Value could be `mobile` or `['mobile', 'tablet'], can be a string or array`              |
+| customLeftArrow         |                                                                       `jsx`                                                                        |              `null`               | Replace the default arrow with your own                                                                                                                                            |
+| customRightArrow        |                                                                       `jsx`                                                                        |              `null`               | Replace the default arrow with your own                                                                                                                                            |
+| customDot               |                                                                       `jsx`                                                                        |               null                | Replace the default dots with your own                                                                                                                                             |
+| customButtonGroup       |                                                                       `jsx`                                                                        |               null                | Fully customize your own control functionality if you don't want arrows or dots                                                                                                    |
+| infinite                |                                                                     `boolean`                                                                      |               false               | Infinite loop                                                                                                                                                                      |
+| minimumTouchDrag        |                                                                      `number`                                                                      |               `50`                | The amount of distance to drag / swipe in order to move to the next slide.                                                                                                         |
+| afterChange             |                                                                     `function`                                                                     |              `null`               | A callback after sliding everytime.                                                                                                                                                |
+| beforeChange            |                                                                     `function`                                                                     |              `null`               | A callback before sliding everytime.                                                                                                                                               |
+| sliderClass             |                                                                      `string`                                                                      |  `'react-multi-carousel-track'`   | CSS class for inner slider div, use this to style your own track list.                                                                                                             |
+| itemClass               |                                                                      `string`                                                                      |               `''`                | CSS class for carousel item, use this to style your own Carousel item. For example add padding-left and padding-right                                                              |
+| containerClass          |                                                                      `string`                                                                      |   `'react-multi-carousel-list'`   | Use this to style the whole container. For example add padding to allow the "dots" or "arrows" to go to other places without being overflown.                                      |
+| dotListClass            |                                                                      `string`                                                                      | `'react-multi-carousel-dot-list'` | Use this to style the dot list.                                                                                                                                                    |
+| keyBoardControl         |                                                                     `boolean`                                                                      |              `true`               | Use keyboard to navigate to next/previous slide                                                                                                                                    |
+| autoPlay                |                                                                     `boolean`                                                                      |              `false`              | Auto play                                                                                                                                                                          |
+| autoPlaySpeed           |                                                                      `number`                                                                      |               3000                | The unit is ms                                                                                                                                                                     |
+| showDots                |                                                                     `boolean`                                                                      |              `false`              | Hide the default dot list                                                                                                                                                          |
+| partialVisbile          |                                                                 `boolean | string`                                                                 |              `false`              | Show partial prev/next slides. If `partialVisbile === 'right'` only show partial next slides, otherwise show both. This is use with the `responsive` prop, see example for details |
+| customTransition        |                                                                      `string`                                                                      |   `transform 300ms ease-in-out`   | Configure your own anaimation when sliding                                                                                                                                         |
+| transitionDuration      | `number |`300` | The unit is ms, if you are using customTransition, make sure to put the duration here as this is needed for the resizing to work. |
 
 ## Contribute
 
 Submit an issue for feature request or submit a pr.
 
-
 ## Locale development.
 
-* cd app
-* npm install
-* npm run dev
+- cd app
+- npm install
+- npm run dev

@@ -14,18 +14,11 @@
     "after-build": "cd src && copyfiles -f assets/* ../lib",
     "publish-ssr": "cd examples/ssr && now && now alias react-multi-carousel.now.sh",
     "prettier": "prettier --write {examples,src,stories,test}/**/*.{js,ts,tsx}",
-    "lint-staged": "lint-staged",
-    "precommit": "lint-staged"
+    "lint-staged": "lint-staged"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/YIZHUANG/react-multi-carousel.git"
-  },
-  "lint-staged": {
-    "*": [
-      "prettier --write",
-      "git add"
-    ]
   },
   "keywords": [
     "react",

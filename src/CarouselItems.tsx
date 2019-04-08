@@ -12,19 +12,19 @@ import {
 } from "./utils";
 
 interface CarouselItemsProps {
-  props:  CarouselProps,
-  state: CarouselInternalState
+  props: CarouselProps;
+  state: CarouselInternalState;
 }
 
-const CarouselItems = ({ props, state }:CarouselItemsProps):any => {
-  const { itemWidth, clones } = state;
+const CarouselItems = ({ props, state }: CarouselItemsProps): any => {
+  const { itemWidth, clones, currentSlide } = state;
   const { children, infinite, itemClass, partialVisbile } = props;
   const {
     flexBisis,
     shouldRenderOnSSR,
     domFullyLoaded,
     paritialVisibilityGutter
-  } = getInitialState(state,props);
+  } = getInitialState(state, props);
   if (infinite) {
     return clones.map((child: any, index: number) => (
       <li
@@ -44,7 +44,10 @@ const CarouselItems = ({ props, state }:CarouselItemsProps):any => {
         }}
         className={`react-multi-carousel-item ${itemClass}`}
       >
-        {child}
+        {React.cloneElement(child, {
+          isvisible: getIfSlideIsVisbile(index, state),
+          active: currentSlide === index
+        })}
       </li>
     ));
   }
@@ -66,7 +69,10 @@ const CarouselItems = ({ props, state }:CarouselItemsProps):any => {
       }}
       className={`react-multi-carousel-item ${itemClass}`}
     >
-      {child}
+      {React.cloneElement(child, {
+        isvisible: getIfSlideIsVisbile(index, state),
+        active: currentSlide === index
+      })}
     </li>
   ));
 };
