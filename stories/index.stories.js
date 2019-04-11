@@ -346,4 +346,20 @@ storiesOf("Carousel", module)
         })}
       </Carousel>
     );
-  });
+  })
+  .addWithJSX("With focusOnSelect prop", () => {
+    return (
+      <Carousel
+        focusOnSelect
+        showDots
+        arrows={false}
+        infinite
+        containerClass='container-padding-bottom'
+        responsive={responsive}
+      >
+        {fakerData.map(card => {
+          return <Card {...card} />;
+        })}
+      </Carousel>
+    );
+  })

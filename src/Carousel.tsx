@@ -29,7 +29,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     autoPlaySpeed: 3000,
     showDots: false,
     minimumTouchDrag: 80,
-    dotListClass: ""
+    dotListClass: "",
+    focusOnSelect: false
   };
   private readonly containerRef: React.RefObject<any>;
   public onMove: boolean;
@@ -62,29 +63,21 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.onKeyUp = this.onKeyUp.bind(this);
     this.handleEnter = this.handleEnter.bind(this);
     this.setIsInThrottle = this.setIsInThrottle.bind(this);
-    /*
-    The reason of using throttle its because of cloning elemnts for inifinite mode.
-    */
-    this.next = infinite
-      ? throttle(
-          this.next.bind(this),
-          props.transitionDuration || defaultTransitionDuration,
-          this.setIsInThrottle
-        )
-      : this.next.bind(this);
-    this.previous = infinite
-      ? throttle(
-          this.previous.bind(this),
-          props.transitionDuration || defaultTransitionDuration,
-          this.setIsInThrottle
-        )
-      : this.previous.bind(this);
-    this.goToSlide = infinite
-      ? throttle(
-          this.goToSlide.bind(this),
-          props.transitionDuration || defaultTransitionDuration
-        )
-      : this.goToSlide.bind(this);
+    this.next = throttle(
+        this.next.bind(this),
+        props.transitionDuration || defaultTransitionDuration,
+        this.setIsInThrottle
+      );
+    this.previous = throttle(
+        this.previous.bind(this),
+        props.transitionDuration || defaultTransitionDuration,
+        this.setIsInThrottle
+      );
+    this.goToSlide = throttle(
+        this.goToSlide.bind(this),
+        props.transitionDuration || defaultTransitionDuration,
+        this.setIsInThrottle
+      );
     this.onMove = false;
     this.initialPosition = 0;
     this.lastPosition = 0;
@@ -410,7 +403,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (
       (e.touches && !this.props.swipeable) ||
       (e && !e.touches && !this.props.draggable) ||
-      (this.isInThrottle && this.props.infinite)
+      (this.isInThrottle)
     ) {
       return;
     }
@@ -537,6 +530,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
 
   public goToSlide(slide: number): void {
+    if (this.isInThrottle) {
+      return;
+    }
     const { itemWidth } = this.state;
     const { afterChange, beforeChange } = this.props;
     const previousSlide = this.state.currentSlide;
@@ -611,7 +607,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     );
   }
   public renderCarouselItems(): any {
-    return <CarouselItems state={this.state} props={this.props} />;
+    return (
+      <CarouselItems
+        goToSlide={this.goToSlide}
+        state={this.state}
+        props={this.props}
+      />
+    );
   }
 
   public render(): React.ReactNode {

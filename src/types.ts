@@ -42,6 +42,7 @@ interface CarouselProps {
   // if you are using customTransition, make sure to put the duration here.
   // for example, customTransition="all .5"  then put transitionDuration as 500.
   // this is needed for the resizing to work.
+  focusOnSelect?: boolean;
 }
 
 

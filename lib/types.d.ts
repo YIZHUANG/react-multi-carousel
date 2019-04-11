@@ -38,6 +38,7 @@ interface CarouselProps {
     partialVisbile?: "right" | boolean;
     customTransition?: string;
     transitionDuration?: number;
+    focusOnSelect?: boolean;
 }
 interface buttonGroupCallBack {
     previous: () => void;

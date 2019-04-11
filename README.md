@@ -295,6 +295,14 @@ They are very useful in the following cases:
 </Carousel>
 ```
 
+## focusOnSelect
+
+Go to slide on click and make the slide a current slide.
+
+```js
+<Carousel focusOnSelect={true} />
+```
+
 ## Using ref.
 
 ```js
@@ -340,6 +348,7 @@ They are very useful in the following cases:
 | partialVisbile          |                                                                 `boolean | string`                                                                 |              `false`              | Show partial prev/next slides. If `partialVisbile === 'right'` only show partial next slides, otherwise show both. This is use with the `responsive` prop, see example for details |
 | customTransition        |                                                                      `string`                                                                      |   `transform 300ms ease-in-out`   | Configure your own anaimation when sliding                                                                                                                                         |
 | transitionDuration      | `number |`300` | The unit is ms, if you are using customTransition, make sure to put the duration here as this is needed for the resizing to work. |
+| focusOnSelect      | `boolean |`false` | Go to slide on click and make the slide a current slide. |
 
 ## Contribute
 
@@ -355,7 +364,7 @@ Submit an issue for feature request or submit a pr.
 
 ## Regarding bundle size
 
-Making the infinite mode is hard, i would say 80% of the code are contribued to making the ``` Infinite mode ``` work.
+Making the infinite mode is hard, i would say 80% of the code are contribued to making the `Infinite mode` work.
 Without the infinite mode, this libiary would be 7kb or less bundle size before Gzippeed.
 
-If you are certain that there is a use case that we make a version that's without the ``` Infinite mode ```, make a feature request, it can be done very easily.
+If you are certain that there is a use case that we make a version that's without the `Infinite mode`, make a feature request, it can be done very easily.

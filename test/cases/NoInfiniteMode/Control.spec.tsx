@@ -64,7 +64,7 @@ describe("Control functionalities", () => {
       clientX: 200
     })
     wrapper.find('ul').simulate('mouseup')
-    expect(wrapper.state().transform).toBe(-200);
+    expect(wrapper.state().transform).toBe(-400);
     // move left
     wrapper.find('ul').simulate('mousedown', {
       clientX: 50
@@ -73,7 +73,7 @@ describe("Control functionalities", () => {
       clientX: 60
     })
     wrapper.find('ul').simulate('mouseup')
-    expect(wrapper.state().transform).toBe(-0);
+    expect(wrapper.state().transform).toBe(-400);
     // infinite - left
     wrapper.find('ul').simulate('mousedown', {
       clientX: 50
@@ -82,7 +82,7 @@ describe("Control functionalities", () => {
       clientX: 60
     })
     wrapper.find('ul').simulate('mouseup')
-    expect(wrapper.state().transform).toBe(-0);
+    expect(wrapper.state().transform).toBe(-400);
     // infinite - right
     wrapper.find('ul').simulate('mousedown', {
       clientX: 50
@@ -91,7 +91,7 @@ describe("Control functionalities", () => {
       clientX: 40
     })
     wrapper.find('ul').simulate('mouseup')
-    expect(wrapper.state().transform).toBe(-200);
+    expect(wrapper.state().transform).toBe(-400);
     // move right
     wrapper.find('ul').simulate('mousedown', {
       clientX: 50
@@ -109,7 +109,7 @@ describe("Control functionalities", () => {
       clientX: 10
     })
     wrapper.find('ul').simulate('mouseup')
-    expect(wrapper.state().transform).toBe(-1600);
+    expect(wrapper.state().transform).toBe(-400);
     // even though the move-right-action way pass the initial position, but it doesn't overslide out of the container of the carousel
     wrapper.find('ul').simulate('mousedown', {
       clientX: 1600
@@ -118,7 +118,7 @@ describe("Control functionalities", () => {
       clientX: 10
     })
     wrapper.find('ul').simulate('mouseup')
-    expect(wrapper.state().transform).toBe(-1800);
+    expect(wrapper.state().transform).toBe(-400);
     // now do the same for previous action.
     // move to first 1 slide of the Carousel
     wrapper.find('ul').simulate('mousedown', {
@@ -144,8 +144,8 @@ describe("Control functionalities", () => {
       clientX: 1000
     })
     wrapper.find('ul').simulate('mouseup')
-    expect(wrapper.state().transform).toBe(-800);
-    expect(wrapper.state().currentSlide).toBe(4);
+    expect(wrapper.state().transform).toBe(-400);
+    expect(wrapper.state().currentSlide).toBe(2);
     wrapper.unmount();
   })
 });
