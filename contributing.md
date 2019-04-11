@@ -1,7 +1,5 @@
 # Contributing
 
-When you look into /src, it seems there are shit loads of codes, but as mentioned in https://github.com/YIZHUANG/react-multi-carousel/blob/master/README.md that 80% of the code in this libirary are about making the `Infinite mode` work. Trust me, i have already tried my best to refactor them, but there are too many edge cases for the `Infinite mode`, and requires extra amount of codes to handle them, i have already tried my best to comment the codes. It's not perfect code but i can say its so much better than ```react-slick```
-
 ## Infinite mode
 
 If you are interested in contributing, and you are making a feature/fixing a bug that's related or not related to the `Infinite mode`, its important for you to know which files/codes are for infinite mode and which files/codes are not for the `Infinite mode`, so that you don't get confused.
