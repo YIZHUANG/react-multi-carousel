@@ -1,6 +1,6 @@
 {
   "name": "react-multi-carousel",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "description": "",
   "main": "index.js",
   "types": "/lib/index.d.ts",
