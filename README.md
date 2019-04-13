@@ -26,6 +26,8 @@ The technical details of this carousel can be found at [www.w3js.com -> react-mu
 - Center mode.
 - Show next/previous set of items partially
 
+## [Documentation](https://w3js.com/react-multi-carousel/)
+
 ## Bundle size
 
 [Bundle-size](https://bundlephobia.com/result?p=react-multi-carousel).

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -507,7 +507,7 @@ function (_React$PureComponent) {
         slidesToSlide: 1,
         containerClass: "carousel-with-custom-dots",
         responsive: responsive,
-        partialVisbile: "right",
+        partialVisbile: true,
         infinite: true,
         customDot: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(CustomDot, {
           __source: {
@@ -2147,7 +2147,7 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

@@ -402,7 +402,7 @@ function (_React$PureComponent) {
         slidesToSlide: 1,
         containerClass: "carousel-with-custom-dots",
         responsive: responsive,
-        partialVisbile: "right",
+        partialVisbile: true,
         infinite: true,
         customDot: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(CustomDot, {
           __source: {
@@ -116517,7 +116517,7 @@ var Carousel = /** @class */ (function (_super) {
         var _this = this;
         if (this.containerRef && this.containerRef.current) {
             var containerWidth = this.containerRef.current.offsetWidth;
-            var itemWidth_1 = Math.round(this.containerRef.current.offsetWidth / slidesToShow);
+            var itemWidth_1 = utils_1.getItemClientSideWidth(this.props, slidesToShow, containerWidth);
             this.setState({
                 containerWidth: containerWidth,
                 itemWidth: itemWidth_1
@@ -116748,7 +116748,7 @@ var Carousel = /** @class */ (function (_super) {
     Carousel.prototype.handleDown = function (e) {
         if ((e.touches && !this.props.swipeable) ||
             (e && !e.touches && !this.props.draggable) ||
-            (this.isInThrottle)) {
+            this.isInThrottle) {
             return;
         }
         var clientX = (e.touches ? e.touches[0] : e).clientX;
@@ -116906,7 +116906,8 @@ var Carousel = /** @class */ (function (_super) {
     };
     Carousel.prototype.render = function () {
         var slidesToShow = this.state.slidesToShow;
-        var _a = this.props, deviceType = _a.deviceType, slidesToSlide = _a.slidesToSlide, arrows = _a.arrows, removeArrowOnDeviceType = _a.removeArrowOnDeviceType, infinite = _a.infinite, containerClass = _a.containerClass, sliderClass = _a.sliderClass, customTransition = _a.customTransition, partialVisbile = _a.partialVisbile;
+        var _a = this.props, deviceType = _a.deviceType, slidesToSlide = _a.slidesToSlide, arrows = _a.arrows, removeArrowOnDeviceType = _a.removeArrowOnDeviceType, infinite = _a.infinite, containerClass = _a.containerClass, sliderClass = _a.sliderClass, customTransition = _a.customTransition, partialVisbile = _a.partialVisbile, centerMode = _a.centerMode;
+        utils_1.throwError(this.state, this.props);
         var _b = utils_1.getInitialState(this.state, this.props), shouldRenderOnSSR = _b.shouldRenderOnSSR, paritialVisibilityGutter = _b.paritialVisibilityGutter;
         var isLeftEndReach = !(this.state.currentSlide - slidesToSlide >= 0);
         var isRightEndReach = !(this.state.currentSlide + 1 + slidesToShow <=
@@ -116918,17 +116919,12 @@ var Carousel = /** @class */ (function (_super) {
                         removeArrowOnDeviceType.indexOf(this.state.deviceType) > -1)));
         var disableLeftArrow = !infinite && isLeftEndReach;
         var disableRightArrow = !infinite && isRightEndReach;
-        // this is formular will be fixed once i find a better way.
-        var currentTransform = paritialVisibilityGutter && partialVisbile
-            ? partialVisbile === "right"
-                ? this.state.transform +
-                    this.state.currentSlide * paritialVisibilityGutter
-                : this.state.transform +
-                    this.state.currentSlide * paritialVisibilityGutter +
-                    (this.state.currentSlide === 0
-                        ? 0
-                        : paritialVisibilityGutter + paritialVisibilityGutter / 2)
-            : this.state.transform;
+        // this lib supports showing next set of items paritially as well as center mode which shows both.
+        var currentTransform = partialVisbile
+            ? utils_1.getTransformForPartialVsibile(this.state, paritialVisibilityGutter)
+            : centerMode
+                ? utils_1.getTransformForCenterMode(this.state, this.props)
+                : this.state.transform;
         return (React.createElement("div", { className: "react-multi-carousel-list " + containerClass, ref: this.containerRef },
             React.createElement("ul", { className: "react-multi-carousel-track " + sliderClass, 
                 // @ts-ignore
@@ -116958,7 +116954,8 @@ var Carousel = /** @class */ (function (_super) {
         showDots: false,
         minimumTouchDrag: 80,
         dotListClass: "",
-        focusOnSelect: false
+        focusOnSelect: false,
+        centerMode: false
     };
     return Carousel;
 }(React.Component));
@@ -117284,6 +117281,20 @@ function getIfSlideIsVisbile(index, state) {
     return index >= currentSlide && index < currentSlide + slidesToShow;
 }
 exports.getIfSlideIsVisbile = getIfSlideIsVisbile;
+function getTransformForCenterMode(state, props) {
+    if (state.currentSlide === 0 && !props.infinite) {
+        return state.transform;
+    }
+    else {
+        return state.transform + state.itemWidth / 2;
+    }
+}
+exports.getTransformForCenterMode = getTransformForCenterMode;
+function getTransformForPartialVsibile(state, paritialVisibilityGutter) {
+    if (paritialVisibilityGutter === void 0) { paritialVisibilityGutter = 0; }
+    return state.transform + state.currentSlide * paritialVisibilityGutter;
+}
+exports.getTransformForPartialVsibile = getTransformForPartialVsibile;
 //# sourceMappingURL=common.js.map
 
 /***/ }),
@@ -117316,6 +117327,10 @@ function getWidthFromDeviceType(deviceType, responsive) {
     return itemWidth;
 }
 exports.getWidthFromDeviceType = getWidthFromDeviceType;
+function getItemClientSideWidth(props, slidesToShow, containerWidth) {
+    return Math.round(containerWidth / (slidesToShow + (props.centerMode ? 1 : 0)));
+}
+exports.getItemClientSideWidth = getItemClientSideWidth;
 //# sourceMappingURL=elementWidth.js.map
 
 /***/ }),
@@ -117338,11 +117353,16 @@ exports.whenEnteredClones = clones_1.whenEnteredClones;
 var elementWidth_1 = __webpack_require__(/*! ./elementWidth */ "./node_modules/react-multi-carousel/lib/utils/elementWidth.js");
 exports.getWidthFromDeviceType = elementWidth_1.getWidthFromDeviceType;
 exports.getParitialVisibilityGutter = elementWidth_1.getParitialVisibilityGutter;
+exports.getItemClientSideWidth = elementWidth_1.getItemClientSideWidth;
 var common_1 = __webpack_require__(/*! ./common */ "./node_modules/react-multi-carousel/lib/utils/common.js");
 exports.getInitialState = common_1.getInitialState;
 exports.getIfSlideIsVisbile = common_1.getIfSlideIsVisbile;
+exports.getTransformForCenterMode = common_1.getTransformForCenterMode;
+exports.getTransformForPartialVsibile = common_1.getTransformForPartialVsibile;
 var throttle_1 = __webpack_require__(/*! ./throttle */ "./node_modules/react-multi-carousel/lib/utils/throttle.js");
 exports.throttle = throttle_1.default;
+var throwError_1 = __webpack_require__(/*! ./throwError */ "./node_modules/react-multi-carousel/lib/utils/throwError.js");
+exports.throwError = throwError_1.default;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -117379,6 +117399,38 @@ var throttle = function (func, limit, setIsInThrottle) {
 };
 exports.default = throttle;
 //# sourceMappingURL=throttle.js.map
+
+/***/ }),
+
+/***/ "./node_modules/react-multi-carousel/lib/utils/throwError.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/react-multi-carousel/lib/utils/throwError.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+function throwError(state, props) {
+    var partialVisbile = props.partialVisbile, centerMode = props.centerMode, ssr = props.ssr, responsive = props.responsive, infinite = props.infinite;
+    if (partialVisbile && centerMode) {
+        throw new Error("center mode can not be used at the same time with partialVisbile");
+    }
+    if (!responsive) {
+        if (ssr) {
+            throw new Error('ssr mode need to be used in conjunction with responsive prop');
+        }
+        else {
+            throw new Error('Responsive prop is needed for deciding the amount of items to show on the screen');
+        }
+    }
+    if (responsive && typeof responsive !== 'object') {
+        throw new Error('responsive prop must be an object');
+    }
+}
+exports.default = throwError;
+//# sourceMappingURL=throwError.js.map
 
 /***/ }),
 
@@ -120521,7 +120573,7 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!*********************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fyi.a.zhuang%2FDesktop%2Fbackup%2Freact-multi-carousel%2Fexamples%2Fssr%2Fpages%2Findex.js ***!
   \*********************************************************************************************************************************************************************/
@@ -120544,5 +120596,5 @@ module.exports = dll_3681e7fd756237ce51c6;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js","styles"]]]));;
+},[[2,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=index.js.map
