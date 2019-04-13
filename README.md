@@ -195,10 +195,9 @@ const CustomDot = ({ onClick, ...rest }) => {
 
 ## ParitialVisibile props.
 
-Shows the next / previous items paritially, this is very useful if you want to indicate to the users that this carousel component is swipable, has more items behind it.
+Shows the next items paritially, this is very useful if you want to indicate to the users that this carousel component is swipable, has more items behind it.
 
-paritialVisibile = 'right' means showing only next items paritially
-paritialVisibile = {true} means showing both.
+This is different from the "centerMode" prop, as it only shows the next items. For the centerMode, it shows both.
 
 [An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=paritially%20visibie%20on%20next%20items&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
@@ -220,10 +219,18 @@ const responsive = {
     paritialVisibilityGutter: 30 // this is needed to tell the amount of px that should be visible.
   }
 }
-<Carousel paritialVisibile='right' responsive={responsive}>
+<Carousel paritialVisibile={true} responsive={responsive}>
   <ItemOne />
   <ItemTwo />
 </Carousel>
+```
+
+## centerMode
+
+Shows the next items and previous items paritially.
+
+```js
+<Carousel centerMode={true} />
 ```
 
 ## afterChange callback.
@@ -345,10 +352,11 @@ Go to slide on click and make the slide a current slide.
 | autoPlay                |                                                                     `boolean`                                                                      |              `false`              | Auto play                                                                                                                                                                          |
 | autoPlaySpeed           |                                                                      `number`                                                                      |               3000                | The unit is ms                                                                                                                                                                     |
 | showDots                |                                                                     `boolean`                                                                      |              `false`              | Hide the default dot list                                                                                                                                                          |
-| partialVisbile          |                                                                 `boolean | string`                                                                 |              `false`              | Show partial prev/next slides. If `partialVisbile === 'right'` only show partial next slides, otherwise show both. This is use with the `responsive` prop, see example for details |
+| partialVisbile          |                                                                 `boolean | string`                                                                 |              `false`              | Show partial next slides. This is use with the `responsive` prop, see example for details |
 | customTransition        |                                                                      `string`                                                                      |   `transform 300ms ease-in-out`   | Configure your own anaimation when sliding                                                                                                                                         |
 | transitionDuration      | `number |`300` | The unit is ms, if you are using customTransition, make sure to put the duration here as this is needed for the resizing to work. |
 | focusOnSelect      | `boolean |`false` | Go to slide on click and make the slide a current slide. |
+| centerMode      | `boolean |`false` | Shows the next items and previous items paritially. |
 
 ## Contribute
 

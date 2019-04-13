@@ -31,12 +31,14 @@ interface CarouselProps {
   containerClass?: string; // Use this to style the whole container. For example add padding to allow the "dots" or "arrows" to go to other places without being overflown.
   dotListClass?: string; // Use this to style the dot list.
   keyBoardControl?: boolean;
+  centerMode?: boolean; // show previous and next set of items paritially
   autoPlay?: boolean;
   autoPlaySpeed?: number; // default 3000ms
   showDots?: boolean;
   // Show next/previous item partially, if its right, only show the next item partially, else show both
   // partialVisbile has to be used in conjunction with the responsive props, details are in documentation.
-  partialVisbile?: "right" | boolean;
+  // it shows the next set of items partially, different from centerMode as it shows both.
+  partialVisbile?: boolean;
   customTransition?: string;
   transitionDuration?: number;
   // if you are using customTransition, make sure to put the duration here.

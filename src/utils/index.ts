@@ -2,10 +2,12 @@ import { getOriginalCounterPart,
 getCloneCounterPart, getClones, whenEnteredClones } from "./clones";
 import {
   getWidthFromDeviceType,
-  getParitialVisibilityGutter
+  getParitialVisibilityGutter,
+  getItemClientSideWidth
 } from "./elementWidth";
-import { getInitialState, getIfSlideIsVisbile } from './common';
+import { getInitialState, getIfSlideIsVisbile, getTransformForCenterMode, getTransformForPartialVsibile } from './common';
 import throttle from "./throttle";
+import throwError from './throwError';
 
 export {
   getOriginalCounterPart,
@@ -13,8 +15,12 @@ export {
   getClones,
   getWidthFromDeviceType,
   whenEnteredClones,
+  getItemClientSideWidth,
   getParitialVisibilityGutter,
   throttle,
   getInitialState,
-  getIfSlideIsVisbile
+  getIfSlideIsVisbile,
+  getTransformForCenterMode,
+  getTransformForPartialVsibile,
+  throwError
 };
