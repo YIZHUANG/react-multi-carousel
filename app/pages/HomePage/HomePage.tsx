@@ -99,6 +99,7 @@ class Index extends React.Component {
           responsive={responsive}
           ssr
           showDots
+          centerMode
           arrows={false}
           infinite={true}
           beforeChange={() => this.setState({ isMoving: true })}
@@ -122,6 +123,7 @@ class Index extends React.Component {
           showDots
           minimumTouchDrag={80}
           slidesToSlide={1}
+          centerMode
           infinite={true}
           containerClass="container-with-dots"
           itemClass="image-item"

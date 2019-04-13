@@ -6,7 +6,11 @@ import {
   getParitialVisibilityGutter,
   getClones,
   whenEnteredClones,
-  getInitialState
+  getInitialState,
+  getTransformForCenterMode,
+  getTransformForPartialVsibile,
+  throwError,
+  getItemClientSideWidth
 } from "./utils";
 import { CarouselInternalState, CarouselProps } from "./types";
 import Dots from "./Dots";
@@ -30,7 +34,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     showDots: false,
     minimumTouchDrag: 80,
     dotListClass: "",
-    focusOnSelect: false
+    focusOnSelect: false,
+    centerMode: false
   };
   private readonly containerRef: React.RefObject<any>;
   public onMove: boolean;
@@ -64,20 +69,20 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.handleEnter = this.handleEnter.bind(this);
     this.setIsInThrottle = this.setIsInThrottle.bind(this);
     this.next = throttle(
-        this.next.bind(this),
-        props.transitionDuration || defaultTransitionDuration,
-        this.setIsInThrottle
-      );
+      this.next.bind(this),
+      props.transitionDuration || defaultTransitionDuration,
+      this.setIsInThrottle
+    );
     this.previous = throttle(
-        this.previous.bind(this),
-        props.transitionDuration || defaultTransitionDuration,
-        this.setIsInThrottle
-      );
+      this.previous.bind(this),
+      props.transitionDuration || defaultTransitionDuration,
+      this.setIsInThrottle
+    );
     this.goToSlide = throttle(
-        this.goToSlide.bind(this),
-        props.transitionDuration || defaultTransitionDuration,
-        this.setIsInThrottle
-      );
+      this.goToSlide.bind(this),
+      props.transitionDuration || defaultTransitionDuration,
+      this.setIsInThrottle
+    );
     this.onMove = false;
     this.initialPosition = 0;
     this.lastPosition = 0;
@@ -144,8 +149,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   ): void {
     if (this.containerRef && this.containerRef.current) {
       const containerWidth = this.containerRef.current.offsetWidth;
-      const itemWidth: number = Math.round(
-        this.containerRef.current.offsetWidth / slidesToShow
+      const itemWidth: number = getItemClientSideWidth(
+        this.props,
+        slidesToShow,
+        containerWidth
       );
       this.setState(
         {
@@ -403,7 +410,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (
       (e.touches && !this.props.swipeable) ||
       (e && !e.touches && !this.props.draggable) ||
-      (this.isInThrottle)
+      this.isInThrottle
     ) {
       return;
     }
@@ -627,8 +634,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       containerClass,
       sliderClass,
       customTransition,
-      partialVisbile
+      partialVisbile,
+      centerMode
     } = this.props;
+    throwError(this.state, this.props);
     const { shouldRenderOnSSR, paritialVisibilityGutter } = getInitialState(
       this.state,
       this.props
@@ -649,18 +658,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const disableLeftArrow = !infinite && isLeftEndReach;
     const disableRightArrow = !infinite && isRightEndReach;
 
-    // this is formular will be fixed once i find a better way.
-    const currentTransform =
-      paritialVisibilityGutter && partialVisbile
-        ? partialVisbile === "right"
-          ? this.state.transform +
-            this.state.currentSlide * paritialVisibilityGutter
-          : this.state.transform +
-            this.state.currentSlide * paritialVisibilityGutter +
-            (this.state.currentSlide === 0
-              ? 0
-              : paritialVisibilityGutter + paritialVisibilityGutter / 2)
-        : this.state.transform;
+    // this lib supports showing next set of items paritially as well as center mode which shows both.
+    const currentTransform = partialVisbile
+      ? getTransformForPartialVsibile(this.state, paritialVisibilityGutter)
+      : centerMode
+      ? getTransformForCenterMode(this.state, this.props)
+      : this.state.transform;
     return (
       <div
         className={`react-multi-carousel-list ${containerClass}`}

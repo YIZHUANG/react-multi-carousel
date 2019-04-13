@@ -39,9 +39,34 @@ function getInitialState(
   };
 }
 
-function getIfSlideIsVisbile(index:number, state:CarouselInternalState):boolean {
+function getIfSlideIsVisbile(
+  index: number,
+  state: CarouselInternalState
+): boolean {
   const { currentSlide, slidesToShow } = state;
   return index >= currentSlide && index < currentSlide + slidesToShow;
 }
 
-export { getInitialState, getIfSlideIsVisbile };
+function getTransformForCenterMode(
+  state: CarouselInternalState,
+  props: CarouselProps
+) {
+  if (state.currentSlide === 0 && !props.infinite) {
+    return state.transform;
+  } else {
+    return state.transform + state.itemWidth / 2;
+  }
+}
+function getTransformForPartialVsibile(
+  state: CarouselInternalState,
+  paritialVisibilityGutter: number = 0
+) {
+  return state.transform + state.currentSlide * paritialVisibilityGutter;
+}
+
+export {
+  getInitialState,
+  getIfSlideIsVisbile,
+  getTransformForCenterMode,
+  getTransformForPartialVsibile
+};

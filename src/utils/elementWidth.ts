@@ -2,7 +2,7 @@ import { responsiveType, CarouselInternalState, CarouselProps } from "../types";
 
 function getParitialVisibilityGutter(
   responsive: responsiveType,
-  partialVisbile?: string | boolean,
+  partialVisbile?: boolean,
   serverSideDeviceType?: string | undefined,
   clientSideDeviceType?: string | undefined
 ): number | undefined {
@@ -26,4 +26,18 @@ function getWidthFromDeviceType(
   return itemWidth;
 }
 
-export { getWidthFromDeviceType, getParitialVisibilityGutter };
+function getItemClientSideWidth(
+  props: CarouselProps,
+  slidesToShow: number,
+  containerWidth: number
+):number {
+  return Math.round(
+    containerWidth / (slidesToShow + (props.centerMode ? 1 : 0))
+  );
+}
+
+export {
+  getWidthFromDeviceType,
+  getParitialVisibilityGutter,
+  getItemClientSideWidth
+};

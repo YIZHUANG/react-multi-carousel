@@ -320,10 +320,11 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX("With paritially visibie on both direction", () => {
+  .addWithJSX("With centerMode, paritially visibie on both direction", () => {
     return (
       <Carousel
-        partialVisbile={true}
+        centerMode
+        infinite
         containerClass="container"
         responsive={responsive}
       >
