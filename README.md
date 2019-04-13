@@ -1,8 +1,8 @@
 # react-multi-carousel
 
-Lightweight fully customizable React carousel component supports multiple items and SSR(Server-side rendering) with typescript.
+Lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering) with typescript.
 
-The technical details of this carousel can be found at [www.w3js.com -> react-multi-carousel](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
+The technical details of this carousel can be found at [www.w3js.com -> react-multi-carousel](https://w3js.com/api/index.php/react-carousel-with-server-side-rendering-support-part-1z/).
 
 [![npm version](https://badge.fury.io/js/react-multi-carousel.svg)](https://www.npmjs.com/package/react-multi-carousel)
 [![Build Status](https://api.travis-ci.org/YIZHUANG/react-multi-carousel.svg?branch=master)](https://travis-ci.org/YIZHUANG/react-multi-carousel)
@@ -23,6 +23,8 @@ The technical details of this carousel can be found at [www.w3js.com -> react-mu
 - Custom dots
 - Custom styling
 - Accessibility support
+- Center mode.
+- Show next/previous set of items partially
 
 ## Bundle size
 
@@ -50,24 +52,23 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 ```
 
-### Technical approach.
-
-Detailed Can be found in this blog post at [w3js](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
-
 ### How the SSR mode works?
 
-The current most common solution is to detect the device type of the user based on the user agent. (server-side or client-side).
+The current most common solution is to detect the device type of the user based on the user agent. (server-side).
 
 Based based on the device type, we decided how many items we are showing in the Carousel.
 
 For example, we want to show 3 items at the same time on desktop (screen size 1024 - 2000px possibily) and 2 items on tablet(700px - 1024px) and 1 item on mobile. ---> this can be achieved through user-agent detection.
 
-More detailed can be found in this blog post [here](https://w3js.com/index.php/2019/03/06/react-carousel-with-server-side-rendering-support-part-1z/).
-
 Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/pages/index.js).
 
 - Demo for the SSR are at [here](https://react-multi-carousel.now.sh/)
 - Try to disable JavaScript to test if it renders on the server-side.
+
+Here is a lighter version of the library for detecting the user's device type [alternative](https://github.com/faisalman/ua-parser-js)
+
+If you are using Nextjs, you can choose to only bundle it on the server-side to improve performance, if you are interested in how, open up an issue.
+
 
 ## Usage
 

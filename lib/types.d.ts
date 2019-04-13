@@ -32,10 +32,11 @@ interface CarouselProps {
     containerClass?: string;
     dotListClass?: string;
     keyBoardControl?: boolean;
+    centerMode?: boolean;
     autoPlay?: boolean;
     autoPlaySpeed?: number;
     showDots?: boolean;
-    partialVisbile?: "right" | boolean;
+    partialVisbile?: boolean;
     customTransition?: string;
     transitionDuration?: number;
     focusOnSelect?: boolean;
