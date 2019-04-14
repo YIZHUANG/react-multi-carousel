@@ -5,17 +5,18 @@ import toJson from "enzyme-to-json";
 
 configure({ adapter: new Adapter() });
 
-import Carousel from "../../../lib/Carousel";
-import { LeftArrow, RightArrow } from "../../../lib/Arrows";
-import { CustomLeftArrow, CustomRightArrow } from "../../components/Arrows";
+import Carousel from "../../../../lib/Carousel";
+import Dots from "../../../../lib/Dots";
+import CustomDot from "../../components/CustomDot";
 import Card from "../../components/Card";
 import { responsive1 } from '../../common/responsive';
 import { longData } from '../../common/data';
 
-describe("With arrows", () => {
-  test("Default arrow", () => {
+describe("With dots", () => {
+  test("Default dots", () => {
     const wrapper = mount(
       <Carousel
+        showDots={true}
         swipeable={false}
         draggable={false}
         responsive={responsive1}
@@ -28,20 +29,19 @@ describe("With arrows", () => {
       })}
       </Carousel>
     );
-    expect(wrapper.find(LeftArrow).find(".react-multiple-carousel__arrow--left").length).toBe(1);
-    expect(wrapper.find(RightArrow).find(".react-multiple-carousel__arrow--right").length).toBe(1);
+    expect(wrapper.find(Dots).length).toBe(1);
+    expect(wrapper.find('.react-multi-carousel-dot').length).toBe(12);
     wrapper.unmount();
   });
-  test('Custom arrow', () => {
+  test('Custom dots', () => {
     const wrapper = mount(
       <Carousel
         swipeable={false}
         draggable={false}
         responsive={responsive1}
-        slidesToSlide={2}
-        infinite={true}
-        customLeftArrow={<CustomLeftArrow />}
-        customRightArrow={<CustomRightArrow />}
+        slidesToSlide={1}
+        showDots={true}
+        customDot={<CustomDot />}
         minimumTouchDrag={0}
       >
       {longData.map(card => {
@@ -49,8 +49,7 @@ describe("With arrows", () => {
       })}
       </Carousel>
     );
-    expect(wrapper.find(LeftArrow).find(CustomLeftArrow).length).toBe(1);
-    expect(wrapper.find(RightArrow).find(CustomRightArrow).length).toBe(1);
+    expect(wrapper.find(CustomDot).length).toBe(12);
     wrapper.unmount();
   });
 });

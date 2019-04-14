@@ -5,14 +5,18 @@ import toJson from "enzyme-to-json";
 
 configure({ adapter: new Adapter() });
 
-import Carousel from "../../../lib/Carousel";
-import { LeftArrow, RightArrow } from "../../../lib/Arrows";
+import Carousel from "../../../../lib/Carousel";
+import { LeftArrow, RightArrow } from "../../../../lib/Arrows";
 import { CustomLeftArrow, CustomRightArrow } from "../../components/Arrows";
 import Card from "../../components/Card";
 import { responsive1 } from '../../common/responsive';
 import { longData, shortData } from '../../common/data';
 
-
+/*
+The current setting is if the length of the carousel item is larger than "slidesToShow * 2",
+then we clone "slidesToShow * 2" amount of beginning and end items.
+Otherwise, it means we only have a few items. Then we clone it 3 times.
+*/
 describe("Clones", () => {
   test("Gets clones for small amount of data 3 items the length", () => {
     const wrapper = mount(

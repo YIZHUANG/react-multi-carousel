@@ -5,7 +5,7 @@ import toJson from "enzyme-to-json";
 
 configure({ adapter: new Adapter() });
 
-import Carousel from "../../../lib/Carousel";
+import Carousel from "../../../../lib/Carousel";
 import { CustomButtonGroup } from "../../components/Arrows";
 import Card from "../../components/Card";
 import { responsive1 } from '../../common/responsive';

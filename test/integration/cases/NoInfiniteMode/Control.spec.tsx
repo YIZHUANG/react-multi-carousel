@@ -7,9 +7,9 @@ import toJson from "enzyme-to-json";
 
 configure({ adapter: new Adapter() });
 
-import { LeftArrow, RightArrow } from "../../../lib/Arrows";
+import { LeftArrow, RightArrow } from "../../../../lib/Arrows";
 import { CustomLeftArrow, CustomRightArrow } from "../../components/Arrows";
-import Carousel from "../../../lib/Carousel";
+import Carousel from "../../../../lib/Carousel";
 import Card from "../../components/Card";
 import { longData } from "../../common/data";
 
