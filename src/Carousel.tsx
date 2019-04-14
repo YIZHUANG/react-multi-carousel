@@ -3,17 +3,17 @@ import * as React from "react";
 import {
   throttle,
   getWidthFromDeviceType,
-  getParitialVisibilityGutter,
+  getParitialVisibilityGutter, // show next items partially
   getClones,
-  whenEnteredClones,
+  whenEnteredClones, // handle when there are clones appear on the screen, only apply to infinite mode.
   getInitialState,
   getTransformForCenterMode,
   getTransformForPartialVsibile,
   throwError,
-  getItemClientSideWidth,
-  getNextSlidesBeforeSlide,
-  getPreviousSlidesBeforeSlide,
-  getMovingState
+  getItemClientSideWidth, // get the width of each item on client side only.
+  getNextSlidesBeforeSlide, // for "next" functionality
+  getPreviousSlidesBeforeSlide, // for "previous" functionality
+  getMovingState // this is to get the values for handling onTouchMove / onMouseMove;
 } from "./utils";
 import { CarouselInternalState, CarouselProps } from "./types";
 import Dots from "./Dots";
@@ -233,12 +233,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
     if (this.props.infinite) {
-      // this is to quicly cancel the animation and move the items position to create the infinite effects.
+      // this is to quickly cancel the animation and move the items position to create the infinite effects.
       this.correctClonesPosition({ domLoaded, isSliding });
     }
   }
   public correctClonesPosition({
-    domLoaded,
+    domLoaded, // this domLoaded comes from previous state, only use to tell if we are on client-side or server-side, nothing else.
     isSliding
   }: {
     domLoaded?: boolean;
@@ -382,7 +382,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = undefined;
     }
     if (this.onMove) {
-      const { direction, nextPosition, canGoNext } = getMovingState(
+      const { direction, nextPosition, canContinue } = getMovingState(
         this.state,
         this.props,
         this.initialPosition,
@@ -391,7 +391,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       );
       if (direction) {
         this.direction = direction;
-        if (canGoNext && nextPosition !== undefined) { // nextPosition can be 0;
+        if (canContinue && nextPosition !== undefined) {
+          // nextPosition can be 0;
           this.setState({ transform: nextPosition });
         }
       }
@@ -412,26 +413,26 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
     if (this.onMove) {
       if (this.direction === "right") {
-        const slidesHavePassed = Math.round(
-          (this.initialPosition - this.lastPosition) / this.state.itemWidth
-        );
-        if (
+        const canGoNext =
           this.initialPosition - this.lastPosition >=
-          this.props.minimumTouchDrag
-        ) {
+          this.props.minimumTouchDrag;
+        if (canGoNext) {
+          const slidesHavePassed = Math.round(
+            (this.initialPosition - this.lastPosition) / this.state.itemWidth
+          );
           this.next(slidesHavePassed);
         } else {
           this.correctItemsPosition(this.state.itemWidth, true);
         }
       }
       if (this.direction === "left") {
-        const slidesHavePassed = Math.round(
-          (this.lastPosition - this.initialPosition) / this.state.itemWidth
-        );
-        if (
+        const canGoNext =
           this.lastPosition - this.initialPosition >
-          this.props.minimumTouchDrag
-        ) {
+          this.props.minimumTouchDrag;
+        if (canGoNext) {
+          const slidesHavePassed = Math.round(
+            (this.lastPosition - this.initialPosition) / this.state.itemWidth
+          );
           this.previous(slidesHavePassed);
         } else {
           this.correctItemsPosition(this.state.itemWidth, true);

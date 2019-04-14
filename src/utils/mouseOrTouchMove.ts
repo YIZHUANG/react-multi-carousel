@@ -1,16 +1,16 @@
-import {  CarouselInternalState, CarouselProps } from "../types";
+import { CarouselInternalState, CarouselProps } from "../types";
 
-
+// this is to get the values for handling onTouchMove / onMouseMove;
 function getMovingState(
-  state:CarouselInternalState,
-  props:CarouselProps,
-  initialPosition:number,
-  lastPosition:number,
-  clientX:number
+  state: CarouselInternalState,
+  props: CarouselProps,
+  initialPosition: number,
+  lastPosition: number,
+  clientX: number
 ): {
   direction?: string;
   nextPosition: number | undefined;
-  canGoNext: boolean;
+  canContinue: boolean;
 } {
   const {
     itemWidth,
@@ -20,7 +20,7 @@ function getMovingState(
     currentSlide
   } = state;
   const { infinite } = props;
-  let canGoNext = false; // it will be true if we have slides to slide to.
+  let canContinue = false; // it will be true if we have slides to slide to.
   let direction; // either 'left' or 'right'
   let nextPosition;
   // making sure we have items to slide back to, prevent oversliding.
@@ -46,7 +46,7 @@ function getMovingState(
         (isLastSlide && infinite)
       ) {
         nextPosition = nextTranslate;
-        canGoNext = true;
+        canContinue = true;
       }
     }
   }
@@ -57,7 +57,7 @@ function getMovingState(
       const nextTranslate = transform + (clientX - lastPosition);
       const isFirstSlide = currentSlide === 0;
       if (nextTranslate <= 0 || (isFirstSlide && infinite)) {
-        canGoNext = true;
+        canContinue = true;
         nextPosition = nextTranslate;
       }
     }
@@ -65,10 +65,9 @@ function getMovingState(
   return {
     direction,
     nextPosition,
-    canGoNext
+    canContinue
   };
 }
 
-export {
-  getMovingState
-}
+
+export { getMovingState };

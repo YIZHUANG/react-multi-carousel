@@ -2,9 +2,9 @@
 
 ## Infinite mode
 
-If you are interested in contributing, and you are making a feature/fixing a bug that's related or not related to the `Infinite mode`, its important for you to know which files/codes are for infinite mode and which files/codes are not for the `Infinite mode`, so that you don't get confused.
+If you are interested in contributing.
 
-Here are a list of files/functions that are for the infinite mode only, if you are making a feature/fixing a bug that's not related to the `Infinite mode` you can safely ignore them.
+Here are a list of files/functions that are for the infinite mode only.
 
 - throttle
 - getOriginalCounterPart
