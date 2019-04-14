@@ -10,7 +10,9 @@ import {
   getTransformForCenterMode,
   getTransformForPartialVsibile,
   throwError,
-  getItemClientSideWidth
+  getItemClientSideWidth,
+  getNextSlidesBeforeSlide,
+  getPreviousSlidesBeforeSlide
 } from "./utils";
 import { CarouselInternalState, CarouselProps } from "./types";
 import Dots from "./Dots";
@@ -267,128 +269,74 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
   }
   public next(slidesHavePassed = 0): void {
-    const { slidesToShow } = this.state;
-    const { slidesToSlide, infinite, afterChange, beforeChange } = this.props;
-    const nextMaximumSlides =
-      this.state.currentSlide +
-      1 +
-      slidesHavePassed +
-      slidesToShow +
-      (slidesHavePassed > 0 ? 0 : slidesToSlide);
-    const nextSlides =
-      this.state.currentSlide +
-      slidesHavePassed +
-      (slidesHavePassed > 0 ? 0 : slidesToSlide);
-    const nextPosition = -(this.state.itemWidth * nextSlides);
+    const { afterChange, beforeChange } = this.props;
+    /*
+    two cases:
+    1. We are not over-sliding.
+    2. We are sliding over to what we have, that means nextslides > this.props.children.length. (does not apply to the inifnite mode)
+    */
+    const { nextSlides, nextPosition } = getNextSlidesBeforeSlide(
+      this.state,
+      this.props,
+      slidesHavePassed
+    );
     const previousSlide = this.state.currentSlide;
-    if (nextMaximumSlides <= this.state.totalItems) {
-      // It means if we have next slides go back to on the right-hand side.
-      if (typeof beforeChange === "function") {
-        beforeChange(nextSlides, this.getState());
-      }
-      this.isAnimationAllowed = true;
-      this.setState(
-        {
-          isSliding: true,
-          transform: nextPosition,
-          currentSlide: nextSlides
-        },
-        () => {
-          this.setState({ isSliding: false });
-          if (typeof afterChange === "function") {
-            setTimeout(() => {
-              afterChange(previousSlide, this.getState());
-            }, this.props.transitionDuration || defaultTransitionDuration);
-          }
-        }
-      );
-    } else if (
-      nextMaximumSlides > this.state.totalItems &&
-      this.state.currentSlide !== this.state.totalItems - slidesToShow
-    ) {
-      // This is to prevent oversliding
-      // This is not for inifinite mode as for inifinite mode is never over-sliding.
-      const maxSlides = this.state.totalItems - slidesToShow;
-      const maxPosition = -(this.state.itemWidth * maxSlides);
-      if (typeof beforeChange === "function") {
-        beforeChange(maxSlides, this.getState());
-      }
-      this.isAnimationAllowed = true;
-      this.setState(
-        {
-          isSliding: true,
-          transform: maxPosition,
-          currentSlide: maxSlides
-        },
-        () => {
-          this.setState({ isSliding: false });
-          if (typeof afterChange === "function") {
-            setTimeout(() => {
-              afterChange(previousSlide, this.getState());
-            }, this.props.transitionDuration || defaultTransitionDuration);
-          }
-        }
-      );
-    } else {
+    if (nextSlides === undefined || nextPosition === undefined) {
+      // they can be 0.
       return;
     }
+    if (typeof beforeChange === "function") {
+      beforeChange(nextSlides, this.getState());
+    }
+    this.isAnimationAllowed = true;
+    this.setState(
+      {
+        isSliding: true,
+        transform: nextPosition,
+        currentSlide: nextSlides
+      },
+      () => {
+        this.setState({ isSliding: false });
+        if (typeof afterChange === "function") {
+          setTimeout(() => {
+            afterChange(previousSlide, this.getState());
+          }, this.props.transitionDuration || defaultTransitionDuration);
+        }
+      }
+    );
   }
   public previous(slidesHavePassed = 0): void {
-    const { slidesToShow } = this.state;
-    const { slidesToSlide, infinite, afterChange, beforeChange } = this.props;
-    const nextSlides =
-      this.state.currentSlide -
-      slidesHavePassed -
-      (slidesHavePassed > 0 ? 0 : slidesToSlide);
-    const nextPosition = -(this.state.itemWidth * nextSlides);
-    const previousSlide = this.state.currentSlide;
-    if (nextSlides >= 0) {
-      // It means if we have next slides go back to on the left-hand side.
-      if (typeof beforeChange === "function") {
-        beforeChange(nextSlides, this.getState());
-      }
-      this.isAnimationAllowed = true;
-      this.setState(
-        {
-          isSliding: true,
-          transform: nextPosition,
-          currentSlide: nextSlides
-        },
-        () => {
-          this.setState({ isSliding: false });
-          if (typeof afterChange === "function") {
-            setTimeout(() => {
-              afterChange(previousSlide, this.getState());
-            }, this.props.transitionDuration || defaultTransitionDuration);
-          }
-        }
-      );
-    } else if (nextSlides < 0 && this.state.currentSlide !== 0) {
-      // prevent oversliding.
-      // it means the user has almost scrolling over to what we have.
-      // this is not for infinite mode as infinite mode always has items to go back to.
-      if (typeof beforeChange === "function") {
-        beforeChange(0, this.getState());
-      }
-      this.isAnimationAllowed = true;
-      this.setState(
-        {
-          isSliding: true,
-          transform: 0,
-          currentSlide: 0
-        },
-        () => {
-          this.setState({ isSliding: false });
-          if (typeof afterChange === "function") {
-            setTimeout(() => {
-              afterChange(previousSlide, this.getState());
-            }, this.props.transitionDuration || defaultTransitionDuration);
-          }
-        }
-      );
-    } else {
+    const { afterChange, beforeChange } = this.props;
+
+    const { nextSlides, nextPosition } = getPreviousSlidesBeforeSlide(
+      this.state,
+      this.props,
+      slidesHavePassed
+    );
+    if (nextSlides === undefined || nextPosition === undefined) {
+      // they can be 0, which goes back to the first slide.
       return;
     }
+    const previousSlide = this.state.currentSlide;
+    if (typeof beforeChange === "function") {
+      beforeChange(nextSlides, this.getState());
+    }
+    this.isAnimationAllowed = true;
+    this.setState(
+      {
+        isSliding: true,
+        transform: nextPosition,
+        currentSlide: nextSlides
+      },
+      () => {
+        this.setState({ isSliding: false });
+        if (typeof afterChange === "function") {
+          setTimeout(() => {
+            afterChange(previousSlide, this.getState());
+          }, this.props.transitionDuration || defaultTransitionDuration);
+        }
+      }
+    );
   }
   public componentWillUnmount(): void {
     window.removeEventListener("resize", this.onResize);

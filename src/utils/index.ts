@@ -8,6 +8,8 @@ import {
 import { getInitialState, getIfSlideIsVisbile, getTransformForCenterMode, getTransformForPartialVsibile } from './common';
 import throttle from "./throttle";
 import throwError from './throwError';
+import { getNextSlidesBeforeSlide } from './next';
+import { getPreviousSlidesBeforeSlide } from './previous';
 
 export {
   getOriginalCounterPart,
@@ -22,5 +24,7 @@ export {
   getIfSlideIsVisbile,
   getTransformForCenterMode,
   getTransformForPartialVsibile,
-  throwError
+  throwError,
+  getNextSlidesBeforeSlide,
+  getPreviousSlidesBeforeSlide
 };
