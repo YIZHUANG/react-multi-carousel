@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1555178848167" clover="3.2.0">
-  <project timestamp="1555178848168" name="All files">
-    <metrics statements="507" coveredstatements="369" conditionals="366" coveredconditionals="196" methods="96" coveredmethods="59" elements="969" coveredelements="624" complexity="0" loc="507" ncloc="507" packages="4" files="14" classes="14"/>
+<coverage generated="1555270874077" clover="3.2.0">
+  <project timestamp="1555270874078" name="All files">
+    <metrics statements="533" coveredstatements="385" conditionals="382" coveredconditionals="203" methods="100" coveredmethods="61" elements="1015" coveredelements="649" complexity="0" loc="533" ncloc="533" packages="4" files="15" classes="15"/>
     <package name="lib">
-      <metrics statements="363" coveredstatements="252" conditionals="309" coveredconditionals="161" methods="72" coveredmethods="43"/>
+      <metrics statements="364" coveredstatements="253" conditionals="305" coveredconditionals="161" methods="72" coveredmethods="43"/>
       <file name="Arrows.js" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/lib/Arrows.js">
         <metrics statements="16" coveredstatements="14" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="2"/>
         <line num="2" count="6" type="stmt"/>
@@ -24,7 +24,7 @@
         <line num="25" count="6" type="stmt"/>
       </file>
       <file name="Carousel.js" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/lib/Carousel.js">
-        <metrics statements="309" coveredstatements="207" conditionals="265" coveredconditionals="134" methods="57" coveredmethods="36"/>
+        <metrics statements="310" coveredstatements="208" conditionals="261" coveredconditionals="134" methods="57" coveredmethods="36"/>
         <line num="2" count="6" type="cond" truecount="3" falsecount="0"/>
         <line num="3" count="6" type="stmt"/>
         <line num="4" count="6" type="cond" truecount="1" falsecount="3"/>
@@ -326,14 +326,15 @@
         <line num="509" count="46" type="stmt"/>
         <line num="510" count="46" type="stmt"/>
         <line num="511" count="46" type="stmt"/>
-        <line num="513" count="46" type="cond" truecount="2" falsecount="0"/>
-        <line num="518" count="46" type="cond" truecount="2" falsecount="0"/>
+        <line num="512" count="46" type="stmt"/>
+        <line num="514" count="46" type="cond" truecount="2" falsecount="0"/>
         <line num="519" count="46" type="cond" truecount="2" falsecount="0"/>
-        <line num="521" count="46" type="cond" truecount="2" falsecount="2"/>
-        <line num="531" count="46" type="stmt"/>
-        <line num="546" count="6" type="stmt"/>
-        <line num="562" count="6" type="stmt"/>
-        <line num="564" count="6" type="stmt"/>
+        <line num="520" count="46" type="cond" truecount="2" falsecount="0"/>
+        <line num="522" count="46" type="cond" truecount="1" falsecount="1"/>
+        <line num="527" count="46" type="stmt"/>
+        <line num="542" count="6" type="stmt"/>
+        <line num="559" count="6" type="stmt"/>
+        <line num="561" count="6" type="stmt"/>
       </file>
       <file name="CarouselItems.js" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/lib/CarouselItems.js">
         <metrics statements="16" coveredstatements="12" conditionals="26" coveredconditionals="10" methods="5" coveredmethods="3"/>
@@ -381,7 +382,7 @@
       </file>
     </package>
     <package name="lib.utils">
-      <metrics statements="106" coveredstatements="85" conditionals="53" coveredconditionals="31" methods="11" coveredmethods="9"/>
+      <metrics statements="131" coveredstatements="100" conditionals="73" coveredconditionals="38" methods="15" coveredmethods="11"/>
       <file name="clones.js" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/lib/utils/clones.js">
         <metrics statements="51" coveredstatements="39" conditionals="24" coveredconditionals="15" methods="4" coveredmethods="4"/>
         <line num="2" count="6" type="stmt"/>
@@ -437,7 +438,7 @@
         <line num="144" count="6" type="stmt"/>
       </file>
       <file name="common.js" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/lib/utils/common.js">
-        <metrics statements="14" coveredstatements="13" conditionals="15" coveredconditionals="10" methods="2" coveredmethods="2"/>
+        <metrics statements="21" coveredstatements="15" conditionals="21" coveredconditionals="10" methods="4" coveredmethods="2"/>
         <line num="2" count="6" type="stmt"/>
         <line num="3" count="6" type="stmt"/>
         <line num="5" count="92" type="stmt"/>
@@ -452,9 +453,16 @@
         <line num="23" count="744" type="stmt"/>
         <line num="24" count="744" type="cond" truecount="2" falsecount="0"/>
         <line num="26" count="6" type="stmt"/>
+        <line num="28" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="6" type="stmt"/>
+        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="40" count="6" type="stmt"/>
       </file>
       <file name="elementWidth.js" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/lib/utils/elementWidth.js">
-        <metrics statements="12" coveredstatements="7" conditionals="8" coveredconditionals="4" methods="2" coveredmethods="1"/>
+        <metrics statements="14" coveredstatements="9" conditionals="10" coveredconditionals="5" methods="3" coveredmethods="2"/>
         <line num="2" count="6" type="stmt"/>
         <line num="4" count="92" type="stmt"/>
         <line num="5" count="92" type="cond" truecount="2" falsecount="0"/>
@@ -467,9 +475,11 @@
         <line num="16" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="20" count="6" type="stmt"/>
+        <line num="22" count="39" type="cond" truecount="1" falsecount="1"/>
+        <line num="24" count="6" type="stmt"/>
       </file>
       <file name="index.js" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/lib/utils/index.js">
-        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="19" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="2" count="6" type="stmt"/>
         <line num="3" count="6" type="stmt"/>
         <line num="4" count="6" type="stmt"/>
@@ -484,6 +494,11 @@
         <line num="13" count="6" type="stmt"/>
         <line num="14" count="6" type="stmt"/>
         <line num="15" count="6" type="stmt"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
       </file>
       <file name="throttle.js" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/lib/utils/throttle.js">
         <metrics statements="15" coveredstatements="12" conditionals="6" coveredconditionals="2" methods="3" coveredmethods="2"/>
@@ -502,6 +517,20 @@
         <line num="16" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="17" count="0" type="stmt"/>
         <line num="23" count="6" type="stmt"/>
+      </file>
+      <file name="throwError.js" path="/Users/yi.a.zhuang/Desktop/backup/react-multi-carousel/lib/utils/throwError.js">
+        <metrics statements="11" coveredstatements="6" conditionals="12" coveredconditionals="6" methods="1" coveredmethods="1"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="4" count="46" type="stmt"/>
+        <line num="5" count="46" type="cond" truecount="2" falsecount="2"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="8" count="46" type="cond" truecount="1" falsecount="1"/>
+        <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="46" type="cond" truecount="3" falsecount="1"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
       </file>
     </package>
     <package name="test.common">

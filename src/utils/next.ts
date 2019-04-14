@@ -5,7 +5,7 @@ two cases:
 1. We are not over-sliding.
 2. We are sliding over to what we have, that means nextslides > this.props.children.length. (does not apply to the inifnite mode)
 */
-function getNextSlidesBeforeSlide(
+function populateNextSlides(
   state: CarouselInternalState,
   props: CarouselProps,
   slidesHavePassed: number = 0
@@ -50,4 +50,4 @@ function getNextSlidesBeforeSlide(
   };
 }
 
-export { getNextSlidesBeforeSlide };
+export { populateNextSlides };

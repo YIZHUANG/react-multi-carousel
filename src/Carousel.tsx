@@ -11,9 +11,9 @@ import {
   getTransformForPartialVsibile,
   throwError,
   getItemClientSideWidth, // get the width of each item on client side only.
-  getNextSlidesBeforeSlide, // for "next" functionality
-  getPreviousSlidesBeforeSlide, // for "previous" functionality
-  getMovingState // this is to get the values for handling onTouchMove / onMouseMove;
+  populateNextSlides, // for "next" functionality
+  populatePreviousSlides, // for "previous" functionality
+  populateSlidesOnMouseTouchMove // this is to get the values for handling onTouchMove / onMouseMove;
 } from "./utils";
 import { CarouselInternalState, CarouselProps } from "./types";
 import Dots from "./Dots";
@@ -117,6 +117,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     itemWidth?: number,
     forResizing?: boolean
   ): void {
+    // if forResizing is true, means we are on client-side.
+    // if forResizing is false, means we are on server-side.
+    // because the first time we set the clones, we change the position of all carousel items when entering client-side from server-side.
+    // but still, we want to maintain the same position as it was on the server-side which is translateX(0) by getting the couter part of the original first slide.
     this.isAnimationAllowed = false;
     const childrenArr = React.Children.toArray(this.props.children);
     const { clones, initialSlide } = getClones(
@@ -145,7 +149,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }
     });
   }
-  // this is for resizing.
+  // this is for resizing only or the first time when we entered client-side from server-side.
   public setContainerAndItemWidth(
     slidesToShow: number,
     shouldCorrectItemPosition?: boolean
@@ -217,7 +221,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.containerRef.current &&
       this.containerRef.current.offsetWidth !== containerWidth
     ) {
-      // this is for handing resizing.
+      // this is for handing resizing only.
       setTimeout(() => {
         this.setItemsToShow(true);
       }, this.props.transitionDuration || defaultTransitionDuration);
@@ -238,7 +242,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
   }
   public correctClonesPosition({
-    domLoaded, // this domLoaded comes from previous state, only use to tell if we are on client-side or server-side, nothing else.
+    domLoaded, // this domLoaded comes from previous state, only use to tell if we are on client-side or server-side because this functin relies the dom.
     isSliding
   }: {
     domLoaded?: boolean;
@@ -276,7 +280,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     1. We are not over-sliding.
     2. We are sliding over to what we have, that means nextslides > this.props.children.length. (does not apply to the inifnite mode)
     */
-    const { nextSlides, nextPosition } = getNextSlidesBeforeSlide(
+    const { nextSlides, nextPosition } = populateNextSlides(
       this.state,
       this.props,
       slidesHavePassed
@@ -308,8 +312,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public previous(slidesHavePassed = 0): void {
     const { afterChange, beforeChange } = this.props;
-
-    const { nextSlides, nextPosition } = getPreviousSlidesBeforeSlide(
+    const { nextSlides, nextPosition } = populatePreviousSlides(
       this.state,
       this.props,
       slidesHavePassed
@@ -382,7 +385,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = undefined;
     }
     if (this.onMove) {
-      const { direction, nextPosition, canContinue } = getMovingState(
+      const { direction, nextPosition, canContinue } = populateSlidesOnMouseTouchMove(
         this.state,
         this.props,
         this.initialPosition,

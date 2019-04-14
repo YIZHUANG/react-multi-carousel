@@ -1,7 +1,7 @@
 import { CarouselInternalState, CarouselProps } from "../types";
 
 // this is to get the values for handling onTouchMove / onMouseMove;
-function getMovingState(
+function populateSlidesOnMouseTouchMove(
   state: CarouselInternalState,
   props: CarouselProps,
   initialPosition: number,
@@ -70,4 +70,4 @@ function getMovingState(
 }
 
 
-export { getMovingState };
+export { populateSlidesOnMouseTouchMove };

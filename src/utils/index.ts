@@ -8,9 +8,9 @@ import {
 import { getInitialState, getIfSlideIsVisbile, getTransformForCenterMode, getTransformForPartialVsibile } from './common';
 import throttle from "./throttle";
 import throwError from './throwError';
-import { getNextSlidesBeforeSlide } from './next';
-import { getPreviousSlidesBeforeSlide } from './previous';
-import { getMovingState } from './mouseOrTouchMove';
+import { populateNextSlides } from './next';
+import { populatePreviousSlides } from './previous';
+import { populateSlidesOnMouseTouchMove } from './mouseOrTouchMove';
 
 export {
   getOriginalCounterPart,
@@ -26,7 +26,7 @@ export {
   getTransformForCenterMode,
   getTransformForPartialVsibile,
   throwError,
-  getNextSlidesBeforeSlide,
-  getPreviousSlidesBeforeSlide,
-  getMovingState
+  populateNextSlides,
+  populatePreviousSlides,
+  populateSlidesOnMouseTouchMove
 };
