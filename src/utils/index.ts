@@ -10,6 +10,7 @@ import throttle from "./throttle";
 import throwError from './throwError';
 import { getNextSlidesBeforeSlide } from './next';
 import { getPreviousSlidesBeforeSlide } from './previous';
+import { getMovingState } from './mouseOrTouchMove';
 
 export {
   getOriginalCounterPart,
@@ -26,5 +27,6 @@ export {
   getTransformForPartialVsibile,
   throwError,
   getNextSlidesBeforeSlide,
-  getPreviousSlidesBeforeSlide
+  getPreviousSlidesBeforeSlide,
+  getMovingState
 };

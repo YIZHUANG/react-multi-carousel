@@ -12,7 +12,8 @@ import {
   throwError,
   getItemClientSideWidth,
   getNextSlidesBeforeSlide,
-  getPreviousSlidesBeforeSlide
+  getPreviousSlidesBeforeSlide,
+  getMovingState
 } from "./utils";
 import { CarouselInternalState, CarouselProps } from "./types";
 import Dots from "./Dots";
@@ -381,47 +382,17 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = undefined;
     }
     if (this.onMove) {
-      // making sure we have items to slide back to, prevent oversliding.
-      const slidesHavePassedRight = Math.round(
-        (this.initialPosition - this.lastPosition) / this.state.itemWidth
+      const { direction, nextPosition, canGoNext } = getMovingState(
+        this.state,
+        this.props,
+        this.initialPosition,
+        this.lastPosition,
+        clientX
       );
-      // making sure we have items to slide back to, prevent oversliding.
-      const slidesHavePassedLeft = Math.round(
-        (this.lastPosition - this.initialPosition) / this.state.itemWidth
-      );
-      if (
-        this.initialPosition > clientX &&
-        slidesHavePassedRight <= this.state.slidesToShow
-      ) {
-        this.direction = "right";
-        const translateXLimit = Math.abs(
-          -(
-            this.state.itemWidth *
-            (this.state.totalItems - this.state.slidesToShow)
-          )
-        );
-        const nextTranslate =
-          this.state.transform - (this.lastPosition - clientX);
-        const isLastSlide =
-          this.state.currentSlide ===
-          this.state.totalItems - this.state.slidesToShow;
-        if (
-          Math.abs(nextTranslate) <= translateXLimit ||
-          (isLastSlide && this.props.infinite)
-        ) {
-          this.setState({ transform: nextTranslate });
-        }
-      }
-      if (
-        clientX > this.initialPosition &&
-        slidesHavePassedLeft <= this.state.slidesToShow
-      ) {
-        this.direction = "left";
-        const nextTranslate =
-          this.state.transform + (clientX - this.lastPosition);
-        const isFirstSlide = this.state.currentSlide === 0;
-        if (nextTranslate <= 0 || (isFirstSlide && this.props.infinite)) {
-          this.setState({ transform: nextTranslate });
+      if (direction) {
+        this.direction = direction;
+        if (canGoNext && nextPosition !== undefined) { // nextPosition can be 0;
+          this.setState({ transform: nextPosition });
         }
       }
       this.lastPosition = clientX;
@@ -483,7 +454,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = undefined;
     }
   }
-
   public goToSlide(slide: number): void {
     if (this.isInThrottle) {
       return;
