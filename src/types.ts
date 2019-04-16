@@ -1,18 +1,16 @@
-import { any } from "prop-types";
-
-interface responsiveType {
+import * as React from "react";
+export interface responsiveType {
   [key: string]: {
     breakpoint: { max: number; min: number };
     items: number;
     paritialVisibilityGutter?: number;
   };
 }
-
-interface CarouselProps {
+export interface CarouselProps {
   responsive: responsiveType;
   deviceType?: string;
   ssr?: boolean;
-  slidesToSlide: number;
+  slidesToSlide?: number;
   draggable?: boolean;
   arrows?: boolean; // show or hide arrows.
   swipeable?: boolean;
@@ -23,7 +21,7 @@ interface CarouselProps {
   customDot?: React.ReactElement<any> | null;
   customButtonGroup?: React.ReactElement<any> | null;
   infinite?: boolean;
-  minimumTouchDrag: number; // default 50px. The amount of distance to drag / swipe in order to move to the next slide.
+  minimumTouchDrag?: number; // default 50px. The amount of distance to drag / swipe in order to move to the next slide.
   afterChange?: (previousSlide: number, state: stateCallBack) => void; // Change callback after sliding everytime. `(previousSlide, currentState) => ...`
   beforeChange?: (nextSlide: number, state: stateCallBack) => void; // Change callback before sliding everytime. `(previousSlide, currentState) => ...`
   sliderClass?: string; // Use this to style your own track list.
@@ -48,19 +46,30 @@ interface CarouselProps {
 }
 
 
-interface buttonGroupCallBack {
-  previous: () => void;
-  next: () => void;
-  goToSlide: (index:number) => void;
-  state: stateCallBack
-}
 
-interface stateCallBack extends CarouselInternalState {
+export interface stateCallBack extends CarouselInternalState {
   onMove: boolean;
   direction: string | undefined;
 }
 
-interface CarouselInternalState {
+export interface buttonGroupProps {
+  previous: () => void;
+  next: () => void;
+  goToSlide: (index:number) => void;
+  carouselState: stateCallBack;
+}
+export interface ArrowProps {
+  onClick: () => void;
+  carouselState: stateCallBack;
+}
+export interface DotProps {
+  index: number;
+  active?: boolean;
+  onClick: () => void;
+  carouselState: stateCallBack;
+}
+
+export interface CarouselInternalState {
   itemWidth: number;
   containerWidth: number;
   slidesToShow: number;
@@ -73,4 +82,4 @@ interface CarouselInternalState {
   clones: any[];
 }
 
-export { CarouselInternalState, CarouselProps, responsiveType, stateCallBack, buttonGroupCallBack };
+export default class Carousel extends React.PureComponent<CarouselProps> {}

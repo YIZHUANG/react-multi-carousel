@@ -23,7 +23,7 @@ import CarouselItems from "./CarouselItems";
 const defaultTransitionDuration = 400;
 const defaultTransition = "transform 400ms ease-in-out";
 class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
-  public static defaultProps: any = {
+  public static defaultProps = {
     slidesToSlide: 1,
     infinite: false,
     draggable: true,
@@ -63,7 +63,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       containerWidth: 0,
       isSliding: false
     };
-    const { infinite, transitionDuration } = props;
     this.onResize = this.onResize.bind(this);
     this.handleDown = this.handleDown.bind(this);
     this.handleMove = this.handleMove.bind(this);
@@ -418,7 +417,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       if (this.direction === "right") {
         const canGoNext =
           this.initialPosition - this.lastPosition >=
-          this.props.minimumTouchDrag;
+          this.props.minimumTouchDrag!;
         if (canGoNext) {
           const slidesHavePassed = Math.round(
             (this.initialPosition - this.lastPosition) / this.state.itemWidth
@@ -431,7 +430,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       if (this.direction === "left") {
         const canGoNext =
           this.lastPosition - this.initialPosition >
-          this.props.minimumTouchDrag;
+          this.props.minimumTouchDrag!;
         if (canGoNext) {
           const slidesHavePassed = Math.round(
             (this.lastPosition - this.initialPosition) / this.state.itemWidth
@@ -564,7 +563,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.state,
       this.props
     );
-    const isLeftEndReach = !(this.state.currentSlide - slidesToSlide >= 0);
+    const isLeftEndReach = !(this.state.currentSlide - slidesToSlide! >= 0);
     const isRightEndReach = !(
       this.state.currentSlide + 1 + slidesToShow <=
       this.state.totalItems

@@ -2,11 +2,6 @@ import * as React from "react";
 
 import { CarouselInternalState, CarouselProps } from "./types";
 import {
-  throttle,
-  getWidthFromDeviceType,
-  getParitialVisibilityGutter,
-  getClones,
-  whenEnteredClones,
   getInitialState,
   getIfSlideIsVisbile
 } from "./utils";

@@ -35,7 +35,7 @@ The technical details of this carousel can be found at [www.w3js.com -> react-mu
 
 ## Demo.
 
-Demo and documentation can be found at [here](https://w3js.com/react-multi-carousel/).
+Documentation is [here](https://w3js.com/react-multi-carousel/).
 
 Demo for the SSR <https://react-multi-carousel.now.sh/>
 
@@ -72,7 +72,11 @@ Here is a lighter version of the library for detecting the user's device type [a
 If you are using Nextjs, you can choose to only bundle it on the server-side to improve performance, if you are interested in how, open up an issue.
 
 
-## Usage
+## Usage with TypeScript
+
+Please read https://github.com/YIZHUANG/react-multi-carousel/blob/master/TypeScriptUsage.md
+
+## Common Usage
 
 ```js
 import Carousel from "react-multi-carousel";
@@ -124,7 +128,7 @@ You can pass your own custom arrows to make it the way you want, the same for th
 
 You custom arrows will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
 
-[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=Custom%20arrow&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
+[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=Custom%20arrow&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomArrows.js)
 
@@ -144,7 +148,7 @@ const CustomRightArrow = ({ onClick, ...rest }) => {
 
 This is very useful if you don't want the dots, or arrows and you want to fully customize the control functionality and styling yourself.
 
-[Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=With%20custom%20button%20group&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
+[Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=With%20custom%20button%20group&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomArrows.js)
 
@@ -169,13 +173,13 @@ const ButtonGroup = ({ next, previous, goToSlide ...rest }) => {
 
 You can pass your own custom dots to replace the default one.
 
-Custom dots can also be a copy or an image of your carousel item. See example in this [One](https://react-multi-carousel.now.sh/)
+Custom dots can also be a copy or an image of your carousel item. See example in this [one](https://react-multi-carousel.now.sh/)
 
 The codes for this [example](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/components/carousel-with-custom-dots.js)
 
 You custom dots will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
 
-[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=custom%20dots&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
+[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=custom%20dots&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomDot.js)
 

@@ -1,14 +1,15 @@
 import * as React from 'react';
 
+import { stateCallBack } from './types';
 
 interface LeftArrowProps {
   customLeftArrow?: React.ReactElement<any> | null,
-  getState: () => any;
+  getState: () => stateCallBack;
   previous: () => void;
 }
 interface RightArrowProps {
   customRightArrow?: React.ReactElement<any> | null,
-  getState: () => any;
+  getState: () => stateCallBack;
   next: () => void;
 }
 

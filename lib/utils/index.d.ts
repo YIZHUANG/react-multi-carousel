@@ -3,4 +3,7 @@ import { getWidthFromDeviceType, getParitialVisibilityGutter, getItemClientSideW
 import { getInitialState, getIfSlideIsVisbile, getTransformForCenterMode, getTransformForPartialVsibile } from './common';
 import throttle from "./throttle";
 import throwError from './throwError';
-export { getOriginalCounterPart, getCloneCounterPart, getClones, getWidthFromDeviceType, whenEnteredClones, getItemClientSideWidth, getParitialVisibilityGutter, throttle, getInitialState, getIfSlideIsVisbile, getTransformForCenterMode, getTransformForPartialVsibile, throwError };
+import { populateNextSlides } from './next';
+import { populatePreviousSlides } from './previous';
+import { populateSlidesOnMouseTouchMove } from './mouseOrTouchMove';
+export { getOriginalCounterPart, getCloneCounterPart, getClones, getWidthFromDeviceType, whenEnteredClones, getItemClientSideWidth, getParitialVisibilityGutter, throttle, getInitialState, getIfSlideIsVisbile, getTransformForCenterMode, getTransformForPartialVsibile, throwError, populateNextSlides, populatePreviousSlides, populateSlidesOnMouseTouchMove };

@@ -11,8 +11,7 @@ function getOriginalCounterPart(
   index: number,
   {
     slidesToShow,
-    currentSlide,
-    totalItems
+    currentSlide
   }: { slidesToShow: number; currentSlide: number; totalItems: number },
   childrenArr: any[]
 ): number {
@@ -41,9 +40,7 @@ We only need this if (childrenArr.length > slidesToShow * 2) as defined in the g
 function getCloneCounterPart(
   index: number,
   {
-    slidesToShow,
-    totalItems,
-    currentSlide
+    slidesToShow
   }: { slidesToShow: number; currentSlide: number; totalItems: number },
   childrenArr: any[]
 ): number | undefined {

@@ -1,13 +1,13 @@
 import * as React from "react";
 
-import { CarouselInternalState, CarouselProps } from "./types";
+import { CarouselInternalState, CarouselProps, stateCallBack } from "./types";
 import { getOriginalCounterPart, getCloneCounterPart } from "./utils";
 
 interface DotsTypes {
   props: CarouselProps;
   state: CarouselInternalState;
   goToSlide: (index: number) => void;
-  getState: () => any;
+  getState: () => stateCallBack;
 }
 
 const Dots = ({
@@ -26,7 +26,7 @@ const Dots = ({
     <ul className={`react-multi-carousel-dot-list ${dotListClass}`}>
       {Array(childrenArr.length)
         .fill(0)
-        .map((item, index) => {
+        .map((item, index:number) => {
           const slideIndex = infinite
             ? getOriginalCounterPart(index, state, childrenArr)
             : index;

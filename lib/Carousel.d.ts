@@ -1,7 +1,23 @@
 import * as React from "react";
 import { CarouselInternalState, CarouselProps } from "./types";
 declare class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
-    static defaultProps: any;
+    static defaultProps: {
+        slidesToSlide: number;
+        infinite: boolean;
+        draggable: boolean;
+        swipeable: boolean;
+        arrows: boolean;
+        containerClass: string;
+        sliderClass: string;
+        itemClass: string;
+        keyBoardControl: boolean;
+        autoPlaySpeed: number;
+        showDots: boolean;
+        minimumTouchDrag: number;
+        dotListClass: string;
+        focusOnSelect: boolean;
+        centerMode: boolean;
+    };
     private readonly containerRef;
     onMove: boolean;
     initialPosition: number;
@@ -19,7 +35,8 @@ declare class Carousel extends React.Component<CarouselProps, CarouselInternalSt
     correctItemsPosition(itemWidth: number, isAnimationAllowed?: boolean): void;
     onResize(value?: any): void;
     componentDidUpdate({ keyBoardControl, autoPlay }: CarouselProps, { containerWidth, domLoaded, isSliding }: CarouselInternalState): void;
-    correctClonesPosition({ domLoaded, isSliding }: {
+    correctClonesPosition({ domLoaded, // this domLoaded comes from previous state, only use to tell if we are on client-side or server-side because this functin relies the dom.
+    isSliding }: {
         domLoaded?: boolean;
         isSliding?: boolean;
     }): void;

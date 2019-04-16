@@ -24,13 +24,13 @@ function populateNextSlides(
     1 +
     slidesHavePassed +
     slidesToShow +
-    (slidesHavePassed > 0 ? 0 : slidesToSlide);
+    (slidesHavePassed > 0 ? 0 : slidesToSlide!);
   if (nextMaximumSlides <= totalItems) {
     // It means if we have next slides go back to on the right-hand side.
     nextSlides =
       currentSlide +
       slidesHavePassed +
-      (slidesHavePassed > 0 ? 0 : slidesToSlide);
+      (slidesHavePassed > 0 ? 0 : slidesToSlide!);
     nextPosition = -(itemWidth * nextSlides);
   } else if (
     nextMaximumSlides > totalItems &&

@@ -1,10 +1,10 @@
 import { CarouselInternalState, CarouselProps } from "../types";
-declare function getOriginalCounterPart(index: number, { slidesToShow, currentSlide, totalItems }: {
+declare function getOriginalCounterPart(index: number, { slidesToShow, currentSlide }: {
     slidesToShow: number;
     currentSlide: number;
     totalItems: number;
 }, childrenArr: any[]): number;
-declare function getCloneCounterPart(index: number, { slidesToShow, totalItems, currentSlide }: {
+declare function getCloneCounterPart(index: number, { slidesToShow }: {
     slidesToShow: number;
     currentSlide: number;
     totalItems: number;

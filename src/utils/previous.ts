@@ -20,7 +20,7 @@ function populatePreviousSlides(
   const nextMaximumSlides =
     currentSlide -
     slidesHavePassed -
-    (slidesHavePassed > 0 ? 0 : slidesToSlide);
+    (slidesHavePassed > 0 ? 0 : slidesToSlide!);
   if (nextMaximumSlides >= 0) {
     // It means if we have next slides go back to on the left-hand side.
     nextSlides = nextMaximumSlides;
