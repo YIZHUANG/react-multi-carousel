@@ -46,20 +46,20 @@ export interface stateCallBack extends CarouselInternalState {
     direction: string | undefined;
 }
 export interface buttonGroupProps {
-    previous: () => void;
-    next: () => void;
-    goToSlide: (index: number) => void;
-    carouselState: stateCallBack;
+    previous?: () => void;
+    next?: () => void;
+    goToSlide?: (index: number) => void;
+    carouselState?: stateCallBack;
 }
 export interface ArrowProps {
-    onClick: () => void;
-    carouselState: stateCallBack;
+    onClick?: () => void;
+    carouselState?: stateCallBack;
 }
 export interface DotProps {
-    index: number;
+    index?: number;
     active?: boolean;
-    onClick: () => void;
-    carouselState: stateCallBack;
+    onClick?: () => void;
+    carouselState?: stateCallBack;
 }
 export interface CarouselInternalState {
     itemWidth: number;
