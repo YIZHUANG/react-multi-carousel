@@ -13,6 +13,8 @@ The technical details of this carousel can be found at [www.w3js.com -> react-mu
 - Infinite mode
 - Custom animation
 - AutoPlay mode
+- Auto play interval
+- Supports images, videos, everything.
 - Responsive
 - Swipe to slide
 - Mouse drag to slide
@@ -27,6 +29,14 @@ The technical details of this carousel can be found at [www.w3js.com -> react-mu
 - Show next/previous set of items partially
 
 ## [Documentation](https://w3js.com/react-multi-carousel/)
+
+## Other important links.
+
+- [Code sandbox](https://codesandbox.io/embed/2omn67p8kj)
+- [Contributing](https://github.com/YIZHUANG/react-multi-carousel/blob/master/contributing.md)
+- [Releases](https://github.com/YIZHUANG/react-multi-carousel/releases)
+- [TypeScript usage](https://github.com/YIZHUANG/react-multi-carousel/blob/master/TypeScriptUsage.md)
+- [Ssr demo](https://react-multi-carousel.now.sh/)
 
 ## Bundle size
 
@@ -70,11 +80,6 @@ Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/
 Here is a lighter version of the library for detecting the user's device type [alternative](https://github.com/faisalman/ua-parser-js)
 
 If you are using Nextjs, you can choose to only bundle it on the server-side to improve performance, if you are interested in how, open up an issue.
-
-
-## Usage with TypeScript
-
-Please read https://github.com/YIZHUANG/react-multi-carousel/blob/master/TypeScriptUsage.md
 
 ## Common Usage
 
@@ -379,6 +384,6 @@ Submit an issue for feature request or submit a pr.
 
 
 ## Donation
-If this project help you reduce time to develop, you can give me a cup of coffee :) 
+If this project help you reduce time to develop, you can give me a cup of coffee :)
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GJSPRG9RKSJLQ&source=url)

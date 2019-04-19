@@ -1,5 +1,19 @@
 # Contributing
 
+Send a PR or raise an issue to:
+
+- Report/Fix a bug.
+- Suggest/Improve the documentation
+- Request/Develop a new feature.
+
+## Pull request
+
+Pull requests are extremely welcome. To start up your local development:
+
+- npm install
+- cd app
+- npm run dev
+
 ## Infinite mode
 
 If you are interested in contributing.
@@ -30,9 +44,3 @@ For for the infinite mode, we need to clone the children on the client-side, the
 We also need to care about the timing of canceling/enabling the animation, there are two functions for this, can be found at `utils/clones` with the name `whenEnteredClones()` and `correctClonesPosition()` in `Carousel.tsx` in the `componentDidUpdate()` method.
 
 For server-side rendering, we use `flex-basis` to set the width of the item, and on the client-side we switch to `width`
-
-## Locale development.
-
-- cd app
-- npm install
-- npm run dev
