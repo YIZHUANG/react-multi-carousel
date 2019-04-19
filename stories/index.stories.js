@@ -194,7 +194,7 @@ storiesOf("Carousel", module)
     return (
       <Carousel
         autoPlay
-        autoPlaySpeed={100}
+        autoPlaySpeed={1}
         infinite={true}
         customTransition='all 1s linear'
         transitionDuration={1000}
