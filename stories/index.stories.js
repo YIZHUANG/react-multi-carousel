@@ -190,6 +190,24 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
+  .addWithJSX('Auto play custom animation', () => {
+    return (
+      <Carousel
+        autoPlay
+        autoPlaySpeed={100}
+        infinite={true}
+        customTransition='all 1s linear'
+        transitionDuration={1000}
+        containerClass="container-with-dots"
+        slidesToSlide={2}
+        responsive={responsive}
+      >
+        {fakerData.map(card => {
+          return <Card {...card} />;
+        })}
+      </Carousel>
+    );
+  })
   .addWithJSX("With dots", () => {
     return (
       <Carousel

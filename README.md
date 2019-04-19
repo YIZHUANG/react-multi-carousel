@@ -1,6 +1,6 @@
 # react-multi-carousel
 
-Lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering) with typescript.
+Production-ready, lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering) with typescript.
 
 The technical details of this carousel can be found at [www.w3js.com -> react-multi-carousel](https://w3js.com/api/index.php/react-carousel-with-server-side-rendering-support-part-1z/).
 
