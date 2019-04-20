@@ -5,7 +5,7 @@ import {
   getWidthFromDeviceType,
   getParitialVisibilityGutter, // show next items partially
   getClones,
-  whenEnteredClones, // handle when there are clones appear on the screen, only apply to infinite mode.
+  checkClonesPosition, // handle when there are clones appear on the screen, only apply to infinite mode.
   getInitialState,
   getTransformForCenterMode,
   getTransformForPartialVsibile,
@@ -249,11 +249,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }): void {
     const childrenArr = React.Children.toArray(this.props.children);
     const {
-      hasEnterClonedAfter,
-      hasEnterClonedBefore,
+      isReachingTheEnd,
+      isReachingTheStart,
       nextSlide,
       nextPosition
-    } = whenEnteredClones(this.state, childrenArr, this.props);
+    } = checkClonesPosition(this.state, childrenArr, this.props);
     if (
       // this is to prevent this gets called on the server-side.
       this.state.domLoaded &&
@@ -261,7 +261,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       isSliding &&
       !this.state.isSliding
     ) {
-      if (hasEnterClonedAfter || hasEnterClonedBefore) {
+      if (isReachingTheEnd || isReachingTheStart) {
         this.isAnimationAllowed = false;
         setTimeout(() => {
           this.setState({

@@ -1,5 +1,5 @@
 import { getOriginalCounterPart,
-getCloneCounterPart, getClones, whenEnteredClones } from "./clones";
+getCloneCounterPart, getClones, checkClonesPosition } from "./clones";
 import {
   getWidthFromDeviceType,
   getParitialVisibilityGutter,
@@ -17,7 +17,7 @@ export {
   getCloneCounterPart,
   getClones,
   getWidthFromDeviceType,
-  whenEnteredClones,
+  checkClonesPosition,
   getItemClientSideWidth,
   getParitialVisibilityGutter,
   throttle,
