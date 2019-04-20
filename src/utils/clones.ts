@@ -112,52 +112,60 @@ creates the infinite effects.
 
 The if else statement here is based on the getClones method. Because it decides how many items we are cloning.
 */
-function whenEnteredClones(
+function checkClonesPosition(
   { currentSlide, slidesToShow, itemWidth, totalItems }: CarouselInternalState,
   childrenArr: any[],
   props: CarouselProps
 ): {
-  hasEnterClonedAfter: boolean;
-  hasEnterClonedBefore: boolean;
+  isReachingTheEnd: boolean;
+  isReachingTheStart: boolean;
   nextSlide: number;
   nextPosition: number;
 } {
+  // the one is here for pre-swtiching the position just right before we are one more slide away from the end.
+  // this gives us enough time to pre-clone the carousel items.
+  const reservedSlide = 1;
   let nextSlide = 0;
   let nextPosition = 0;
-  let hasEnterClonedAfter;
-  const hasEnterClonedBefore = currentSlide === 0;
+  let isReachingTheEnd;
+  const isReachingTheStart = currentSlide <= reservedSlide;
   const originalFirstSlide =
     childrenArr.length - (childrenArr.length - slidesToShow * 2);
   if (childrenArr.length > slidesToShow * 2) {
-    hasEnterClonedAfter =
-      currentSlide >= originalFirstSlide + childrenArr.length;
-    if (hasEnterClonedAfter) {
+    isReachingTheEnd =
+      currentSlide >=
+      originalFirstSlide + childrenArr.length - reservedSlide;
+    if (isReachingTheEnd) {
       nextSlide = currentSlide - childrenArr.length;
       nextPosition = -(itemWidth * nextSlide);
     }
-    if (hasEnterClonedBefore) {
-      nextSlide = originalFirstSlide + (childrenArr.length - slidesToShow * 2);
+    if (isReachingTheStart) {
+      nextSlide =
+        originalFirstSlide +
+        currentSlide +
+        (childrenArr.length - slidesToShow * 2);
       nextPosition = -(itemWidth * nextSlide);
     }
   } else {
-    hasEnterClonedAfter = currentSlide >= childrenArr.length * 2;
-    if (hasEnterClonedAfter) {
+    isReachingTheEnd =
+      currentSlide + reservedSlide >= childrenArr.length * 2;
+    if (isReachingTheEnd) {
       nextSlide = currentSlide - childrenArr.length;
       nextPosition = -(itemWidth * nextSlide);
     }
-    if (hasEnterClonedBefore) {
+    if (isReachingTheStart) {
       if (props.showDots) {
-        nextSlide = childrenArr.length;
+        nextSlide = childrenArr.length + currentSlide;
         nextPosition = -(itemWidth * nextSlide);
       } else {
-        nextSlide = totalItems - slidesToShow * 2;
+        nextSlide = totalItems - slidesToShow * 2 + currentSlide;
         nextPosition = -(itemWidth * nextSlide);
       }
     }
   }
   return {
-    hasEnterClonedAfter,
-    hasEnterClonedBefore,
+    isReachingTheEnd,
+    isReachingTheStart,
     nextSlide,
     nextPosition
   };
@@ -167,5 +175,5 @@ export {
   getOriginalCounterPart,
   getCloneCounterPart,
   getClones,
-  whenEnteredClones
+  checkClonesPosition
 };
