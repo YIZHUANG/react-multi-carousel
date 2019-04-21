@@ -2,20 +2,18 @@ import * as React from "react";
 
 import {
   throttle,
-  getWidthFromDeviceType,
-  getParitialVisibilityGutter, // show next items partially
   getClones,
   checkClonesPosition, // handle when there are clones appear on the screen, only apply to infinite mode.
   getInitialState,
   getTransformForCenterMode,
   getTransformForPartialVsibile,
   throwError,
-  getItemClientSideWidth, // get the width of each item on client side only.
-  populateNextSlides, // for "next" functionality
-  populatePreviousSlides, // for "previous" functionality
-  populateSlidesOnMouseTouchMove // this is to get the values for handling onTouchMove / onMouseMove;
+  getItemClientSideWidth,
+  populateNextSlides,
+  populatePreviousSlides,
+  populateSlidesOnMouseTouchMove
 } from "./utils";
-import { CarouselInternalState, CarouselProps } from "./types";
+import { CarouselInternalState, CarouselProps, stateCallBack } from "./types";
 import Dots from "./Dots";
 import { LeftArrow, RightArrow } from "./Arrows";
 import CarouselItems from "./CarouselItems";
@@ -485,7 +483,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }
     );
   }
-  public getState(): any {
+  public getState(): stateCallBack {
     return {
       ...this.state,
       onMove: this.onMove,
