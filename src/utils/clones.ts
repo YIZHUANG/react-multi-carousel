@@ -124,41 +124,34 @@ function checkClonesPosition(
 } {
   // the one is here for pre-swtiching the position just right before we are one more slide away from the end.
   // this gives us enough time to pre-clone the carousel items.
-  const reservedSlide = 1;
   let nextSlide = 0;
   let nextPosition = 0;
   let isReachingTheEnd;
-  const isReachingTheStart = currentSlide <= reservedSlide;
+  const isReachingTheStart = currentSlide === 0;
   const originalFirstSlide =
     childrenArr.length - (childrenArr.length - slidesToShow * 2);
   if (childrenArr.length > slidesToShow * 2) {
-    isReachingTheEnd =
-      currentSlide >=
-      originalFirstSlide + childrenArr.length - reservedSlide;
+    isReachingTheEnd = currentSlide >= originalFirstSlide + childrenArr.length;
     if (isReachingTheEnd) {
       nextSlide = currentSlide - childrenArr.length;
       nextPosition = -(itemWidth * nextSlide);
     }
     if (isReachingTheStart) {
-      nextSlide =
-        originalFirstSlide +
-        currentSlide +
-        (childrenArr.length - slidesToShow * 2);
+      nextSlide = originalFirstSlide + (childrenArr.length - slidesToShow * 2);
       nextPosition = -(itemWidth * nextSlide);
     }
   } else {
-    isReachingTheEnd =
-      currentSlide + reservedSlide >= childrenArr.length * 2;
+    isReachingTheEnd = currentSlide >= childrenArr.length * 2;
     if (isReachingTheEnd) {
       nextSlide = currentSlide - childrenArr.length;
       nextPosition = -(itemWidth * nextSlide);
     }
     if (isReachingTheStart) {
       if (props.showDots) {
-        nextSlide = childrenArr.length + currentSlide;
+        nextSlide = childrenArr.length;
         nextPosition = -(itemWidth * nextSlide);
       } else {
-        nextSlide = totalItems - slidesToShow * 2 + currentSlide;
+        nextSlide = totalItems - slidesToShow * 2;
         nextPosition = -(itemWidth * nextSlide);
       }
     }

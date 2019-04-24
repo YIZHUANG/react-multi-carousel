@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CarouselInternalState, CarouselProps } from "./types";
+import { CarouselInternalState, CarouselProps, stateCallBack } from "./types";
 declare class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     static defaultProps: {
         slidesToSlide: number;
@@ -50,7 +50,7 @@ declare class Carousel extends React.Component<CarouselProps, CarouselInternalSt
     onKeyUp(e: any): void;
     handleEnter(): void;
     goToSlide(slide: number): void;
-    getState(): any;
+    getState(): stateCallBack;
     renderLeftArrow(): React.ReactNode;
     renderRightArrow(): React.ReactNode;
     renderButtonGroups(): React.ReactElement<any> | null;
