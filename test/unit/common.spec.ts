@@ -1,6 +1,7 @@
 import {
   getInitialState,
-  getIfSlideIsVisbile
+  getIfSlideIsVisbile,
+  getTransformForPartialVsibile
 } from "./utils";
 
 describe("common utils", () => {
@@ -74,5 +75,47 @@ describe("common utils", () => {
         paritialVisibilityGutter: 0
       });
     });
+  });
+
+  describe("getTransformForPartialVsibile", () => {
+    test("In end of the slides and not in infinite mode", () => {
+      const number = getTransformForPartialVsibile(
+        {
+          slidesToShow: 3,
+          transform: 400,
+          currentSlide: 7,
+          totalItems: 9
+        },
+        40,
+        { infinite: false }
+      );
+      expect(number).toBe(720);
+    });
+    test('Not end of the slides and not in inifinite mode', () => {
+      const number = getTransformForPartialVsibile(
+        {
+          slidesToShow: 3,
+          transform: 400,
+          currentSlide: 4,
+          totalItems: 9
+        },
+        40,
+        { infinite: false }
+      );
+      expect(number).toBe(560);
+    })
+    test('In infinite mode and at the end of the slides', () => {
+      const number = getTransformForPartialVsibile(
+        {
+          slidesToShow: 3,
+          transform: 400,
+          currentSlide: 7,
+          totalItems: 9
+        },
+        40,
+        { infinite: true }
+      );
+      expect(number).toBe(680);
+    })
   });
 });
