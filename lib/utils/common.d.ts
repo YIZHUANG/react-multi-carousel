@@ -7,5 +7,5 @@ declare function getInitialState(state: CarouselInternalState, props: CarouselPr
 };
 declare function getIfSlideIsVisbile(index: number, state: CarouselInternalState): boolean;
 declare function getTransformForCenterMode(state: CarouselInternalState, props: CarouselProps): number;
-declare function getTransformForPartialVsibile(state: CarouselInternalState, paritialVisibilityGutter?: number): number;
+declare function getTransformForPartialVsibile(state: CarouselInternalState, paritialVisibilityGutter: number | undefined, props: CarouselProps): number;
 export { getInitialState, getIfSlideIsVisbile, getTransformForCenterMode, getTransformForPartialVsibile };

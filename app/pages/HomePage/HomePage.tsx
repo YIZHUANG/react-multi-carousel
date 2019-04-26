@@ -78,15 +78,18 @@ class Index extends React.Component {
     const responsive = {
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 3
+        items: 1,
+        paritialVisibilityGutter: 80
       },
       tablet: {
         breakpoint: { max: 1024, min: 464 },
-        items: 2
+        items: 1,
+        paritialVisibilityGutter: 30
       },
       mobile: {
         breakpoint: { max: 464, min: 0 },
-        items: 1
+        items: 1,
+        paritialVisibilityGutter: 30
       }
     };
     return (
@@ -123,13 +126,14 @@ class Index extends React.Component {
           showDots
           minimumTouchDrag={80}
           slidesToSlide={1}
-          centerMode
-          infinite={true}
+
+          partialVisbile={true}
+          //infinite={true}
           containerClass="container-with-dots"
           itemClass="image-item"
           deviceType={this.props.deviceType}
         >
-          {fakerData.slice(0,3).map(card => {
+          {fakerData.slice(0,5).map(card => {
             return <Image url={card.image} alt={card.headline} />;
           })}
         </Carousel>

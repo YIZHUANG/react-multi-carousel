@@ -59,9 +59,17 @@ function getTransformForCenterMode(
 }
 function getTransformForPartialVsibile(
   state: CarouselInternalState,
-  paritialVisibilityGutter: number = 0
+  paritialVisibilityGutter: number = 0,
+  props: CarouselProps
 ) {
-  return state.transform + state.currentSlide * paritialVisibilityGutter;
+  const {  currentSlide, totalItems, slidesToShow } = state;
+  const isRightEndReach = !(currentSlide + 1 + slidesToShow <= totalItems);
+  const shouldRemoveRightGutter = !props.infinite && isRightEndReach;
+  const transform = state.transform + currentSlide * paritialVisibilityGutter;
+  if (shouldRemoveRightGutter) {
+    return transform + paritialVisibilityGutter;
+  }
+  return transform;
 }
 
 export {

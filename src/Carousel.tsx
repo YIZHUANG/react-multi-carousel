@@ -576,10 +576,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       );
     const disableLeftArrow = !infinite && isLeftEndReach;
     const disableRightArrow = !infinite && isRightEndReach;
-
     // this lib supports showing next set of items paritially as well as center mode which shows both.
     const currentTransform = partialVisbile
-      ? getTransformForPartialVsibile(this.state, paritialVisibilityGutter)
+      ? getTransformForPartialVsibile(this.state, paritialVisibilityGutter, this.props)
       : centerMode
       ? getTransformForCenterMode(this.state, this.props)
       : this.state.transform;
