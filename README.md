@@ -205,7 +205,7 @@ const CustomDot = ({ onClick, ...rest }) => {
 </Carousel>
 ```
 
-## ParitialVisibile props.
+## partialVisbile props.
 
 Shows the next items paritially, this is very useful if you want to indicate to the users that this carousel component is swipable, has more items behind it.
 
@@ -231,7 +231,7 @@ const responsive = {
     paritialVisibilityGutter: 30 // this is needed to tell the amount of px that should be visible.
   }
 }
-<Carousel paritialVisibile={true} responsive={responsive}>
+<Carousel partialVisbile={true} responsive={responsive}>
   <ItemOne />
   <ItemTwo />
 </Carousel>
