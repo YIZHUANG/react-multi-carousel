@@ -2,7 +2,7 @@
 
 Production-ready, lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering) with typescript.
 
-The technical details of this carousel can be found at [www.w3js.com -> react-multi-carousel](https://w3js.com/api/index.php/react-carousel-with-server-side-rendering-support-part-1z/).
+The technical details of this carousel can be found at [www.w3js.com -> react-multi-carousel](https://w3js.com/article/react-carousel-with-server-side-rendering-support-part-1z/881).
 
 [![npm version](https://badge.fury.io/js/react-multi-carousel.svg)](https://www.npmjs.com/package/react-multi-carousel)
 [![Build Status](https://api.travis-ci.org/YIZHUANG/react-multi-carousel.svg?branch=master)](https://travis-ci.org/YIZHUANG/react-multi-carousel)
