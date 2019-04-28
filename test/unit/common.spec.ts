@@ -84,12 +84,14 @@ describe("common utils", () => {
           slidesToShow: 3,
           transform: 400,
           currentSlide: 7,
-          totalItems: 9
+          totalItems: 9,
+          containerWidth: 800,
+          itemWidth: 100
         },
         40,
         { infinite: false }
       );
-      expect(number).toBe(720);
+      expect(number).toBe(1300);
     });
     test('Not end of the slides and not in inifinite mode', () => {
       const number = getTransformForPartialVsibile(

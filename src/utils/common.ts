@@ -67,7 +67,8 @@ function getTransformForPartialVsibile(
   const shouldRemoveRightGutter = !props.infinite && isRightEndReach;
   const transform = state.transform + currentSlide * paritialVisibilityGutter;
   if (shouldRemoveRightGutter) {
-    return transform + paritialVisibilityGutter;
+    const remainingWidth = state.containerWidth - (state.itemWidth - paritialVisibilityGutter) * slidesToShow;
+    return transform + remainingWidth
   }
   return transform;
 }
