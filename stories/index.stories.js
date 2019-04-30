@@ -19,6 +19,7 @@ import CarouselWithCustomDots from './carousel-with-custom-dots';
 import CustomDot from "./CustomDot";
 import Image from "./CustomImage";
 import Carousel from "../src";
+import WithScrollbar from './WithScrollbar';
 import "../src/assets/styles.css";
 
 setAddon(JSX);
@@ -174,6 +175,11 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
+  .addWithJSX("With custom control functionality", () => {
+      return (
+        <WithScrollbar />
+      );
+    })
   .addWithJSX("Auto play", () => {
     return (
       <Carousel
