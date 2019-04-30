@@ -23,7 +23,7 @@ const responsive = {
 class WithScrollbar extends React.Component {
   render() {
     const { deviceType } = this.props;
-    const CustomSlider = () => {
+    const CustomSlider = ({ carouselState }) => {
       let value = 0;
       let carouselItemWidth = 0;
       if (this.Carousel) {
@@ -33,10 +33,12 @@ class WithScrollbar extends React.Component {
           (this.Carousel.state.totalItems - this.Carousel.state.slidesToShow);
         value = maxTranslateX / 100; // calculate the unit of transform for the slider
       }
+      const { transform } = carouselState;
       return (
         <div className="custom-slider">
           <input
             type="range"
+            value={Math.abs(transform) / value}
             defaultValue={0}
             onChange={e => {
               if (this.Carousel.isAnimationAllowed) {
@@ -45,7 +47,7 @@ class WithScrollbar extends React.Component {
               const nextTransform = e.target.value * value;
               const nextSlide = Math.round(nextTransform / carouselItemWidth);
               this.Carousel.setState({
-                transform: -nextTransform - 20 * 5, // padding 20px and 5 items.
+                transform: -nextTransform, // padding 20px and 5 items.
                 currentSlide: nextSlide
               });
             }}
@@ -57,15 +59,13 @@ class WithScrollbar extends React.Component {
     return (
       <Carousel
         ssr={false}
-        arrows={false}
-        swipeable={false}
-        draggable={false}
         ref={el => (this.Carousel = el)}
         partialVisbile={false}
         customButtonGroup={<CustomSlider />}
         itemClass="image-item"
         responsive={responsive}
         containerClass="carousel-container-with-scrollbar"
+        additionalTransfrom={-100}
       >
         <div class="image-container increase-size">
           <div class="image-container-text">

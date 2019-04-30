@@ -36,7 +36,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     minimumTouchDrag: 80,
     dotListClass: "",
     focusOnSelect: false,
-    centerMode: false
+    centerMode: false,
+    additionalTransfrom: 0
   };
   private readonly containerRef: React.RefObject<any>;
   public onMove: boolean;
@@ -554,7 +555,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       sliderClass,
       customTransition,
       partialVisbile,
-      centerMode
+      centerMode,
+      additionalTransfrom
     } = this.props;
     throwError(this.state, this.props);
     const { shouldRenderOnSSR, paritialVisibilityGutter } = getInitialState(
@@ -595,7 +597,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
               ? customTransition || defaultTransition
               : "none",
             overflow: shouldRenderOnSSR ? "hidden" : "unset",
-            transform: `translate3d(${currentTransform}px,0,0)`
+            transform: `translate3d(${currentTransform + additionalTransfrom!}px,0,0)`
           }}
           onMouseMove={this.handleMove}
           onMouseDown={this.handleDown}

@@ -336,6 +336,18 @@ Go to slide on click and make the slide a current slide.
   }}>Click me</button>
 ```
 
+## additionalTransfrom Props.
+
+This is very useful when you are fully customizing the control functionality by yourself like this [one](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=With%20custom%20control%20functionality&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
+
+[Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/WithScrollbar.js)
+
+For example if you give to your carousel item padding left and padding right 20px. And you have 5 items in total, you might want to do the following:
+
+```js
+<Carousel ref={(el) => (this.Carousel = el)} additionalTransfrom={-20* 5} /> // it needs to be a negative number
+```
+
 ## Specific Props
 
 | Name                    |                                                                        Type                                                                        |              Default              | Description                                                                                                                                                                        |
@@ -369,6 +381,7 @@ Go to slide on click and make the slide a current slide.
 | transitionDuration      | `number |`300` | The unit is ms, if you are using customTransition, make sure to put the duration here as this is needed for the resizing to work. |
 | focusOnSelect      | `boolean |`false` | Go to slide on click and make the slide a current slide. |
 | centerMode      | `boolean |`false` | Shows the next items and previous items paritially. |
+| additionalTransfrom      | `number |`0` | additional transfrom to the current one. |
 
 ## Contribute
 
