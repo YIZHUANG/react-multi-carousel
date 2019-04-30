@@ -21,6 +21,7 @@ const responsive = {
 };
 
 class WithScrollbar extends React.Component {
+  state = { additionalTransfrom: 0 }
   render() {
     const { deviceType } = this.props;
     const CustomSlider = ({ carouselState }) => {
@@ -46,6 +47,12 @@ class WithScrollbar extends React.Component {
               }
               const nextTransform = e.target.value * value;
               const nextSlide = Math.round(nextTransform / carouselItemWidth);
+              if(nextSlide !== 0 && this.state.additionalTransfrom !== 150) {
+                this.setState({ additionalTransfrom: 150 })
+              }
+              if(nextSlide === 0 && this.state.additionalTransfrom === 150) {
+                this.setState({ additionalTransfrom: 0 })
+              }
               this.Carousel.setState({
                 transform: -nextTransform, // padding 20px and 5 items.
                 currentSlide: nextSlide
@@ -65,7 +72,15 @@ class WithScrollbar extends React.Component {
         itemClass="image-item"
         responsive={responsive}
         containerClass="carousel-container-with-scrollbar"
-        additionalTransfrom={-100}
+        additionalTransfrom={-this.state.additionalTransfrom}
+        beforeChange={(nextSlide) => {
+          if(nextSlide !== 0 && this.state.additionalTransfrom !== 150) {
+            this.setState({ additionalTransfrom: 150 })
+          }
+          if(nextSlide === 0 && this.state.additionalTransfrom === 150) {
+            this.setState({ additionalTransfrom: 0 })
+          }
+        }}
       >
         <div class="image-container increase-size">
           <div class="image-container-text">

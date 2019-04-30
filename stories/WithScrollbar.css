@@ -28,7 +28,8 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   background: #ccc;
 }
 .carousel-container-with-scrollbar {
-  padding: 30px;
+  padding-left: 100px;
+  padding-bottom: 20px;
   overflow: visible !important;
 }
 .custom-slider {
