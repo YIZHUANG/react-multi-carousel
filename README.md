@@ -9,6 +9,10 @@ The technical details of this carousel can be found at [www.w3js.com -> react-mu
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel?ref=badge_shield)
 [![David Dependancy Status](https://david-dm.org/YIZHUANG/react-multi-carousel.svg)](https://david-dm.org/YIZHUANG/react-multi-carousel)
 
+![demo](https://media.giphy.com/media/emNGIfso7Iu66qz53C/giphy.gif)
+
+![demo](https://media.giphy.com/media/3octyw2XELzfaplNUm/giphy.gif)
+
 ### Features.
 
 - Server-side rendering
