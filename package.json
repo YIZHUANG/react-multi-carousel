@@ -1,7 +1,8 @@
 {
   "name": "react-multi-carousel",
+  "private": false,
   "version": "1.3.18",
-  "description": "",
+  "description": "Production-ready, lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering) with typescript.",
   "main": "index.js",
   "types": "./lib/types.d.ts",
   "scripts": {
@@ -14,23 +15,46 @@
     "after-build": "cd src && copyfiles -f assets/* ../lib",
     "publish-ssr": "cd examples/ssr && now && now alias react-multi-carousel.now.sh",
     "prettier": "prettier --write {examples,src,stories,test}/**/*.{js,ts,tsx}",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "lint": "tslint --fix \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.js\""
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/YIZHUANG/react-multi-carousel.git"
   },
+  "bugs": {
+    "url": "https://github.com/YIZHUANG/react-multi-carousel/issues"
+  },
   "keywords": [
     "react",
     "typescript",
     "carousel",
+    "react-component",
     "server-side rendering",
     "ssr",
-    "multiple items"
+    "image-gallery",
+    "video-gallery",
+    "slide-show",
+    "swipe",
+    "drag",
+    "touch",
+    "multiple items",
+    "gallery",
+    "slider",
+    "responsive",
+    "mobile-friendly",
+    "tablet-friendly",
+    "breakpoint"
   ],
-  "author": "YIZHUANG",
+  "engines": {
+    "node": ">=8"
+  },
+  "author": {
+    "name": "YI ZHUANG",
+    "url": "https://yizhuang.fi/"
+  },
   "license": "MIT",
-  "homepage": "https://github.com/YIZHUANG/react-multi-carousel#readme",
+  "homepage": "https://w3js.com/react-multi-carousel/",
   "jest": {
     "testEnvironment": "jsdom",
     "verbose": true,
@@ -58,6 +82,7 @@
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@material-ui/core": "^3.9.2",
+    "@smartive/tslint-config": "^6.0.0",
     "@storybook/addon-actions": "^4.1.13",
     "@storybook/addon-links": "^4.1.13",
     "@storybook/addon-viewport": "^4.1.13",
@@ -85,6 +110,7 @@
     "react-ga": "^2.5.7",
     "storybook-addon-jsx": "^6.0.0",
     "ts-jest": "^24.0.2",
+    "tslint": "^5.16.0",
     "typescript": "^3.4.3"
   },
   "dependencies": {}
