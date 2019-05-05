@@ -6,6 +6,7 @@ The technical details of this carousel can be found at [www.w3js.com -> react-mu
 
 [![npm version](https://badge.fury.io/js/react-multi-carousel.svg)](https://www.npmjs.com/package/react-multi-carousel)
 [![Build Status](https://api.travis-ci.org/YIZHUANG/react-multi-carousel.svg?branch=master)](https://travis-ci.org/YIZHUANG/react-multi-carousel)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel?ref=badge_shield)
 
 ### Features.
 
@@ -400,3 +401,7 @@ Submit an issue for feature request or submit a pr.
 If this project help you reduce time to develop, you can give me a cup of coffee :)
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GJSPRG9RKSJLQ&source=url)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel?ref=badge_large)
