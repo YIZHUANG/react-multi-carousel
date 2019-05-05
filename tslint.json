@@ -1,0 +1,9 @@
+{
+    "defaultSeverity": "error",
+    "rules": {
+        "ordered-imports": false,
+        "ter-arrow-parens": [false, "as-needed"],
+        "no-console": [true]
+    },
+    "extends": "@smartive/tslint-config/tslint-react"
+}
