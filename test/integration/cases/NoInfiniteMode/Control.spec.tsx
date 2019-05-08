@@ -49,99 +49,121 @@ describe("Control functionalities", () => {
     wrapper.setState({ itemWidth: 200 });
     // move right
     wrapper.find('ul').simulate('mousedown', {
-      clientX: 100
+      clientX: 100,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mousemove', {
-      clientX: -200
+      clientX: -200,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mouseup')
     expect(wrapper.state().transform).toBe(-400);
     // move left
     wrapper.find('ul').simulate('mousedown', {
-      clientX: 100
+      clientX: 100,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mousemove', {
-      clientX: 200
+      clientX: 200,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mouseup')
     expect(wrapper.state().transform).toBe(-400);
     // move left
     wrapper.find('ul').simulate('mousedown', {
-      clientX: 50
+      clientX: 50,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mousemove', {
-      clientX: 60
+      clientX: 60,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mouseup')
     expect(wrapper.state().transform).toBe(-400);
     // infinite - left
     wrapper.find('ul').simulate('mousedown', {
-      clientX: 50
+      clientX: 50,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mousemove', {
-      clientX: 60
+      clientX: 60,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mouseup')
     expect(wrapper.state().transform).toBe(-400);
     // infinite - right
     wrapper.find('ul').simulate('mousedown', {
-      clientX: 50
+      clientX: 50,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mousemove', {
-      clientX: 40
+      clientX: 40,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mouseup')
     expect(wrapper.state().transform).toBe(-400);
     // move right
     wrapper.find('ul').simulate('mousedown', {
-      clientX: 50
+      clientX: 50,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mousemove', {
-      clientX: 10
+      clientX: 10,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mouseup')
     expect(wrapper.state().transform).toBe(-400);
     // move to bottom 4 of the carousel - right, to test if oversliding is prevented.
     wrapper.find('ul').simulate('mousedown', {
-      clientX: 1200
+      clientX: 1200,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mousemove', {
-      clientX: 10
+      clientX: 10,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mouseup')
     expect(wrapper.state().transform).toBe(-400);
     // even though the move-right-action way pass the initial position, but it doesn't overslide out of the container of the carousel
     wrapper.find('ul').simulate('mousedown', {
-      clientX: 1600
+      clientX: 1600,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mousemove', {
-      clientX: 10
+      clientX: 10,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mouseup')
     expect(wrapper.state().transform).toBe(-400);
     // now do the same for previous action.
     // move to first 1 slide of the Carousel
     wrapper.find('ul').simulate('mousedown', {
-      clientX: 11
+      clientX: 11,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mousemove', {
-      clientX: 10
+      clientX: 10,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mouseup')
      // move to first 3 slides of the Carousel
     wrapper.find('ul').simulate('mousedown', {
-      clientX: 500
+      clientX: 500,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mousemove', {
-      clientX: 10
+      clientX: 10,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mouseup')
     // move to left as much as it can, but it doesn't overslide
     wrapper.find('ul').simulate('mousedown', {
-      clientX: 10
+      clientX: 10,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mousemove', {
-      clientX: 1000
+      clientX: 1000,
+      clientY: 0
     })
     wrapper.find('ul').simulate('mouseup')
     expect(wrapper.state().transform).toBe(-400);

@@ -41,7 +41,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   };
   private readonly containerRef: React.RefObject<any>;
   public onMove: boolean;
-  public initialPosition: number;
+  public initialX: number;
   public lastPosition: number;
   public isAnimationAllowed: boolean;
   public direction: string;
@@ -86,7 +86,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.setIsInThrottle
     );
     this.onMove = false;
-    this.initialPosition = 0;
+    this.initialX = 0;
     this.lastPosition = 0;
     this.isAnimationAllowed = false;
     this.direction = "";
@@ -354,7 +354,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public resetMoveStatus(): void {
     this.onMove = false;
-    this.initialPosition = 0;
+    this.initialX = 0;
     this.lastPosition = 0;
     this.direction = "";
     this.initialY = 0;
@@ -369,7 +369,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
     const { clientX, clientY } = e.touches ? e.touches[0] : e;
     this.onMove = true;
-    this.initialPosition = clientX;
+    this.initialX = clientX;
     this.initialY = clientY;
     this.lastPosition = clientX;
     this.isAnimationAllowed = false;
@@ -382,7 +382,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       return;
     }
     const { clientX, clientY } = e.touches ? e.touches[0] : e;
-    const diffX = this.initialPosition - clientX;
+    const diffX = this.initialX - clientX;
     const diffY = this.initialY - clientY;
     if (e.touches && this.autoPlay && this.props.autoPlay) {
       clearInterval(this.autoPlay);
@@ -390,12 +390,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
     if (this.onMove) {
       if (!(Math.abs(diffX) > Math.abs(diffY))) {
+        // prevent swiping up and down moves the carousel.
         return;
       }
       const { direction, nextPosition, canContinue } = populateSlidesOnMouseTouchMove(
         this.state,
         this.props,
-        this.initialPosition,
+        this.initialX,
         this.lastPosition,
         clientX
       );
@@ -424,11 +425,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.onMove) {
       if (this.direction === "right") {
         const canGoNext =
-          this.initialPosition - this.lastPosition >=
+          this.initialX - this.lastPosition >=
           this.props.minimumTouchDrag!;
         if (canGoNext) {
           const slidesHavePassed = Math.round(
-            (this.initialPosition - this.lastPosition) / this.state.itemWidth
+            (this.initialX - this.lastPosition) / this.state.itemWidth
           );
           this.next(slidesHavePassed);
         } else {
@@ -437,11 +438,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }
       if (this.direction === "left") {
         const canGoNext =
-          this.lastPosition - this.initialPosition >
+          this.lastPosition - this.initialX >
           this.props.minimumTouchDrag!;
         if (canGoNext) {
           const slidesHavePassed = Math.round(
-            (this.lastPosition - this.initialPosition) / this.state.itemWidth
+            (this.lastPosition - this.initialX) / this.state.itemWidth
           );
           this.previous(slidesHavePassed);
         } else {

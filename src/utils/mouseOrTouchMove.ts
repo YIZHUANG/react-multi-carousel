@@ -4,7 +4,7 @@ import { CarouselInternalState, CarouselProps } from "../types";
 function populateSlidesOnMouseTouchMove(
   state: CarouselInternalState,
   props: CarouselProps,
-  initialPosition: number,
+  initialX: number,
   lastPosition: number,
   clientX: number
 ): {
@@ -25,13 +25,13 @@ function populateSlidesOnMouseTouchMove(
   let nextPosition;
   // making sure we have items to slide back to, prevent oversliding.
   const slidesHavePassedRight = Math.round(
-    (initialPosition - lastPosition) / itemWidth
+    (initialX - lastPosition) / itemWidth
   );
   const slidesHavePassedLeft = Math.round(
-    (lastPosition - initialPosition) / itemWidth
+    (lastPosition - initialX) / itemWidth
   );
-  const isMovingRight = initialPosition > clientX;
-  const isMovingLeft = clientX > initialPosition;
+  const isMovingRight = initialX > clientX;
+  const isMovingLeft = clientX > initialX;
   if (isMovingRight) {
     const isAboutToOverSlide = !(slidesHavePassedRight <= slidesToShow);
     if (!isAboutToOverSlide) {
