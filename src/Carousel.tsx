@@ -47,6 +47,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public direction: string;
   public autoPlay?: any;
   public isInThrottle?: boolean;
+  public initialY: number;
   constructor(props: CarouselProps) {
     super(props);
     this.containerRef = React.createRef();
@@ -89,6 +90,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.lastPosition = 0;
     this.isAnimationAllowed = false;
     this.direction = "";
+    this.initialY = 0;
     this.isInThrottle = false;
   }
   public setIsInThrottle(isInThrottle: boolean = false): void {
@@ -355,6 +357,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.initialPosition = 0;
     this.lastPosition = 0;
     this.direction = "";
+    this.initialY = 0;
   }
   public handleDown(e: any): void {
     if (
@@ -364,9 +367,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     ) {
       return;
     }
-    const { clientX } = e.touches ? e.touches[0] : e;
+    const { clientX, clientY } = e.touches ? e.touches[0] : e;
     this.onMove = true;
     this.initialPosition = clientX;
+    this.initialY = clientY;
     this.lastPosition = clientX;
     this.isAnimationAllowed = false;
   }
@@ -377,12 +381,17 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     ) {
       return;
     }
-    const { clientX } = e.touches ? e.touches[0] : e;
+    const { clientX, clientY } = e.touches ? e.touches[0] : e;
+    const diffX = this.initialPosition - clientX;
+    const diffY = this.initialY - clientY;
     if (e.touches && this.autoPlay && this.props.autoPlay) {
       clearInterval(this.autoPlay);
       this.autoPlay = undefined;
     }
     if (this.onMove) {
+      if (!(Math.abs(diffX) > Math.abs(diffY))) {
+        return;
+      }
       const { direction, nextPosition, canContinue } = populateSlidesOnMouseTouchMove(
         this.state,
         this.props,
