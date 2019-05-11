@@ -1,10 +1,7 @@
 import * as React from "react";
 
 import { CarouselInternalState, CarouselProps } from "./types";
-import {
-  getInitialState,
-  getIfSlideIsVisbile
-} from "./utils";
+import { getInitialState, getIfSlideIsVisbile } from "./utils";
 
 interface CarouselItemsProps {
   props: CarouselProps;
@@ -47,7 +44,11 @@ const CarouselItems = ({
               }px`
             : "auto"
         }}
-        className={`react-multi-carousel-item ${itemClass}`}
+        className={`react-multi-carousel-item ${
+          getIfSlideIsVisbile(index, state)
+            ? "react-multi-carousel-item--active"
+            : ""
+        } ${itemClass}`}
       >
         {child}
       </li>
