@@ -5,7 +5,7 @@ function populateSlidesOnMouseTouchMove(
   state: CarouselInternalState,
   props: CarouselProps,
   initialX: number,
-  lastPosition: number,
+  lastX: number,
   clientX: number
 ): {
   direction?: string;
@@ -25,10 +25,10 @@ function populateSlidesOnMouseTouchMove(
   let nextPosition;
   // making sure we have items to slide back to, prevent oversliding.
   const slidesHavePassedRight = Math.round(
-    (initialX - lastPosition) / itemWidth
+    (initialX - lastX) / itemWidth
   );
   const slidesHavePassedLeft = Math.round(
-    (lastPosition - initialX) / itemWidth
+    (lastX - initialX) / itemWidth
   );
   const isMovingRight = initialX > clientX;
   const isMovingLeft = clientX > initialX;
@@ -39,7 +39,7 @@ function populateSlidesOnMouseTouchMove(
       const translateXLimit = Math.abs(
         -(itemWidth * (totalItems - slidesToShow))
       );
-      const nextTranslate = transform - (lastPosition - clientX);
+      const nextTranslate = transform - (lastX - clientX);
       const isLastSlide = currentSlide === totalItems - slidesToShow;
       if (
         Math.abs(nextTranslate) <= translateXLimit ||
@@ -54,7 +54,7 @@ function populateSlidesOnMouseTouchMove(
     const isAboutToOverSlide = !(slidesHavePassedLeft <= slidesToShow);
     if (!isAboutToOverSlide) {
       direction = "left";
-      const nextTranslate = transform + (clientX - lastPosition);
+      const nextTranslate = transform + (clientX - lastX);
       const isFirstSlide = currentSlide === 0;
       if (nextTranslate <= 0 || (isFirstSlide && infinite)) {
         canContinue = true;

@@ -42,7 +42,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   private readonly containerRef: React.RefObject<any>;
   public onMove: boolean;
   public initialX: number;
-  public lastPosition: number;
+  public lastX: number;
   public isAnimationAllowed: boolean;
   public direction: string;
   public autoPlay?: any;
@@ -87,7 +87,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     );
     this.onMove = false;
     this.initialX = 0;
-    this.lastPosition = 0;
+    this.lastX = 0;
     this.isAnimationAllowed = false;
     this.direction = "";
     this.initialY = 0;
@@ -355,7 +355,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public resetMoveStatus(): void {
     this.onMove = false;
     this.initialX = 0;
-    this.lastPosition = 0;
+    this.lastX = 0;
     this.direction = "";
     this.initialY = 0;
   }
@@ -371,7 +371,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.onMove = true;
     this.initialX = clientX;
     this.initialY = clientY;
-    this.lastPosition = clientX;
+    this.lastX = clientX;
     this.isAnimationAllowed = false;
   }
   public handleMove(e: any): void {
@@ -397,7 +397,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         this.state,
         this.props,
         this.initialX,
-        this.lastPosition,
+        this.lastX,
         clientX
       );
       if (direction) {
@@ -407,7 +407,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           this.setState({ transform: nextPosition });
         }
       }
-      this.lastPosition = clientX;
+      this.lastX = clientX;
     }
   }
   public handleOut(e: any): void {
@@ -425,11 +425,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.onMove) {
       if (this.direction === "right") {
         const canGoNext =
-          this.initialX - this.lastPosition >=
+          this.initialX - this.lastX >=
           this.props.minimumTouchDrag!;
         if (canGoNext) {
           const slidesHavePassed = Math.round(
-            (this.initialX - this.lastPosition) / this.state.itemWidth
+            (this.initialX - this.lastX) / this.state.itemWidth
           );
           this.next(slidesHavePassed);
         } else {
@@ -438,11 +438,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }
       if (this.direction === "left") {
         const canGoNext =
-          this.lastPosition - this.initialX >
+          this.lastX - this.initialX >
           this.props.minimumTouchDrag!;
         if (canGoNext) {
           const slidesHavePassed = Math.round(
-            (this.lastPosition - this.initialX) / this.state.itemWidth
+            (this.lastX - this.initialX) / this.state.itemWidth
           );
           this.previous(slidesHavePassed);
         } else {

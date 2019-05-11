@@ -4,6 +4,8 @@ Production-ready, lightweight fully customizable React carousel component that r
 
 The technical details of this carousel can be found at [www.w3js.com -> react-multi-carousel](https://w3js.com/article/react-carousel-with-server-side-rendering-support-part-1z/881).
 
+Don't forget to leave a star if this project help you reduce time to develop.
+
 [![npm version](https://badge.fury.io/js/react-multi-carousel.svg)](https://www.npmjs.com/package/react-multi-carousel)
 [![Build Status](https://api.travis-ci.org/YIZHUANG/react-multi-carousel.svg?branch=master)](https://travis-ci.org/YIZHUANG/react-multi-carousel)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel?ref=badge_shield)
