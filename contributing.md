@@ -10,8 +10,8 @@ Send a PR or raise an issue to:
 
 Pull requests are extremely welcome. To start up your local development:
 
-- npm install
 - cd app
+- npm install -- package.json
 - npm run dev
 
 ## Infinite mode
