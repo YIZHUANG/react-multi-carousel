@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import JssProvider from 'react-jss/lib/JssProvider';
 import Typography from '@material-ui/core/Typography';
 import "react-multi-carousel/lib/styles.css";
-import '../styles/main.scss';
+import '../styles/main.css';
 import Menu from '../components/menu';
 import getPageContext from '../src/getPageContext';
 
