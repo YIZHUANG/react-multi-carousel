@@ -25,7 +25,7 @@ function MediaCard(props) {
         if(isMoving) {
           e.preventDefault();
         }
-      }} href={link || 'https://w3js.com'} target="_blank">
+      }} href='https://w3js.com' target="_blank">
     <Card className={classes.card}>
       <CardActionArea>
         <CardMedia className={classes.media} image={image} title={headline} />

@@ -259,7 +259,7 @@ function MediaCard(props) {
         e.preventDefault();
       }
     },
-    href: link || 'https://w3js.com',
+    href: "https://w3js.com",
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
