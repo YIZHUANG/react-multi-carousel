@@ -12,11 +12,12 @@
     "storybook": "start-storybook -p 6006",
     "export": "build-storybook -c .storybook -o .out",
     "build-storybook": "build-storybook",
-    "after-build": "cd src && copyfiles -f assets/* ../lib",
+    "after-build": "cd src && copyfiles -f assets/* ../lib && npm run minify",
     "publish-ssr": "cd examples/ssr && now && now alias react-multi-carousel.now.sh",
     "prettier": "prettier --write {examples,src,stories,test}/**/*.{js,ts,tsx}",
     "lint-staged": "lint-staged",
-    "lint": "tslint --fix \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.js\""
+    "lint": "tslint --fix \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.js\"",
+    "minify": "node minify.js"
   },
   "repository": {
     "type": "git",
@@ -111,7 +112,8 @@
     "storybook-addon-jsx": "^6.0.0",
     "ts-jest": "^24.0.2",
     "tslint": "^5.16.0",
-    "typescript": "^3.4.3"
+    "typescript": "^3.4.3",
+    "uglifycss": "0.0.29"
   },
   "dependencies": {}
 }
