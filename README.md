@@ -35,6 +35,11 @@ Don't forget to leave a star if this project help you reduce time to develop.
 - Center mode.
 - Show next/previous set of items partially
 
+### Shoutouts 🙏
+<img src="/browserstack-logo-600x315.png" height="80" title="BrowserStack Logo" alt="BrowserStack Logo" />
+
+Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maintainers use their service to debug browser issues.
+
 ## [Documentation](https://w3js.com/react-multi-carousel/)
 
 ## Other important links.
