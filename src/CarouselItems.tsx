@@ -75,7 +75,11 @@ const CarouselItems = ({
             }px`
           : "auto"
       }}
-      className={`react-multi-carousel-item ${itemClass}`}
+      className={`react-multi-carousel-item ${
+        getIfSlideIsVisbile(index, state)
+          ? "react-multi-carousel-item--active"
+          : ""
+      } ${itemClass}`}
     >
       {child}
     </li>
