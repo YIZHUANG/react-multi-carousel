@@ -1,7 +1,9 @@
 import {
   getInitialState,
   getIfSlideIsVisbile,
-  getTransformForPartialVsibile
+  getTransformForPartialVsibile,
+  isInLeftEnd,
+  isInRightEnd,
 } from "./utils";
 
 describe("common utils", () => {
@@ -120,4 +122,24 @@ describe("common utils", () => {
       expect(number).toBe(680);
     })
   });
+  test('Should reach the left end', () => {
+    const state = { currentSlide: 0 };
+    const result = isInLeftEnd(state);
+    expect(result).toBe(true);
+  })
+  test('Should not reach the left end', () => {
+    const state = { currentSlide: 4 };
+    const result = isInLeftEnd(state);
+    expect(result).toBe(false);
+  })
+  test('Should not reach the right end', () => {
+    const state = { currentSlide: 4, slidesToShow: 4, totalItems: 10 };
+    const result = isInRightEnd(state);
+    expect(result).toBe(false);
+  })
+  test('Should reach the right end', () => {
+    const state = { currentSlide: 6, slidesToShow: 4, totalItems: 10 };
+    const result = isInRightEnd(state);
+    expect(result).toBe(true);
+  })
 });

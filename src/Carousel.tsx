@@ -11,7 +11,9 @@ import {
   getItemClientSideWidth,
   populateNextSlides,
   populatePreviousSlides,
-  populateSlidesOnMouseTouchMove
+  populateSlidesOnMouseTouchMove,
+  isInLeftEnd,
+  isInRightEnd
 } from "./utils";
 import { CarouselInternalState, CarouselProps, stateCallBack } from "./types";
 import Dots from "./Dots";
@@ -393,7 +395,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         // prevent swiping up and down moves the carousel.
         return;
       }
-      const { direction, nextPosition, canContinue } = populateSlidesOnMouseTouchMove(
+      const {
+        direction,
+        nextPosition,
+        canContinue
+      } = populateSlidesOnMouseTouchMove(
         this.state,
         this.props,
         this.initialX,
@@ -425,8 +431,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.onMove) {
       if (this.direction === "right") {
         const canGoNext =
-          this.initialX - this.lastX >=
-          this.props.minimumTouchDrag!;
+          this.initialX - this.lastX >= this.props.minimumTouchDrag!;
         if (canGoNext) {
           const slidesHavePassed = Math.round(
             (this.initialX - this.lastX) / this.state.itemWidth
@@ -438,8 +443,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }
       if (this.direction === "left") {
         const canGoNext =
-          this.lastX - this.initialX >
-          this.props.minimumTouchDrag!;
+          this.lastX - this.initialX > this.props.minimumTouchDrag!;
         if (canGoNext) {
           const slidesHavePassed = Math.round(
             (this.lastX - this.initialX) / this.state.itemWidth
@@ -573,11 +577,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.state,
       this.props
     );
-    const isLeftEndReach = !(this.state.currentSlide - slidesToSlide! >= 0);
-    const isRightEndReach = !(
-      this.state.currentSlide + 1 + slidesToShow <=
-      this.state.totalItems
-    );
+    const isLeftEndReach = isInLeftEnd(this.state);
+    const isRightEndReach = isInRightEnd(this.state);
     const shouldShowArrows =
       arrows &&
       !(
@@ -590,7 +591,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const disableRightArrow = !infinite && isRightEndReach;
     // this lib supports showing next set of items paritially as well as center mode which shows both.
     const currentTransform = partialVisbile
-      ? getTransformForPartialVsibile(this.state, paritialVisibilityGutter, this.props)
+      ? getTransformForPartialVsibile(
+          this.state,
+          paritialVisibilityGutter,
+          this.props
+        )
       : centerMode
       ? getTransformForCenterMode(this.state, this.props)
       : this.state.transform;
@@ -607,7 +612,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
               ? customTransition || defaultTransition
               : "none",
             overflow: shouldRenderOnSSR ? "hidden" : "unset",
-            transform: `translate3d(${currentTransform + additionalTransfrom!}px,0,0)`
+            transform: `translate3d(${currentTransform +
+              additionalTransfrom!}px,0,0)`
           }}
           onMouseMove={this.handleMove}
           onMouseDown={this.handleDown}

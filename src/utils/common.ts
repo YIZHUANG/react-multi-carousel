@@ -62,18 +62,33 @@ function getTransformForPartialVsibile(
   paritialVisibilityGutter: number = 0,
   props: CarouselProps
 ) {
-  const {  currentSlide, totalItems, slidesToShow } = state;
-  const isRightEndReach = !(currentSlide + 1 + slidesToShow <= totalItems);
+  const { currentSlide, totalItems, slidesToShow } = state;
+  const isRightEndReach = isInRightEnd(state);
   const shouldRemoveRightGutter = !props.infinite && isRightEndReach;
   const transform = state.transform + currentSlide * paritialVisibilityGutter;
   if (shouldRemoveRightGutter) {
-    const remainingWidth = state.containerWidth - (state.itemWidth - paritialVisibilityGutter) * slidesToShow;
-    return transform + remainingWidth
+    const remainingWidth =
+      state.containerWidth -
+      (state.itemWidth - paritialVisibilityGutter) * slidesToShow;
+    return transform + remainingWidth;
   }
   return transform;
 }
 
+function isInLeftEnd({ currentSlide }: CarouselInternalState): boolean {
+  return !(currentSlide > 0);
+}
+function isInRightEnd({
+  currentSlide,
+  totalItems,
+  slidesToShow
+}: CarouselInternalState): boolean {
+  return !(currentSlide + slidesToShow < totalItems);
+}
+
 export {
+  isInLeftEnd,
+  isInRightEnd,
   getInitialState,
   getIfSlideIsVisbile,
   getTransformForCenterMode,

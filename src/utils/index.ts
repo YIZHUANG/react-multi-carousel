@@ -1,18 +1,31 @@
-import { getOriginalCounterPart,
-getCloneCounterPart, getClones, checkClonesPosition } from "./clones";
+import {
+  getOriginalCounterPart,
+  getCloneCounterPart,
+  getClones,
+  checkClonesPosition
+} from "./clones";
 import {
   getWidthFromDeviceType,
   getParitialVisibilityGutter,
   getItemClientSideWidth
 } from "./elementWidth";
-import { getInitialState, getIfSlideIsVisbile, getTransformForCenterMode, getTransformForPartialVsibile } from './common';
+import {
+  getInitialState,
+  getIfSlideIsVisbile,
+  getTransformForCenterMode,
+  getTransformForPartialVsibile,
+  isInLeftEnd,
+  isInRightEnd
+} from "./common";
 import throttle from "./throttle";
-import throwError from './throwError';
-import { populateNextSlides } from './next';
-import { populatePreviousSlides } from './previous';
-import { populateSlidesOnMouseTouchMove } from './mouseOrTouchMove';
+import throwError from "./throwError";
+import { populateNextSlides } from "./next";
+import { populatePreviousSlides } from "./previous";
+import { populateSlidesOnMouseTouchMove } from "./mouseOrTouchMove";
 
 export {
+  isInLeftEnd,
+  isInRightEnd,
   getOriginalCounterPart,
   getCloneCounterPart,
   getClones,
