@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   getParitialVisibilityGutter,
   getWidthFromDeviceType
@@ -86,11 +87,22 @@ function isInRightEnd({
   return !(currentSlide + slidesToShow < totalItems);
 }
 
+function notEnoughChildren(
+  state: CarouselInternalState,
+  props: CarouselProps,
+  items?: number | undefined
+): boolean {
+  const childrenArr = React.Children.toArray(props.children);
+  const { slidesToShow } = state;
+  return items ? childrenArr.length < items : childrenArr.length < slidesToShow;
+}
+
 export {
   isInLeftEnd,
   isInRightEnd,
   getInitialState,
   getIfSlideIsVisbile,
   getTransformForCenterMode,
-  getTransformForPartialVsibile
+  getTransformForPartialVsibile,
+  notEnoughChildren
 };
