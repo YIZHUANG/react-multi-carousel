@@ -15,7 +15,8 @@ import {
   getTransformForCenterMode,
   getTransformForPartialVsibile,
   isInLeftEnd,
-  isInRightEnd
+  isInRightEnd,
+  notEnoughChildren
 } from "./common";
 import throttle from "./throttle";
 import throwError from "./throwError";
@@ -41,5 +42,6 @@ export {
   throwError,
   populateNextSlides,
   populatePreviousSlides,
-  populateSlidesOnMouseTouchMove
+  populateSlidesOnMouseTouchMove,
+  notEnoughChildren
 };

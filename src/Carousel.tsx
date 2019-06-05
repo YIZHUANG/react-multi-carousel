@@ -13,7 +13,8 @@ import {
   populatePreviousSlides,
   populateSlidesOnMouseTouchMove,
   isInLeftEnd,
-  isInRightEnd
+  isInRightEnd,
+  notEnoughChildren
 } from "./utils";
 import { CarouselInternalState, CarouselProps, stateCallBack } from "./types";
 import Dots from "./Dots";
@@ -129,16 +130,18 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.state.slidesToShow,
       childrenArr
     );
-    this.setState(
-      {
-        clones,
-        totalItems: clones.length,
-        currentSlide: forResizing ? this.state.currentSlide : initialSlide
-      },
-      () => {
-        this.correctItemsPosition(itemWidth || this.state.itemWidth);
-      }
-    );
+    if(!notEnoughChildren(this.state, this.props, slidesToShow)) {
+      this.setState(
+        {
+          clones,
+          totalItems: clones.length,
+          currentSlide: forResizing ? this.state.currentSlide : initialSlide
+        },
+        () => {
+          this.correctItemsPosition(itemWidth || this.state.itemWidth);
+        }
+      );
+    }
   }
   public setItemsToShow(shouldCorrectItemPosition?: boolean): void {
     const { responsive, infinite } = this.props;
@@ -277,6 +280,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public next(slidesHavePassed = 0): void {
     const { afterChange, beforeChange } = this.props;
+    if(notEnoughChildren(this.state, this.props)) {
+      return;
+    }
     /*
     two cases:
     1. We are not over-sliding.
@@ -314,6 +320,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public previous(slidesHavePassed = 0): void {
     const { afterChange, beforeChange } = this.props;
+    if(notEnoughChildren(this.state, this.props)) {
+      return;
+    }
     const { nextSlides, nextPosition } = populatePreviousSlides(
       this.state,
       this.props,
@@ -379,7 +388,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public handleMove(e: any): void {
     if (
       (e.touches && !this.props.swipeable) ||
-      (e && !e.touches && !this.props.draggable)
+      (e && !e.touches && !this.props.draggable) ||
+      notEnoughChildren(this.state, this.props)
     ) {
       return;
     }
@@ -586,7 +596,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         ((deviceType && removeArrowOnDeviceType.indexOf(deviceType) > -1) ||
           (this.state.deviceType &&
             removeArrowOnDeviceType.indexOf(this.state.deviceType) > -1))
-      );
+      ) && !notEnoughChildren(this.state, this.props);
     const disableLeftArrow = !infinite && isLeftEndReach;
     const disableRightArrow = !infinite && isRightEndReach;
     // this lib supports showing next set of items paritially as well as center mode which shows both.
