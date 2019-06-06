@@ -213,7 +213,7 @@ const CustomDot = ({ onClick, ...rest }) => {
     </button>
     )
 }
-<Carousel shouldShowDots customDot={<CustomDot />}>
+<Carousel showDots customDot={<CustomDot />}>
 {carouselItems}
 </Carousel>
 ```

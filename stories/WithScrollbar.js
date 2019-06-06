@@ -1,4 +1,3 @@
-// idea comes from https://github.com/bsultonov
 
 import React from "react";
 import Carousel from "../src";
