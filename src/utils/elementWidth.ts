@@ -1,4 +1,4 @@
-import { responsiveType, CarouselInternalState, CarouselProps } from "../types";
+import { responsiveType, CarouselProps } from "../types";
 
 function getParitialVisibilityGutter(
   responsive: responsiveType,

@@ -13,8 +13,8 @@ const CarouselItems = ({
   props,
   state,
   goToSlide
-}: CarouselItemsProps): any => {
-  const { itemWidth, clones, currentSlide } = state;
+}: CarouselItemsProps): any => { // it can be any.
+  const { itemWidth, clones } = state;
   const { children, infinite, itemClass, partialVisbile } = props;
   const {
     flexBisis,

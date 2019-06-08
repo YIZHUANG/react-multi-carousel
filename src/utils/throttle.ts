@@ -1,4 +1,8 @@
-const throttle = (func: any, limit: number, setIsInThrottle?: any): any => {
+const throttle = (
+  func: () => void,
+  limit: number,
+  setIsInThrottle?: (value?: boolean) => void
+): (() => void) => {
   let inThrottle: boolean;
   return function() {
     const args = arguments;
