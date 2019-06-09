@@ -584,7 +584,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       additionalTransfrom
     } = this.props;
     throwError(this.state, this.props);
-    const { shouldRenderOnSSR, paritialVisibilityGutter } = getInitialState(
+    const { shouldRenderOnSSR, paritialVisibilityGutter, shouldRenderAtAll } = getInitialState(
       this.state,
       this.props
     );
@@ -598,7 +598,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           (this.state.deviceType &&
             removeArrowOnDeviceType.indexOf(this.state.deviceType) > -1))
       ) &&
-      !notEnoughChildren(this.state, this.props);
+      !notEnoughChildren(this.state, this.props) && shouldRenderAtAll;
     const disableLeftArrow = !infinite && isLeftEndReach;
     const disableRightArrow = !infinite && isRightEndReach;
     // this lib supports showing next set of items paritially as well as center mode which shows both.
@@ -640,8 +640,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         </ul>
         {shouldShowArrows && !disableLeftArrow && this.renderLeftArrow()}
         {shouldShowArrows && !disableRightArrow && this.renderRightArrow()}
-        {this.renderButtonGroups()}
-        {this.renderDotsList()}
+        {shouldRenderAtAll && this.renderButtonGroups()}
+        {shouldRenderAtAll && this.renderDotsList()}
       </div>
     );
   }

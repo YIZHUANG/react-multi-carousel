@@ -13,6 +13,7 @@ function getInitialState(
   flexBisis: number | string | undefined;
   domFullyLoaded: boolean;
   paritialVisibilityGutter: number | undefined;
+  shouldRenderAtAll: boolean;
 } {
   const { domLoaded, slidesToShow, containerWidth, itemWidth } = state;
   const { deviceType, responsive, ssr, partialVisbile } = props;
@@ -32,11 +33,13 @@ function getInitialState(
     deviceType,
     state.deviceType
   );
+  const shouldRenderAtAll = shouldRenderOnSSR || domFullyLoaded;
   return {
     shouldRenderOnSSR,
     flexBisis,
     domFullyLoaded,
-    paritialVisibilityGutter
+    paritialVisibilityGutter,
+    shouldRenderAtAll
   };
 }
 
@@ -63,7 +66,7 @@ function getTransformForPartialVsibile(
   paritialVisibilityGutter: number = 0,
   props: CarouselProps
 ) {
-  const { currentSlide, totalItems, slidesToShow } = state;
+  const { currentSlide, slidesToShow } = state;
   const isRightEndReach = isInRightEnd(state);
   const shouldRemoveRightGutter = !props.infinite && isRightEndReach;
   const transform = state.transform + currentSlide * paritialVisibilityGutter;

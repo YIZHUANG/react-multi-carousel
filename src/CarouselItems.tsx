@@ -20,8 +20,12 @@ const CarouselItems = ({
     flexBisis,
     shouldRenderOnSSR,
     domFullyLoaded,
-    paritialVisibilityGutter
+    paritialVisibilityGutter,
+    shouldRenderAtAll
   } = getInitialState(state, props);
+  if(!shouldRenderAtAll) {
+    return null;
+  }
   if (infinite) {
     return clones.map((child: any, index: number) => (
       <li
