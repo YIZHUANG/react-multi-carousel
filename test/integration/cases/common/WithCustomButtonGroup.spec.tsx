@@ -15,6 +15,8 @@ describe("Custom button group", () => {
   test("It renders and has the props", () => {
     const wrapper = mount(
       <Carousel
+        ssr
+        deviceType='desktop'
         arrows={false}
         swipeable={false}
         draggable={false}

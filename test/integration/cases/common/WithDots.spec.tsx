@@ -17,6 +17,8 @@ describe("With dots", () => {
     const wrapper = mount(
       <Carousel
         showDots={true}
+        ssr
+        deviceType='desktop'
         swipeable={false}
         draggable={false}
         responsive={responsive1}
@@ -38,6 +40,8 @@ describe("With dots", () => {
       <Carousel
         swipeable={false}
         draggable={false}
+        ssr
+        deviceType='desktop'
         responsive={responsive1}
         slidesToSlide={1}
         showDots={true}

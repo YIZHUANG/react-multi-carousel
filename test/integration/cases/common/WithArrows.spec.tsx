@@ -9,13 +9,15 @@ import Carousel from "../../../../lib/Carousel";
 import { LeftArrow, RightArrow } from "../../../../lib/Arrows";
 import { CustomLeftArrow, CustomRightArrow } from "../../components/Arrows";
 import Card from "../../components/Card";
-import { responsive1 } from '../../common/responsive';
-import { longData } from '../../common/data';
+import { responsive1 } from "../../common/responsive";
+import { longData } from "../../common/data";
 
 describe("With arrows", () => {
   test("Default arrow", () => {
     const wrapper = mount(
       <Carousel
+        ssr
+        deviceType="desktop"
         swipeable={false}
         draggable={false}
         responsive={responsive1}
@@ -23,18 +25,26 @@ describe("With arrows", () => {
         infinite={true}
         minimumTouchDrag={0}
       >
-      {longData.map(card => {
-        return <Card {...card} />;
-      })}
+        {longData.map(card => {
+          return <Card {...card} />;
+        })}
       </Carousel>
     );
-    expect(wrapper.find(LeftArrow).find(".react-multiple-carousel__arrow--left").length).toBe(1);
-    expect(wrapper.find(RightArrow).find(".react-multiple-carousel__arrow--right").length).toBe(1);
+    expect(
+      wrapper.find(LeftArrow).find(".react-multiple-carousel__arrow--left")
+        .length
+    ).toBe(1);
+    expect(
+      wrapper.find(RightArrow).find(".react-multiple-carousel__arrow--right")
+        .length
+    ).toBe(1);
     wrapper.unmount();
   });
-  test('Custom arrow', () => {
+  test("Custom arrow", () => {
     const wrapper = mount(
       <Carousel
+        ssr
+        deviceType="desktop"
         swipeable={false}
         draggable={false}
         responsive={responsive1}
@@ -44,9 +54,9 @@ describe("With arrows", () => {
         customRightArrow={<CustomRightArrow />}
         minimumTouchDrag={0}
       >
-      {longData.map(card => {
-        return <Card {...card} />;
-      })}
+        {longData.map(card => {
+          return <Card {...card} />;
+        })}
       </Carousel>
     );
     expect(wrapper.find(LeftArrow).find(CustomLeftArrow).length).toBe(1);
