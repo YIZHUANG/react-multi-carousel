@@ -50,7 +50,7 @@ const Dots = ({
             return React.cloneElement(customDot, {
               index,
               active: isActive,
-              key: slideIndex,
+              key: index,
               onClick: () => goToSlide(slideIndex),
               carouselState: getState(),
             });
