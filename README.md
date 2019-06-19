@@ -1,4 +1,4 @@
-# react-multi-carousel
+# react-multi-carousel 👋
 
 Production-ready, lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering) with typescript.
 
@@ -6,6 +6,15 @@ Don't forget to leave a star if this project help you reduce time to develop.
 
 [![npm version](https://badge.fury.io/js/react-multi-carousel.svg)](https://www.npmjs.com/package/react-multi-carousel)
 [![Build Status](https://api.travis-ci.org/YIZHUANG/react-multi-carousel.svg?branch=master)](https://travis-ci.org/YIZHUANG/react-multi-carousel)
+<a href="https://w3js.com/react-multi-carousel">
+<img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
+</a>
+<a href="https://github.com/YIZHUANG/react-multi-carousel/graphs/commit-activity">
+<img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" target="_blank" />
+</a>
+<a href="https://github.com/YIZHUANG/react-multi-carousel/blob/master/LICENSE">
+<img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
+</a>
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel?ref=badge_shield)
 [![David Dependancy Status](https://david-dm.org/YIZHUANG/react-multi-carousel.svg)](https://david-dm.org/YIZHUANG/react-multi-carousel)
 [![Known Vulnerabilities](https://snyk.io/test/github/YIZHUANG/react-multi-carousel/badge.svg?targetFile=package.json)](https://snyk.io/test/github/YIZHUANG/react-multi-carousel?targetFile=package.json)
@@ -36,11 +45,16 @@ Don't forget to leave a star if this project help you reduce time to develop.
 - Show next/previous set of items partially
 
 ### Shoutouts 🙏
+
 <img src="/browserstack-logo-600x315.png" height="80" title="BrowserStack Logo" alt="BrowserStack Logo" />
 
 Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maintainers use their service to debug browser issues.
 
 ## [Documentation](https://w3js.com/react-multi-carousel/)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
 
 ## Other important links.
 
@@ -103,16 +117,16 @@ import "react-multi-carousel/lib/styles.css";
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 3
+    items: 3,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2
+    items: 2,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1
-  }
+    items: 1,
+  },
 };
 <Carousel
   swipeable={false}
@@ -154,7 +168,7 @@ You custom arrows will receive a list of props/state that's passed back by the c
 const CustomRightArrow = ({ onClick, ...rest }) => {
   const {
     onMove,
-    state: { currentSlide, deviceType }
+    state: { currentSlide, deviceType },
   } = rest;
   // onMove means if dragging or swiping in progress.
   return <button onClick={() => onClick()} />;
@@ -396,7 +410,13 @@ For example if you give to your carousel item padding left and padding right 20p
 | centerMode              |                                      `boolean |`false` | Shows the next items and previous items paritially.                                       |
 | additionalTransfrom     |                                              `number |`0` | additional transfrom to the current one.                                               |
 
-## Contribute
+## Author
+
+👤 **Yi Zhuang**
+
+- Github: [@YIZHUANG](https://github.com/YIZHUANG)
+
+## 🤝 Contribute
 
 Please read https://github.com/YIZHUANG/react-multi-carousel/blob/master/contributing.md
 
@@ -414,6 +434,6 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GJSPRG9RKSJLQ&source=url)
 
-
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel?ref=badge_large)
