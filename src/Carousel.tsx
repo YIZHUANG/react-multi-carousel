@@ -63,8 +63,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       deviceType: "",
       domLoaded: false,
       transform: 0,
-      containerWidth: 0,
-      isSliding: false
+      containerWidth: 0
     };
     this.onResize = this.onResize.bind(this);
     this.handleDown = this.handleDown.bind(this);
@@ -219,7 +218,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public componentDidUpdate(
     { keyBoardControl, autoPlay }: CarouselProps,
-    { containerWidth, domLoaded, isSliding }: CarouselInternalState
+    { containerWidth, domLoaded }: CarouselInternalState
   ): void {
     if (
       this.containerRef &&
@@ -243,15 +242,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
     if (this.props.infinite) {
       // this is to quickly cancel the animation and move the items position to create the infinite effects.
-      this.correctClonesPosition({ domLoaded, isSliding });
+      this.correctClonesPosition({ domLoaded });
     }
   }
   public correctClonesPosition({
     domLoaded, // this domLoaded comes from previous state, only use to tell if we are on client-side or server-side because this functin relies the dom.
-    isSliding
   }: {
     domLoaded?: boolean;
-    isSliding?: boolean;
   }): void {
     const childrenArr = React.Children.toArray(this.props.children);
     const {
@@ -263,9 +260,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (
       // this is to prevent this gets called on the server-side.
       this.state.domLoaded &&
-      domLoaded &&
-      isSliding &&
-      !this.state.isSliding
+      domLoaded 
     ) {
       if (isReachingTheEnd || isReachingTheStart) {
         this.isAnimationAllowed = false;
@@ -304,12 +299,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.isAnimationAllowed = true;
     this.setState(
       {
-        isSliding: true,
         transform: nextPosition,
         currentSlide: nextSlides
       },
       () => {
-        this.setState({ isSliding: false });
         if (typeof afterChange === "function") {
           setTimeout(() => {
             afterChange(previousSlide, this.getState());
@@ -339,12 +332,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.isAnimationAllowed = true;
     this.setState(
       {
-        isSliding: true,
         transform: nextPosition,
         currentSlide: nextSlides
       },
       () => {
-        this.setState({ isSliding: false });
         if (typeof afterChange === "function") {
           setTimeout(() => {
             afterChange(previousSlide, this.getState());
@@ -500,7 +491,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       },
       () => {
         if (this.props.infinite) {
-          this.correctClonesPosition({ domLoaded: true, isSliding: true });
+          this.correctClonesPosition({ domLoaded: true });
         }
         if (typeof afterChange === "function") {
           setTimeout(() => {
