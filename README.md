@@ -4,6 +4,7 @@ Production-ready, lightweight fully customizable React carousel component that r
 
 Don't forget to leave a star if this project help you reduce time to develop.
 
+[![Package Quality](https://npm.packagequality.com/shield/react-multi-carousel.svg)](https://packagequality.com/#?package=react-multi-carousel)
 [![npm version](https://badge.fury.io/js/react-multi-carousel.svg)](https://www.npmjs.com/package/react-multi-carousel)
 [![Build Status](https://api.travis-ci.org/YIZHUANG/react-multi-carousel.svg?branch=master)](https://travis-ci.org/YIZHUANG/react-multi-carousel)
 <a href="https://w3js.com/react-multi-carousel">
