@@ -9,7 +9,7 @@ function uglifyJS(fileName) {
     fileName,
     UglifyJS.minify(
       { [fileName]: fs.readFileSync(fileName, "utf8") },
-      { mangle: false }
+      { mangle: true }
     ).code,
     "utf8"
   );
