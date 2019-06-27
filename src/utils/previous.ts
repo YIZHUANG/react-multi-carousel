@@ -1,5 +1,6 @@
+import React from "react";
 import { CarouselInternalState, CarouselProps } from "../types";
-
+import { isInRightEnd } from "./common";
 /*
 two cases:
 1. We are not over-sliding.
@@ -13,17 +14,22 @@ function populatePreviousSlides(
   nextSlides: number | undefined;
   nextPosition: number | undefined;
 } {
-  const { currentSlide, itemWidth } = state;
-  const { slidesToSlide } = props;
+  const { currentSlide, itemWidth, slidesToShow } = state;
+  const { slidesToSlide, children, showDots, infinite } = props;
   let nextSlides;
   let nextPosition;
   const nextMaximumSlides =
     currentSlide -
     slidesHavePassed -
     (slidesHavePassed > 0 ? 0 : slidesToSlide!);
+  const childrenArr = React.Children.toArray(children);
+  const additionalSlides = (childrenArr.length - slidesToShow) % slidesToSlide!;
   if (nextMaximumSlides >= 0) {
     // It means if we have next slides go back to on the left-hand side.
     nextSlides = nextMaximumSlides;
+    if (showDots && !infinite && additionalSlides > 0 && isInRightEnd(state)) {
+      nextSlides = currentSlide - additionalSlides;
+    }
     nextPosition = -(itemWidth * nextSlides);
   } else if (nextMaximumSlides < 0 && currentSlide !== 0) {
     // prevent oversliding.
@@ -38,7 +44,7 @@ function populatePreviousSlides(
   }
   return {
     nextSlides,
-    nextPosition
+    nextPosition,
   };
 }
 

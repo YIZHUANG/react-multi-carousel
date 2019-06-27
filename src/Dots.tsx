@@ -1,7 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { CarouselInternalState, CarouselProps, stateCallBack } from './types';
-import { getOriginalCounterPart, getCloneCounterPart } from './utils';
+import { CarouselInternalState, CarouselProps, stateCallBack } from "./types";
 
 interface DotsTypes {
   props: CarouselProps;
@@ -20,38 +19,44 @@ const Dots = ({
   if (!showDots) {
     return null;
   }
-  const { currentSlide } = state;
+  const { currentSlide, slidesToShow } = state;
+  const { slidesToSlide } = props;
   const childrenArr = React.Children.toArray(children);
+  let numberOfDotsToShow;
+  if (!infinite) {
+    numberOfDotsToShow =
+      Math.ceil((childrenArr.length - slidesToShow) / slidesToSlide!) + 1;
+  } else {
+    throw new Error("Not supported yet");
+  }
   return (
     <ul className={`react-multi-carousel-dot-list ${dotListClass}`}>
-      {Array(childrenArr.length)
+      {Array(numberOfDotsToShow)
         .fill(0)
         .map((item, index: number) => {
-          const slideIndex = infinite
-            ? getOriginalCounterPart(index, state, childrenArr)
-            : index;
-          const cloneIndex = infinite
-            ? getCloneCounterPart(index, state, childrenArr)
-            : null;
           let isActive;
-          // cloneIndex can be 0 and its true!
-          if (cloneIndex !== undefined) {
-            /*
-            It means we are in infinite mode, and the condition (childrenArr.length > slidesToShow * 2) is true.
-            Also there could be multiple items that are exactly the same but have different index due to the reasons that they are clones.
-            */
+          let nextSlide: number;
+          if (!infinite) {
+            const maximumNextSlide = childrenArr.length - slidesToShow;
+            const possibileNextSlides = index * slidesToSlide!;
+            const isAboutToOverSlide = possibileNextSlides > maximumNextSlide;
+            nextSlide = isAboutToOverSlide
+              ? maximumNextSlide
+              : possibileNextSlides;
             isActive =
-              currentSlide === cloneIndex || currentSlide === slideIndex;
+              nextSlide === currentSlide ||
+              (currentSlide > nextSlide &&
+                currentSlide < nextSlide + slidesToSlide! &&
+                currentSlide < childrenArr.length - slidesToShow);
           } else {
-            // we are not in infinite mode or we don't have duplicate clones.
-            isActive = currentSlide === slideIndex;
+            throw new Error("Not supported yet");
           }
           if (customDot) {
             return React.cloneElement(customDot, {
               index,
               active: isActive,
               key: index,
-              onClick: () => goToSlide(slideIndex),
+              onClick: () => goToSlide(nextSlide),
               carouselState: getState(),
             });
           }
@@ -60,10 +65,10 @@ const Dots = ({
               data-index={index}
               key={index}
               className={`react-multi-carousel-dot ${
-                isActive ? 'react-multi-carousel-dot--active' : ''
+                isActive ? "react-multi-carousel-dot--active" : ""
               }`}
             >
-              <button onClick={() => goToSlide(slideIndex)} />
+              <button onClick={() => goToSlide(nextSlide)} />
             </li>
           );
         })}
