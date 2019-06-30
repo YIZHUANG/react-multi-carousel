@@ -2,3 +2,4 @@ node_modules
 .next
 app
 lib
+deploy_key
