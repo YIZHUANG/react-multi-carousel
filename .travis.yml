@@ -2,6 +2,13 @@ language: node_js
 node_js:
   - "8"
 dist: trusty
+before_install:
+  - openssl aes-256-cbc -K $encrypted_fc1c34415af5_key -iv $encrypted_fc1c34415af5_iv
+    -in deploy_key.enc -out ./deploy_key -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 ./deploy_key
+  - echo -e "Host $gcpip\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - ssh-add ./deploy_key
 env:
   - NODE_ENV=ci
 cache:
@@ -12,3 +19,8 @@ install:
 script:
   - npm run build
   - npm run test
+deploy:
+  provider: script
+  script: bash ./deploy-documentation.sh
+  on:
+    branch: master
