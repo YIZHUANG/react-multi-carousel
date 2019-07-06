@@ -1,5 +1,6 @@
 import * as React from "react";
 import { CarouselInternalState, CarouselProps } from "../types";
+import { getSlidesToSlide } from './common';
 import { isInRightEnd } from "./common";
 /*
 two cases:
@@ -15,7 +16,8 @@ function populatePreviousSlides(
   nextPosition: number | undefined;
 } {
   const { currentSlide, itemWidth, slidesToShow } = state;
-  const { slidesToSlide, children, showDots, infinite } = props;
+  const { children, showDots, infinite } = props;
+  const slidesToSlide = getSlidesToSlide(state,props);
   let nextSlides;
   let nextPosition;
   const nextMaximumSlides =

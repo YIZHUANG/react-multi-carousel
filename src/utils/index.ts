@@ -1,6 +1,5 @@
 import {
   getOriginalCounterPart,
-  getCloneCounterPart,
   getClones,
   checkClonesPosition
 } from "./clones";
@@ -16,7 +15,8 @@ import {
   getTransformForPartialVsibile,
   isInLeftEnd,
   isInRightEnd,
-  notEnoughChildren
+  notEnoughChildren,
+  getSlidesToSlide
 } from "./common";
 import throttle from "./throttle";
 import throwError from "./throwError";
@@ -28,8 +28,8 @@ export {
   isInLeftEnd,
   isInRightEnd,
   getOriginalCounterPart,
-  getCloneCounterPart,
   getClones,
+  getSlidesToSlide,
   getWidthFromDeviceType,
   checkClonesPosition,
   getItemClientSideWidth,

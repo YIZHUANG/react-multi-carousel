@@ -1,6 +1,9 @@
 import * as React from "react";
 
 import { CarouselInternalState, CarouselProps, stateCallBack } from "./types";
+import { getOriginalIndexLookupTableByClones } from "./utils/clones";
+import { getLookupTableForNextSlides } from "./utils/dots";
+import { getSlidesToSlide } from './utils/common';
 
 interface DotsTypes {
   props: CarouselProps;
@@ -8,7 +11,6 @@ interface DotsTypes {
   goToSlide: (index: number) => void;
   getState: () => stateCallBack;
 }
-
 const Dots = ({
   props,
   state,
@@ -20,20 +22,31 @@ const Dots = ({
     return null;
   }
   const { currentSlide, slidesToShow } = state;
-  const { slidesToSlide } = props;
+  const slidesToSlide = getSlidesToSlide(state,props);
   const childrenArr = React.Children.toArray(children);
-  let numberOfDotsToShow;
+  let numberOfDotsToShow: number;
   if (!infinite) {
     numberOfDotsToShow =
       Math.ceil((childrenArr.length - slidesToShow) / slidesToSlide!) + 1;
   } else {
-    throw new Error("Not supported yet");
+    numberOfDotsToShow = Math.ceil(childrenArr.length / slidesToSlide!);
   }
+  const nextSlidesTable = getLookupTableForNextSlides(
+    numberOfDotsToShow,
+    state,
+    props,
+    childrenArr
+  );
+  const lookupTable = getOriginalIndexLookupTableByClones(
+    slidesToShow,
+    childrenArr
+  );
+  const currentSlides = lookupTable[currentSlide];
   return (
     <ul className={`react-multi-carousel-dot-list ${dotListClass}`}>
       {Array(numberOfDotsToShow)
         .fill(0)
-        .map((item, index: number) => {
+        .map((_, index: number) => {
           let isActive;
           let nextSlide: number;
           if (!infinite) {
@@ -49,7 +62,12 @@ const Dots = ({
                 currentSlide < nextSlide + slidesToSlide! &&
                 currentSlide < childrenArr.length - slidesToShow);
           } else {
-            throw new Error("Not supported yet");
+            nextSlide = nextSlidesTable[index];
+            const cloneIndex = lookupTable[nextSlide];
+            isActive =
+              currentSlides === cloneIndex ||
+              (currentSlides >= cloneIndex &&
+                currentSlides < cloneIndex + slidesToSlide!);
           }
           if (customDot) {
             return React.cloneElement(customDot, {

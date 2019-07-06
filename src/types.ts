@@ -4,6 +4,7 @@ export interface responsiveType {
     breakpoint: { max: number; min: number };
     items: number;
     paritialVisibilityGutter?: number;
+    slidesToSlide?: number;
   };
 }
 export interface CarouselProps {
