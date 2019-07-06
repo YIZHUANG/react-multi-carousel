@@ -28,8 +28,10 @@ Don't forget to leave a star if this project help you reduce time to develop.
 
 This only concerns the people who are using the dots.
 
- * The behavior of the dot mode now is exactly the same as react-slick but better and all the edge cases are handled nicely, for a better look please refer to the demo in the [documentation](https://w3js.com/react-multi-carousel).
+ * The behavior of the dot mode now has been improved and its the same as react-slick but better and all the edge cases are handled nicely. For a better look please refer to the demo in the [documentation](https://w3js.com/react-multi-carousel).
  * slidesToSlide can now be added for each break-point in the responsive props if specified, otherwise the this.props.slidesToSlide is used by default. New usage can be found either below or [here](https://github.com/YIZHUANG/react-multi-carousel/blob/master/src/types.ts).
+
+This documentation of this change can also be found at the [release log](https://github.com/YIZHUANG/react-multi-carousel/releases/tag/2.0)
 
 ### Features.
 
