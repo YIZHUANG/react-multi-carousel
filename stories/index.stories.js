@@ -15,11 +15,12 @@ import {
   CustomRightArrow,
   CustomButtonGroup
 } from "./CustomArrows";
-import CarouselWithCustomDots from './carousel-with-custom-dots';
+import CopyOfChildAsDots from './CopyOfChildAsDots';
 import CustomDot from "./CustomDot";
 import Image from "./CustomImage";
 import Carousel from "../src";
 import WithScrollbar from './WithScrollbar';
+import DotModeWithSlidesToSlide from './DotModeWithSlidesToSlide';
 import "../src/assets/styles.css";
 
 setAddon(JSX);
@@ -269,7 +270,7 @@ storiesOf("Carousel", module)
   })
   .addWithJSX("Copy of Carousel items as Custom dots", () => {
     return (
-      <CarouselWithCustomDots />
+      <CopyOfChildAsDots />
     );
   })
   .addWithJSX("With aria hidden, inspect me in the debugger", () => {
@@ -387,4 +388,7 @@ storiesOf("Carousel", module)
         })}
       </Carousel>
     );
+  })
+  .addWithJSX("Responsive dot mode", () => {
+    return <DotModeWithSlidesToSlide />
   })
