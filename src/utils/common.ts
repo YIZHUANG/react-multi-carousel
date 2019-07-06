@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
   getParitialVisibilityGutter,
-  getWidthFromDeviceType
+  getWidthFromDeviceType,
 } from "./elementWidth";
 import { CarouselInternalState, CarouselProps } from "../types";
 
@@ -39,7 +39,7 @@ function getInitialState(
     flexBisis,
     domFullyLoaded,
     paritialVisibilityGutter,
-    shouldRenderAtAll
+    shouldRenderAtAll,
   };
 }
 
@@ -85,7 +85,7 @@ function isInLeftEnd({ currentSlide }: CarouselInternalState): boolean {
 function isInRightEnd({
   currentSlide,
   totalItems,
-  slidesToShow
+  slidesToShow,
 }: CarouselInternalState): boolean {
   return !(currentSlide + slidesToShow < totalItems);
 }
@@ -100,6 +100,42 @@ function notEnoughChildren(
   return items ? childrenArr.length < items : childrenArr.length < slidesToShow;
 }
 
+function getSlidesToSlide(
+  state: CarouselInternalState,
+  props: CarouselProps
+): number {
+ 
+  const { domLoaded, slidesToShow, containerWidth, itemWidth } = state;
+  const { deviceType, responsive } = props;
+  let slidesToScroll = props.slidesToSlide || 1;
+  const domFullyLoaded = Boolean(
+    domLoaded && slidesToShow && containerWidth && itemWidth
+  );
+  const ssr = props.ssr && props.deviceType && !domFullyLoaded;
+  if (ssr) {
+    Object.keys(responsive).forEach(device => {
+      const { slidesToSlide } = responsive[device];
+      if (deviceType === device && slidesToSlide) {
+        slidesToScroll = slidesToSlide;
+      }
+    });
+  }
+  if (domFullyLoaded) {
+    Object.keys(responsive).forEach(item => {
+      const { breakpoint, slidesToSlide } = responsive[item];
+      const { max, min } = breakpoint;
+      if (
+        slidesToSlide &&
+        window.innerWidth >= min &&
+        window.innerWidth <= max
+      ) {
+        slidesToScroll = slidesToSlide;
+      }
+    });
+  }
+  return slidesToScroll;
+}
+
 export {
   isInLeftEnd,
   isInRightEnd,
@@ -107,5 +143,6 @@ export {
   getIfSlideIsVisbile,
   getTransformForCenterMode,
   getTransformForPartialVsibile,
-  notEnoughChildren
+  notEnoughChildren,
+  getSlidesToSlide
 };

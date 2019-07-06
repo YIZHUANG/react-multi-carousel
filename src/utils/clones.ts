@@ -1,5 +1,6 @@
 import { CarouselInternalState, CarouselProps } from "../types";
 
+
 /*
 getOriginalCounterPart gets the index of the original children.
 For example, we have an array [clones, originalChildren, clones];
@@ -27,53 +28,56 @@ function getOriginalCounterPart(
     }
   }
 }
-
 /*
-getCloneCounterPart.
-For example, before we make the clones, an item's index is 0, but after the clones
-we have we have an array like this [clones, originalChildren, clones] and the index of item we were talking about becomes 4,
-because we change the array by adding clones to it. However, we want to get the clone counter part of this item that's at index 4.
-And this gets the exact clone that is exactly the same as item at index 4. (Node: This item belongs to the originalChildren)
-
-We only need this if (childrenArr.length > slidesToShow * 2) as defined in the getClones function.
+A slide can have many clones, this produces a hash table structure for us to know 
+What is the clone of a particular slide and where it is. Note: a slide can have multiple clones.
+This is based on the getclones method below.
 */
-function getCloneCounterPart(
-  index: number,
-  {
-    slidesToShow
-  }: { slidesToShow: number; currentSlide: number; totalItems: number },
+interface Table {
+  [key: number]: number;
+}
+function getOriginalIndexLookupTableByClones(
+  slidesToShow: number,
   childrenArr: any[]
-): number | undefined {
-  // this function is only used for "infinite and showDots are true";
+): Table {
+  // It took me nearly two weeks to figure this out and write this function with a piece of paper and a pen.
   if (childrenArr.length > slidesToShow * 2) {
-    if (index === 0) {
-      // if (childrenArr.length > slidesToShow * 2) it means our data structure is like the following:
-      /*
-      const carouselItems = [
-        ...childrenArr.slice(
-          childrenArr.length - slidesToShow * 2,
-          childrenArr.length
-        ),
-        ...childrenArr,
-        ...childrenArr.slice(0, slidesToShow * 2)
-      ]
-      As you can see its being clone (childrenArr.length - slidesToShow * 2) times,
-      so the couter part index for 0 is (childrenArr.length + slidesToShow * 2)
-      */
-      return childrenArr.length + slidesToShow * 2;
+    const table: Table = {};
+    const firstBeginningOfClones = childrenArr.length - slidesToShow * 2;
+    const firstEndOfClones = childrenArr.length - firstBeginningOfClones;
+    let firstCount = firstBeginningOfClones;
+    for (let i = 0; i < firstEndOfClones; i++) {
+      table[i] = firstCount;
+      firstCount++;
     }
-    const cloneCouterPart = index - (childrenArr.length - slidesToShow * 2);
-    return cloneCouterPart;
+    const secondBeginningOfClones = childrenArr.length + firstEndOfClones;
+    const secondEndOfClones =
+      secondBeginningOfClones + childrenArr.slice(0, slidesToShow * 2).length;
+    let secondCount = 0;
+    for (let i = secondBeginningOfClones; i <= secondEndOfClones; i++) {
+      table[i] = secondCount;
+      secondCount++;
+    }
+    const originalStart = firstEndOfClones;
+    const originalEnd = secondBeginningOfClones;
+    let originalCounter = 0;
+    for (let i = originalStart; i < originalEnd; i++) {
+      table[i] = originalCounter;
+      originalCounter++;
+    }
+    return table;
   } else {
-    if (index === 0) {
-      // if !(childrenArr.length > slidesToShow * 2) it means our data structure is like the following:
-      /*
-      const carouselItems = [...children, ...children, ...children]
-      As you can see its being clone 3 times, so the couter part index for 0 is childrenArr.length * 2
-      */
-      return childrenArr.length * 2;
+    const table: Table = {};
+    const totalSlides = childrenArr.length * 3; // the origianl children array gets clone 3 times.
+    let count = 0;
+    for (let i = 0; i < totalSlides; i++) {
+      table[i] = count;
+      count++;
+      if (count === childrenArr.length) {
+        count = 0;
+      }
     }
-    return undefined;
+    return table;
   }
 }
 
@@ -93,7 +97,7 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
         childrenArr.length
       ),
       ...childrenArr,
-      ...childrenArr.slice(0, slidesToShow * 2)
+      ...childrenArr.slice(0, slidesToShow * 2),
     ];
     initialSlide = slidesToShow * 2;
   } else {
@@ -102,7 +106,7 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
   }
   return {
     clones,
-    initialSlide
+    initialSlide,
   };
 }
 
@@ -160,13 +164,13 @@ function checkClonesPosition(
     isReachingTheEnd,
     isReachingTheStart,
     nextSlide,
-    nextPosition
+    nextPosition,
   };
 }
 
 export {
   getOriginalCounterPart,
-  getCloneCounterPart,
+  getOriginalIndexLookupTableByClones,
   getClones,
-  checkClonesPosition
+  checkClonesPosition,
 };
