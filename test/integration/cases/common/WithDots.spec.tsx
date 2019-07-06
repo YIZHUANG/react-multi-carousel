@@ -32,7 +32,7 @@ describe("With dots", () => {
       </Carousel>
     );
     expect(wrapper.find(Dots).length).toBe(1);
-    expect(wrapper.find('.react-multi-carousel-dot').length).toBe(12);
+    expect(wrapper.find('.react-multi-carousel-dot').length).toBe(6);
     wrapper.unmount();
   });
   test('Custom dots', () => {
@@ -53,7 +53,7 @@ describe("With dots", () => {
       })}
       </Carousel>
     );
-    expect(wrapper.find(CustomDot).length).toBe(12);
+    expect(wrapper.find(CustomDot).length).toBe(10);
     wrapper.unmount();
   });
 });

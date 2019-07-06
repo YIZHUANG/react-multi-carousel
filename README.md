@@ -24,10 +24,18 @@ Don't forget to leave a star if this project help you reduce time to develop.
 
 ![demo](https://media.giphy.com/media/3octyw2XELzfaplNUm/giphy.gif)
 
+### Breaking changes in 2.0.
+
+This only concerns the people who are using the dots.
+
+ * The behavior of the dot mode now is exactly the same as react-slick but better and all the edge cases are handled nicely, for a better look please refer to the demo in the [documentation](https://w3js.com/react-multi-carousel).
+ * slidesToSlide can now be added for each break-point in the responsive props if specified, otherwise the this.props.slidesToSlide is used by default. New usage can be found either below or [here](https://github.com/YIZHUANG/react-multi-carousel/blob/master/src/types.ts).
+
 ### Features.
 
 - Server-side rendering
 - Infinite mode
+- Dot mode
 - Custom animation
 - AutoPlay mode
 - Auto play interval
@@ -119,14 +127,17 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
+    slidesToSlide: 3 // optional, default to 1.
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
+    slidesToSlide: 2 // optional, default to 1.
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
+    slidesToSlide: 1 // optional, default to 1.
   },
 };
 <Carousel
@@ -135,7 +146,6 @@ const responsive = {
   showDots={true}
   responsive={responsive}
   ssr={true} // means to render carousel on server-side.
-  slidesToSlide={2}
   infinite={true}
   autoPlay={this.props.deviceType !== "mobile" ? true : false}
   autoPlaySpeed={1000}

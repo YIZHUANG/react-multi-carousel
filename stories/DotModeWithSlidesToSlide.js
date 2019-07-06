@@ -5,7 +5,7 @@ import Avatar from "@material-ui/core/Avatar";
 
 import articles from "./data.json";
 import Card from "./Card";
-import "./carousel-with-custom-dots.css";
+import "./CopyOfChildAsDots.css";
 
 const responsive = {
   desktop: {
@@ -14,6 +14,7 @@ const responsive = {
       min: 1024
     },
     items: 3,
+    slidesToSlide: 3,
     paritialVisibilityGutter: 40
   },
   mobile: {
@@ -22,6 +23,7 @@ const responsive = {
       min: 0
     },
     items: 2,
+    slidesToSlide: 2,
     paritialVisibilityGutter: 30
   },
   tablet: {
@@ -30,6 +32,7 @@ const responsive = {
       min: 200
     },
     items: 1,
+    slidesToSlide: 1,
     paritialVisibilityGutter: 30
   }
 };
@@ -39,7 +42,7 @@ const ArticleCard = ({ date, imageUrl, link, title, tags, content }) => {
 };
 
 
-class CarouselWithCustomDots extends React.PureComponent {
+class DotModeWithSlidesToSlide extends React.PureComponent {
   render() {
     const children = articles
       .slice(0, 6)
@@ -73,6 +76,7 @@ class CarouselWithCustomDots extends React.PureComponent {
       <Carousel
         showDots
         slidesToSlide={1}
+        focusOnSelect
         containerClass="carousel-with-custom-dots"
         responsive={responsive}
         partialVisbile
@@ -85,4 +89,4 @@ class CarouselWithCustomDots extends React.PureComponent {
   }
 }
 
-export default CarouselWithCustomDots;
+export default DotModeWithSlidesToSlide;
