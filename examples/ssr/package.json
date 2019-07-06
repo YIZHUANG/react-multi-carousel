@@ -27,7 +27,7 @@
     "react-ga": "^2.5.7",
     "react-icons": "^3.5.0",
     "react-jss": "^8.6.1",
-    "react-multi-carousel": "^1.4.0",
+    "react-multi-carousel": "^2.0.0",
     "snyk": "^1.189.0"
   },
   "devDependencies": {

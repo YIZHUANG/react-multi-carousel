@@ -15,6 +15,7 @@ const responsive = {
       min: 1024
     },
     items: 3,
+    slidesToSlide: 2,
     paritialVisibilityGutter: 40
   },
   mobile: {
@@ -23,6 +24,7 @@ const responsive = {
       min: 0
     },
     items: 2,
+    slidesToSlide: 2,
     paritialVisibilityGutter: 30
   },
   tablet: {
@@ -31,6 +33,7 @@ const responsive = {
       min: 200
     },
     items: 1,
+    slidesToSlide: 1,
     paritialVisibilityGutter: 30
   }
 };

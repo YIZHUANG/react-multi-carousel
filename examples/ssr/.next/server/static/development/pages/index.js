@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -401,6 +401,7 @@ var responsive = {
       min: 1024
     },
     items: 3,
+    slidesToSlide: 2,
     paritialVisibilityGutter: 40
   },
   mobile: {
@@ -409,6 +410,7 @@ var responsive = {
       min: 0
     },
     items: 2,
+    slidesToSlide: 2,
     paritialVisibilityGutter: 30
   },
   tablet: {
@@ -417,6 +419,7 @@ var responsive = {
       min: 200
     },
     items: 1,
+    slidesToSlide: 1,
     paritialVisibilityGutter: 30
   }
 };
@@ -434,7 +437,7 @@ var ArticleCard = function ArticleCard(_ref) {
     headline: title,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 42
     },
     __self: this
   });
@@ -461,7 +464,7 @@ function (_React$PureComponent) {
         }, article, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 47
+            lineNumber: 50
           },
           __self: this
         }));
@@ -472,7 +475,7 @@ function (_React$PureComponent) {
           src: article.imageUrl,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 50
+            lineNumber: 53
           },
           __self: this
         });
@@ -494,7 +497,7 @@ function (_React$PureComponent) {
           }),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 60
+            lineNumber: 63
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_6___default.a.Children.toArray(images)[index]);
@@ -512,13 +515,13 @@ function (_React$PureComponent) {
         customDot: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(CustomDot, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 83
+            lineNumber: 86
           },
           __self: this
         }),
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 74
+          lineNumber: 77
         },
         __self: this
       }, children);
@@ -1966,28 +1969,31 @@ function (_React$Component) {
             max: 3000,
             min: 1024
           },
-          items: 3
+          items: 3,
+          slidesToSlide: 3
         },
         tablet: {
           breakpoint: {
             max: 1024,
             min: 464
           },
-          items: 2
+          items: 2,
+          slidesToSlide: 2
         },
         mobile: {
           breakpoint: {
             max: 464,
             min: 0
           },
-          items: 1
+          items: 1,
+          slidesToSlide: 1
         }
       };
       return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         className: classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 95
+          lineNumber: 98
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -1996,7 +2002,7 @@ function (_React$Component) {
         color: "grey",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 96
+          lineNumber: 99
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
@@ -2004,7 +2010,7 @@ function (_React$Component) {
         href: "https://w3js.com/",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 97
+          lineNumber: 100
         },
         __self: this
       }, "A Carousel supports multiple items and server-side rendering")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -2013,7 +2019,7 @@ function (_React$Component) {
         color: "grey",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 101
+          lineNumber: 104
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
@@ -2021,7 +2027,7 @@ function (_React$Component) {
         href: "https://w3js.com/",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 102
+          lineNumber: 105
         },
         __self: this
       }, "This is the server-side rendering demo of the libiary, try to disable the JavaScript in your browser, you will still see our Carousel renders nicely")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_16___default.a
@@ -2044,11 +2050,10 @@ function (_React$Component) {
           });
         },
         containerClass: "first-carousel-container container",
-        slidesToSlide: 1,
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 108
+          lineNumber: 111
         },
         __self: this
       }, fakerData.map(function (card) {
@@ -2057,7 +2062,7 @@ function (_React$Component) {
         }, card, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 123
+            lineNumber: 125
           },
           __self: this
         }));
@@ -2070,14 +2075,13 @@ function (_React$Component) {
         responsive: responsive,
         ssr: true,
         showDots: true,
-        slidesToSlide: 1,
         infinite: true,
         containerClass: "container-with-dots",
         itemClass: "image-item",
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 127
+          lineNumber: 129
         },
         __self: this
       }, fakerData.slice(0, 5).map(function (card) {
@@ -2086,7 +2090,7 @@ function (_React$Component) {
           alt: card.headline,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 142
+            lineNumber: 143
           },
           __self: this
         });
@@ -2094,7 +2098,7 @@ function (_React$Component) {
         deviceType: this.props.deviceType,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 145
+          lineNumber: 146
         },
         __self: this
       }));
@@ -2147,7 +2151,7 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
