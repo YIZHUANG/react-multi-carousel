@@ -28,7 +28,7 @@ Don't forget to leave a star if this project help you reduce time to develop.
 
 This only concerns the people who are using the dots.
 
- * The behavior of the dot mode now has been improved and its the same as react-slick but better and all the edge cases are handled nicely. For a better look please refer to the demo in the [documentation](https://w3js.com/react-multi-carousel).
+ * The behavior of the dot mode now has been changed and improved to be responsive and all the edge cases are handled nicely. For a better look please refer to the demo in the [documentation](https://w3js.com/react-multi-carousel).
  * slidesToSlide can now be added for each break-point in the responsive props if specified, otherwise the this.props.slidesToSlide is used by default. New usage can be found either below or [here](https://github.com/YIZHUANG/react-multi-carousel/blob/master/src/types.ts).
 
 This documentation of this change can also be found at the [release log](https://github.com/YIZHUANG/react-multi-carousel/releases/tag/2.0)
@@ -104,12 +104,6 @@ import 'react-multi-carousel/lib/styles.css';
 
 ### How the SSR mode works?
 
-The current most common solution is to detect the device type of the user based on the user agent. (server-side).
-
-Based based on the device type, we decided how many items we are showing in the Carousel.
-
-For example, we want to show 3 items at the same time on desktop (screen size 1024 - 2000px possibily) and 2 items on tablet(700px - 1024px) and 1 item on mobile. ---> this can be achieved through user-agent detection.
-
 Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/pages/index.js).
 
 - Demo for the SSR are at [here](https://react-multi-carousel.now.sh/)
@@ -117,7 +111,7 @@ Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/
 
 Here is a lighter version of the library for detecting the user's device type [alternative](https://github.com/faisalman/ua-parser-js)
 
-If you are using Nextjs, you can choose to only bundle it on the server-side to improve performance, if you are interested in how, open up an issue.
+If you are using Nextjs, you can choose to only bundle it on the server-side.
 
 ## Common Usage
 

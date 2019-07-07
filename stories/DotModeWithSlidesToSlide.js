@@ -1,7 +1,6 @@
 import React from "react";
 import Carousel from "../src";
 import classNames from "classnames";
-import Avatar from "@material-ui/core/Avatar";
 
 import articles from "./data.json";
 import Card from "./Card";
@@ -48,10 +47,6 @@ class DotModeWithSlidesToSlide extends React.PureComponent {
       .slice(0, 6)
       .map(article => <ArticleCard key={article.title} {...article} />);
 
-    const images = articles.map(article => (
-      <Avatar key={article.title} src={article.imageUrl} />
-    ));
-
     const CustomDot = ({
       index,
       onClick,
@@ -68,7 +63,7 @@ class DotModeWithSlidesToSlide extends React.PureComponent {
             "custom-dot--active": active
           })}
         >
-          {React.Children.toArray(images)[index]}
+          Dot {index + 1}
         </button>
       );
     };
@@ -80,8 +75,8 @@ class DotModeWithSlidesToSlide extends React.PureComponent {
         containerClass="carousel-with-custom-dots"
         responsive={responsive}
         partialVisbile
-        infinite
         customDot={<CustomDot />}
+        infinite
       >
         {children}
       </Carousel>
