@@ -28,8 +28,8 @@ Don't forget to leave a star if this project help you reduce time to develop.
 
 This only concerns the people who are using the dots.
 
- * The behavior of the dot mode now has been changed and improved to be responsive and all the edge cases are handled nicely. For a better look please refer to the demo in the [documentation](https://w3js.com/react-multi-carousel).
- * slidesToSlide can now be added for each break-point in the responsive props if specified, otherwise the this.props.slidesToSlide is used by default. New usage can be found either below or [here](https://github.com/YIZHUANG/react-multi-carousel/blob/master/src/types.ts).
+- The behavior of the dot mode now has been changed and improved to be responsive and all the edge cases are handled nicely. For a better look please refer to the demo in the [documentation](https://w3js.com/react-multi-carousel).
+- slidesToSlide can now be added for each break-point in the responsive props if specified, otherwise the this.props.slidesToSlide is used by default. New usage can be found either below or [here](https://github.com/YIZHUANG/react-multi-carousel/blob/master/src/types.ts).
 
 This documentation of this change can also be found at the [release log](https://github.com/YIZHUANG/react-multi-carousel/releases/tag/2.0)
 
@@ -123,17 +123,17 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
-    slidesToSlide: 3 // optional, default to 1.
+    slidesToSlide: 3, // optional, default to 1.
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    slidesToSlide: 2 // optional, default to 1.
+    slidesToSlide: 2, // optional, default to 1.
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    slidesToSlide: 1 // optional, default to 1.
+    slidesToSlide: 1, // optional, default to 1.
   },
 };
 <Carousel
@@ -409,7 +409,8 @@ For example if you give to your carousel item padding left and padding right 20p
 | keyBoardControl         |                                                                     `boolean`                                                                      |              `true`               | Use keyboard to navigate to next/previous slide                                                                                                                       |
 | autoPlay                |                                                                     `boolean`                                                                      |              `false`              | Auto play                                                                                                                                                             |
 | autoPlaySpeed           |                                                                      `number`                                                                      |               3000                | The unit is ms                                                                                                                                                        |
-| showDots                |                                                                     `boolean`                                                                      |              `false`              | Hide the default dot list                                                                                                                                             |
+| showDots                |                                                                     `boolean`                                                                      |              `false`              | Hide the default dot list                |
+| renderDotsOutside                |                                                                     `boolean`                                                                      |              `false`              | Show dots outside of the container                                                                                                                                     |
 | partialVisbile          |                                                                 `boolean | string`                                                                 |              `false`              | Show partial next slides. This is use with the `responsive` prop, see example for details                                                                             |
 | customTransition        |                                                                      `string`                                                                      |   `transform 300ms ease-in-out`   | Configure your own anaimation when sliding                                                                                                                            |
 | transitionDuration      | `number |`300` | The unit is ms, if you are using customTransition, make sure to put the duration here as this is needed for the resizing to work. |
