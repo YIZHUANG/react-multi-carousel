@@ -619,7 +619,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       ? getTransformForCenterMode(this.state, this.props)
       : this.state.transform;
     return (
-      <React.Fragment>
+      <>
         <div
           className={`react-multi-carousel-list ${containerClass}`}
           ref={this.containerRef}
@@ -652,7 +652,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           {shouldRenderAtAll && !renderDotsOutside && this.renderDotsList()}
         </div>
         {shouldRenderAtAll && renderDotsOutside && this.renderDotsList()}
-      </React.Fragment>
+      </>
     );
   }
 }
