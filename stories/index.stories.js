@@ -241,6 +241,35 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
+  .addWithJSX("With dots rendered outside of/after list container within custom div for styling", () => {
+    return (
+      <div style={{position: 'relative', paddingBottom: '30px'}}>
+        <Carousel
+          showDots
+          renderDotsOutside
+          infinite
+          containerClass="container"
+          slidesToSlide={1}
+          responsive={responsiveImageHero}
+        >
+          {images.slice(0, 5).map(image => {
+            return (
+              <img
+                draggable={false}
+                src={image}
+                style={{
+                  width: "100%",
+                  display: "block",
+                  height: "100%",
+                  margin: "auto"
+                }}
+              />
+            );
+          })}
+        </Carousel>
+      </div>
+    );
+  })
   .addWithJSX("Custom dots", () => {
     return (
       <Carousel

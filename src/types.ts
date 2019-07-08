@@ -34,6 +34,7 @@ export interface CarouselProps {
   autoPlay?: boolean;
   autoPlaySpeed?: number; // default 3000ms
   showDots?: boolean;
+  renderDotsOutside?: boolean;
   // Show next/previous item partially, if its right, only show the next item partially, else show both
   // partialVisbile has to be used in conjunction with the responsive props, details are in documentation.
   // it shows the next set of items partially, different from centerMode as it shows both.
