@@ -28,6 +28,7 @@ export interface CarouselProps {
   sliderClass?: string; // Use this to style your own track list.
   itemClass?: string; // Use this to style your own Carousel item. For example add padding-left and padding-right
   containerClass?: string; // Use this to style the whole container. For example add padding to allow the "dots" or "arrows" to go to other places without being overflown.
+  className?: string;  // Use this to style the whole container with styled-components
   dotListClass?: string; // Use this to style the dot list.
   keyBoardControl?: boolean;
   centerMode?: boolean; // show previous and next set of items paritially

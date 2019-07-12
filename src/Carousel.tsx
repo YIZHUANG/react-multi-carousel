@@ -587,6 +587,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       centerMode,
       additionalTransfrom,
       renderDotsOutside,
+      className,
     } = this.props;
     throwError(this.state, this.props);
     const {
@@ -621,7 +622,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     return (
       <>
         <div
-          className={`react-multi-carousel-list ${containerClass}`}
+          className={`react-multi-carousel-list ${containerClass} ${className}`}
           ref={this.containerRef}
         >
           <ul
