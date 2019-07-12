@@ -36,6 +36,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     keyBoardControl: true,
     autoPlaySpeed: 3000,
     showDots: false,
+    renderDotsOutside: false,
     minimumTouchDrag: 80,
     dotListClass: "",
     focusOnSelect: false,
@@ -585,6 +586,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       partialVisbile,
       centerMode,
       additionalTransfrom,
+      renderDotsOutside,
     } = this.props;
     throwError(this.state, this.props);
     const {
@@ -617,37 +619,40 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       ? getTransformForCenterMode(this.state, this.props)
       : this.state.transform;
     return (
-      <div
-        className={`react-multi-carousel-list ${containerClass}`}
-        ref={this.containerRef}
-      >
-        <ul
-          className={`react-multi-carousel-track ${sliderClass}`}
-          // @ts-ignore
-          style={{
-            transition: this.isAnimationAllowed
-              ? customTransition || defaultTransition
-              : "none",
-            overflow: shouldRenderOnSSR ? "hidden" : "unset",
-            transform: `translate3d(${currentTransform +
-              additionalTransfrom!}px,0,0)`,
-          }}
-          onMouseMove={this.handleMove}
-          onMouseDown={this.handleDown}
-          onMouseUp={this.handleOut}
-          onMouseEnter={this.handleEnter}
-          onMouseLeave={this.handleOut}
-          onTouchStart={this.handleDown}
-          onTouchMove={this.handleMove}
-          onTouchEnd={this.handleOut}
+      <>
+        <div
+          className={`react-multi-carousel-list ${containerClass}`}
+          ref={this.containerRef}
         >
-          {this.renderCarouselItems()}
-        </ul>
-        {shouldShowArrows && !disableLeftArrow && this.renderLeftArrow()}
-        {shouldShowArrows && !disableRightArrow && this.renderRightArrow()}
-        {shouldRenderAtAll && this.renderButtonGroups()}
-        {shouldRenderAtAll && this.renderDotsList()}
-      </div>
+          <ul
+            className={`react-multi-carousel-track ${sliderClass}`}
+            // @ts-ignore
+            style={{
+              transition: this.isAnimationAllowed
+                ? customTransition || defaultTransition
+                : "none",
+              overflow: shouldRenderOnSSR ? "hidden" : "unset",
+              transform: `translate3d(${currentTransform +
+                additionalTransfrom!}px,0,0)`,
+            }}
+            onMouseMove={this.handleMove}
+            onMouseDown={this.handleDown}
+            onMouseUp={this.handleOut}
+            onMouseEnter={this.handleEnter}
+            onMouseLeave={this.handleOut}
+            onTouchStart={this.handleDown}
+            onTouchMove={this.handleMove}
+            onTouchEnd={this.handleOut}
+          >
+            {this.renderCarouselItems()}
+          </ul>
+          {shouldShowArrows && !disableLeftArrow && this.renderLeftArrow()}
+          {shouldShowArrows && !disableRightArrow && this.renderRightArrow()}
+          {shouldRenderAtAll && this.renderButtonGroups()}
+          {shouldRenderAtAll && !renderDotsOutside && this.renderDotsList()}
+        </div>
+        {shouldRenderAtAll && renderDotsOutside && this.renderDotsList()}
+      </>
     );
   }
 }
