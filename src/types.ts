@@ -85,4 +85,9 @@ export interface CarouselInternalState {
   clones: any[];
 }
 
-export default class Carousel extends React.PureComponent<CarouselProps> {}
+export default class Carousel extends React.PureComponent<CarouselProps> {
+  previous: (slidesHavePassed: number) => void;
+  next: (slidesHavePassed: number) => void;
+  goToSlide: (slide: number) => void;
+  state: CarouselInternalState;
+}
