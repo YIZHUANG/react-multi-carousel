@@ -16,7 +16,7 @@ import {
   isInRightEnd,
   notEnoughChildren,
 } from "./utils";
-import { CarouselInternalState, CarouselProps, stateCallBack } from "./types";
+import { CarouselInternalState, CarouselProps, StateCallBack, Direction } from "./types";
 import Dots from "./Dots";
 import { LeftArrow, RightArrow } from "./Arrows";
 import CarouselItems from "./CarouselItems";
@@ -43,12 +43,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     centerMode: false,
     additionalTransfrom: 0,
   };
-  private readonly containerRef: React.RefObject<any>;
+  private readonly containerRef: React.RefObject<HTMLDivElement>;
   public onMove: boolean;
   public initialX: number;
   public lastX: number;
   public isAnimationAllowed: boolean;
-  public direction: string;
+  public direction: Direction;
   public autoPlay?: any;
   public isInThrottle?: boolean;
   public initialY: number;
@@ -514,7 +514,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }
     );
   }
-  public getState(): stateCallBack {
+  public getState(): StateCallBack {
     return {
       ...this.state,
       onMove: this.onMove,

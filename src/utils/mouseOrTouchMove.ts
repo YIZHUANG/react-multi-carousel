@@ -1,4 +1,4 @@
-import { CarouselInternalState, CarouselProps } from "../types";
+import { CarouselInternalState, CarouselProps, Direction } from "../types";
 
 // this is to get the values for handling onTouchMove / onMouseMove;
 function populateSlidesOnMouseTouchMove(
@@ -8,7 +8,7 @@ function populateSlidesOnMouseTouchMove(
   lastX: number,
   clientX: number
 ): {
-  direction?: string;
+  direction?: Direction;
   nextPosition: number | undefined;
   canContinue: boolean;
 } {
@@ -21,7 +21,7 @@ function populateSlidesOnMouseTouchMove(
   } = state;
   const { infinite } = props;
   let canContinue = false; // it will be true if we have slides to slide to.
-  let direction; // either 'left' or 'right'
+  let direction:Direction; // either 'left' or 'right'
   let nextPosition;
   // making sure we have items to slide back to, prevent oversliding.
   const slidesHavePassedRight = Math.round(
