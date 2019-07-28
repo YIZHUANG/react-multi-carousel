@@ -77,12 +77,12 @@ class Index extends React.Component {
     const responsive = {
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 1,
+        items: 3,
         paritialVisibilityGutter: 80
       },
       tablet: {
         breakpoint: { max: 1024, min: 464 },
-        items: 1,
+        items: 2,
         paritialVisibilityGutter: 30
       },
       mobile: {

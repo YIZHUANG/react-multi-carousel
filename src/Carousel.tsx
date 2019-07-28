@@ -127,7 +127,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   ): void {
     // if forResizing is true, means we are on client-side.
     // if forResizing is false, means we are on server-side.
-    // because the first tim  e we set the clones, we change the position of all carousel items when entering client-side from server-side.
+    // because the first time we set the clones, we change the position of all carousel items when entering client-side from server-side.
     // but still, we want to maintain the same position as it was on the server-side which is translateX(0) by getting the couter part of the original first slide.
     this.isAnimationAllowed = false;
     const childrenArr = React.Children.toArray(this.props.children);
