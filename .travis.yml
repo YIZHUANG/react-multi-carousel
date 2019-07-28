@@ -1,8 +1,3 @@
-stages:
-  - test
-  - name: deploy
-    if: branch = master
-
 jobs:
   include:
     - stage: test
@@ -19,6 +14,7 @@ jobs:
         - npm run build
         - npm run test
     - stage: deploy
+      if: (NOT type IN (pull_request)) AND (branch = master)
       script:
         - openssl aes-256-cbc -K $encrypted_fc1c34415af5_key -iv $encrypted_fc1c34415af5_iv
           -in deploy_key.enc -out ./deploy_key -d
