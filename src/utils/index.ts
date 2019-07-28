@@ -1,7 +1,8 @@
 import {
   getOriginalCounterPart,
   getClones,
-  checkClonesPosition
+  checkClonesPosition,
+  getInitialSlideInInifteMode
 } from "./clones";
 import {
   getWidthFromDeviceType,
@@ -43,5 +44,6 @@ export {
   populateNextSlides,
   populatePreviousSlides,
   populateSlidesOnMouseTouchMove,
-  notEnoughChildren
+  notEnoughChildren,
+  getInitialSlideInInifteMode
 };

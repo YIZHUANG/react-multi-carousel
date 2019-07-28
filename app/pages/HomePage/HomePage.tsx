@@ -8,7 +8,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "../../components/card";
 import Image from "../../components/image";
 import Carousel from "../../../src";
-import CarouselWithCustomDots from "./carousel-with-custom-dots";
 
 import Link from "next/link";
 
@@ -137,7 +136,6 @@ class Index extends React.Component {
             return <Image url={card.image} alt={card.headline} />;
           })}
         </Carousel>
-        <CarouselWithCustomDots />
       </div>
     );
   }

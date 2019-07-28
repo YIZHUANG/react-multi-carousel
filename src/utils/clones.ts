@@ -40,7 +40,6 @@ function getOriginalIndexLookupTableByClones(
   slidesToShow: number,
   childrenArr: any[]
 ): Table {
-  // It took me nearly two weeks to figure this out and write this function with a piece of paper and a pen.
   if (childrenArr.length > slidesToShow * 2) {
     const table: Table = {};
     const firstBeginningOfClones = childrenArr.length - slidesToShow * 2;
@@ -88,7 +87,6 @@ then we clone "slidesToShow * 2" amount of beginning and end items.
 Otherwise, it means we only have a few items. Then we clone it 3 times.
 */
 function getClones(slidesToShow: number, childrenArr: any[]) {
-  let initialSlide;
   let clones;
   if (childrenArr.length > slidesToShow * 2) {
     clones = [
@@ -99,15 +97,18 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
       ...childrenArr,
       ...childrenArr.slice(0, slidesToShow * 2),
     ];
-    initialSlide = slidesToShow * 2;
   } else {
     clones = [...childrenArr, ...childrenArr, ...childrenArr];
-    initialSlide = childrenArr.length;
   }
-  return {
-    clones,
-    initialSlide,
-  };
+  return clones;
+}
+
+function getInitialSlideInInifteMode(slidesToShow:number, childrenArr: any[]) {
+  if (childrenArr.length > slidesToShow * 2) {
+    return slidesToShow * 2;
+  } else {
+    return childrenArr.length;
+  }
 }
 
 /*
@@ -173,4 +174,5 @@ export {
   getOriginalIndexLookupTableByClones,
   getClones,
   checkClonesPosition,
+  getInitialSlideInInifteMode
 };

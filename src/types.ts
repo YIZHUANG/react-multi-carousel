@@ -81,7 +81,6 @@ export interface CarouselInternalState {
   deviceType?: string;
   transform: number;
   isSliding?: boolean;
-  clones: any[];
 }
 
 export default class Carousel extends React.PureComponent<CarouselProps> {
