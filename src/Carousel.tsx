@@ -14,9 +14,15 @@ import {
   populateSlidesOnMouseTouchMove,
   isInLeftEnd,
   isInRightEnd,
+  getInitialSlideInInifteMode,
   notEnoughChildren,
 } from "./utils";
-import { CarouselInternalState, CarouselProps, StateCallBack, Direction } from "./types";
+import {
+  CarouselInternalState,
+  CarouselProps,
+  StateCallBack,
+  Direction,
+} from "./types";
 import Dots from "./Dots";
 import { LeftArrow, RightArrow } from "./Arrows";
 import CarouselItems from "./CarouselItems";
@@ -59,7 +65,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       itemWidth: 0,
       slidesToShow: 0,
       currentSlide: 0,
-      clones: React.Children.toArray(props.children),
       totalItems: React.Children.count(props.children),
       deviceType: "",
       domLoaded: false,
@@ -126,14 +131,14 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     // but still, we want to maintain the same position as it was on the server-side which is translateX(0) by getting the couter part of the original first slide.
     this.isAnimationAllowed = false;
     const childrenArr = React.Children.toArray(this.props.children);
-    const { clones, initialSlide } = getClones(
-      this.state.slidesToShow,
+    const initialSlide = getInitialSlideInInifteMode(
+      slidesToShow || this.state.slidesToShow,
       childrenArr
     );
+    const clones = getClones(this.state.slidesToShow, childrenArr);
     if (!notEnoughChildren(this.state, this.props, slidesToShow)) {
       this.setState(
         {
-          clones,
           totalItems: clones.length,
           currentSlide: forResizing ? this.state.currentSlide : initialSlide,
         },
@@ -563,10 +568,15 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       />
     );
   }
-  public renderCarouselItems(): any {
-    // it can be any.
+  public renderCarouselItems() {
+    let clones = [];
+    if (this.props.infinite) {
+      const childrenArr = React.Children.toArray(this.props.children);
+      clones = getClones(this.state.slidesToShow, childrenArr);
+    }
     return (
       <CarouselItems
+        clones={clones}
         goToSlide={this.goToSlide}
         state={this.state}
         props={this.props}
@@ -589,7 +599,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       renderDotsOutside,
       className,
     } = this.props;
-    throwError(this.state, this.props);
+    if (process.env.NODE_ENV !== "production") {
+      throwError(this.state, this.props);
+    }
     const {
       shouldRenderOnSSR,
       paritialVisibilityGutter,

@@ -8,7 +8,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "../../components/card";
 import Image from "../../components/image";
 import Carousel from "../../../src";
-import CarouselWithCustomDots from "./carousel-with-custom-dots";
 
 import Link from "next/link";
 
@@ -78,12 +77,12 @@ class Index extends React.Component {
     const responsive = {
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 1,
+        items: 3,
         paritialVisibilityGutter: 80
       },
       tablet: {
         breakpoint: { max: 1024, min: 464 },
-        items: 1,
+        items: 2,
         paritialVisibilityGutter: 30
       },
       mobile: {
@@ -137,7 +136,6 @@ class Index extends React.Component {
             return <Image url={card.image} alt={card.headline} />;
           })}
         </Carousel>
-        <CarouselWithCustomDots />
       </div>
     );
   }

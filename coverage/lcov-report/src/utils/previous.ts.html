@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">84.62% </span>
+        <span class="strong">86.96% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>11/13</span>
+        <span class='fraction'>20/23</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/6</span>
+        <span class='fraction'>5/10</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>1/1</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">83.33% </span>
+        <span class="strong">84.21% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>10/12</span>
+        <span class='fraction'>16/19</span>
       </div>
     </div>
     <p class="quiet">
@@ -91,8 +91,18 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -108,15 +118,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -136,8 +152,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { CarouselInternalState, CarouselProps } from "../types";
-&nbsp;
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as React from "react";
+import { CarouselInternalState, CarouselProps } from "../types";
+import { getSlidesToSlide } from './common';
+import { isInRightEnd } from "./common";
 /*
 two cases:
 1. We are not over-sliding.
@@ -151,17 +169,23 @@ function populatePreviousSlides(
   nextSlides: number | undefined;
   nextPosition: number | undefined;
 } {
-  const { currentSlide, itemWidth } = state;
-  const { slidesToSlide } = props;
+  const { currentSlide, itemWidth, slidesToShow } = state;
+  const { children, showDots, infinite } = props;
+  const slidesToSlide = getSlidesToSlide(state,props);
   let nextSlides;
   let nextPosition;
   const nextMaximumSlides =
     currentSlide -
     slidesHavePassed -
     (slidesHavePassed &gt; 0 ? <span class="branch-0 cbranch-no" title="branch not covered" >0 </span>: slidesToSlide!);
+  const childrenArr = React.Children.toArray(children);
+  const additionalSlides = (childrenArr.length - slidesToShow) % slidesToSlide!;
   if (nextMaximumSlides &gt;= 0) {
     // It means if we have next slides go back to on the left-hand side.
     nextSlides = nextMaximumSlides;
+    if (showDots &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >!infinite </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >additionalSlides &gt; 0 </span>&amp;&amp; <span class="branch-3 cbranch-no" title="branch not covered" >isInRightEnd(state))</span> {
+<span class="cstat-no" title="statement not covered" >      nextSlides = currentSlide - additionalSlides;</span>
+    }
     nextPosition = -(itemWidth * nextSlides);
   } else if (nextMaximumSlides &lt; 0 &amp;&amp; currentSlide !== 0) {
     // prevent oversliding.
@@ -176,7 +200,7 @@ function populatePreviousSlides(
   }
   return {
     nextSlides,
-    nextPosition
+    nextPosition,
   };
 }
 &nbsp;
@@ -187,7 +211,7 @@ export { populatePreviousSlides };
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun May 12 2019 00:51:44 GMT+0300 (Eastern European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Jul 28 2019 16:57:14 GMT+0300 (Eastern European Summer Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>
