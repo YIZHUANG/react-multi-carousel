@@ -22,6 +22,7 @@ import {
   CarouselProps,
   StateCallBack,
   Direction,
+  isMouseMoveEvent,
 } from "./types";
 import Dots from "./Dots";
 import { LeftArrow, RightArrow } from "./Arrows";
@@ -231,7 +232,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.containerRef.current &&
       this.containerRef.current.offsetWidth !== containerWidth
     ) {
-      // this is for handing resizing only.
+      // this is for handling resizing only.
       setTimeout(() => {
         this.setItemsToShow(true);
       }, this.props.transitionDuration || defaultTransitionDuration);
@@ -375,15 +376,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public handleDown(e: React.MouseEvent | React.TouchEvent): void {
     if (
-      ((e as React.TouchEvent).touches && !this.props.swipeable) ||
-      (!(e as React.TouchEvent).touches && !this.props.draggable) ||
+      (!isMouseMoveEvent(e) && !this.props.swipeable) ||
+      (isMouseMoveEvent(e) && !this.props.draggable) ||
       this.isInThrottle
     ) {
       return;
     }
-    const { clientX, clientY } = (e as React.TouchEvent).touches
-      ? (e as React.TouchEvent).touches[0]
-      : (e as React.MouseEvent);
+    const { clientX, clientY } = isMouseMoveEvent(e) ? e : e.touches[0];
     this.onMove = true;
     this.initialX = clientX;
     this.initialY = clientY;
@@ -392,22 +391,16 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public handleMove(e: React.MouseEvent | React.TouchEvent): void {
     if (
-      ((e as React.TouchEvent).touches && !this.props.swipeable) ||
-      (e && !(e as React.TouchEvent).touches && !this.props.draggable) ||
+      (!isMouseMoveEvent(e) && !this.props.swipeable) ||
+      (isMouseMoveEvent(e) && !this.props.draggable) ||
       notEnoughChildren(this.state, this.props)
     ) {
       return;
     }
-    const { clientX, clientY } = (e as React.TouchEvent).touches
-      ? (e as React.TouchEvent).touches[0]
-      : (e as React.MouseEvent);
+    const { clientX, clientY } = isMouseMoveEvent(e) ? e : e.touches[0];
     const diffX = this.initialX - clientX;
     const diffY = this.initialY - clientY;
-    if (
-      (e as React.TouchEvent).touches &&
-      this.autoPlay &&
-      this.props.autoPlay
-    ) {
+    if (!isMouseMoveEvent(e) && this.autoPlay && this.props.autoPlay) {
       clearInterval(this.autoPlay);
       this.autoPlay = undefined;
     }
@@ -639,7 +632,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         >
           <ul
             className={`react-multi-carousel-track ${sliderClass}`}
-            // @ts-ignore
             style={{
               transition: this.isAnimationAllowed
                 ? customTransition || defaultTransition

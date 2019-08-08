@@ -7,6 +7,12 @@ export interface responsiveType {
     slidesToSlide?: number;
   };
 }
+
+export function isMouseMoveEvent(
+  e: React.MouseEvent | React.TouchEvent
+): e is React.MouseEvent {
+  return "clientX" && 'clientY' in e;
+}
 export interface CarouselProps {
   responsive: responsiveType;
   deviceType?: string;
@@ -28,7 +34,7 @@ export interface CarouselProps {
   sliderClass?: string; // Use this to style your own track list.
   itemClass?: string; // Use this to style your own Carousel item. For example add padding-left and padding-right
   containerClass?: string; // Use this to style the whole container. For example add padding to allow the "dots" or "arrows" to go to other places without being overflown.
-  className?: string;  // Use this to style the whole container with styled-components
+  className?: string; // Use this to style the whole container with styled-components
   dotListClass?: string; // Use this to style the dot list.
   keyBoardControl?: boolean;
   centerMode?: boolean; // show previous and next set of items paritially
@@ -36,7 +42,7 @@ export interface CarouselProps {
   autoPlaySpeed?: number; // default 3000ms
   showDots?: boolean;
   renderDotsOutside?: boolean; // show dots outside of the container for custom styling.
-  // Show next/previous item partially, if its right, only show the next item partially, else show both
+  // Show next/previous item partially
   // partialVisbile has to be used in conjunction with the responsive props, details are in documentation.
   // it shows the next set of items partially, different from centerMode as it shows both.
   partialVisbile?: boolean;
@@ -80,10 +86,9 @@ export interface CarouselInternalState {
   domLoaded: boolean;
   deviceType?: string;
   transform: number;
-  isSliding?: boolean;
 }
 
-export default class Carousel extends React.PureComponent<CarouselProps> {
+export default class Carousel extends React.Component<CarouselProps> {
   previous: (slidesHavePassed: number) => void;
   next: (slidesHavePassed: number) => void;
   goToSlide: (slide: number) => void;
