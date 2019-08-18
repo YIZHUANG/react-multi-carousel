@@ -66,17 +66,17 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
-    paritialVisibilityGutter: 40 // this is optional if you are not using partialVisbile props
+    partialVisibilityGutter: 40 // this is optional if you are not using partialVisbile props
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    paritialVisibilityGutter: 30 // this is optional if you are not using partialVisbile props
+    partialVisibilityGutter: 30 // this is optional if you are not using partialVisbile props
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    paritialVisibilityGutter: 30 // this is optional if you are not using partialVisbile props
+    partialVisibilityGutter: 30 // this is optional if you are not using partialVisbile props
   }
 };
 
@@ -360,7 +360,7 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX("With paritially visibie on next items", () => {
+  .addWithJSX("With partially visibie on next items", () => {
     return (
       <Carousel
         infinite
@@ -374,7 +374,7 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX("With centerMode, paritially visibie on both direction", () => {
+  .addWithJSX("With centerMode, partially visibie on both direction", () => {
     return (
       <Carousel
         centerMode

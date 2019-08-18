@@ -14,7 +14,7 @@ const responsive = {
     },
     items: 3,
     slidesToSlide: 3,
-    paritialVisibilityGutter: 40
+    partialVisibilityGutter: 40
   },
   mobile: {
     breakpoint: {
@@ -23,7 +23,7 @@ const responsive = {
     },
     items: 2,
     slidesToSlide: 2,
-    paritialVisibilityGutter: 30
+    partialVisibilityGutter: 30
   },
   tablet: {
     breakpoint: {
@@ -32,7 +32,7 @@ const responsive = {
     },
     items: 1,
     slidesToSlide: 1,
-    paritialVisibilityGutter: 30
+    partialVisibilityGutter: 30
   }
 };
 

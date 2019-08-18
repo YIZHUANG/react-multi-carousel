@@ -6,7 +6,7 @@ import {
 } from "./clones";
 import {
   getWidthFromDeviceType,
-  getParitialVisibilityGutter,
+  getPartialVisibilityGutter,
   getItemClientSideWidth
 } from "./elementWidth";
 import {
@@ -34,7 +34,7 @@ export {
   getWidthFromDeviceType,
   checkClonesPosition,
   getItemClientSideWidth,
-  getParitialVisibilityGutter,
+  getPartialVisibilityGutter,
   throttle,
   getInitialState,
   getIfSlideIsVisbile,

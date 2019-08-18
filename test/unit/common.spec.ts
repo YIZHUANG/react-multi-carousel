@@ -46,7 +46,7 @@ describe("common utils", () => {
         shouldRenderOnSSR: true,
         flexBisis: "33.3",
         domFullyLoaded: false,
-        paritialVisibilityGutter: 0,
+        partialVisibilityGutter: 0,
         shouldRenderAtAll: true
       });
     });
@@ -75,7 +75,7 @@ describe("common utils", () => {
         shouldRenderOnSSR: false,
         flexBisis: undefined,
         domFullyLoaded: true,
-        paritialVisibilityGutter: 0,
+        partialVisibilityGutter: 0,
         shouldRenderAtAll: true
       });
     });

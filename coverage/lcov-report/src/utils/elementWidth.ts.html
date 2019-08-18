@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">90.91% </span>
+        <span class="strong">92.31% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>10/11</span>
+        <span class='fraction'>12/13</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/6</span>
+        <span class='fraction'>9/12</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">66.67% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>2/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">90.91% </span>
+        <span class="strong">92.31% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>10/11</span>
+        <span class='fraction'>12/13</span>
       </div>
     </div>
     <p class="quiet">
@@ -89,7 +89,11 @@
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -99,9 +103,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -110,7 +118,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -134,7 +142,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { responsiveType, CarouselProps } from "../types";
 &nbsp;
-function getParitialVisibilityGutter(
+function getPartialVisibilityGutter(
   responsive: responsiveType,
   partialVisbile?: boolean,
   serverSideDeviceType?: string | undefined,
@@ -143,7 +151,11 @@ function getParitialVisibilityGutter(
   let gutter: number | undefined = 0;
   const deviceType = clientSideDeviceType || serverSideDeviceType;
   if (partialVisbile &amp;&amp; deviceType) {
-    gutter = responsive[deviceType].paritialVisibilityGutter;
+    gutter =
+      responsive[deviceType].partialVisibilityGutter ||
+      responsive[deviceType].paritialVisibilityGutter;
+    // back-ward compatible, because previously there has been a typo
+    // remove in the future
   }
   return gutter;
 }
@@ -153,7 +165,7 @@ function getWidthFromDeviceType(
   responsive: responsiveType
 ): number | string | undefined {
   let itemWidth;
-  if (responsive[deviceType]) {
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (responsive[deviceType]) {
     const { items } = responsive[deviceType];
     itemWidth = (100 / items).toFixed(1);
   }
@@ -164,7 +176,7 @@ function <span class="fstat-no" title="function not covered" >getItemClientSideW
   props: CarouselProps,
   slidesToShow: number,
   containerWidth: number
-):number {
+): number {
 <span class="cstat-no" title="statement not covered" >  return Math.round(</span>
     containerWidth / (slidesToShow + (props.centerMode ? 1 : 0))
   );
@@ -172,8 +184,8 @@ function <span class="fstat-no" title="function not covered" >getItemClientSideW
 &nbsp;
 export {
   getWidthFromDeviceType,
-  getParitialVisibilityGutter,
-  getItemClientSideWidth
+  getPartialVisibilityGutter,
+  getItemClientSideWidth,
 };
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -181,7 +193,7 @@ export {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Jul 28 2019 16:57:14 GMT+0300 (Eastern European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Aug 18 2019 22:42:40 GMT+0300 (Eastern European Summer Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>
