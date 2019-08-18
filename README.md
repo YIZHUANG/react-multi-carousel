@@ -27,6 +27,10 @@ Don't forget to leave a star if this project help you reduce time to develop.
 
 ![demo](https://media.giphy.com/media/3octyw2XELzfaplNUm/giphy.gif)
 
+### Job.
+
+If you have any good developer jobs in the Helsinki area, please don't hesitate to contact the author.
+
 ### Features.
 
 - Server-side rendering
@@ -106,6 +110,38 @@ Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/
 Here is a lighter version of the library for detecting the user's device type [alternative](https://github.com/faisalman/ua-parser-js)
 
 If you are using Nextjs, you can choose to only bundle it on the server-side.
+
+## Minimum working set up.
+
+```js
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
+<Carousel responsive={responsive}>
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+  <div>Item 4</div>
+</Carousel>;
+```
 
 ## Common Usage
 
@@ -409,7 +445,7 @@ For example if you give to your carousel item padding left and padding right 20p
 | customTransition        |                                                                      `string`                                                                      |   `transform 300ms ease-in-out`   | Configure your own anaimation when sliding                                                                                                                            |
 | transitionDuration      | `number |`300` | The unit is ms, if you are using customTransition, make sure to put the duration here as this is needed for the resizing to work. |
 | focusOnSelect           |                                    `boolean |`false` | Go to slide on click and make the slide a current slide.                                    |
-| centerMode              |                                      `boolean |`false` | Shows the next items and previous items partially.                                       |
+| centerMode              |                                       `boolean |`false` | Shows the next items and previous items partially.                                       |
 | additionalTransfrom     |                                              `number |`0` | additional transfrom to the current one.                                               |
 
 ## Author
