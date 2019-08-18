@@ -14,7 +14,7 @@ const responsive = {
       min: 1024
     },
     items: 3,
-    paritialVisibilityGutter: 40
+    partialVisibilityGutter: 40
   },
   mobile: {
     breakpoint: {
@@ -22,7 +22,7 @@ const responsive = {
       min: 0
     },
     items: 2,
-    paritialVisibilityGutter: 30
+    partialVisibilityGutter: 30
   },
   tablet: {
     breakpoint: {
@@ -30,7 +30,7 @@ const responsive = {
       min: 200
     },
     items: 1,
-    paritialVisibilityGutter: 30
+    partialVisibilityGutter: 30
   }
 };
 

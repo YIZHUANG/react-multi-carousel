@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">77.61% </span>
+        <span class="strong">75.68% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>52/67</span>
+        <span class='fraction'>56/74</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">56.76% </span>
+        <span class="strong">52.94% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>21/37</span>
+        <span class='fraction'>27/51</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">60% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>6/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">76.92% </span>
+        <span class="strong">74.58% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>40/52</span>
+        <span class='fraction'>44/59</span>
       </div>
     </div>
     <p class="quiet">
@@ -217,7 +217,7 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -251,7 +251,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -266,7 +266,7 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -308,19 +308,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -344,7 +344,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as React from "react";
 import {
-  getParitialVisibilityGutter,
+  getPartialVisibilityGutter,
   getWidthFromDeviceType,
 } from "./elementWidth";
 import { CarouselInternalState, CarouselProps } from "../types";
@@ -356,7 +356,7 @@ function getInitialState(
   shouldRenderOnSSR: boolean;
   flexBisis: number | string | undefined;
   domFullyLoaded: boolean;
-  paritialVisibilityGutter: number | undefined;
+  partialVisibilityGutter: number | undefined;
   shouldRenderAtAll: boolean;
 } {
   const { domLoaded, slidesToShow, containerWidth, itemWidth } = state;
@@ -371,7 +371,7 @@ function getInitialState(
   const shouldRenderOnSSR = Boolean(
     ssr &amp;&amp; deviceType &amp;&amp; !domFullyLoaded &amp;&amp; flexBisis
   );
-  const paritialVisibilityGutter = getParitialVisibilityGutter(
+  const partialVisibilityGutter = getPartialVisibilityGutter(
     responsive,
     partialVisbile,
     deviceType,
@@ -382,7 +382,7 @@ function getInitialState(
     shouldRenderOnSSR,
     flexBisis,
     domFullyLoaded,
-    paritialVisibilityGutter,
+    partialVisibilityGutter,
     shouldRenderAtAll,
   };
 }
@@ -399,7 +399,7 @@ function <span class="fstat-no" title="function not covered" >getTransformForCen
   state: CarouselInternalState,
   props: CarouselProps
 ) {
-  if (state.currentSlide === 0 &amp;&amp; !props.infinite) {
+<span class="cstat-no" title="statement not covered" >  if (state.currentSlide === 0 &amp;&amp; !props.infinite) {</span>
 <span class="cstat-no" title="statement not covered" >    return state.transform;</span>
   } else {
 <span class="cstat-no" title="statement not covered" >    return state.transform + state.itemWidth / 2;</span>
@@ -407,17 +407,17 @@ function <span class="fstat-no" title="function not covered" >getTransformForCen
 }
 function getTransformForPartialVsibile(
   state: CarouselInternalState,
-  <span class="missing-if-branch" title="if path not taken" >I</span>paritialVisibilityGutter: number = 0,
+  <span class="missing-if-branch" title="if path not taken" >I</span>partialVisibilityGutter: number = 0,
   props: CarouselProps
 ) {
   const { currentSlide, slidesToShow } = state;
   const isRightEndReach = isInRightEnd(state);
   const shouldRemoveRightGutter = !props.infinite &amp;&amp; isRightEndReach;
-  const transform = state.transform + currentSlide * paritialVisibilityGutter;
+  const transform = state.transform + currentSlide * partialVisibilityGutter;
   if (shouldRemoveRightGutter) {
     const remainingWidth =
       state.containerWidth -
-      (state.itemWidth - paritialVisibilityGutter) * slidesToShow;
+      (state.itemWidth - partialVisibilityGutter) * slidesToShow;
     return transform + remainingWidth;
   }
   return transform;
@@ -456,19 +456,19 @@ function getSlidesToSlide(
     domLoaded &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >slidesToShow </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >containerWidth </span>&amp;&amp; <span class="branch-3 cbranch-no" title="branch not covered" >itemWidth</span>
   );
   const ssr = props.ssr &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >props.deviceType </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >!domFullyLoaded;</span>
-  if (ssr) {
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (ssr) {
 <span class="cstat-no" title="statement not covered" >    Object.keys(responsive).forEach(<span class="fstat-no" title="function not covered" >device </span>=&gt; {</span>
       const { <span class="cstat-no" title="statement not covered" >slidesToSlide </span>} = responsive[device];
-      if (deviceType === device &amp;&amp; slidesToSlide) {
+<span class="cstat-no" title="statement not covered" >      if (deviceType === device &amp;&amp; slidesToSlide) {</span>
 <span class="cstat-no" title="statement not covered" >        slidesToScroll = slidesToSlide;</span>
       }
     });
   }
-  if (domFullyLoaded) {
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (domFullyLoaded) {
 <span class="cstat-no" title="statement not covered" >    Object.keys(responsive).forEach(<span class="fstat-no" title="function not covered" >item </span>=&gt; {</span>
       const <span class="cstat-no" title="statement not covered" >{ <span class="cstat-no" title="statement not covered" >b</span>reakpoint,</span> <span class="cstat-no" title="statement not covered" >slidesToSlide } = responsive[item];</span>
       const { <span class="cstat-no" title="statement not covered" >max,</span> <span class="cstat-no" title="statement not covered" >min </span>} = breakpoint;
-      if (
+<span class="cstat-no" title="statement not covered" >      if (</span>
         slidesToSlide &amp;&amp;
         window.innerWidth &gt;= min &amp;&amp;
         window.innerWidth &lt;= max
@@ -496,7 +496,7 @@ export {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Jul 28 2019 16:57:14 GMT+0300 (Eastern European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Aug 18 2019 22:42:40 GMT+0300 (Eastern European Summer Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>

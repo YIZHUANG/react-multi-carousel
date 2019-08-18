@@ -22,7 +22,7 @@ const CarouselItems = ({
     flexBisis,
     shouldRenderOnSSR,
     domFullyLoaded,
-    paritialVisibilityGutter,
+    partialVisibilityGutter,
     shouldRenderAtAll,
   } = getInitialState(state, props);
   if (!shouldRenderAtAll) {
@@ -47,8 +47,8 @@ const CarouselItems = ({
                 position: "relative",
                 width: domFullyLoaded
                   ? `${
-                      partialVisbile && paritialVisibilityGutter
-                        ? itemWidth - paritialVisibilityGutter
+                      partialVisbile && partialVisibilityGutter
+                        ? itemWidth - partialVisibilityGutter
                         : itemWidth
                     }px`
                   : "auto",

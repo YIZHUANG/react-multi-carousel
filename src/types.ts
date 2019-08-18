@@ -3,6 +3,7 @@ export interface responsiveType {
   [key: string]: {
     breakpoint: { max: number; min: number };
     items: number;
+    partialVisibilityGutter?: number; // back-ward compatible, because previously there has been a typo
     paritialVisibilityGutter?: number;
     slidesToSlide?: number;
   };
@@ -37,7 +38,7 @@ export interface CarouselProps {
   className?: string; // Use this to style the whole container with styled-components
   dotListClass?: string; // Use this to style the dot list.
   keyBoardControl?: boolean;
-  centerMode?: boolean; // show previous and next set of items paritially
+  centerMode?: boolean; // show previous and next set of items partially
   autoPlay?: boolean;
   autoPlaySpeed?: number; // default 3000ms
   showDots?: boolean;

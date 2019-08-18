@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-  getParitialVisibilityGutter,
+  getPartialVisibilityGutter,
   getWidthFromDeviceType,
 } from "./elementWidth";
 import { CarouselInternalState, CarouselProps } from "../types";
@@ -12,7 +12,7 @@ function getInitialState(
   shouldRenderOnSSR: boolean;
   flexBisis: number | string | undefined;
   domFullyLoaded: boolean;
-  paritialVisibilityGutter: number | undefined;
+  partialVisibilityGutter: number | undefined;
   shouldRenderAtAll: boolean;
 } {
   const { domLoaded, slidesToShow, containerWidth, itemWidth } = state;
@@ -27,7 +27,7 @@ function getInitialState(
   const shouldRenderOnSSR = Boolean(
     ssr && deviceType && !domFullyLoaded && flexBisis
   );
-  const paritialVisibilityGutter = getParitialVisibilityGutter(
+  const partialVisibilityGutter = getPartialVisibilityGutter(
     responsive,
     partialVisbile,
     deviceType,
@@ -38,7 +38,7 @@ function getInitialState(
     shouldRenderOnSSR,
     flexBisis,
     domFullyLoaded,
-    paritialVisibilityGutter,
+    partialVisibilityGutter,
     shouldRenderAtAll,
   };
 }
@@ -63,17 +63,17 @@ function getTransformForCenterMode(
 }
 function getTransformForPartialVsibile(
   state: CarouselInternalState,
-  paritialVisibilityGutter: number = 0,
+  partialVisibilityGutter: number = 0,
   props: CarouselProps
 ) {
   const { currentSlide, slidesToShow } = state;
   const isRightEndReach = isInRightEnd(state);
   const shouldRemoveRightGutter = !props.infinite && isRightEndReach;
-  const transform = state.transform + currentSlide * paritialVisibilityGutter;
+  const transform = state.transform + currentSlide * partialVisibilityGutter;
   if (shouldRemoveRightGutter) {
     const remainingWidth =
       state.containerWidth -
-      (state.itemWidth - paritialVisibilityGutter) * slidesToShow;
+      (state.itemWidth - partialVisibilityGutter) * slidesToShow;
     return transform + remainingWidth;
   }
   return transform;
