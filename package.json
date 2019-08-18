@@ -1,7 +1,7 @@
 {
   "name": "react-multi-carousel",
   "private": false,
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Production-ready, lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering) with typescript.",
   "main": "index.js",
   "types": "./lib/types.d.ts",
