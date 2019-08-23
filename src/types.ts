@@ -1,5 +1,5 @@
 import * as React from "react";
-export interface responsiveType {
+export interface ResponsiveType {
   [key: string]: {
     breakpoint: { max: number; min: number };
     items: number;
@@ -15,7 +15,7 @@ export function isMouseMoveEvent(
   return "clientX" && 'clientY' in e;
 }
 export interface CarouselProps {
-  responsive: responsiveType;
+  responsive: ResponsiveType;
   deviceType?: string;
   ssr?: boolean;
   slidesToSlide?: number;
@@ -61,7 +61,7 @@ export interface StateCallBack extends CarouselInternalState {
   direction: Direction;
 }
 export type Direction = "left" | "right" | "" | undefined;
-export interface buttonGroupProps {
+export interface ButtonGroupProps {
   previous?: () => void;
   next?: () => void;
   goToSlide?: (index: number) => void;

@@ -1,9 +1,9 @@
-import { responsiveType, CarouselProps } from "../types";
+import { ResponsiveType, CarouselProps } from "../types";
 
 let hasWarnAboutTypo = false;
 
 function getPartialVisibilityGutter(
-  responsive: responsiveType,
+  responsive: ResponsiveType,
   partialVisbile?: boolean,
   serverSideDeviceType?: string | undefined,
   clientSideDeviceType?: string | undefined
@@ -32,7 +32,7 @@ function getPartialVisibilityGutter(
 
 function getWidthFromDeviceType(
   deviceType: string,
-  responsive: responsiveType
+  responsive: ResponsiveType
 ): number | string | undefined {
   let itemWidth;
   if (responsive[deviceType]) {

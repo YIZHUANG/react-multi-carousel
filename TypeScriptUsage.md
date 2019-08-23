@@ -3,11 +3,11 @@
 
 ```js
 import * as React from 'react';
-import { buttonGroupProps, ArrowProps, DotProps } from 'react-multi-carousel/lib/types';
+import { ButtonGroupProps, ArrowProps, DotProps } from 'react-multi-carousel/lib/types';
 interface CustomLeftArrowProps extends ArrowProps {
   myOwnStuff: string;
 }
-interface CarouselButtonGroupProps extends buttonGroupProps {
+interface CarouselButtonGroupProps extends ButtonGroupProps {
   className?: string;
 }
 const CustomLeftArrow = ({ onClick }:CustomLeftArrowProps) => {
