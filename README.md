@@ -1,8 +1,6 @@
 # react-multi-carousel 👋
 
-Production-ready, lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering) with typescript.
-
-Don't forget to leave a star if this project help you reduce time to develop.
+Production-ready, lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering).
 
 [![Package Quality](https://npm.packagequality.com/shield/react-multi-carousel.svg)](https://packagequality.com/#?package=react-multi-carousel)
 [![npm version](https://badge.fury.io/js/react-multi-carousel.svg)](https://www.npmjs.com/package/react-multi-carousel)
@@ -26,10 +24,6 @@ Don't forget to leave a star if this project help you reduce time to develop.
 ![demo](https://media.giphy.com/media/emNGIfso7Iu66qz53C/giphy.gif)
 
 ![demo](https://media.giphy.com/media/3octyw2XELzfaplNUm/giphy.gif)
-
-### Job.
-
-If you have any good developer jobs in the Helsinki area, please don't hesitate to contact the author.
 
 ### Features.
 
@@ -60,10 +54,6 @@ If you have any good developer jobs in the Helsinki area, please don't hesitate 
 Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maintainers use their service to debug browser issues.
 
 ## [Documentation](https://w3js.com/react-multi-carousel/)
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
 
 ## Other important links.
 
@@ -109,7 +99,7 @@ Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/
 
 Here is a lighter version of the library for detecting the user's device type [alternative](https://github.com/faisalman/ua-parser-js)
 
-If you are using Nextjs, you can choose to only bundle it on the server-side.
+You can choose to only bundle it on the server-side.
 
 ## Minimum working set up.
 
@@ -460,7 +450,7 @@ Please read https://github.com/YIZHUANG/react-multi-carousel/blob/master/contrib
 
 Submit an issue for feature request or submit a pr.
 
-## Locale development.
+## Local development.
 
 - cd app
 - npm install

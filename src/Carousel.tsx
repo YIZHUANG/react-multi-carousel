@@ -45,6 +45,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     showDots: false,
     renderDotsOutside: false,
     minimumTouchDrag: 80,
+    className: "",
     dotListClass: "",
     focusOnSelect: false,
     centerMode: false,
