@@ -87,9 +87,11 @@ then we clone "slidesToShow * 2" amount of beginning and end items.
 Otherwise, it means we only have a few items. Then we clone it 3 times.
 */
 function getClones(slidesToShow: number, childrenArr: any[]) {
-  let clones;
+  if (childrenArr.length < slidesToShow ) {
+    return childrenArr; 
+  }
   if (childrenArr.length > slidesToShow * 2) {
-    clones = [
+    return [
       ...childrenArr.slice(
         childrenArr.length - slidesToShow * 2,
         childrenArr.length
@@ -97,10 +99,8 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
       ...childrenArr,
       ...childrenArr.slice(0, slidesToShow * 2),
     ];
-  } else {
-    clones = [...childrenArr, ...childrenArr, ...childrenArr];
   }
-  return clones;
+  return [...childrenArr, ...childrenArr, ...childrenArr];
 }
 
 function getInitialSlideInInifteMode(slidesToShow:number, childrenArr: any[]) {
@@ -135,7 +135,11 @@ function checkClonesPosition(
   const isReachingTheStart = currentSlide === 0;
   const originalFirstSlide =
     childrenArr.length - (childrenArr.length - slidesToShow * 2);
-  if (childrenArr.length > slidesToShow * 2) {
+  if (childrenArr.length < slidesToShow) {
+    nextSlide = 0;
+    nextPosition = 0;
+    isReachingTheEnd = false;
+  } else if (childrenArr.length > slidesToShow * 2) {
     isReachingTheEnd = currentSlide >= originalFirstSlide + childrenArr.length;
     if (isReachingTheEnd) {
       nextSlide = currentSlide - childrenArr.length;
