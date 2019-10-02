@@ -44,6 +44,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     autoPlaySpeed: 3000,
     showDots: false,
     renderDotsOutside: false,
+    renderButtonGroupOutside: false,
     minimumTouchDrag: 80,
     className: "",
     dotListClass: "",
@@ -594,6 +595,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       centerMode,
       additionalTransfrom,
       renderDotsOutside,
+      renderButtonGroupOutside,
       className,
     } = this.props;
     if (process.env.NODE_ENV !== "production") {
@@ -657,10 +659,15 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           </ul>
           {shouldShowArrows && !disableLeftArrow && this.renderLeftArrow()}
           {shouldShowArrows && !disableRightArrow && this.renderRightArrow()}
-          {shouldRenderAtAll && this.renderButtonGroups()}
+          {shouldRenderAtAll &&
+            !renderButtonGroupOutside &&
+            this.renderButtonGroups()}
           {shouldRenderAtAll && !renderDotsOutside && this.renderDotsList()}
         </div>
         {shouldRenderAtAll && renderDotsOutside && this.renderDotsList()}
+        {shouldRenderAtAll &&
+          renderButtonGroupOutside &&
+          this.renderButtonGroups()}
       </>
     );
   }

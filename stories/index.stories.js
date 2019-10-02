@@ -13,14 +13,15 @@ import Card from "./Card";
 import {
   CustomLeftArrow,
   CustomRightArrow,
-  CustomButtonGroup
+  CustomButtonGroup,
+  CustomButtonGroupAsArrows,
 } from "./CustomArrows";
-import CopyOfChildAsDots from './CopyOfChildAsDots';
+import CopyOfChildAsDots from "./CopyOfChildAsDots";
 import CustomDot from "./CustomDot";
 import Image from "./CustomImage";
 import Carousel from "../src";
-import WithScrollbar from './WithScrollbar';
-import DotModeWithSlidesToSlide from './DotModeWithSlidesToSlide';
+import WithScrollbar from "./WithScrollbar";
+import DotModeWithSlidesToSlide from "./DotModeWithSlidesToSlide";
 import "../src/assets/styles.css";
 
 setAddon(JSX);
@@ -42,14 +43,14 @@ const images = [
   "https://images.unsplash.com/photo-1549737328-8b9f3252b927?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
   "https://images.unsplash.com/photo-1549833284-6a7df91c1f65?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
   "https://images.unsplash.com/photo-1549985908-597a09ef0a7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+  "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
 ];
 const texts = [
   "Appending currency sign to a purchase form in your e-commerce site using plain JavaScript.",
   "Fixing CSS load order/style.chunk.css incorrect in Nextjs",
   "React Carousel with Server Side Rendering Support – Part 1",
   "React Carousel with Server Side Rendering Support – Part 2",
-  "Flutter Xcode couldn’t find any iOS App Development provisioning profiles"
+  "Flutter Xcode couldn’t find any iOS App Development provisioning profiles",
 ];
 const fakerData = Array(12)
   .fill(0)
@@ -58,7 +59,7 @@ const fakerData = Array(12)
     return {
       image: images[index],
       headline: "w3js.com - web front-end studio",
-      description: texts[number]
+      description: texts[number],
     };
   });
 
@@ -66,33 +67,33 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
-    partialVisibilityGutter: 40 // this is optional if you are not using partialVisbile props
+    partialVisibilityGutter: 40, // this is optional if you are not using partialVisbile props
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    partialVisibilityGutter: 30 // this is optional if you are not using partialVisbile props
+    partialVisibilityGutter: 30, // this is optional if you are not using partialVisbile props
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    partialVisibilityGutter: 30 // this is optional if you are not using partialVisbile props
-  }
+    partialVisibilityGutter: 30, // this is optional if you are not using partialVisbile props
+  },
 };
 
 const responsiveImageHero = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 1
+    items: 1,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 1
+    items: 1,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1
-  }
+    items: 1,
+  },
 };
 
 storiesOf("Carousel", module)
@@ -177,10 +178,8 @@ storiesOf("Carousel", module)
     );
   })
   .addWithJSX("With custom control functionality", () => {
-      return (
-        <WithScrollbar />
-      );
-    })
+    return <WithScrollbar />;
+  })
   .addWithJSX("Auto play", () => {
     return (
       <Carousel
@@ -197,13 +196,13 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX('Auto play custom animation', () => {
+  .addWithJSX("Auto play custom animation", () => {
     return (
       <Carousel
         autoPlay
         autoPlaySpeed={1}
         infinite={true}
-        customTransition='all 1s linear'
+        customTransition="all 1s linear"
         transitionDuration={1000}
         containerClass="container-with-dots"
         slidesToSlide={2}
@@ -233,7 +232,7 @@ storiesOf("Carousel", module)
                 width: "100%",
                 display: "block",
                 height: "100%",
-                margin: "auto"
+                margin: "auto",
               }}
             />
           );
@@ -241,35 +240,38 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
-  .addWithJSX("With dots rendered outside of/after list container within custom div for styling", () => {
-    return (
-      <div style={{position: 'relative', paddingBottom: '30px'}}>
-        <Carousel
-          showDots
-          renderDotsOutside
-          infinite
-          containerClass="container"
-          slidesToSlide={1}
-          responsive={responsiveImageHero}
-        >
-          {images.slice(0, 5).map(image => {
-            return (
-              <img
-                draggable={false}
-                src={image}
-                style={{
-                  width: "100%",
-                  display: "block",
-                  height: "100%",
-                  margin: "auto"
-                }}
-              />
-            );
-          })}
-        </Carousel>
-      </div>
-    );
-  })
+  .addWithJSX(
+    "With dots rendered outside of/after list container within custom div for styling",
+    () => {
+      return (
+        <div style={{ position: "relative", paddingBottom: "30px" }}>
+          <Carousel
+            showDots
+            renderDotsOutside
+            infinite
+            containerClass="container"
+            slidesToSlide={1}
+            responsive={responsiveImageHero}
+          >
+            {images.slice(0, 5).map(image => {
+              return (
+                <img
+                  draggable={false}
+                  src={image}
+                  style={{
+                    width: "100%",
+                    display: "block",
+                    height: "100%",
+                    margin: "auto",
+                  }}
+                />
+              );
+            })}
+          </Carousel>
+        </div>
+      );
+    }
+  )
   .addWithJSX("Custom dots", () => {
     return (
       <Carousel
@@ -289,7 +291,7 @@ storiesOf("Carousel", module)
                 width: "100%",
                 display: "block",
                 height: "100%",
-                margin: "auto"
+                margin: "auto",
               }}
             />
           );
@@ -298,9 +300,7 @@ storiesOf("Carousel", module)
     );
   })
   .addWithJSX("Copy of Carousel items as Custom dots", () => {
-    return (
-      <CopyOfChildAsDots />
-    );
+    return <CopyOfChildAsDots />;
   })
   .addWithJSX("With aria hidden, inspect me in the debugger", () => {
     return (
@@ -392,7 +392,7 @@ storiesOf("Carousel", module)
     return (
       <Carousel
         arrows={false}
-        containerClass='container-padding-bottom'
+        containerClass="container-padding-bottom"
         customButtonGroup={<CustomButtonGroup />}
         responsive={responsive}
       >
@@ -402,6 +402,27 @@ storiesOf("Carousel", module)
       </Carousel>
     );
   })
+  .addWithJSX("Render custom button group outside of the container", () => {
+    return (
+      <div
+        style={{
+          position: "relative",
+        }}
+      >
+        <Carousel
+          arrows={false}
+          renderButtonGroupOutside
+          containerClass="container-padding-bottom"
+          customButtonGroup={<CustomButtonGroupAsArrows />}
+          responsive={responsive}
+        >
+          {fakerData.map(card => {
+            return <Card {...card} />;
+          })}
+        </Carousel>
+      </div>
+    );
+  })
   .addWithJSX("With focusOnSelect prop", () => {
     return (
       <Carousel
@@ -409,7 +430,7 @@ storiesOf("Carousel", module)
         showDots
         arrows={false}
         infinite
-        containerClass='container-padding-bottom'
+        containerClass="container-padding-bottom"
         responsive={responsive}
       >
         {fakerData.map(card => {
@@ -419,5 +440,5 @@ storiesOf("Carousel", module)
     );
   })
   .addWithJSX("Responsive dot mode", () => {
-    return <DotModeWithSlidesToSlide />
-  })
+    return <DotModeWithSlidesToSlide />;
+  });

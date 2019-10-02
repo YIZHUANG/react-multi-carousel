@@ -15,7 +15,7 @@ then we clone "slidesToShow * 2" amount of beginning and end items.
 Otherwise, it means we only have a few items. Then we clone it 3 times.
 */
 describe("Clones", () => {
-  test("Gets clones for small amount of data 3 items the length", () => {
+  test("Gets clones for childrenArr.length < slidesToShow * 2", () => {
     const wrapper = mount(
       <Carousel responsive={responsive1} infinite={true} minimumTouchDrag={0}>
         {shortData.map(card => {
@@ -26,7 +26,7 @@ describe("Clones", () => {
     expect(wrapper.state().totalItems).toBe(shortData.length * 3);
     wrapper.unmount();
   });
-  test("Gets clones for large amount of data for beginning and end set of items", () => {
+  test("Gets clones for childrenArr.length > slidesToShow * 2 ", () => {
     const wrapper = mount(
       <Carousel responsive={responsive1} infinite={true} minimumTouchDrag={0}>
         {longData.map(card => {
@@ -35,6 +35,17 @@ describe("Clones", () => {
       </Carousel>
     );
     expect(wrapper.state().totalItems).toBe(24);
+    wrapper.unmount();
+  });
+  test("Gets clones for childrenArr.length < slidesToShow", () => {
+    const wrapper = mount(
+      <Carousel responsive={responsive1} infinite={true} minimumTouchDrag={0}>
+        {shortData.slice(0, 2).map(card => {
+          return <Card {...card} />;
+        })}
+      </Carousel>
+    );
+    expect(wrapper.state().totalItems).toBe(2);
     wrapper.unmount();
   });
 });

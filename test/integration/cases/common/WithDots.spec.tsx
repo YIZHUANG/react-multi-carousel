@@ -9,8 +9,8 @@ import Carousel from "../../../../lib/Carousel";
 import Dots from "../../../../lib/Dots";
 import CustomDot from "../../components/CustomDot";
 import Card from "../../components/Card";
-import { responsive1 } from '../../common/responsive';
-import { longData } from '../../common/data';
+import { responsive1 } from "../../common/responsive";
+import { longData } from "../../common/data";
 
 describe("With dots", () => {
   test("Default dots", () => {
@@ -18,7 +18,7 @@ describe("With dots", () => {
       <Carousel
         showDots={true}
         ssr
-        deviceType='desktop'
+        deviceType="desktop"
         swipeable={false}
         draggable={false}
         responsive={responsive1}
@@ -26,34 +26,61 @@ describe("With dots", () => {
         infinite={true}
         minimumTouchDrag={0}
       >
-      {longData.map(card => {
-        return <Card {...card} />;
-      })}
+        {longData.map(card => {
+          return <Card {...card} />;
+        })}
       </Carousel>
     );
     expect(wrapper.find(Dots).length).toBe(1);
-    expect(wrapper.find('.react-multi-carousel-dot').length).toBe(6);
+    expect(wrapper.find(".react-multi-carousel-dot").length).toBe(6);
     wrapper.unmount();
   });
-  test('Custom dots', () => {
+  test("Custom dots", () => {
     const wrapper = mount(
       <Carousel
         swipeable={false}
         draggable={false}
         ssr
-        deviceType='desktop'
+        deviceType="desktop"
         responsive={responsive1}
         slidesToSlide={1}
         showDots={true}
         customDot={<CustomDot />}
         minimumTouchDrag={0}
       >
-      {longData.map(card => {
-        return <Card {...card} />;
-      })}
+        {longData.map(card => {
+          return <Card {...card} />;
+        })}
       </Carousel>
     );
     expect(wrapper.find(CustomDot).length).toBe(10);
+    wrapper.unmount();
+  });
+  test("Should render dots outside outside of the container if renderDotsOutside is true", () => {
+    const wrapper = mount(
+      <div>
+        <Carousel
+          swipeable={false}
+          draggable={false}
+          ssr
+          deviceType="desktop"
+          responsive={responsive1}
+          slidesToSlide={1}
+          renderDotsOutside
+          showDots={true}
+          customDot={<CustomDot />}
+          minimumTouchDrag={0}
+        >
+          {longData.map(card => {
+            return <Card {...card} />;
+          })}
+        </Carousel>
+      </div>
+    );
+    expect(wrapper.find(".custom-dot").length).toBe(10);
+    expect(
+      wrapper.find(".react-multi-carousel-list").find(".custom-dot").length
+    ).toBe(0);
     wrapper.unmount();
   });
 });

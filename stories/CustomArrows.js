@@ -22,5 +22,13 @@ const CustomButtonGroup = ({ next, previous, goToSlide, carouselState }) => {
     </div>
   );
 };
+const CustomButtonGroupAsArrows = ({ next, previous }) => {
+  return (
+    <ul>
+      <CustomLeftArrow onClick={previous} />
+      <CustomRightArrow onClick={next} />
+    </ul>
+  );
+};
 
-export { CustomLeftArrow, CustomRightArrow, CustomButtonGroup };
+export { CustomLeftArrow, CustomRightArrow, CustomButtonGroup, CustomButtonGroupAsArrows };
