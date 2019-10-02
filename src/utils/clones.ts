@@ -135,11 +135,7 @@ function checkClonesPosition(
   const isReachingTheStart = currentSlide === 0;
   const originalFirstSlide =
     childrenArr.length - (childrenArr.length - slidesToShow * 2);
-  if (childrenArr.length < slidesToShow) {
-    nextSlide = 0;
-    nextPosition = 0;
-    isReachingTheEnd = false;
-  } else if (childrenArr.length > slidesToShow * 2) {
+  if (childrenArr.length > slidesToShow * 2) {
     isReachingTheEnd = currentSlide >= originalFirstSlide + childrenArr.length;
     if (isReachingTheEnd) {
       nextSlide = currentSlide - childrenArr.length;
