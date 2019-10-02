@@ -228,6 +228,19 @@ const ButtonGroup = ({ next, previous, goToSlide ...rest }) => {
 </Carousel>
 ```
 
+## renderButtonGroupOutside
+
+Passing this props would render the button group outside of the Carousel container. This is done using React.fragment
+
+```js
+<div className='my-own-custom-container'>
+  <Carousel arrows={false} renderButtonGroupOutside={renderButtonGroupOutside} customButtonGroup={<ButtonGroup />}>
+    <ItemOne>
+    <ItemTwo>
+  </Carousel>
+</div>
+```
+
 ## Custom dots.
 
 You can pass your own custom dots to replace the default one.
@@ -257,6 +270,19 @@ const CustomDot = ({ onClick, ...rest }) => {
 <Carousel showDots customDot={<CustomDot />}>
 {carouselItems}
 </Carousel>
+```
+
+## renderDotsOutside
+
+Passing this props would render the dots outside of the Carousel container. This is done using React.fragment
+
+```js
+<div className='my-own-custom-container'>
+  <Carousel arrows={false} showDots={true} renderDotsOutside={renderButtonGroupOutside}>
+    <ItemOne>
+    <ItemTwo>
+  </Carousel>
+</div>
 ```
 
 ## partialVisbile props.
