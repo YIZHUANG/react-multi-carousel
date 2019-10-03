@@ -24,11 +24,21 @@ const CustomButtonGroup = ({ next, previous, goToSlide, carouselState }) => {
 };
 const CustomButtonGroupAsArrows = ({ next, previous }) => {
   return (
-    <ul>
-      <CustomLeftArrow onClick={previous} />
-      <CustomRightArrow onClick={next} />
-    </ul>
+    <div
+      style={{
+        textAlign: "center",
+      }}
+    >
+      <h4>These buttons can be positioned anywhere you want on the screen</h4>
+      <button onClick={previous}>Prev</button>
+      <button onClick={next}>Next</button>
+    </div>
   );
 };
 
-export { CustomLeftArrow, CustomRightArrow, CustomButtonGroup, CustomButtonGroupAsArrows };
+export {
+  CustomLeftArrow,
+  CustomRightArrow,
+  CustomButtonGroup,
+  CustomButtonGroupAsArrows,
+};
