@@ -1,5 +1,5 @@
-import { getOriginalCounterPart } from "./clones";
-import { CarouselInternalState, CarouselProps } from "../types";
+import { getOriginalCounterPart } from './clones';
+import { CarouselInternalState, CarouselProps } from '../types';
 import { getSlidesToSlide } from './common';
 
 interface NextSlidesTable {
@@ -16,7 +16,7 @@ function getLookupTableForNextSlides(
   childrenArr: any[]
 ): NextSlidesTable {
   const table: NextSlidesTable = {};
-  const slidesToSlide = getSlidesToSlide(state,props);
+  const slidesToSlide = getSlidesToSlide(state, props);
   Array(numberOfDotsToShow)
     .fill(0)
     .forEach((_, i) => {

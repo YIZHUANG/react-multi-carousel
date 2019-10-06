@@ -1,4 +1,4 @@
-import { CarouselInternalState, CarouselProps } from "../types";
+import { CarouselInternalState, CarouselProps } from '../types';
 import { getSlidesToSlide } from './common';
 
 /*
@@ -9,13 +9,13 @@ two cases:
 function populateNextSlides(
   state: CarouselInternalState,
   props: CarouselProps,
-  slidesHavePassed: number = 0
+  slidesHavePassed = 0
 ): {
   nextSlides: number | undefined;
   nextPosition: number | undefined;
 } {
   const { slidesToShow, currentSlide, itemWidth, totalItems } = state;
-  const slidesToSlide = getSlidesToSlide(state,props);
+  const slidesToSlide = getSlidesToSlide(state, props);
   let nextSlides;
   let nextPosition;
   // possibile next number of slides that don't go over what we have, this doesn't apply to the infinite mode.

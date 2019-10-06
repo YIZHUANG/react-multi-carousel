@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 export interface ResponsiveType {
   [key: string]: {
     breakpoint: { max: number; min: number };
@@ -12,7 +12,7 @@ export interface ResponsiveType {
 export function isMouseMoveEvent(
   e: React.MouseEvent | React.TouchEvent
 ): e is React.MouseEvent {
-  return "clientX" && 'clientY' in e;
+  return 'clientX' && 'clientY' in e;
 }
 export interface CarouselProps {
   responsive: ResponsiveType;
@@ -61,7 +61,7 @@ export interface StateCallBack extends CarouselInternalState {
   onMove: boolean;
   direction: Direction;
 }
-export type Direction = "left" | "right" | "" | undefined;
+export type Direction = 'left' | 'right' | '' | undefined;
 export interface ButtonGroupProps {
   previous?: () => void;
   next?: () => void;

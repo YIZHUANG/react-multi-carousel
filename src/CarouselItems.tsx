@@ -1,7 +1,7 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { CarouselInternalState, CarouselProps } from "./types";
-import { getInitialState, getIfSlideIsVisbile } from "./utils";
+import { CarouselInternalState, CarouselProps } from './types';
+import { getInitialState, getIfSlideIsVisbile } from './utils';
 
 interface CarouselItemsProps {
   props: CarouselProps;
@@ -14,7 +14,7 @@ const CarouselItems = ({
   props,
   state,
   goToSlide,
-  clones,
+  clones
 }: CarouselItemsProps) => {
   const { itemWidth } = state;
   const { children, infinite, itemClass, partialVisbile } = props;
@@ -23,7 +23,7 @@ const CarouselItems = ({
     shouldRenderOnSSR,
     domFullyLoaded,
     partialVisibilityGutter,
-    shouldRenderAtAll,
+    shouldRenderAtAll
   } = getInitialState(state, props);
   if (!shouldRenderAtAll) {
     return null;
@@ -41,22 +41,22 @@ const CarouselItems = ({
                   goToSlide(index);
                 }
               }}
-              aria-hidden={getIfSlideIsVisbile(index, state) ? "false" : "true"}
+              aria-hidden={getIfSlideIsVisbile(index, state) ? 'false' : 'true'}
               style={{
-                flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
-                position: "relative",
+                flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : 'auto',
+                position: 'relative',
                 width: domFullyLoaded
                   ? `${
                       partialVisbile && partialVisibilityGutter
                         ? itemWidth - partialVisibilityGutter
                         : itemWidth
                     }px`
-                  : "auto",
+                  : 'auto'
               }}
               className={`react-multi-carousel-item ${
                 getIfSlideIsVisbile(index, state)
-                  ? "react-multi-carousel-item--active"
-                  : ""
+                  ? 'react-multi-carousel-item--active'
+                  : ''
               } ${itemClass}`}
             >
               {child}

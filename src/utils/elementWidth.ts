@@ -1,4 +1,4 @@
-import { ResponsiveType, CarouselProps } from "../types";
+import { ResponsiveType, CarouselProps } from '../types';
 
 let hasWarnAboutTypo = false;
 
@@ -13,12 +13,12 @@ function getPartialVisibilityGutter(
   if (partialVisbile && deviceType) {
     if (
       !hasWarnAboutTypo &&
-      process.env.NODE_ENV !== "production" &&
+      process.env.NODE_ENV !== 'production' &&
       responsive[deviceType].paritialVisibilityGutter
     ) {
       hasWarnAboutTypo = true;
       console.warn(
-        "You appear to be using paritialVisibilityGutter instead of partialVisibilityGutter which will be moved to partialVisibilityGutter in the future completely"
+        'You appear to be using paritialVisibilityGutter instead of partialVisibilityGutter which will be moved to partialVisibilityGutter in the future completely'
       );
     }
     gutter =
@@ -55,5 +55,5 @@ function getItemClientSideWidth(
 export {
   getWidthFromDeviceType,
   getPartialVisibilityGutter,
-  getItemClientSideWidth,
+  getItemClientSideWidth
 };

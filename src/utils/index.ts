@@ -3,12 +3,12 @@ import {
   getClones,
   checkClonesPosition,
   getInitialSlideInInifteMode
-} from "./clones";
+} from './clones';
 import {
   getWidthFromDeviceType,
   getPartialVisibilityGutter,
   getItemClientSideWidth
-} from "./elementWidth";
+} from './elementWidth';
 import {
   getInitialState,
   getIfSlideIsVisbile,
@@ -18,12 +18,12 @@ import {
   isInRightEnd,
   notEnoughChildren,
   getSlidesToSlide
-} from "./common";
-import throttle from "./throttle";
-import throwError from "./throwError";
-import { populateNextSlides } from "./next";
-import { populatePreviousSlides } from "./previous";
-import { populateSlidesOnMouseTouchMove } from "./mouseOrTouchMove";
+} from './common';
+import throttle from './throttle';
+import throwError from './throwError';
+import { populateNextSlides } from './next';
+import { populatePreviousSlides } from './previous';
+import { populateSlidesOnMouseTouchMove } from './mouseOrTouchMove';
 
 export {
   isInLeftEnd,

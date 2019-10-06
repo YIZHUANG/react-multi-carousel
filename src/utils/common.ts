@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   getPartialVisibilityGutter,
-  getWidthFromDeviceType,
-} from "./elementWidth";
-import { CarouselInternalState, CarouselProps } from "../types";
+  getWidthFromDeviceType
+} from './elementWidth';
+import { CarouselInternalState, CarouselProps } from '../types';
 
 function getInitialState(
   state: CarouselInternalState,
@@ -39,7 +39,7 @@ function getInitialState(
     flexBisis,
     domFullyLoaded,
     partialVisibilityGutter,
-    shouldRenderAtAll,
+    shouldRenderAtAll
   };
 }
 
@@ -63,7 +63,7 @@ function getTransformForCenterMode(
 }
 function getTransformForPartialVsibile(
   state: CarouselInternalState,
-  partialVisibilityGutter: number = 0,
+  partialVisibilityGutter = 0,
   props: CarouselProps
 ) {
   const { currentSlide, slidesToShow } = state;
@@ -85,7 +85,7 @@ function isInLeftEnd({ currentSlide }: CarouselInternalState): boolean {
 function isInRightEnd({
   currentSlide,
   totalItems,
-  slidesToShow,
+  slidesToShow
 }: CarouselInternalState): boolean {
   return !(currentSlide + slidesToShow < totalItems);
 }
@@ -104,7 +104,6 @@ function getSlidesToSlide(
   state: CarouselInternalState,
   props: CarouselProps
 ): number {
- 
   const { domLoaded, slidesToShow, containerWidth, itemWidth } = state;
   const { deviceType, responsive } = props;
   let slidesToScroll = props.slidesToSlide || 1;
