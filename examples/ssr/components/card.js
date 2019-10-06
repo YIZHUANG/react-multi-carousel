@@ -1,6 +1,7 @@
 import React from "react";
 
 import { withStyles } from "@material-ui/core/styles";
+
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -19,7 +20,8 @@ const styles = {
 };
 
 function MediaCard(props) {
-  const { classes, image, headline, description, isMoving, link } = props;
+  const { classes, image, headline, description, isMoving } = props;
+
   return (
     <a onClick={(e) => {
         if(isMoving) {

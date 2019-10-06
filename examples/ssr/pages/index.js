@@ -1,9 +1,10 @@
-import React from "react";
-import faker from "faker";
-import MobileDetect from "mobile-detect";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+import React, { Component } from "react";
+
 import { withStyles } from "@material-ui/core/styles";
+
+import Typography from "@material-ui/core/Typography";
+
+import MobileDetect from "mobile-detect";
 
 import Card from "../components/card";
 import Image from "../components/image";
@@ -12,21 +13,8 @@ import CarouselWithCustomDots from "../components/carousel-with-custom-dots";
 import "../style.css";
 import "react-multi-carousel/lib/styles.css";
 
-import Link from "next/link";
-
-const styles = theme => ({
-  root: {
-    textAlign: "center"
-  },
-  title: {
-    maxWidth: 400,
-    margin: "auto",
-    marginTop: 10
-  }
-});
-
-class Index extends React.Component {
-  static getInitialProps({ req, isServer }) {
+class Index extends Component {
+  static getInitialProps({ req }) {
     let userAgent;
     let deviceType;
     if (req) {
@@ -44,7 +32,9 @@ class Index extends React.Component {
     }
     return { deviceType };
   }
+
   state = { isMoving: false };
+
   render() {
     const { classes } = this.props;
     const images = [
@@ -148,5 +138,16 @@ class Index extends React.Component {
     );
   }
 }
+
+const styles = () => ({
+  root: {
+    textAlign: "center"
+  },
+  title: {
+    maxWidth: 400,
+    margin: "auto",
+    marginTop: 10
+  }
+});
 
 export default withStyles(styles)(Index);
