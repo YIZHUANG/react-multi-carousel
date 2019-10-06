@@ -1,11 +1,11 @@
 import React from "react";
+
 import Carousel from "react-multi-carousel";
 import classNames from "classnames";
 import Avatar from "@material-ui/core/Avatar";
 
 import articles from "./data.json";
 import Card from "./card";
-import Markdown from "./Markdown";
 import "./carousel-with-custom-dots.css";
 
 const responsive = {
@@ -38,7 +38,7 @@ const responsive = {
   }
 };
 
-const ArticleCard = ({ date, imageUrl, link, title, tags, content }) => {
+const ArticleCard = ({ imageUrl, link, title }) => {
   return <Card link={link} image={imageUrl} headline={title} />;
 };
 
@@ -56,8 +56,7 @@ class CarouselWithCustomDots extends React.PureComponent {
     const CustomDot = ({
       index,
       onClick,
-      active,
-      carouselState: { currentSlide }
+      active
     }) => {
       return (
         <button
