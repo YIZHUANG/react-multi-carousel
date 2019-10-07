@@ -8,7 +8,7 @@ Production-ready, lightweight fully customizable React carousel component that r
 <img alt="download per month" src="https://img.shields.io/npm/dm/react-multi-carousel" target="_blank" />
 </a>
 [![Build Status](https://api.travis-ci.org/YIZHUANG/react-multi-carousel.svg?branch=master)](https://travis-ci.org/YIZHUANG/react-multi-carousel)
-<a href="https://react-multi-carousel.surge.sh">
+<a href="https://w3js.com/react-multi-carousel">
 <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
 </a>
 <a href="https://github.com/YIZHUANG/react-multi-carousel/graphs/commit-activity">
@@ -53,7 +53,7 @@ Production-ready, lightweight fully customizable React carousel component that r
 
 Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maintainers use their service to debug browser issues.
 
-## [Documentation](https://react-multi-carousel.surge.sh)
+## [Documentation](https://w3js.com/react-multi-carousel/)
 
 ## Other important links.
 
@@ -71,7 +71,7 @@ Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maint
 
 ## Demo.
 
-Documentation is [here](https://react-multi-carousel.surge.sh/).
+Documentation is [here](https://w3js.com/react-multi-carousel/).
 
 Demo for the SSR <https://react-multi-carousel.now.sh/>
 
@@ -187,7 +187,7 @@ You can pass your own custom arrows to make it the way you want, the same for th
 
 You custom arrows will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
 
-[An Example](https://react-multi-carousel.surge.sh/?selectedKind=Carousel&selectedStory=Custom%20arrow&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
+[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=Custom%20arrow&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomArrows.js)
 
@@ -207,7 +207,7 @@ const CustomRightArrow = ({ onClick, ...rest }) => {
 
 This is very useful if you don't want the dots, or arrows and you want to fully customize the control functionality and styling yourself.
 
-[Example](/?selectedKind=Carousel&selectedStory=With%20custom%20button%20group&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
+[Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=With%20custom%20button%20group&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomArrows.js)
 
@@ -234,7 +234,7 @@ Passing this props would render the button group outside of the Carousel contain
 
 ```js
 <div className='my-own-custom-container'>
-  <Carousel arrows={false} renderButtonGroupOutside={renderButtonGroupOutside} customButtonGroup={<ButtonGroup />}>
+  <Carousel arrows={false} renderButtonGroupOutside={true} customButtonGroup={<ButtonGroup />}>
     <ItemOne>
     <ItemTwo>
   </Carousel>
@@ -251,7 +251,7 @@ The codes for this [example](https://github.com/YIZHUANG/react-multi-carousel/bl
 
 You custom dots will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
 
-[An Example](/?selectedKind=Carousel&selectedStory=custom%20dots&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
+[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=custom%20dots&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomDot.js)
 
@@ -291,7 +291,7 @@ Shows the next items partially, this is very useful if you want to indicate to t
 
 This is different from the "centerMode" prop, as it only shows the next items. For the centerMode, it shows both.
 
-[An Example](/?selectedKind=Carousel&selectedStory=partially%20visibie%20on%20next%20items&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
+[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=partially%20visibie%20on%20next%20items&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 ```js
 const responsive = {
@@ -329,7 +329,7 @@ Shows the next items and previous items partially.
 
 This is a callback function that is invoked each time when there has been a sliding.
 
-[An Example](/?selectedKind=Carousel&selectedStory=afterChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
+[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=afterChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 ```js
 <Carousel
@@ -343,7 +343,7 @@ This is a callback function that is invoked each time when there has been a slid
 
 This is a callback function that is invoked each time before a sliding.
 
-[An Example](/?selectedKind=Carousel&selectedStory=beforeChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
+[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=beforeChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 ```js
 <Carousel
@@ -418,7 +418,7 @@ Go to slide on click and make the slide a current slide.
 
 ## additionalTransfrom Props.
 
-This is very useful when you are fully customizing the control functionality by yourself like this [one](/?selectedKind=Carousel&selectedStory=With%20custom%20control%20functionality&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
+This is very useful when you are fully customizing the control functionality by yourself like this [one](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=With%20custom%20control%20functionality&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/WithScrollbar.js)
 
