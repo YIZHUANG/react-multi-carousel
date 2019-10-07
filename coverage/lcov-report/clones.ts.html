@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/utils/clones.ts</title>
+    <title>Code coverage report for clones.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -16,18 +16,18 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">All files</a> / <a href="index.html">src/utils</a> clones.ts
+      <a href="index.html">All files</a> clones.ts
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">14.63% </span>
+        <span class="strong">13.95% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>12/82</span>
+        <span class='fraction'>12/86</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">19.23% </span>
+        <span class="strong">17.86% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>5/26</span>
+        <span class='fraction'>5/28</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">40% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>2/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">16% </span>
+        <span class="strong">15.19% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>12/75</span>
+        <span class='fraction'>12/79</span>
       </div>
     </div>
     <p class="quiet">
@@ -228,8 +228,7 @@
 <a name='L180'></a><a href='#L180'>180</a>
 <a name='L181'></a><a href='#L181'>181</a>
 <a name='L182'></a><a href='#L182'>182</a>
-<a name='L183'></a><a href='#L183'>183</a>
-<a name='L184'></a><a href='#L184'>184</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L183'></a><a href='#L183'>183</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -321,7 +320,7 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -335,10 +334,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -365,7 +364,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -546,14 +544,13 @@ function <span class="fstat-no" title="function not covered" >checkClonesPositio
   let nextSlide = <span class="cstat-no" title="statement not covered" >0;</span>
   let nextPosition = <span class="cstat-no" title="statement not covered" >0;</span>
   let isReachingTheEnd;
-  let isReachingTheStart = <span class="cstat-no" title="statement not covered" >currentSlide === 0;</span>
+  const isReachingTheStart = <span class="cstat-no" title="statement not covered" >currentSlide === 0;</span>
   const originalFirstSlide =
 <span class="cstat-no" title="statement not covered" >    childrenArr.length - (childrenArr.length - slidesToShow * 2);</span>
 <span class="cstat-no" title="statement not covered" >  if (childrenArr.length &lt; slidesToShow) {</span>
 <span class="cstat-no" title="statement not covered" >    nextSlide = 0;</span>
 <span class="cstat-no" title="statement not covered" >    nextPosition = 0;</span>
 <span class="cstat-no" title="statement not covered" >    isReachingTheEnd = false;</span>
-<span class="cstat-no" title="statement not covered" >    isReachingTheStart = false;</span>
   } else <span class="cstat-no" title="statement not covered" >if (childrenArr.length &gt; slidesToShow * 2) {</span>
 <span class="cstat-no" title="statement not covered" >    isReachingTheEnd = currentSlide &gt;= originalFirstSlide + childrenArr.length;</span>
 <span class="cstat-no" title="statement not covered" >    if (isReachingTheEnd) {</span>
@@ -601,10 +598,10 @@ export {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 02 2019 23:01:37 GMT+0300 (Eastern European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 07 2019 10:56:46 GMT+0530 (India Standard Time)
 </div>
 </div>
-<script src="../../prettify.js"></script>
+<script src="prettify.js"></script>
 <script>
 window.onload = function () {
         if (typeof prettyPrint === 'function') {
@@ -612,7 +609,7 @@ window.onload = function () {
         }
 };
 </script>
-<script src="../../sorter.js"></script>
-<script src="../../block-navigation.js"></script>
+<script src="sorter.js"></script>
+<script src="block-navigation.js"></script>
 </body>
 </html>

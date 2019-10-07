@@ -14,7 +14,7 @@ import {
   populateSlidesOnMouseTouchMove,
   isInLeftEnd,
   isInRightEnd,
-  getInitialSlideInInifteMode,
+  getInitialSlideInInfiniteMode,
   notEnoughChildren,
 } from "./utils";
 import {
@@ -134,22 +134,24 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     // but still, we want to maintain the same position as it was on the server-side which is translateX(0) by getting the couter part of the original first slide.
     this.isAnimationAllowed = false;
     const childrenArr = React.Children.toArray(this.props.children);
-    const initialSlide = getInitialSlideInInifteMode(
+    const initialSlide = getInitialSlideInInfiniteMode(
       slidesToShow || this.state.slidesToShow,
       childrenArr
     );
     const clones = getClones(this.state.slidesToShow, childrenArr);
-    if (!notEnoughChildren(this.state, this.props, slidesToShow)) {
-      this.setState(
-        {
-          totalItems: clones.length,
-          currentSlide: forResizing ? this.state.currentSlide : initialSlide,
-        },
-        () => {
-          this.correctItemsPosition(itemWidth || this.state.itemWidth);
-        }
-      );
-    }
+    const currentSlide =
+      childrenArr.length < this.state.slidesToShow
+        ? 0
+        : this.state.currentSlide;
+    this.setState(
+      {
+        totalItems: clones.length,
+        currentSlide: forResizing ? currentSlide : initialSlide,
+      },
+      () => {
+        this.correctItemsPosition(itemWidth || this.state.itemWidth);
+      }
+    );
   }
   public setItemsToShow(shouldCorrectItemPosition?: boolean): void {
     const { responsive } = this.props;
@@ -205,7 +207,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.isAnimationAllowed = false;
     }
     this.setState({
-      transform: -(itemWidth * this.state.currentSlide),
+      transform: (this.state.totalItems < this.state.slidesToShow) ? 0 : -(itemWidth * this.state.currentSlide)
     });
   }
   public onResize(value?: React.KeyboardEvent | boolean): void {
