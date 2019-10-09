@@ -21,15 +21,11 @@ function populateSlidesOnMouseTouchMove(
   } = state;
   const { infinite } = props;
   let canContinue = false; // it will be true if we have slides to slide to.
-  let direction:Direction; // either 'left' or 'right'
+  let direction: Direction; // either 'left' or 'right'
   let nextPosition;
   // making sure we have items to slide back to, prevent oversliding.
-  const slidesHavePassedRight = Math.round(
-    (initialX - lastX) / itemWidth
-  );
-  const slidesHavePassedLeft = Math.round(
-    (lastX - initialX) / itemWidth
-  );
+  const slidesHavePassedRight = Math.round((initialX - lastX) / itemWidth);
+  const slidesHavePassedLeft = Math.round((lastX - initialX) / itemWidth);
   const isMovingRight = initialX > clientX;
   const isMovingLeft = clientX > initialX;
   if (isMovingRight) {
@@ -68,6 +64,5 @@ function populateSlidesOnMouseTouchMove(
     canContinue
   };
 }
-
 
 export { populateSlidesOnMouseTouchMove };

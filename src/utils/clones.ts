@@ -1,6 +1,5 @@
 import { CarouselInternalState, CarouselProps } from "../types";
 
-
 /*
 getOriginalCounterPart gets the index of the original children.
 For example, we have an array [clones, originalChildren, clones];
@@ -87,8 +86,8 @@ then we clone "slidesToShow * 2" amount of beginning and end items.
 Otherwise, it means we only have a few items. Then we clone it 3 times.
 */
 function getClones(slidesToShow: number, childrenArr: any[]) {
-  if (childrenArr.length < slidesToShow ) {
-    return childrenArr; 
+  if (childrenArr.length < slidesToShow) {
+    return childrenArr;
   }
   if (childrenArr.length > slidesToShow * 2) {
     return [
@@ -97,13 +96,13 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
         childrenArr.length
       ),
       ...childrenArr,
-      ...childrenArr.slice(0, slidesToShow * 2),
+      ...childrenArr.slice(0, slidesToShow * 2)
     ];
   }
   return [...childrenArr, ...childrenArr, ...childrenArr];
 }
 
-function getInitialSlideInInifteMode(slidesToShow:number, childrenArr: any[]) {
+function getInitialSlideInInifteMode(slidesToShow: number, childrenArr: any[]) {
   if (childrenArr.length > slidesToShow * 2) {
     return slidesToShow * 2;
   } else {
@@ -165,7 +164,7 @@ function checkClonesPosition(
     isReachingTheEnd,
     isReachingTheStart,
     nextSlide,
-    nextPosition,
+    nextPosition
   };
 }
 

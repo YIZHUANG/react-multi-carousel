@@ -16,12 +16,12 @@ interface RightArrowProps {
 const LeftArrow = ({
   customLeftArrow,
   getState,
-  previous,
+  previous
 }: LeftArrowProps): React.ReactElement<any> => {
   if (customLeftArrow) {
     return React.cloneElement(customLeftArrow, {
       onClick: () => previous(),
-      carouselState: getState(),
+      carouselState: getState()
     });
   }
   return (
@@ -34,12 +34,12 @@ const LeftArrow = ({
 const RightArrow = ({
   customRightArrow,
   next,
-  getState,
+  getState
 }: RightArrowProps): React.ReactElement<any> => {
   if (customRightArrow) {
     return React.cloneElement(customRightArrow, {
       onClick: () => next(),
-      carouselState: getState(),
+      carouselState: getState()
     });
   }
   return (

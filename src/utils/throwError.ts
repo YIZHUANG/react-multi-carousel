@@ -1,7 +1,7 @@
 import { CarouselInternalState, CarouselProps } from "../types";
 
 function throwError(state: CarouselInternalState, props: CarouselProps): void {
-  const { partialVisbile, centerMode, ssr, responsive, infinite } = props;
+  const { partialVisbile, centerMode, ssr, responsive } = props;
   if (partialVisbile && centerMode) {
     throw new Error(
       "center mode can not be used at the same time with partialVisbile"

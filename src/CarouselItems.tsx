@@ -14,7 +14,7 @@ const CarouselItems = ({
   props,
   state,
   goToSlide,
-  clones,
+  clones
 }: CarouselItemsProps) => {
   const { itemWidth } = state;
   const { children, infinite, itemClass, partialVisbile } = props;
@@ -23,7 +23,7 @@ const CarouselItems = ({
     shouldRenderOnSSR,
     domFullyLoaded,
     partialVisibilityGutter,
-    shouldRenderAtAll,
+    shouldRenderAtAll
   } = getInitialState(state, props);
   if (!shouldRenderAtAll) {
     return null;
@@ -51,7 +51,7 @@ const CarouselItems = ({
                         ? itemWidth - partialVisibilityGutter
                         : itemWidth
                     }px`
-                  : "auto",
+                  : "auto"
               }}
               className={`react-multi-carousel-item ${
                 getIfSlideIsVisbile(index, state)

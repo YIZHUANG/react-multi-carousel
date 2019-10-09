@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
   getPartialVisibilityGutter,
-  getWidthFromDeviceType,
+  getWidthFromDeviceType
 } from "./elementWidth";
 import { CarouselInternalState, CarouselProps } from "../types";
 
@@ -39,7 +39,7 @@ function getInitialState(
     flexBisis,
     domFullyLoaded,
     partialVisibilityGutter,
-    shouldRenderAtAll,
+    shouldRenderAtAll
   };
 }
 
@@ -61,9 +61,22 @@ function getTransformForCenterMode(
     return state.transform + state.itemWidth / 2;
   }
 }
+
+function isInLeftEnd({ currentSlide }: CarouselInternalState): boolean {
+  return !(currentSlide > 0);
+}
+
+function isInRightEnd({
+  currentSlide,
+  totalItems,
+  slidesToShow
+}: CarouselInternalState): boolean {
+  return !(currentSlide + slidesToShow < totalItems);
+}
+
 function getTransformForPartialVsibile(
   state: CarouselInternalState,
-  partialVisibilityGutter: number = 0,
+  partialVisibilityGutter = 0,
   props: CarouselProps
 ) {
   const { currentSlide, slidesToShow } = state;
@@ -77,17 +90,6 @@ function getTransformForPartialVsibile(
     return transform + remainingWidth;
   }
   return transform;
-}
-
-function isInLeftEnd({ currentSlide }: CarouselInternalState): boolean {
-  return !(currentSlide > 0);
-}
-function isInRightEnd({
-  currentSlide,
-  totalItems,
-  slidesToShow,
-}: CarouselInternalState): boolean {
-  return !(currentSlide + slidesToShow < totalItems);
 }
 
 function notEnoughChildren(
@@ -104,7 +106,6 @@ function getSlidesToSlide(
   state: CarouselInternalState,
   props: CarouselProps
 ): number {
- 
   const { domLoaded, slidesToShow, containerWidth, itemWidth } = state;
   const { deviceType, responsive } = props;
   let slidesToScroll = props.slidesToSlide || 1;
