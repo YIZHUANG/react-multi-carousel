@@ -61,6 +61,19 @@ function getTransformForCenterMode(
     return state.transform + state.itemWidth / 2;
   }
 }
+
+function isInLeftEnd({ currentSlide }: CarouselInternalState): boolean {
+  return !(currentSlide > 0);
+}
+
+function isInRightEnd({
+  currentSlide,
+  totalItems,
+  slidesToShow
+}: CarouselInternalState): boolean {
+  return !(currentSlide + slidesToShow < totalItems);
+}
+
 function getTransformForPartialVsibile(
   state: CarouselInternalState,
   partialVisibilityGutter = 0,
@@ -77,17 +90,6 @@ function getTransformForPartialVsibile(
     return transform + remainingWidth;
   }
   return transform;
-}
-
-function isInLeftEnd({ currentSlide }: CarouselInternalState): boolean {
-  return !(currentSlide > 0);
-}
-function isInRightEnd({
-  currentSlide,
-  totalItems,
-  slidesToShow
-}: CarouselInternalState): boolean {
-  return !(currentSlide + slidesToShow < totalItems);
 }
 
 function notEnoughChildren(
