@@ -16,7 +16,7 @@
     "publish-ssr": "cd examples/ssr && now && now alias react-multi-carousel.now.sh",
     "prettier": "prettier --write {examples,src,stories,test}/**/*.{js,ts,tsx}",
     "lint-staged": "lint-staged",
-    "lint": "eslint --fix src/**/*{.js,.jsx,.ts,.tsx}",
+    "lint": "eslint src/**/*{.js,.jsx,.ts,.tsx}",
     "minify": "node minify.js"
   },
   "repository": {
