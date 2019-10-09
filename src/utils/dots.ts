@@ -1,6 +1,6 @@
-import { getOriginalCounterPart } from './clones';
-import { CarouselInternalState, CarouselProps } from '../types';
-import { getSlidesToSlide } from './common';
+import { getOriginalCounterPart } from "./clones";
+import { CarouselInternalState, CarouselProps } from "../types";
+import { getSlidesToSlide } from "./common";
 
 interface NextSlidesTable {
   [key: number]: number;

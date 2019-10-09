@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { StateCallBack } from './types';
+import { StateCallBack } from "./types";
 
 interface LeftArrowProps {
   customLeftArrow?: React.ReactElement<any> | null;

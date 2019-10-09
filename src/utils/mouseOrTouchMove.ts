@@ -1,4 +1,4 @@
-import { CarouselInternalState, CarouselProps, Direction } from '../types';
+import { CarouselInternalState, CarouselProps, Direction } from "../types";
 
 // this is to get the values for handling onTouchMove / onMouseMove;
 function populateSlidesOnMouseTouchMove(
@@ -31,7 +31,7 @@ function populateSlidesOnMouseTouchMove(
   if (isMovingRight) {
     const isAboutToOverSlide = !(slidesHavePassedRight <= slidesToShow);
     if (!isAboutToOverSlide) {
-      direction = 'right';
+      direction = "right";
       const translateXLimit = Math.abs(
         -(itemWidth * (totalItems - slidesToShow))
       );
@@ -49,7 +49,7 @@ function populateSlidesOnMouseTouchMove(
   if (isMovingLeft) {
     const isAboutToOverSlide = !(slidesHavePassedLeft <= slidesToShow);
     if (!isAboutToOverSlide) {
-      direction = 'left';
+      direction = "left";
       const nextTranslate = transform + (clientX - lastX);
       const isFirstSlide = currentSlide === 0;
       if (nextTranslate <= 0 || (isFirstSlide && infinite)) {

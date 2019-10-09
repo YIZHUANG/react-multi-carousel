@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { CarouselInternalState, CarouselProps } from '../types';
-import { getSlidesToSlide } from './common';
-import { isInRightEnd } from './common';
+import * as React from "react";
+import { CarouselInternalState, CarouselProps } from "../types";
+import { getSlidesToSlide } from "./common";
+import { isInRightEnd } from "./common";
 /*
 two cases:
 1. We are not over-sliding.

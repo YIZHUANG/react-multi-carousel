@@ -1,9 +1,9 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   getPartialVisibilityGutter,
   getWidthFromDeviceType
-} from './elementWidth';
-import { CarouselInternalState, CarouselProps } from '../types';
+} from "./elementWidth";
+import { CarouselInternalState, CarouselProps } from "../types";
 
 function getInitialState(
   state: CarouselInternalState,

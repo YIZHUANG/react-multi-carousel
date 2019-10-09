@@ -1,9 +1,9 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { CarouselInternalState, CarouselProps, StateCallBack } from './types';
-import { getOriginalIndexLookupTableByClones } from './utils/clones';
-import { getLookupTableForNextSlides } from './utils/dots';
-import { getSlidesToSlide } from './utils/common';
+import { CarouselInternalState, CarouselProps, StateCallBack } from "./types";
+import { getOriginalIndexLookupTableByClones } from "./utils/clones";
+import { getLookupTableForNextSlides } from "./utils/dots";
+import { getSlidesToSlide } from "./utils/common";
 
 interface DotsTypes {
   props: CarouselProps;
@@ -83,7 +83,7 @@ const Dots = ({
               data-index={index}
               key={index}
               className={`react-multi-carousel-dot ${
-                isActive ? 'react-multi-carousel-dot--active' : ''
+                isActive ? "react-multi-carousel-dot--active" : ""
               }`}
             >
               <button onClick={() => goToSlide(nextSlide)} />

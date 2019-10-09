@@ -1,4 +1,4 @@
-import { CarouselInternalState, CarouselProps } from '../types';
+import { CarouselInternalState, CarouselProps } from "../types";
 
 /*
 getOriginalCounterPart gets the index of the original children.

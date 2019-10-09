@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { CarouselInternalState, CarouselProps } from './types';
-import { getInitialState, getIfSlideIsVisbile } from './utils';
+import { CarouselInternalState, CarouselProps } from "./types";
+import { getInitialState, getIfSlideIsVisbile } from "./utils";
 
 interface CarouselItemsProps {
   props: CarouselProps;
@@ -41,22 +41,22 @@ const CarouselItems = ({
                   goToSlide(index);
                 }
               }}
-              aria-hidden={getIfSlideIsVisbile(index, state) ? 'false' : 'true'}
+              aria-hidden={getIfSlideIsVisbile(index, state) ? "false" : "true"}
               style={{
-                flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : 'auto',
-                position: 'relative',
+                flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
+                position: "relative",
                 width: domFullyLoaded
                   ? `${
                       partialVisbile && partialVisibilityGutter
                         ? itemWidth - partialVisibilityGutter
                         : itemWidth
                     }px`
-                  : 'auto'
+                  : "auto"
               }}
               className={`react-multi-carousel-item ${
                 getIfSlideIsVisbile(index, state)
-                  ? 'react-multi-carousel-item--active'
-                  : ''
+                  ? "react-multi-carousel-item--active"
+                  : ""
               } ${itemClass}`}
             >
               {child}

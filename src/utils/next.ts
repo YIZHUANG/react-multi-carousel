@@ -1,5 +1,5 @@
-import { CarouselInternalState, CarouselProps } from '../types';
-import { getSlidesToSlide } from './common';
+import { CarouselInternalState, CarouselProps } from "../types";
+import { getSlidesToSlide } from "./common";
 
 /*
 two cases:
