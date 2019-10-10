@@ -126,7 +126,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public setClones(
     slidesToShow: number,
     itemWidth?: number,
-    forResizing?: boolean
+    forResizing?: boolean,
+    resetCurrentSlide: boolean = false
   ): void {
     // if forResizing is true, means we are on client-side.
     // if forResizing is false, means we are on server-side.
@@ -140,13 +141,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     );
     const clones = getClones(this.state.slidesToShow, childrenArr);
     const currentSlide =
-      childrenArr.length < this.state.slidesToShow 
+      childrenArr.length < this.state.slidesToShow
         ? 0
         : this.state.currentSlide;
     this.setState(
       {
         totalItems: clones.length,
-        currentSlide: forResizing ? currentSlide : initialSlide,
+        currentSlide: forResizing && !resetCurrentSlide ? currentSlide : initialSlide,
       },
       () => {
         this.correctItemsPosition(itemWidth || this.state.itemWidth);
@@ -228,7 +229,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.setItemsToShow(shouldCorrectItemPosition);
   }
   public componentDidUpdate(
-    { keyBoardControl, autoPlay }: CarouselProps,
+    { keyBoardControl, autoPlay, children }: CarouselProps,
     { containerWidth, domLoaded }: CarouselInternalState
   ): void {
     if (
@@ -257,8 +258,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
     if (this.props.infinite) {
-      // this is to quickly cancel the animation and move the items position to create the infinite effects.
-      this.correctClonesPosition({ domLoaded });
+      if (children.length !== this.props.children.length) {
+        this.setClones(this.state.slidesToShow, this.state.itemWidth, true, true );
+      } else {
+        // this is to quickly cancel the animation and move the items position to create the infinite effects.
+        this.correctClonesPosition({ domLoaded });
+      }
     }
   }
   public correctClonesPosition({
