@@ -1,6 +1,6 @@
 import * as React from "react";
 import { CarouselInternalState, CarouselProps } from "../types";
-import { getSlidesToSlide } from './common';
+import { getSlidesToSlide } from "./common";
 import { isInRightEnd } from "./common";
 /*
 two cases:
@@ -10,14 +10,14 @@ two cases:
 function populatePreviousSlides(
   state: CarouselInternalState,
   props: CarouselProps,
-  slidesHavePassed: number = 0
+  slidesHavePassed = 0
 ): {
   nextSlides: number | undefined;
   nextPosition: number | undefined;
 } {
   const { currentSlide, itemWidth, slidesToShow } = state;
   const { children, showDots, infinite } = props;
-  const slidesToSlide = getSlidesToSlide(state,props);
+  const slidesToSlide = getSlidesToSlide(state, props);
   let nextSlides;
   let nextPosition;
   const nextMaximumSlides =
@@ -46,7 +46,7 @@ function populatePreviousSlides(
   }
   return {
     nextSlides,
-    nextPosition,
+    nextPosition
   };
 }
 

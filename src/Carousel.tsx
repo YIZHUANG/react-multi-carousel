@@ -22,7 +22,7 @@ import {
   CarouselProps,
   StateCallBack,
   Direction,
-  isMouseMoveEvent,
+  isMouseMoveEvent
 } from "./types";
 import Dots from "./Dots";
 import { LeftArrow, RightArrow } from "./Arrows";
@@ -50,7 +50,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     dotListClass: "",
     focusOnSelect: false,
     centerMode: false,
-    additionalTransfrom: 0,
+    additionalTransfrom: 0
   };
   private readonly containerRef: React.RefObject<HTMLDivElement>;
   public onMove: boolean;
@@ -72,7 +72,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       deviceType: "",
       domLoaded: false,
       transform: 0,
-      containerWidth: 0,
+      containerWidth: 0
     };
     this.onResize = this.onResize.bind(this);
     this.handleDown = this.handleDown.bind(this);
@@ -104,7 +104,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.initialY = 0;
     this.isInThrottle = false;
   }
-  public setIsInThrottle(isInThrottle: boolean = false): void {
+  public setIsInThrottle(isInThrottle = false): void {
     this.isInThrottle = isInThrottle;
   }
   public componentDidMount(): void {
@@ -180,7 +180,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.setState(
         {
           containerWidth,
-          itemWidth,
+          itemWidth
         },
         () => {
           if (this.props.infinite) {
@@ -267,7 +267,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
   }
   public correctClonesPosition({
-    domLoaded, // this domLoaded comes from previous state, only use to tell if we are on client-side or server-side because this functin relies the dom.
+    domLoaded // this domLoaded comes from previous state, only use to tell if we are on client-side or server-side because this functin relies the dom.
   }: {
     domLoaded?: boolean;
   }): void {
@@ -276,7 +276,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       isReachingTheEnd,
       isReachingTheStart,
       nextSlide,
-      nextPosition,
+      nextPosition
     } = checkClonesPosition(this.state, childrenArr, this.props);
     if (
       // this is to prevent this gets called on the server-side.
@@ -288,7 +288,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         setTimeout(() => {
           this.setState({
             transform: nextPosition,
-            currentSlide: nextSlide,
+            currentSlide: nextSlide
           });
         }, this.props.transitionDuration || defaultTransitionDuration);
       }
@@ -321,7 +321,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.setState(
       {
         transform: nextPosition,
-        currentSlide: nextSlides,
+        currentSlide: nextSlides
       },
       () => {
         if (typeof afterChange === "function") {
@@ -354,7 +354,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.setState(
       {
         transform: nextPosition,
-        currentSlide: nextSlides,
+        currentSlide: nextSlides
       },
       () => {
         if (typeof afterChange === "function") {
@@ -424,7 +424,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       const {
         direction,
         nextPosition,
-        canContinue,
+        canContinue
       } = populateSlidesOnMouseTouchMove(
         this.state,
         this.props,
@@ -510,7 +510,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.setState(
       {
         currentSlide: slide,
-        transform: -(itemWidth * slide),
+        transform: -(itemWidth * slide)
       },
       () => {
         if (this.props.infinite) {
@@ -528,7 +528,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     return {
       ...this.state,
       onMove: this.onMove,
-      direction: this.direction,
+      direction: this.direction
     };
   }
   public renderLeftArrow(): React.ReactNode {
@@ -558,7 +558,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         previous: () => this.previous(),
         next: () => this.next(),
         goToSlide: (slideIndex: number) => this.goToSlide(slideIndex),
-        carouselState: this.getState(),
+        carouselState: this.getState()
       });
     }
     return null;
@@ -603,7 +603,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       additionalTransfrom,
       renderDotsOutside,
       renderButtonGroupOutside,
-      className,
+      className
     } = this.props;
     if (process.env.NODE_ENV !== "production") {
       throwError(this.state, this.props);
@@ -611,7 +611,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const {
       shouldRenderOnSSR,
       partialVisibilityGutter,
-      shouldRenderAtAll,
+      shouldRenderAtAll
     } = getInitialState(this.state, this.props);
     const isLeftEndReach = isInLeftEnd(this.state);
     const isRightEndReach = isInRightEnd(this.state);
@@ -651,7 +651,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
                 : "none",
               overflow: shouldRenderOnSSR ? "hidden" : "unset",
               transform: `translate3d(${currentTransform +
-                additionalTransfrom!}px,0,0)`,
+                additionalTransfrom!}px,0,0)`
             }}
             onMouseMove={this.handleMove}
             onMouseDown={this.handleDown}

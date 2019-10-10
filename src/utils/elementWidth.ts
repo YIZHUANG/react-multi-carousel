@@ -55,5 +55,5 @@ function getItemClientSideWidth(
 export {
   getWidthFromDeviceType,
   getPartialVisibilityGutter,
-  getItemClientSideWidth,
+  getItemClientSideWidth
 };
