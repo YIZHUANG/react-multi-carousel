@@ -394,6 +394,16 @@ They are very useful in the following cases:
 </Carousel>
 ```
 
+## Skipping callbacks
+
+When calling the `goToSlide` function on a Carousel the callbacks will be run by default. You can skip all or individul callbacks by passing a second parameter to `goToSlide.`
+
+```js
+this.Carousel.goToSlide(1, true); // Skips both beforeChange and afterChange
+this.Carousel.goToSlide(1, { skipBeforeChange: true }); // Skips only beforeChange
+this.Carousel.goToSlide(1, { skipAfterChange: true }); // Skips only afterChange
+```
+
 ## focusOnSelect
 
 Go to slide on click and make the slide a current slide.
