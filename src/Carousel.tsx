@@ -22,7 +22,8 @@ import {
   CarouselProps,
   StateCallBack,
   Direction,
-  isMouseMoveEvent
+  isMouseMoveEvent,
+  SkipCallbackOptions
 } from "./types";
 import Dots from "./Dots";
 import { LeftArrow, RightArrow } from "./Arrows";
@@ -489,14 +490,18 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = undefined;
     }
   }
-  public goToSlide(slide: number, skipCallbacks?: boolean): void {
+  public goToSlide(slide: number, skipCallbacks?: SkipCallbackOptions): void {
     if (this.isInThrottle) {
       return;
     }
     const { itemWidth } = this.state;
     const { afterChange, beforeChange } = this.props;
     const previousSlide = this.state.currentSlide;
-    if (!skipCallbacks && typeof beforeChange === "function") {
+    if (
+      typeof beforeChange === "function" &&
+      (!skipCallbacks ||
+        (typeof skipCallbacks === "object" && !skipCallbacks.skipBeforeChange))
+    ) {
       beforeChange(slide, this.getState());
     }
     this.isAnimationAllowed = true;
@@ -509,7 +514,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         if (this.props.infinite) {
           this.correctClonesPosition({ domLoaded: true });
         }
-        if (!skipCallbacks && typeof afterChange === "function") {
+        if (
+          typeof afterChange === "function" &&
+          (!skipCallbacks ||
+            (typeof skipCallbacks === "object" &&
+              !skipCallbacks.skipAfterChange))
+        ) {
           setTimeout(() => {
             afterChange(previousSlide, this.getState());
           }, this.props.transitionDuration || defaultTransitionDuration);
@@ -550,7 +560,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       return React.cloneElement(customButtonGroup, {
         previous: () => this.previous(),
         next: () => this.next(),
-        goToSlide: (slideIndex: number, skipCallbacks?: boolean) => this.goToSlide(slideIndex, skipCallbacks),
+        goToSlide: (slideIndex: number, skipCallbacks?: SkipCallbackOptions) =>
+          this.goToSlide(slideIndex, skipCallbacks),
         carouselState: this.getState()
       });
     }

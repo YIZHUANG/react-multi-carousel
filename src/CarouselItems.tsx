@@ -1,13 +1,17 @@
 import * as React from "react";
 
-import { CarouselInternalState, CarouselProps } from "./types";
+import {
+  CarouselInternalState,
+  CarouselProps,
+  SkipCallbackOptions
+} from "./types";
 import { getInitialState, getIfSlideIsVisbile } from "./utils";
 
 interface CarouselItemsProps {
   props: CarouselProps;
   state: CarouselInternalState;
   clones: any[];
-  goToSlide: (index: number, skipCallbacks?: boolean) => void;
+  goToSlide: (index: number, skipCallbacks?: SkipCallbackOptions) => void;
 }
 
 const CarouselItems = ({
