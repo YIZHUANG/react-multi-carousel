@@ -489,14 +489,14 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = undefined;
     }
   }
-  public goToSlide(slide: number): void {
+  public goToSlide(slide: number, skipCallbacks: boolean = false): void {
     if (this.isInThrottle) {
       return;
     }
     const { itemWidth } = this.state;
     const { afterChange, beforeChange } = this.props;
     const previousSlide = this.state.currentSlide;
-    if (typeof beforeChange === "function") {
+    if (!skipCallbacks && typeof beforeChange === "function") {
       beforeChange(slide, this.getState());
     }
     this.isAnimationAllowed = true;
@@ -509,7 +509,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         if (this.props.infinite) {
           this.correctClonesPosition({ domLoaded: true });
         }
-        if (typeof afterChange === "function") {
+        if (!skipCallbacks && typeof afterChange === "function") {
           setTimeout(() => {
             afterChange(previousSlide, this.getState());
           }, this.props.transitionDuration || defaultTransitionDuration);
