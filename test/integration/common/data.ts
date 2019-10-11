@@ -34,6 +34,7 @@ const longData = Array(12)
   .fill(0)
   .map((item, index) => {
     return {
+      key: images[index],
       image: images[index],
       headline: "w3js.com - web front-end studio",
       description: texts[index]
@@ -43,6 +44,7 @@ const shortData = Array(5)
   .fill(0)
   .map((item, index) => {
     return {
+      key: images[index],
       image: images[index],
       headline: "w3js.com - web front-end studio",
       description: texts[index]
