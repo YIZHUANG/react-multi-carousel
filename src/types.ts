@@ -62,10 +62,11 @@ export interface StateCallBack extends CarouselInternalState {
   direction: Direction;
 }
 export type Direction = "left" | "right" | "" | undefined;
+export type SkipCallbackOptions = boolean | { skipBeforeChange?: boolean, skipAfterChange?: boolean }
 export interface ButtonGroupProps {
   previous?: () => void;
   next?: () => void;
-  goToSlide?: (index: number) => void;
+  goToSlide?: (index: number, skipCallbacks?: SkipCallbackOptions) => void;
   carouselState?: StateCallBack;
 }
 export interface ArrowProps {
@@ -93,7 +94,7 @@ export interface CarouselInternalState {
 export default class Carousel extends React.Component<CarouselProps> {
   previous: (slidesHavePassed: number) => void;
   next: (slidesHavePassed: number) => void;
-  goToSlide: (slide: number) => void;
+  goToSlide: (slide: number, skipCallbacks?: SkipCallbackOptions) => void;
   state: CarouselInternalState;
   setClones: (
     slidesToShow: number,
