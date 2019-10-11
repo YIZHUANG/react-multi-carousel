@@ -489,7 +489,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = undefined;
     }
   }
-  public goToSlide(slide: number, skipCallbacks: boolean = false): void {
+  public goToSlide(slide: number, skipCallbacks?: boolean): void {
     if (this.isInThrottle) {
       return;
     }
@@ -550,7 +550,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       return React.cloneElement(customButtonGroup, {
         previous: () => this.previous(),
         next: () => this.next(),
-        goToSlide: (slideIndex: number) => this.goToSlide(slideIndex),
+        goToSlide: (slideIndex: number, skipCallbacks?: boolean) => this.goToSlide(slideIndex, skipCallbacks),
         carouselState: this.getState()
       });
     }

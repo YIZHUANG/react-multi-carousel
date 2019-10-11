@@ -8,7 +8,7 @@ import { getSlidesToSlide } from "./utils/common";
 interface DotsTypes {
   props: CarouselProps;
   state: CarouselInternalState;
-  goToSlide: (index: number) => void;
+  goToSlide: (index: number, skipCallbacks?: boolean) => void;
   getState: () => StateCallBack;
 }
 const Dots = ({

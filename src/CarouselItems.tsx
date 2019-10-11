@@ -7,7 +7,7 @@ interface CarouselItemsProps {
   props: CarouselProps;
   state: CarouselInternalState;
   clones: any[];
-  goToSlide: (index: number) => void;
+  goToSlide: (index: number, skipCallbacks?: boolean) => void;
 }
 
 const CarouselItems = ({
