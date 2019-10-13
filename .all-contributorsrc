@@ -1,0 +1,23 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "revskill10",
+      "name": "Truong Hoang Dung",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1390196?v=4",
+      "profile": "https://github.com/revskill10",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "react-multi-carousel",
+  "projectOwner": "YIZHUANG",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
