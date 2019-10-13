@@ -1,5 +1,5 @@
 # react-multi-carousel 👋
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 
 Production-ready, lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering).
 
@@ -512,6 +512,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/revskill10"><img src="https://avatars3.githubusercontent.com/u/1390196?v=4" width="100px;" alt="Truong Hoang Dung"/><br /><sub><b>Truong Hoang Dung</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=revskill10" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/tpinne"><img src="https://avatars1.githubusercontent.com/u/1384345?v=4" width="100px;" alt="Tobias Pinnekamp"/><br /><sub><b>Tobias Pinnekamp</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=tpinne" title="Code">💻</a></td>
   </tr>
 </table>
 
