@@ -120,14 +120,23 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
   }
 
+  // we only use this when infinite mode is on but we transition to notEnoughChildren as childrens passed have reduced
+  public resetTotalItems(): void {
+    this.setState({
+      totalItems: React.Children.count(this.props.children),
+      currentSlide: 0
+    }, () => {
+      this.setContainerAndItemWidth(this.state.slidesToShow, true);
+    })
+  }
+
   /*
   We only want to set the clones on the client-side cause it relies on getting the width of the carousel items.
   */
   public setClones(
     slidesToShow: number,
     itemWidth?: number,
-    forResizing?: boolean,
-    resetCurrentSlide: boolean = false
+    forResizing?: boolean
   ): void {
     // if forResizing is true, means we are on client-side.
     // if forResizing is false, means we are on server-side.
@@ -140,19 +149,17 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       childrenArr
     );
     const clones = getClones(this.state.slidesToShow, childrenArr);
-    const currentSlide =
-      childrenArr.length < this.state.slidesToShow
-        ? 0
-        : this.state.currentSlide;
-    this.setState(
-      {
-        totalItems: clones.length,
-        currentSlide: forResizing && !resetCurrentSlide ? currentSlide : initialSlide,
-      },
-      () => {
-        this.correctItemsPosition(itemWidth || this.state.itemWidth);
-      }
-    );
+    if (!notEnoughChildren(this.state, this.props, slidesToShow)) {
+      this.setState(
+        {
+          totalItems: clones.length,
+          currentSlide: forResizing ? this.state.currentSlide : initialSlide
+        },
+        () => {
+          this.correctItemsPosition(itemWidth || this.state.itemWidth);
+        }
+      );
+    }
   }
   public setItemsToShow(shouldCorrectItemPosition?: boolean): void {
     const { responsive } = this.props;
@@ -183,7 +190,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           itemWidth
         },
         () => {
-          if (this.props.infinite) {
+          if (!notEnoughChildren(this.state, this.props) && this.props.infinite) {
             this.setClones(slidesToShow, itemWidth, shouldCorrectItemPosition);
           }
         }
@@ -208,7 +215,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.isAnimationAllowed = false;
     }
     this.setState({
-      transform: (this.state.totalItems < this.state.slidesToShow) ? 0 : -(itemWidth * this.state.currentSlide),
+      transform: -(itemWidth * this.state.currentSlide)
     });
   }
   public onResize(value?: React.KeyboardEvent | boolean): void {
@@ -257,13 +264,18 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (!autoPlay && this.props.autoPlay && !this.autoPlay) {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
-    if (this.props.infinite) {
-      if (children.length !== this.props.children.length) {
-        this.setClones(this.state.slidesToShow, this.state.itemWidth, true, true );
-      } else {
-        // this is to quickly cancel the animation and move the items position to create the infinite effects.
-        this.correctClonesPosition({ domLoaded });
-      }
+    if (children.length !== this.props.children.length) {
+      // this is for handling resizing only.
+      setTimeout(() => {
+        if(notEnoughChildren(this.state, this.props)) {
+          this.resetTotalItems();
+        } else {
+          this.setClones(this.state.slidesToShow);
+        }
+      }, this.props.transitionDuration || defaultTransitionDuration);
+    } else if (!notEnoughChildren(this.state, this.props) && this.props.infinite) {
+      // this is to quickly cancel the animation and move the items position to create the infinite effects.
+      this.correctClonesPosition({ domLoaded });
     }
   }
   public correctClonesPosition({
@@ -513,7 +525,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         transform: -(itemWidth * slide)
       },
       () => {
-        if (this.props.infinite) {
+        if (!notEnoughChildren(this.state, this.props) && this.props.infinite) {
           this.correctClonesPosition({ domLoaded: true });
         }
         if (typeof afterChange === "function") {
@@ -574,11 +586,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     );
   }
   public renderCarouselItems() {
-    let clones = [];
-    if (this.props.infinite) {
-      const childrenArr = React.Children.toArray(this.props.children);
-      clones = getClones(this.state.slidesToShow, childrenArr);
-    }
+    const clones = !this.props.infinite
+      ? []
+      : notEnoughChildren(this.state, this.props)
+        ? React.Children.toArray(this.props.children)
+        : getClones(this.state.slidesToShow, React.Children.toArray(this.props.children));
     return (
       <CarouselItems
         clones={clones}

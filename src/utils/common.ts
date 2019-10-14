@@ -55,7 +55,7 @@ function getTransformForCenterMode(
   state: CarouselInternalState,
   props: CarouselProps
 ) {
-  if ((!props.infinite && state.currentSlide === 0) || (props.infinite && state.totalItems < state.slidesToShow)) {
+  if (notEnoughChildren(state, props) || state.currentSlide === 0 && !props.infinite) {
     return state.transform;
   } else {
     return state.transform + state.itemWidth / 2;
