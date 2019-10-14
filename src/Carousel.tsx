@@ -232,6 +232,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       } else {
         shouldCorrectItemPosition = true;
       }
+      if (notEnoughChildren(this.state, this.props)) {
+        this.resetTotalItems();
+      }
     }
     this.setItemsToShow(shouldCorrectItemPosition);
   }
