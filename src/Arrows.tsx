@@ -26,7 +26,7 @@ const LeftArrow = ({
   }
   return (
     <button
-      aria-label="carousel-previous-arrow"
+      aria-label="Go to previous slide"
       className="react-multiple-carousel__arrow react-multiple-carousel__arrow--left"
       onClick={() => previous()}
     />
@@ -45,7 +45,7 @@ const RightArrow = ({
   }
   return (
     <button
-      aria-label="carousel-next-arrow"
+      aria-label="Go to next slide"
       className="react-multiple-carousel__arrow react-multiple-carousel__arrow--right"
       onClick={() => next()}
     />
