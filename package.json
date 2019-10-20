@@ -17,6 +17,7 @@
     "prettier": "prettier --write {examples,src,stories,test}/**/*.{js,ts,tsx}",
     "lint-staged": "lint-staged",
     "lint": "eslint src/**/*{.ts,.tsx}",
+    "lint:fix": "eslint --fix src/**/*{.ts,.tsx}",
     "minify": "node minify.js"
   },
   "repository": {
@@ -82,7 +83,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "npm run lint:fix && git add ."
     }
   },
   "devDependencies": {
