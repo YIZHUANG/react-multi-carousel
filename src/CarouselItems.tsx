@@ -20,7 +20,7 @@ const CarouselItems = ({
   goToSlide,
   clones
 }: CarouselItemsProps) => {
-  const { itemWidth, currentSlide } = state;
+  const { itemWidth } = state;
   const { children, infinite, itemClass, partialVisbile } = props;
   const {
     flexBisis,
@@ -63,9 +63,7 @@ const CarouselItems = ({
                   : ""
               } ${itemClass}`}
             >
-              {React.cloneElement(child, {
-                visible: getIfSlideIsVisbile(index, state)
-              })}
+              {child}
             </li>
           );
         }
