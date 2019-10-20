@@ -9,7 +9,7 @@ two cases:
 function populateNextSlides(
   state: CarouselInternalState,
   props: CarouselProps,
-  slidesHavePassed = 0
+  slidesHavePassed = 0,
 ): {
   nextSlides: number | undefined;
   nextPosition: number | undefined;

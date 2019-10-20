@@ -53,12 +53,14 @@ function getIfSlideIsVisbile(
 
 function getTransformForCenterMode(
   state: CarouselInternalState,
-  props: CarouselProps
+  props: CarouselProps,
+  transformPlaceHolder?: number
 ) {
+  const transform = transformPlaceHolder || state.transform;
   if (state.currentSlide === 0 && !props.infinite) {
-    return state.transform;
+    return transform;
   } else {
-    return state.transform + state.itemWidth / 2;
+    return transform + state.itemWidth / 2;
   }
 }
 
@@ -77,12 +79,15 @@ function isInRightEnd({
 function getTransformForPartialVsibile(
   state: CarouselInternalState,
   partialVisibilityGutter = 0,
-  props: CarouselProps
+  props: CarouselProps,
+  transformPlaceHolder?: number
 ) {
   const { currentSlide, slidesToShow } = state;
   const isRightEndReach = isInRightEnd(state);
   const shouldRemoveRightGutter = !props.infinite && isRightEndReach;
-  const transform = state.transform + currentSlide * partialVisibilityGutter;
+  const transform =
+    (transformPlaceHolder || state.transform) +
+    currentSlide * partialVisibilityGutter;
   if (shouldRemoveRightGutter) {
     const remainingWidth =
       state.containerWidth -
@@ -90,6 +95,32 @@ function getTransformForPartialVsibile(
     return transform + remainingWidth;
   }
   return transform;
+}
+
+function getTransform(
+  state: CarouselInternalState,
+  props: CarouselProps,
+  transformPlaceHolder?: number
+) {
+  const { partialVisbile, responsive, deviceType, centerMode } = props;
+  const transform = transformPlaceHolder || state.transform;
+  const partialVisibilityGutter = getPartialVisibilityGutter(
+    responsive,
+    partialVisbile,
+    deviceType,
+    state.deviceType
+  );
+  const currentTransform = partialVisbile
+    ? getTransformForPartialVsibile(
+        state,
+        partialVisibilityGutter,
+        props,
+        transformPlaceHolder
+      )
+    : centerMode
+    ? getTransformForCenterMode(state, props, transformPlaceHolder)
+    : transform;
+  return currentTransform;
 }
 
 function notEnoughChildren(
@@ -145,5 +176,6 @@ export {
   getTransformForCenterMode,
   getTransformForPartialVsibile,
   notEnoughChildren,
-  getSlidesToSlide
+  getSlidesToSlide,
+  getTransform
 };

@@ -5,8 +5,6 @@ import {
   getClones,
   checkClonesPosition, // handle when there are clones appear on the screen, only apply to infinite mode.
   getInitialState,
-  getTransformForCenterMode,
-  getTransformForPartialVsibile,
   throwError,
   getItemClientSideWidth,
   populateNextSlides,
@@ -28,6 +26,7 @@ import {
 import Dots from "./Dots";
 import { LeftArrow, RightArrow } from "./Arrows";
 import CarouselItems from "./CarouselItems";
+import { getTransform } from "./utils/common";
 
 const defaultTransitionDuration = 400;
 const defaultTransition = "transform 400ms ease-in-out";
@@ -54,6 +53,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     additionalTransfrom: 0
   };
   private readonly containerRef: React.RefObject<HTMLDivElement>;
+  private readonly listRef: React.RefObject<HTMLUListElement>;
   public onMove: boolean;
   public initialX: number;
   public lastX: number;
@@ -62,9 +62,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public autoPlay?: any;
   public isInThrottle?: boolean;
   public initialY: number;
+  private transformPlaceHolder: number;
   constructor(props: CarouselProps) {
     super(props);
     this.containerRef = React.createRef();
+    this.listRef = React.createRef();
     this.state = {
       itemWidth: 0,
       slidesToShow: 0,
@@ -104,9 +106,30 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.direction = "";
     this.initialY = 0;
     this.isInThrottle = false;
+    this.transformPlaceHolder = 0;
   }
   public setIsInThrottle(isInThrottle = false): void {
     this.isInThrottle = isInThrottle;
+  }
+  public setTransformDirectly(position: number, withAnimation?: boolean) {
+    const { additionalTransfrom } = this.props;
+    const currentTransform = getTransform(this.state, this.props, position);
+    this.transformPlaceHolder = position;
+    if (this.listRef && this.listRef.current) {
+      this.setAnimationDirectly(withAnimation);
+      this.listRef.current.style.transform = `translate3d(${currentTransform +
+        additionalTransfrom!}px,0,0)`;
+    }
+  }
+  public setAnimationDirectly(animationAllowed?: boolean) {
+    if (this.listRef && this.listRef.current) {
+      if (animationAllowed) {
+        this.listRef.current.style.transition =
+          this.props.customTransition || defaultTransition;
+      } else {
+        this.listRef.current.style.transition = "none";
+      }
+    }
   }
   public componentDidMount(): void {
     this.setState({ domLoaded: true });
@@ -193,7 +216,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public correctItemsPosition(
     itemWidth: number,
-    isAnimationAllowed?: boolean
+    isAnimationAllowed?: boolean,
+    setToDomDirectly?: boolean
   ): void {
     /*
     For swipe, drag and resizing, they changed the position of the carousel, but the position are not always correct.
@@ -205,8 +229,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (!isAnimationAllowed && this.isAnimationAllowed) {
       this.isAnimationAllowed = false;
     }
+    const nexTransform = -(itemWidth * this.state.currentSlide);
+    if (setToDomDirectly) {
+      this.setTransformDirectly(nexTransform, true);
+    }
     this.setState({
-      transform: -(itemWidth * this.state.currentSlide)
+      transform: nexTransform
     });
   }
   public onResize(value?: React.KeyboardEvent | boolean): void {
@@ -228,7 +256,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public componentDidUpdate(
     { keyBoardControl, autoPlay }: CarouselProps,
-    { containerWidth, domLoaded }: CarouselInternalState
+    { containerWidth, domLoaded, currentSlide }: CarouselInternalState
   ): void {
     if (
       this.containerRef &&
@@ -255,9 +283,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (!autoPlay && this.props.autoPlay && !this.autoPlay) {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
-    if (this.props.infinite) {
+    if (this.props.infinite && this.state.currentSlide !== currentSlide) {
       // this is to quickly cancel the animation and move the items position to create the infinite effects.
       this.correctClonesPosition({ domLoaded });
+    }
+    if (this.transformPlaceHolder !== this.state.transform) {
+      this.transformPlaceHolder = this.state.transform;
     }
   }
   public correctClonesPosition({
@@ -424,13 +455,14 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         this.props,
         this.initialX,
         this.lastX,
-        clientX
+        clientX,
+        this.transformPlaceHolder
       );
       if (direction) {
         this.direction = direction;
         if (canContinue && nextPosition !== undefined) {
           // nextPosition can be 0;
-          this.setState({ transform: nextPosition });
+          this.setTransformDirectly(nextPosition);
         }
       }
       this.lastX = clientX;
@@ -449,6 +481,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       return;
     }
     if (this.onMove) {
+      this.setAnimationDirectly(true);
       if (this.direction === "right") {
         const canGoNext =
           this.initialX - this.lastX >= this.props.minimumTouchDrag!;
@@ -458,7 +491,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           );
           this.next(slidesHavePassed);
         } else {
-          this.correctItemsPosition(this.state.itemWidth, true);
+          this.correctItemsPosition(this.state.itemWidth, true, true);
         }
       }
       if (this.direction === "left") {
@@ -470,7 +503,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           );
           this.previous(slidesHavePassed);
         } else {
-          this.correctItemsPosition(this.state.itemWidth, true);
+          this.correctItemsPosition(this.state.itemWidth, true, true);
         }
       }
       this.resetMoveStatus();
@@ -602,8 +635,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       containerClass,
       sliderClass,
       customTransition,
-      partialVisbile,
-      centerMode,
       additionalTransfrom,
       renderDotsOutside,
       renderButtonGroupOutside,
@@ -612,11 +643,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (process.env.NODE_ENV !== "production") {
       throwError(this.state, this.props);
     }
-    const {
-      shouldRenderOnSSR,
-      partialVisibilityGutter,
-      shouldRenderAtAll
-    } = getInitialState(this.state, this.props);
+    const { shouldRenderOnSSR, shouldRenderAtAll } = getInitialState(
+      this.state,
+      this.props
+    );
     const isLeftEndReach = isInLeftEnd(this.state);
     const isRightEndReach = isInRightEnd(this.state);
     const shouldShowArrows =
@@ -631,16 +661,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       shouldRenderAtAll;
     const disableLeftArrow = !infinite && isLeftEndReach;
     const disableRightArrow = !infinite && isRightEndReach;
+
     // this lib supports showing next set of items partially as well as center mode which shows both.
-    const currentTransform = partialVisbile
-      ? getTransformForPartialVsibile(
-          this.state,
-          partialVisibilityGutter,
-          this.props
-        )
-      : centerMode
-      ? getTransformForCenterMode(this.state, this.props)
-      : this.state.transform;
+    const currentTransform = getTransform(this.state, this.props);
     return (
       <>
         <div
@@ -648,8 +671,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           ref={this.containerRef}
         >
           <ul
+            ref={this.listRef}
             className={`react-multi-carousel-track ${sliderClass}`}
             style={{
+              // todos.  Remove this from virtual dom.
               transition: this.isAnimationAllowed
                 ? customTransition || defaultTransition
                 : "none",
