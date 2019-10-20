@@ -229,12 +229,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (!isAnimationAllowed && this.isAnimationAllowed) {
       this.isAnimationAllowed = false;
     }
-    const nexTransform = -(itemWidth * this.state.currentSlide);
+    const nextTransform = -(itemWidth * this.state.currentSlide);
     if (setToDomDirectly) {
-      this.setTransformDirectly(nexTransform, true);
+      this.setTransformDirectly(nextTransform, true);
     }
     this.setState({
-      transform: nexTransform
+      transform: nextTransform
     });
   }
   public onResize(value?: React.KeyboardEvent | boolean): void {
