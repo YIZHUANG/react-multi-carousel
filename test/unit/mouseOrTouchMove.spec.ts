@@ -7,7 +7,6 @@ describe("Mouse move and touch functionality", () => {
       currentSlide: 2,
       itemWidth: 250,
       totalItems: 4,
-      slidesHavePassed: 2,
       transform: 2000
     };
     const props = {
@@ -21,7 +20,8 @@ describe("Mouse move and touch functionality", () => {
       props,
       initialPosition,
       lastPosition,
-      clientX
+      clientX,
+      2000
     );
     expect(results).toEqual({
       direction: "right",
@@ -35,8 +35,7 @@ describe("Mouse move and touch functionality", () => {
       currentSlide: 2,
       itemWidth: 250,
       totalItems: 4,
-      slidesHavePassed: 2,
-      transform: 2000
+      slidesHavePassed: 2
     };
     const props = {
       slidesToSlide: 1
@@ -49,7 +48,8 @@ describe("Mouse move and touch functionality", () => {
       props,
       initialPosition,
       lastPosition,
-      clientX
+      clientX,
+      2000
     );
     expect(results).toEqual({
       direction: "left",
@@ -63,8 +63,7 @@ describe("Mouse move and touch functionality", () => {
       currentSlide: 2,
       itemWidth: 250,
       totalItems: 8,
-      slidesHavePassed: 2,
-      transform: 2000
+      slidesHavePassed: 2
     };
     const props = {
       slidesToSlide: 1
@@ -77,7 +76,8 @@ describe("Mouse move and touch functionality", () => {
       props,
       initialPosition,
       lastPosition,
-      clientX
+      clientX,
+      2000
     );
     expect(results).toEqual({
       direction: "right",
@@ -91,8 +91,7 @@ describe("Mouse move and touch functionality", () => {
       currentSlide: 5,
       itemWidth: 250,
       totalItems: 8,
-      slidesHavePassed: 2,
-      transform: 600
+      slidesHavePassed: 2
     };
     const props = {
       slidesToSlide: 1
@@ -105,7 +104,8 @@ describe("Mouse move and touch functionality", () => {
       props,
       initialPosition,
       lastPosition,
-      clientX
+      clientX,
+      600
     );
     expect(results).toEqual({
       direction: "left",

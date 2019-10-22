@@ -11,6 +11,7 @@ jobs:
         directories:
         - node_modules
       script:
+        - npm run lint:fix
         - npm run build
         - npm run test
     - stage: deploy

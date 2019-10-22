@@ -102,7 +102,10 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
   return [...childrenArr, ...childrenArr, ...childrenArr];
 }
 
-function getInitialSlideInInfiniteMode(slidesToShow:number, childrenArr: any[]) {
+function getInitialSlideInInfiniteMode(
+  slidesToShow: number,
+  childrenArr: any[]
+) {
   if (childrenArr.length < slidesToShow) {
     return 0;
   }

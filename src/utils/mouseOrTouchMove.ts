@@ -6,19 +6,14 @@ function populateSlidesOnMouseTouchMove(
   props: CarouselProps,
   initialX: number,
   lastX: number,
-  clientX: number
+  clientX: number,
+  transformPlaceHolder: number
 ): {
   direction?: Direction;
   nextPosition: number | undefined;
   canContinue: boolean;
 } {
-  const {
-    itemWidth,
-    slidesToShow,
-    totalItems,
-    transform,
-    currentSlide
-  } = state;
+  const { itemWidth, slidesToShow, totalItems, currentSlide } = state;
   const { infinite } = props;
   let canContinue = false; // it will be true if we have slides to slide to.
   let direction: Direction; // either 'left' or 'right'
@@ -35,7 +30,7 @@ function populateSlidesOnMouseTouchMove(
       const translateXLimit = Math.abs(
         -(itemWidth * (totalItems - slidesToShow))
       );
-      const nextTranslate = transform - (lastX - clientX);
+      const nextTranslate = transformPlaceHolder - (lastX - clientX);
       const isLastSlide = currentSlide === totalItems - slidesToShow;
       if (
         Math.abs(nextTranslate) <= translateXLimit ||
@@ -50,7 +45,7 @@ function populateSlidesOnMouseTouchMove(
     const isAboutToOverSlide = !(slidesHavePassedLeft <= slidesToShow);
     if (!isAboutToOverSlide) {
       direction = "left";
-      const nextTranslate = transform + (clientX - lastX);
+      const nextTranslate = transformPlaceHolder + (clientX - lastX);
       const isFirstSlide = currentSlide === 0;
       if (nextTranslate <= 0 || (isFirstSlide && infinite)) {
         canContinue = true;

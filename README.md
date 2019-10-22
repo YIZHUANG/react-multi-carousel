@@ -1,4 +1,5 @@
 # react-multi-carousel 👋
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
 
 Production-ready, lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering).
 
@@ -394,6 +395,16 @@ They are very useful in the following cases:
 </Carousel>
 ```
 
+## Skipping callbacks
+
+When calling the `goToSlide` function on a Carousel the callbacks will be run by default. You can skip all or individul callbacks by passing a second parameter to `goToSlide.`
+
+```js
+this.Carousel.goToSlide(1, true); // Skips both beforeChange and afterChange
+this.Carousel.goToSlide(1, { skipBeforeChange: true }); // Skips only beforeChange
+this.Carousel.goToSlide(1, { skipAfterChange: true }); // Skips only afterChange
+```
+
 ## focusOnSelect
 
 Go to slide on click and make the slide a current slide.
@@ -491,3 +502,25 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 ## License
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel?ref=badge_large)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/revskill10"><img src="https://avatars3.githubusercontent.com/u/1390196?v=4" width="100px;" alt="Truong Hoang Dung"/><br /><sub><b>Truong Hoang Dung</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=revskill10" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/tpinne"><img src="https://avatars1.githubusercontent.com/u/1384345?v=4" width="100px;" alt="Tobias Pinnekamp"/><br /><sub><b>Tobias Pinnekamp</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=tpinne" title="Code">💻</a></td>
+    <td align="center"><a href="https://raajnadar.in"><img src="https://avatars1.githubusercontent.com/u/17236768?v=4" width="100px;" alt="Rajendran Nadar"/><br /><sub><b>Rajendran Nadar</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=raajnadar" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/abhinavdalal-iconnect"><img src="https://avatars0.githubusercontent.com/u/35057308?v=4" width="100px;" alt="Abhinav Dalal"/><br /><sub><b>Abhinav Dalal</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=abhinavdalal-iconnect" title="Code">💻</a></td>
+    <td align="center"><a href="https://oscarbarrett.github.io/"><img src="https://avatars0.githubusercontent.com/u/3511332?v=4" width="100px;" alt="Oscar Barrett"/><br /><sub><b>Oscar Barrett</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=OscarBarrett" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/neamatmim"><img src="https://avatars2.githubusercontent.com/u/37859935?v=4" width="100px;" alt="Neamat Mim"/><br /><sub><b>Neamat Mim</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=neamatmim" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Martinretrou"><img src="https://avatars3.githubusercontent.com/u/17448102?v=4" width="100px;" alt="Martin Retrou"/><br /><sub><b>Martin Retrou</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=Martinretrou" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

@@ -51,14 +51,29 @@ function getIfSlideIsVisbile(
   return index >= currentSlide && index < currentSlide + slidesToShow;
 }
 
+function notEnoughChildren(
+  state: CarouselInternalState,
+  props: CarouselProps,
+  items?: number | undefined
+): boolean {
+  const childrenArr = React.Children.toArray(props.children);
+  const { slidesToShow } = state;
+  return items ? childrenArr.length < items : childrenArr.length < slidesToShow;
+}
+
 function getTransformForCenterMode(
   state: CarouselInternalState,
-  props: CarouselProps
+  props: CarouselProps,
+  transformPlaceHolder?: number
 ) {
-  if (notEnoughChildren(state, props) || state.currentSlide === 0 && !props.infinite) {
-    return state.transform;
+  const transform = transformPlaceHolder || state.transform;
+  if (
+    notEnoughChildren(state, props) ||
+    (state.currentSlide === 0 && !props.infinite)
+  ) {
+    return transform;
   } else {
-    return state.transform + state.itemWidth / 2;
+    return transform + state.itemWidth / 2;
   }
 }
 
@@ -77,12 +92,15 @@ function isInRightEnd({
 function getTransformForPartialVsibile(
   state: CarouselInternalState,
   partialVisibilityGutter = 0,
-  props: CarouselProps
+  props: CarouselProps,
+  transformPlaceHolder?: number
 ) {
   const { currentSlide, slidesToShow } = state;
   const isRightEndReach = isInRightEnd(state);
   const shouldRemoveRightGutter = !props.infinite && isRightEndReach;
-  const transform = state.transform + currentSlide * partialVisibilityGutter;
+  const transform =
+    (transformPlaceHolder || state.transform) +
+    currentSlide * partialVisibilityGutter;
   if (shouldRemoveRightGutter) {
     const remainingWidth =
       state.containerWidth -
@@ -92,14 +110,30 @@ function getTransformForPartialVsibile(
   return transform;
 }
 
-function notEnoughChildren(
+function getTransform(
   state: CarouselInternalState,
   props: CarouselProps,
-  items?: number | undefined
-): boolean {
-  const childrenArr = React.Children.toArray(props.children);
-  const { slidesToShow } = state;
-  return items ? childrenArr.length < items : childrenArr.length < slidesToShow;
+  transformPlaceHolder?: number
+) {
+  const { partialVisbile, responsive, deviceType, centerMode } = props;
+  const transform = transformPlaceHolder || state.transform;
+  const partialVisibilityGutter = getPartialVisibilityGutter(
+    responsive,
+    partialVisbile,
+    deviceType,
+    state.deviceType
+  );
+  const currentTransform = partialVisbile
+    ? getTransformForPartialVsibile(
+        state,
+        partialVisibilityGutter,
+        props,
+        transformPlaceHolder
+      )
+    : centerMode
+    ? getTransformForCenterMode(state, props, transformPlaceHolder)
+    : transform;
+  return currentTransform;
 }
 
 function getSlidesToSlide(
@@ -145,5 +179,6 @@ export {
   getTransformForCenterMode,
   getTransformForPartialVsibile,
   notEnoughChildren,
-  getSlidesToSlide
+  getSlidesToSlide,
+  getTransform
 };
