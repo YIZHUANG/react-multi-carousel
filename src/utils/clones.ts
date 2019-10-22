@@ -86,6 +86,9 @@ then we clone "slidesToShow * 2" amount of beginning and end items.
 Otherwise, it means we only have a few items. Then we clone it 3 times.
 */
 function getClones(slidesToShow: number, childrenArr: any[]) {
+  if (childrenArr.length < slidesToShow) {
+    return childrenArr;
+  }
   if (childrenArr.length > slidesToShow * 2) {
     return [
       ...childrenArr.slice(
@@ -100,11 +103,13 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
 }
 
 function getInitialSlideInInfiniteMode(slidesToShow:number, childrenArr: any[]) {
+  if (childrenArr.length < slidesToShow) {
+    return 0;
+  }
   if (childrenArr.length > slidesToShow * 2) {
     return slidesToShow * 2;
-  } else {
-    return childrenArr.length;
   }
+  return childrenArr.length;
 }
 
 /*
@@ -128,10 +133,15 @@ function checkClonesPosition(
   let nextSlide = 0;
   let nextPosition = 0;
   let isReachingTheEnd;
-  const isReachingTheStart = currentSlide === 0;
+  let isReachingTheStart = currentSlide === 0;
   const originalFirstSlide =
     childrenArr.length - (childrenArr.length - slidesToShow * 2);
-  if (childrenArr.length > slidesToShow * 2) {
+  if (childrenArr.length < slidesToShow) {
+    nextSlide = 0;
+    nextPosition = 0;
+    isReachingTheEnd = false;
+    isReachingTheStart = false;
+  } else if (childrenArr.length > slidesToShow * 2) {
     isReachingTheEnd = currentSlide >= originalFirstSlide + childrenArr.length;
     if (isReachingTheEnd) {
       nextSlide = currentSlide - childrenArr.length;
