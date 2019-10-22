@@ -28,6 +28,7 @@ export interface CarouselProps {
   customRightArrow?: React.ReactElement<any> | null;
   customDot?: React.ReactElement<any> | null;
   customButtonGroup?: React.ReactElement<any> | null;
+  ifEmpty?: React.ReactElement<any> | null;
   infinite?: boolean;
   minimumTouchDrag?: number; // default 50px. The amount of distance to drag / swipe in order to move to the next slide.
   afterChange?: (previousSlide: number, state: StateCallBack) => void; // Change callback after sliding everytime. `(previousSlide, currentState) => ...`
@@ -62,7 +63,9 @@ export interface StateCallBack extends CarouselInternalState {
   direction: Direction;
 }
 export type Direction = "left" | "right" | "" | undefined;
-export type SkipCallbackOptions = boolean | { skipBeforeChange?: boolean, skipAfterChange?: boolean }
+export type SkipCallbackOptions =
+  | boolean
+  | { skipBeforeChange?: boolean; skipAfterChange?: boolean };
 export interface ButtonGroupProps {
   previous?: () => void;
   next?: () => void;

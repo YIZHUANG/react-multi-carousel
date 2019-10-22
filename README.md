@@ -44,6 +44,7 @@ Production-ready, lightweight fully customizable React carousel component that r
 - Custom arrows / control buttons
 - Custom dots
 - Custom styling
+- Custom ifEmpty
 - Accessibility support
 - Center mode.
 - Show next/previous set of items partially
@@ -271,6 +272,18 @@ const CustomDot = ({ onClick, ...rest }) => {
 <Carousel showDots customDot={<CustomDot />}>
 {carouselItems}
 </Carousel>
+```
+
+## custom ifEmpty
+You can pass your own component to be rendered only when no children are passed.
+```js
+const carouselItems = items.filter(i=> i.name.search(searchQuery))
+
+<div className='my-own-custom-container'>
+  <Carousel ifEmpty={<CustomComponent />}>
+    {carouselItems}
+  </Carousel>
+</div>
 ```
 
 ## renderDotsOutside
