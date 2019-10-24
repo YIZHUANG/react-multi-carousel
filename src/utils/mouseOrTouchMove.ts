@@ -13,12 +13,7 @@ function populateSlidesOnMouseTouchMove(
   nextPosition: number | undefined;
   canContinue: boolean;
 } {
-  const {
-    itemWidth,
-    slidesToShow,
-    totalItems,
-    currentSlide
-  } = state;
+  const { itemWidth, slidesToShow, totalItems, currentSlide } = state;
   const { infinite } = props;
   let canContinue = false; // it will be true if we have slides to slide to.
   let direction: Direction; // either 'left' or 'right'

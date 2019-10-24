@@ -45,9 +45,10 @@ export interface CarouselProps {
   renderDotsOutside?: boolean; // show dots outside of the container for custom styling.
   renderButtonGroupOutside?: boolean; // show buttonGroup outside of the container for custom styling.
   // Show next/previous item partially
-  // partialVisbile has to be used in conjunction with the responsive props, details are in documentation.
+  // partialVisible has to be used in conjunction with the responsive props, details are in documentation.
   // it shows the next set of items partially, different from centerMode as it shows both.
-  partialVisbile?: boolean;
+  partialVisible?: boolean;
+  partialVisbile?: boolean; // old typo - deprecated (will be remove in 3.0)
   customTransition?: string;
   transitionDuration?: number;
   // if you are using customTransition, make sure to put the duration here.
@@ -62,7 +63,9 @@ export interface StateCallBack extends CarouselInternalState {
   direction: Direction;
 }
 export type Direction = "left" | "right" | "" | undefined;
-export type SkipCallbackOptions = boolean | { skipBeforeChange?: boolean, skipAfterChange?: boolean }
+export type SkipCallbackOptions =
+  | boolean
+  | { skipBeforeChange?: boolean; skipAfterChange?: boolean };
 export interface ButtonGroupProps {
   previous?: () => void;
   next?: () => void;
