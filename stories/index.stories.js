@@ -364,7 +364,7 @@ storiesOf("Carousel", module)
     return (
       <Carousel
         infinite
-        partialVisible="right" // should be boolean ideally
+        partialVisible
         containerClass="container"
         responsive={responsive}
       >
