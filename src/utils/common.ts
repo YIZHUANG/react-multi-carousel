@@ -16,7 +16,8 @@ function getInitialState(
   shouldRenderAtAll: boolean;
 } {
   const { domLoaded, slidesToShow, containerWidth, itemWidth } = state;
-  const { deviceType, responsive, ssr, partialVisbile } = props;
+  // old wrongly spelt partialVisbile prop kept to not make changes breaking
+  const { deviceType, responsive, ssr, partialVisbile, partialVisible } = props;
   let flexBisis: number | string | undefined;
   const domFullyLoaded = Boolean(
     domLoaded && slidesToShow && containerWidth && itemWidth
@@ -29,7 +30,7 @@ function getInitialState(
   );
   const partialVisibilityGutter = getPartialVisibilityGutter(
     responsive,
-    partialVisbile,
+    partialVisbile || partialVisible,
     deviceType,
     state.deviceType
   );
@@ -102,24 +103,32 @@ function getTransform(
   props: CarouselProps,
   transformPlaceHolder?: number
 ) {
-  const { partialVisbile, responsive, deviceType, centerMode } = props;
+  // old wrongly spelt partialVisbile prop kept to not make changes breaking
+  const {
+    partialVisbile,
+    partialVisible,
+    responsive,
+    deviceType,
+    centerMode
+  } = props;
   const transform = transformPlaceHolder || state.transform;
   const partialVisibilityGutter = getPartialVisibilityGutter(
     responsive,
-    partialVisbile,
+    partialVisbile || partialVisible,
     deviceType,
     state.deviceType
   );
-  const currentTransform = partialVisbile
-    ? getTransformForPartialVsibile(
-        state,
-        partialVisibilityGutter,
-        props,
-        transformPlaceHolder
-      )
-    : centerMode
-    ? getTransformForCenterMode(state, props, transformPlaceHolder)
-    : transform;
+  const currentTransform =
+    partialVisible || partialVisbile
+      ? getTransformForPartialVsibile(
+          state,
+          partialVisibilityGutter,
+          props,
+          transformPlaceHolder
+        )
+      : centerMode
+      ? getTransformForCenterMode(state, props, transformPlaceHolder)
+      : transform;
   return currentTransform;
 }
 

@@ -77,7 +77,7 @@ class WithScrollbar extends React.Component {
       <Carousel
         ssr={false}
         ref={el => (this.Carousel = el)}
-        partialVisbile={false}
+        partialVisible={false}
         customButtonGroup={<CustomSlider />}
         itemClass="image-item"
         responsive={responsive}

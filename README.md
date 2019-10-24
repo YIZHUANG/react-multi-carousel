@@ -286,7 +286,7 @@ Passing this props would render the dots outside of the Carousel container. This
 </div>
 ```
 
-## partialVisbile props.
+## partialVisible props.
 
 Shows the next items partially, this is very useful if you want to indicate to the users that this carousel component is swipable, has more items behind it.
 
@@ -312,7 +312,7 @@ const responsive = {
     partialVisibilityGutter: 30 // this is needed to tell the amount of px that should be visible.
   }
 }
-<Carousel partialVisbile={true} responsive={responsive}>
+<Carousel partialVisible={true} responsive={responsive}>
   <ItemOne />
   <ItemTwo />
 </Carousel>
@@ -468,7 +468,7 @@ For example if you give to your carousel item padding left and padding right 20p
 | autoPlaySpeed           |                                                                      `number`                                                                      |               3000                | The unit is ms                                                                                                                                                        |
 | showDots                |                                                                     `boolean`                                                                      |              `false`              | Hide the default dot list                                                                                                                                             |
 | renderDotsOutside       |                                                                     `boolean`                                                                      |              `false`              | Show dots outside of the container                                                                                                                                    |
-| partialVisbile          |                                                                 `boolean | string`                                                                 |              `false`              | Show partial next slides. This is use with the `responsive` prop, see example for details                                                                             |
+| partialVisible          |                                                                 `boolean | string`                                                                 |              `false`              | Show partial next slides. This is use with the `responsive` prop, see example for details                                                                             |
 | customTransition        |                                                                      `string`                                                                      |   `transform 300ms ease-in-out`   | Configure your own anaimation when sliding                                                                                                                            |
 | transitionDuration      | `number |`300` | The unit is ms, if you are using customTransition, make sure to put the duration here as this is needed for the resizing to work. |
 | focusOnSelect           |                                    `boolean |`false` | Go to slide on click and make the slide a current slide.                                    |

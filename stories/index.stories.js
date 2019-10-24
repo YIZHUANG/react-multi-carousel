@@ -67,17 +67,17 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
-    partialVisibilityGutter: 40, // this is optional if you are not using partialVisbile props
+    partialVisibilityGutter: 40, // this is optional if you are not using partialVisible props
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    partialVisibilityGutter: 30, // this is optional if you are not using partialVisbile props
+    partialVisibilityGutter: 30, // this is optional if you are not using partialVisible props
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    partialVisibilityGutter: 30, // this is optional if you are not using partialVisbile props
+    partialVisibilityGutter: 30, // this is optional if you are not using partialVisible props
   },
 };
 
@@ -364,7 +364,7 @@ storiesOf("Carousel", module)
     return (
       <Carousel
         infinite
-        partialVisbile="right"
+        partialVisible="right" // should be boolean ideally
         containerClass="container"
         responsive={responsive}
       >

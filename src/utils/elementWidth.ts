@@ -4,13 +4,13 @@ let hasWarnAboutTypo = false;
 
 function getPartialVisibilityGutter(
   responsive: ResponsiveType,
-  partialVisbile?: boolean,
+  partialVisible?: boolean,
   serverSideDeviceType?: string | undefined,
   clientSideDeviceType?: string | undefined
 ): number | undefined {
   let gutter: number | undefined = 0;
   const deviceType = clientSideDeviceType || serverSideDeviceType;
-  if (partialVisbile && deviceType) {
+  if (partialVisible && deviceType) {
     if (
       !hasWarnAboutTypo &&
       process.env.NODE_ENV !== "production" &&
