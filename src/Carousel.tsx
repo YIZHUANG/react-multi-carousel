@@ -32,6 +32,7 @@ const defaultTransitionDuration = 400;
 const defaultTransition = "transform 400ms ease-in-out";
 class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public static defaultProps = {
+    intialSlide: 0,
     slidesToSlide: 1,
     infinite: false,
     draggable: true,
@@ -67,10 +68,14 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     super(props);
     this.containerRef = React.createRef();
     this.listRef = React.createRef();
+    const childCount = React.Children.count(props.children);
     this.state = {
       itemWidth: 0,
       slidesToShow: 0,
-      currentSlide: 0,
+      currentSlide:
+        this.props.initialSlide < childCount
+          ? this.props.initialSlide
+          : childCount,
       totalItems: React.Children.count(props.children),
       deviceType: "",
       domLoaded: false,
