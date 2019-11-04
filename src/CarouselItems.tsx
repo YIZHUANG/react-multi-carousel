@@ -1,13 +1,17 @@
 import * as React from "react";
 
-import { CarouselInternalState, CarouselProps } from "./types";
+import {
+  CarouselInternalState,
+  CarouselProps,
+  SkipCallbackOptions
+} from "./types";
 import { getInitialState, getIfSlideIsVisbile } from "./utils";
 
 interface CarouselItemsProps {
   props: CarouselProps;
   state: CarouselInternalState;
   clones: any[];
-  goToSlide: (index: number) => void;
+  goToSlide: (index: number, skipCallbacks?: SkipCallbackOptions) => void;
 }
 
 const CarouselItems = ({
@@ -17,7 +21,13 @@ const CarouselItems = ({
   clones
 }: CarouselItemsProps) => {
   const { itemWidth } = state;
-  const { children, infinite, itemClass, partialVisbile } = props;
+  const {
+    children,
+    infinite,
+    itemClass,
+    partialVisbile,
+    partialVisible
+  } = props;
   const {
     flexBisis,
     shouldRenderOnSSR,
@@ -27,6 +37,11 @@ const CarouselItems = ({
   } = getInitialState(state, props);
   if (!shouldRenderAtAll) {
     return null;
+  }
+  if (partialVisbile) {
+    console.warn(
+      'WARNING: Please correct props name: "partialVisible" as old typo will be removed in future versions!'
+    );
   }
   return (
     <>
@@ -47,7 +62,9 @@ const CarouselItems = ({
                 position: "relative",
                 width: domFullyLoaded
                   ? `${
-                      partialVisbile && partialVisibilityGutter
+                      // old wrongly spelt partialVisbile prop kept to not make changes breaking
+                      (partialVisbile || partialVisible) &&
+                      partialVisibilityGutter
                         ? itemWidth - partialVisibilityGutter
                         : itemWidth
                     }px`

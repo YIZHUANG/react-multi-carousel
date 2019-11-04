@@ -16,7 +16,8 @@ function getInitialState(
   shouldRenderAtAll: boolean;
 } {
   const { domLoaded, slidesToShow, containerWidth, itemWidth } = state;
-  const { deviceType, responsive, ssr, partialVisbile } = props;
+  // old wrongly spelt partialVisbile prop kept to not make changes breaking
+  const { deviceType, responsive, ssr, partialVisbile, partialVisible } = props;
   let flexBisis: number | string | undefined;
   const domFullyLoaded = Boolean(
     domLoaded && slidesToShow && containerWidth && itemWidth
@@ -29,7 +30,7 @@ function getInitialState(
   );
   const partialVisibilityGutter = getPartialVisibilityGutter(
     responsive,
-    partialVisbile,
+    partialVisbile || partialVisible,
     deviceType,
     state.deviceType
   );
@@ -53,12 +54,17 @@ function getIfSlideIsVisbile(
 
 function getTransformForCenterMode(
   state: CarouselInternalState,
-  props: CarouselProps
+  props: CarouselProps,
+  transformPlaceHolder?: number
 ) {
-  if ((!props.infinite && state.currentSlide === 0) || (props.infinite && state.totalItems < state.slidesToShow)) {
-    return state.transform;
+  const transform = transformPlaceHolder || state.transform;
+  if (
+    (!props.infinite && state.currentSlide === 0) ||
+    (props.infinite && state.totalItems < state.slidesToShow)
+  ) {
+    return transform;
   } else {
-    return state.transform + state.itemWidth / 2;
+    return transform + state.itemWidth / 2;
   }
 }
 
@@ -77,12 +83,15 @@ function isInRightEnd({
 function getTransformForPartialVsibile(
   state: CarouselInternalState,
   partialVisibilityGutter = 0,
-  props: CarouselProps
+  props: CarouselProps,
+  transformPlaceHolder?: number
 ) {
   const { currentSlide, slidesToShow } = state;
   const isRightEndReach = isInRightEnd(state);
   const shouldRemoveRightGutter = !props.infinite && isRightEndReach;
-  const transform = state.transform + currentSlide * partialVisibilityGutter;
+  const transform =
+    (transformPlaceHolder || state.transform) +
+    currentSlide * partialVisibilityGutter;
   if (shouldRemoveRightGutter) {
     const remainingWidth =
       state.containerWidth -
@@ -90,6 +99,40 @@ function getTransformForPartialVsibile(
     return transform + remainingWidth;
   }
   return transform;
+}
+
+function getTransform(
+  state: CarouselInternalState,
+  props: CarouselProps,
+  transformPlaceHolder?: number
+) {
+  // old wrongly spelt partialVisbile prop kept to not make changes breaking
+  const {
+    partialVisbile,
+    partialVisible,
+    responsive,
+    deviceType,
+    centerMode
+  } = props;
+  const transform = transformPlaceHolder || state.transform;
+  const partialVisibilityGutter = getPartialVisibilityGutter(
+    responsive,
+    partialVisbile || partialVisible,
+    deviceType,
+    state.deviceType
+  );
+  const currentTransform =
+    partialVisible || partialVisbile
+      ? getTransformForPartialVsibile(
+          state,
+          partialVisibilityGutter,
+          props,
+          transformPlaceHolder
+        )
+      : centerMode
+      ? getTransformForCenterMode(state, props, transformPlaceHolder)
+      : transform;
+  return currentTransform;
 }
 
 function notEnoughChildren(
@@ -145,5 +188,6 @@ export {
   getTransformForCenterMode,
   getTransformForPartialVsibile,
   notEnoughChildren,
-  getSlidesToSlide
+  getSlidesToSlide,
+  getTransform
 };

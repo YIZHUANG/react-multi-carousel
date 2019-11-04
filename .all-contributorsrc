@@ -1,0 +1,77 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "revskill10",
+      "name": "Truong Hoang Dung",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1390196?v=4",
+      "profile": "https://github.com/revskill10",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "tpinne",
+      "name": "Tobias Pinnekamp",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1384345?v=4",
+      "profile": "https://github.com/tpinne",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "raajnadar",
+      "name": "Rajendran Nadar",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/17236768?v=4",
+      "profile": "https://raajnadar.in",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "abhinavdalal-iconnect",
+      "name": "Abhinav Dalal",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/35057308?v=4",
+      "profile": "https://github.com/abhinavdalal-iconnect",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "OscarBarrett",
+      "name": "Oscar Barrett",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/3511332?v=4",
+      "profile": "https://oscarbarrett.github.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "neamatmim",
+      "name": "Neamat Mim",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/37859935?v=4",
+      "profile": "https://github.com/neamatmim",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Martinretrou",
+      "name": "Martin Retrou",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/17448102?v=4",
+      "profile": "https://github.com/Martinretrou",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "react-multi-carousel",
+  "projectOwner": "YIZHUANG",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}

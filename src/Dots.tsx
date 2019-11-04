@@ -1,6 +1,11 @@
 import * as React from "react";
 
-import { CarouselInternalState, CarouselProps, StateCallBack } from "./types";
+import {
+  CarouselInternalState,
+  CarouselProps,
+  StateCallBack,
+  SkipCallbackOptions
+} from "./types";
 import { getOriginalIndexLookupTableByClones } from "./utils/clones";
 import { getLookupTableForNextSlides } from "./utils/dots";
 import { getSlidesToSlide } from "./utils/common";
@@ -8,7 +13,7 @@ import { getSlidesToSlide } from "./utils/common";
 interface DotsTypes {
   props: CarouselProps;
   state: CarouselInternalState;
-  goToSlide: (index: number) => void;
+  goToSlide: (index: number, skipCallbacks?: SkipCallbackOptions) => void;
   getState: () => StateCallBack;
 }
 const Dots = ({

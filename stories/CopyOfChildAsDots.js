@@ -75,7 +75,7 @@ class CarouselWithCustomDots extends React.PureComponent {
         slidesToSlide={1}
         containerClass="carousel-with-custom-dots"
         responsive={responsive}
-        partialVisbile
+        partialVisible
         infinite
         customDot={<CustomDot />}
       >

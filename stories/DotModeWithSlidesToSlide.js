@@ -74,7 +74,7 @@ class DotModeWithSlidesToSlide extends React.PureComponent {
         focusOnSelect
         containerClass="carousel-with-custom-dots"
         responsive={responsive}
-        partialVisbile
+        partialVisible
         customDot={<CustomDot />}
         infinite
       >
