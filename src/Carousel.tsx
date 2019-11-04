@@ -12,7 +12,7 @@ import {
   populateSlidesOnMouseTouchMove,
   isInLeftEnd,
   isInRightEnd,
-  getInitialSlideInInifteMode,
+  getInitialSlideInInfiniteMode,
   notEnoughChildren
 } from "./utils";
 import {
@@ -150,7 +150,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public setClones(
     slidesToShow: number,
     itemWidth?: number,
-    forResizing?: boolean
+    forResizing?: boolean,
+    resetCurrentSlide = false
   ): void {
     // if forResizing is true, means we are on client-side.
     // if forResizing is false, means we are on server-side.
@@ -158,22 +159,25 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     // but still, we want to maintain the same position as it was on the server-side which is translateX(0) by getting the couter part of the original first slide.
     this.isAnimationAllowed = false;
     const childrenArr = React.Children.toArray(this.props.children);
-    const initialSlide = getInitialSlideInInifteMode(
+    const initialSlide = getInitialSlideInInfiniteMode(
       slidesToShow || this.state.slidesToShow,
       childrenArr
     );
     const clones = getClones(this.state.slidesToShow, childrenArr);
-    if (!notEnoughChildren(this.state, this.props, slidesToShow)) {
-      this.setState(
-        {
-          totalItems: clones.length,
-          currentSlide: forResizing ? this.state.currentSlide : initialSlide
-        },
-        () => {
-          this.correctItemsPosition(itemWidth || this.state.itemWidth);
-        }
-      );
-    }
+    const currentSlide =
+      childrenArr.length < this.state.slidesToShow
+        ? 0
+        : this.state.currentSlide;
+    this.setState(
+      {
+        totalItems: clones.length,
+        currentSlide:
+          forResizing && !resetCurrentSlide ? currentSlide : initialSlide
+      },
+      () => {
+        this.correctItemsPosition(itemWidth || this.state.itemWidth);
+      }
+    );
   }
   public setItemsToShow(shouldCorrectItemPosition?: boolean): void {
     const { responsive } = this.props;
@@ -229,7 +233,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (!isAnimationAllowed && this.isAnimationAllowed) {
       this.isAnimationAllowed = false;
     }
-    const nextTransform = -(itemWidth * this.state.currentSlide);
+    const nextTransform =
+      this.state.totalItems < this.state.slidesToShow
+        ? 0
+        : -(itemWidth * this.state.currentSlide);
     if (setToDomDirectly) {
       this.setTransformDirectly(nextTransform, true);
     }
@@ -255,7 +262,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.setItemsToShow(shouldCorrectItemPosition);
   }
   public componentDidUpdate(
-    { keyBoardControl, autoPlay }: CarouselProps,
+    { keyBoardControl, autoPlay, children }: CarouselProps,
     { containerWidth, domLoaded, currentSlide }: CarouselInternalState
   ): void {
     if (
@@ -284,8 +291,17 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
     if (this.props.infinite && this.state.currentSlide !== currentSlide) {
-      // this is to quickly cancel the animation and move the items position to create the infinite effects.
-      this.correctClonesPosition({ domLoaded });
+      if (children.length !== this.props.children.length) {
+        this.setClones(
+          this.state.slidesToShow,
+          this.state.itemWidth,
+          true,
+          true
+        );
+      } else {
+        // this is to quickly cancel the animation and move the items position to create the infinite effects.
+        this.correctClonesPosition({ domLoaded });
+      }
     }
     if (this.transformPlaceHolder !== this.state.transform) {
       this.transformPlaceHolder = this.state.transform;

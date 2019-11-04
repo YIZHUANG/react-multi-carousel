@@ -58,7 +58,10 @@ function getTransformForCenterMode(
   transformPlaceHolder?: number
 ) {
   const transform = transformPlaceHolder || state.transform;
-  if (state.currentSlide === 0 && !props.infinite) {
+  if (
+    (!props.infinite && state.currentSlide === 0) ||
+    (props.infinite && state.totalItems < state.slidesToShow)
+  ) {
     return transform;
   } else {
     return transform + state.itemWidth / 2;
