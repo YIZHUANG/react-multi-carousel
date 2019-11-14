@@ -43,7 +43,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     keyBoardControl: true,
     autoPlaySpeed: 3000,
     showDots: false,
-    removeDotsIfSingleSlide: false,
     renderDotsOutside: false,
     renderButtonGroupOutside: false,
     minimumTouchDrag: 80,

@@ -22,14 +22,7 @@ const Dots = ({
   goToSlide,
   getState
 }: DotsTypes): React.ReactElement<any> | null => {
-  const {
-    showDots,
-    removeDotsIfSingleSlide,
-    customDot,
-    dotListClass,
-    infinite,
-    children
-  } = props;
+  const { showDots, customDot, dotListClass, infinite, children } = props;
   if (!showDots) {
     return null;
   }
@@ -54,8 +47,7 @@ const Dots = ({
     childrenArr
   );
   const currentSlides = lookupTable[currentSlide];
-  const shouldRemoveDots =
-    removeDotsIfSingleSlide && numberOfDotsToShow <= 1 && !customDot;
+  const shouldRemoveDots = numberOfDotsToShow <= 1 && !customDot;
 
   if (shouldRemoveDots) {
     return null;
