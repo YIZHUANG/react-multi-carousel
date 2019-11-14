@@ -42,6 +42,7 @@ export interface CarouselProps {
   autoPlay?: boolean;
   autoPlaySpeed?: number; // default 3000ms
   showDots?: boolean;
+  removeDotsIfSingleSlide?: boolean; // hides the dots when there is only one slide
   renderDotsOutside?: boolean; // show dots outside of the container for custom styling.
   renderButtonGroupOutside?: boolean; // show buttonGroup outside of the container for custom styling.
   // Show next/previous item partially
