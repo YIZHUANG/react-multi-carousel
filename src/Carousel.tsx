@@ -108,6 +108,23 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.isInThrottle = false;
     this.transformPlaceHolder = 0;
   }
+  // we only use this when infinite mode is off
+  public resetTotalItems(): void {
+    const totalItems = React.Children.count(this.props.children);
+    const currentSlide = notEnoughChildren(this.state, this.props)
+      ? 0
+      : // this ensures that if the currentSlide before change in childrenCount is more than new childrenCount; we will set it to new childrenCount
+        Math.max(0, Math.min(this.state.currentSlide, totalItems));
+    this.setState(
+      {
+        totalItems,
+        currentSlide
+      },
+      () => {
+        this.setContainerAndItemWidth(this.state.slidesToShow, true);
+      }
+    );
+  }
   public setIsInThrottle(isInThrottle = false): void {
     this.isInThrottle = isInThrottle;
   }
@@ -179,21 +196,29 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }
     );
   }
-  public setItemsToShow(shouldCorrectItemPosition?: boolean): void {
+  public setItemsToShow(
+    shouldCorrectItemPosition?: boolean,
+    resetCurrentSlide?: boolean
+  ): void {
     const { responsive } = this.props;
     Object.keys(responsive).forEach(item => {
       const { breakpoint, items } = responsive[item];
       const { max, min } = breakpoint;
       if (window.innerWidth >= min && window.innerWidth <= max) {
         this.setState({ slidesToShow: items, deviceType: item });
-        this.setContainerAndItemWidth(items, shouldCorrectItemPosition);
+        this.setContainerAndItemWidth(
+          items,
+          shouldCorrectItemPosition,
+          resetCurrentSlide
+        );
       }
     });
   }
   // this is for resizing only or the first time when we entered client-side from server-side.
   public setContainerAndItemWidth(
     slidesToShow: number,
-    shouldCorrectItemPosition?: boolean
+    shouldCorrectItemPosition?: boolean,
+    resetCurrentSlide?: boolean
   ): void {
     if (this.containerRef && this.containerRef.current) {
       const containerWidth = this.containerRef.current.offsetWidth;
@@ -209,7 +234,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         },
         () => {
           if (this.props.infinite) {
-            this.setClones(slidesToShow, itemWidth, shouldCorrectItemPosition);
+            this.setClones(
+              slidesToShow,
+              itemWidth,
+              shouldCorrectItemPosition,
+              resetCurrentSlide
+            );
           }
         }
       );
@@ -259,7 +289,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         shouldCorrectItemPosition = true;
       }
     }
-    this.setItemsToShow(shouldCorrectItemPosition);
+    this.setItemsToShow(shouldCorrectItemPosition, true);
   }
   public componentDidUpdate(
     { keyBoardControl, autoPlay, children }: CarouselProps,
@@ -290,18 +320,26 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (!autoPlay && this.props.autoPlay && !this.autoPlay) {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
-    if (this.props.infinite && this.state.currentSlide !== currentSlide) {
-      if (children.length !== this.props.children.length) {
-        this.setClones(
-          this.state.slidesToShow,
-          this.state.itemWidth,
-          true,
-          true
-        );
-      } else {
-        // this is to quickly cancel the animation and move the items position to create the infinite effects.
-        this.correctClonesPosition({ domLoaded });
-      }
+    if (children.length !== this.props.children.length) {
+      // this is for handling changing children only.
+      setTimeout(() => {
+        if (this.props.infinite) {
+          this.setClones(
+            this.state.slidesToShow,
+            this.state.itemWidth,
+            true,
+            true
+          );
+        } else {
+          this.resetTotalItems();
+        }
+      }, this.props.transitionDuration || defaultTransitionDuration);
+    } else if (
+      this.props.infinite &&
+      this.state.currentSlide !== currentSlide
+    ) {
+      // this is to quickly cancel the animation and move the items position to create the infinite effects.
+      this.correctClonesPosition({ domLoaded });
     }
     if (this.transformPlaceHolder !== this.state.transform) {
       this.transformPlaceHolder = this.state.transform;
