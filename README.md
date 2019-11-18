@@ -1,5 +1,5 @@
 # react-multi-carousel 👋
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
 
 Production-ready, lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering).
 
@@ -518,6 +518,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://oscarbarrett.github.io/"><img src="https://avatars0.githubusercontent.com/u/3511332?v=4" width="100px;" alt="Oscar Barrett"/><br /><sub><b>Oscar Barrett</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=OscarBarrett" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/neamatmim"><img src="https://avatars2.githubusercontent.com/u/37859935?v=4" width="100px;" alt="Neamat Mim"/><br /><sub><b>Neamat Mim</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=neamatmim" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Martinretrou"><img src="https://avatars3.githubusercontent.com/u/17448102?v=4" width="100px;" alt="Martin Retrou"/><br /><sub><b>Martin Retrou</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=Martinretrou" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="http://benhodgson.net"><img src="https://avatars0.githubusercontent.com/u/189707?v=4" width="100px;" alt="Ben Hodgson"/><br /><sub><b>Ben Hodgson</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=benhodgson87" title="Code">💻</a></td>
   </tr>
 </table>
 
