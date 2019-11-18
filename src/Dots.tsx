@@ -47,7 +47,7 @@ const Dots = ({
     childrenArr
   );
   const currentSlides = lookupTable[currentSlide];
-  const shouldRemoveDots = numberOfDotsToShow <= 1 && !customDot;
+  const shouldRemoveDots = numberOfDotsToShow <= 1;
 
   if (shouldRemoveDots) {
     return null;
