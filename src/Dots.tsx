@@ -8,7 +8,7 @@ import {
 } from "./types";
 import { getOriginalIndexLookupTableByClones } from "./utils/clones";
 import { getLookupTableForNextSlides } from "./utils/dots";
-import { getSlidesToSlide } from "./utils/common";
+import { getSlidesToSlide, notEnoughChildren } from "./utils/common";
 
 interface DotsTypes {
   props: CarouselProps;
@@ -47,6 +47,11 @@ const Dots = ({
     childrenArr
   );
   const currentSlides = lookupTable[currentSlide];
+
+  if (notEnoughChildren(state, props)) {
+    return null;
+  }
+
   return (
     <ul className={`react-multi-carousel-dot-list ${dotListClass}`}>
       {Array(numberOfDotsToShow)
