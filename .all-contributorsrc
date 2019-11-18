@@ -67,6 +67,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "benhodgson87",
+      "name": "Ben Hodgson",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/189707?v=4",
+      "profile": "http://benhodgson.net",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
