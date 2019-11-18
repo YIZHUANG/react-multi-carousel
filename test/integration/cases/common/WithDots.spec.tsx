@@ -83,4 +83,25 @@ describe("With dots", () => {
     ).toBe(0);
     wrapper.unmount();
   });
+  test("Should not render dots if there is not enough children", () => {
+    const wrapper = mount(
+      <Carousel
+        showDots={true}
+        ssr
+        deviceType="desktop"
+        swipeable={false}
+        draggable={false}
+        responsive={responsive1}
+        slidesToSlide={2}
+        minimumTouchDrag={0}
+        customDot={<CustomDot />}
+      >
+        {longData.slice(0, 1).map(card => {
+          return <Card {...card} />;
+        })}
+      </Carousel>
+    );
+    expect(wrapper.find(".custom-dot").length).toBe(0);
+    wrapper.unmount();
+  });
 });

@@ -23,7 +23,7 @@ const Dots = ({
   getState
 }: DotsTypes): React.ReactElement<any> | null => {
   const { showDots, customDot, dotListClass, infinite, children } = props;
-  if (!showDots) {
+  if (!showDots || notEnoughChildren(state, props)) {
     return null;
   }
   const { currentSlide, slidesToShow } = state;
@@ -47,11 +47,6 @@ const Dots = ({
     childrenArr
   );
   const currentSlides = lookupTable[currentSlide];
-
-  if (notEnoughChildren(state, props)) {
-    return null;
-  }
-
   return (
     <ul className={`react-multi-carousel-dot-list ${dotListClass}`}>
       {Array(numberOfDotsToShow)
