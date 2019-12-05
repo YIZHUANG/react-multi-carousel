@@ -111,7 +111,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   // we only use this when infinite mode is off
   public resetTotalItems(): void {
     const totalItems = React.Children.count(this.props.children);
-    const currentSlide = notEnoughChildren(this.state, this.props)
+    const currentSlide = notEnoughChildren(this.state)
       ? 0
       : // this ensures that if the currentSlide before change in childrenCount is more than new childrenCount; we will set it to new childrenCount
         Math.max(0, Math.min(this.state.currentSlide, totalItems));
@@ -375,7 +375,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public next(slidesHavePassed = 0): void {
     const { afterChange, beforeChange } = this.props;
-    if (notEnoughChildren(this.state, this.props)) {
+    if (notEnoughChildren(this.state)) {
       return;
     }
     /*
@@ -413,7 +413,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public previous(slidesHavePassed = 0): void {
     const { afterChange, beforeChange } = this.props;
-    if (notEnoughChildren(this.state, this.props)) {
+    if (notEnoughChildren(this.state)) {
       return;
     }
     const { nextSlides, nextPosition } = populatePreviousSlides(
@@ -484,7 +484,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (
       (!isMouseMoveEvent(e) && !this.props.swipeable) ||
       (isMouseMoveEvent(e) && !this.props.draggable) ||
-      notEnoughChildren(this.state, this.props)
+      notEnoughChildren(this.state)
     ) {
       return;
     }
@@ -675,6 +675,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         clones={clones}
         goToSlide={this.goToSlide}
         state={this.state}
+        notEnoughChildren={notEnoughChildren(this.state)}
         props={this.props}
       />
     );
@@ -711,7 +712,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           (this.state.deviceType &&
             removeArrowOnDeviceType.indexOf(this.state.deviceType) > -1))
       ) &&
-      !notEnoughChildren(this.state, this.props) &&
+      !notEnoughChildren(this.state) &&
       shouldRenderAtAll;
     const disableLeftArrow = !infinite && isLeftEndReach;
     const disableRightArrow = !infinite && isRightEndReach;

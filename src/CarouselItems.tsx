@@ -11,6 +11,7 @@ interface CarouselItemsProps {
   props: CarouselProps;
   state: CarouselInternalState;
   clones: any[];
+  notEnoughChildren: boolean;
   goToSlide: (index: number, skipCallbacks?: SkipCallbackOptions) => void;
 }
 
@@ -18,7 +19,8 @@ const CarouselItems = ({
   props,
   state,
   goToSlide,
-  clones
+  clones,
+  notEnoughChildren
 }: CarouselItemsProps) => {
   const { itemWidth } = state;
   const {
@@ -64,7 +66,8 @@ const CarouselItems = ({
                   ? `${
                       // old wrongly spelt partialVisbile prop kept to not make changes breaking
                       (partialVisbile || partialVisible) &&
-                      partialVisibilityGutter
+                      partialVisibilityGutter &&
+                      !notEnoughChildren
                         ? itemWidth - partialVisibilityGutter
                         : itemWidth
                     }px`

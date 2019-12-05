@@ -1,9 +1,13 @@
-import * as React from "react";
 import {
   getPartialVisibilityGutter,
   getWidthFromDeviceType
 } from "./elementWidth";
 import { CarouselInternalState, CarouselProps } from "../types";
+
+function notEnoughChildren(state: CarouselInternalState): boolean {
+  const { slidesToShow, totalItems } = state;
+  return totalItems < slidesToShow;
+}
 
 function getInitialState(
   state: CarouselInternalState,
@@ -60,7 +64,7 @@ function getTransformForCenterMode(
   const transform = transformPlaceHolder || state.transform;
   if (
     (!props.infinite && state.currentSlide === 0) ||
-    (props.infinite && state.totalItems < state.slidesToShow)
+    notEnoughChildren(state)
   ) {
     return transform;
   } else {
@@ -89,9 +93,11 @@ function getTransformForPartialVsibile(
   const { currentSlide, slidesToShow } = state;
   const isRightEndReach = isInRightEnd(state);
   const shouldRemoveRightGutter = !props.infinite && isRightEndReach;
-  const transform =
-    (transformPlaceHolder || state.transform) +
-    currentSlide * partialVisibilityGutter;
+  const baseTransform = transformPlaceHolder || state.transform;
+  if (notEnoughChildren(state)) {
+    return baseTransform;
+  }
+  const transform = baseTransform + currentSlide * partialVisibilityGutter;
   if (shouldRemoveRightGutter) {
     const remainingWidth =
       state.containerWidth -
@@ -133,16 +139,6 @@ function getTransform(
       ? getTransformForCenterMode(state, props, transformPlaceHolder)
       : transform;
   return currentTransform;
-}
-
-function notEnoughChildren(
-  state: CarouselInternalState,
-  props: CarouselProps,
-  items?: number | undefined
-): boolean {
-  const childrenArr = React.Children.toArray(props.children);
-  const { slidesToShow } = state;
-  return items ? childrenArr.length < items : childrenArr.length < slidesToShow;
 }
 
 function getSlidesToSlide(
