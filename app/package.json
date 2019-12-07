@@ -20,7 +20,7 @@
     "faker": "^4.1.0",
     "jss": "^9.8.7",
     "mobile-detect": "^1.4.3",
-    "next": "7.0.3",
+    "next": "9.0.6",
     "next-routes": "1.4.2",
     "next-transpile-modules": "^2.2.0",
     "package.json": "^2.0.1",
