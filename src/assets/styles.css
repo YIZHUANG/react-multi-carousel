@@ -92,7 +92,7 @@
   outline: 0;
   cursor: pointer;
 }
-.react-multi-carousel-dot button:hover {
+.react-multi-carousel-dot button:hover:active {
   background: #080808;
 }
 .react-multi-carousel-dot--active button {
