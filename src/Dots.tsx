@@ -23,7 +23,7 @@ const Dots = ({
   getState
 }: DotsTypes): React.ReactElement<any> | null => {
   const { showDots, customDot, dotListClass, infinite, children } = props;
-  if (!showDots || notEnoughChildren(state, props)) {
+  if (!showDots || notEnoughChildren(state)) {
     return null;
   }
   const { currentSlide, slidesToShow } = state;

@@ -8,7 +8,6 @@ export interface ResponsiveType {
     slidesToSlide?: number;
   };
 }
-
 export function isMouseMoveEvent(
   e: React.MouseEvent | React.TouchEvent
 ): e is React.MouseEvent {
