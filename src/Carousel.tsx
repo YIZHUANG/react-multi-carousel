@@ -615,11 +615,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     );
   }
   public getState(): StateCallBack {
-    return {
-      ...this.state,
-      onMove: this.onMove,
-      direction: this.direction
-    };
+    return this.state;
   }
   public renderLeftArrow(): React.ReactNode {
     const { customLeftArrow } = this.props;

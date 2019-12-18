@@ -106,7 +106,7 @@ class Index extends React.Component {
           infinite={true}
           beforeChange={() => this.setState({ isMoving: true })}
           afterChange={() => this.setState({ isMoving: false })}
-          containerClass="first-carousel-container container"
+          containerClass="container"
           slidesToSlide={1}
           deviceType={this.props.deviceType}
         >

@@ -57,10 +57,9 @@ export interface CarouselProps {
   additionalTransfrom?: number; // this is only used if you want to add additional transfrom to the current transform
 }
 
-export interface StateCallBack extends CarouselInternalState {
-  onMove: boolean;
-  direction: Direction;
-}
+
+export type StateCallBack = CarouselInternalState;
+
 export type Direction = "left" | "right" | "" | undefined;
 export type SkipCallbackOptions =
   | boolean

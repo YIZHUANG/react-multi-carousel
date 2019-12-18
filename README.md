@@ -259,7 +259,7 @@ You custom dots will receive a list of props/state that's passed back by the car
 ```js
 const CustomDot = ({ onClick, ...rest }) => {
   const { onMove, index, active, carouselState: { currentSlide, deviceType }  } = rest;
-  const carouselItems = [<CarouselItem1, CaourselItem2, CarouselItem3];
+  const carouselItems = [CarouselItem1, CaourselItem2, CarouselItem3];
   // onMove means if dragging or swiping in progress.
   // active is provided by this lib for checking if the item is active or not.
   return (

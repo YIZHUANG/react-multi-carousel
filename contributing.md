@@ -10,7 +10,7 @@ Send a PR or raise an issue to:
 
 Pull requests are welcome. To start up your local development:
 
-- cd app
+- cd dev
 - npm install -- package.json
 - npm run dev
 - Navigate to http://localhost:3000
