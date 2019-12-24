@@ -8,7 +8,7 @@ assignees: ''
 ---
 **Prerequisite**
 
-Before you submit a feature request or report a bug to be fixed, make sure you have stared this repository or given or about to give good compliments regarding what a good job the contributors of this project have done as they are doing this for free at their own free time, this is the least you can do.
+Before you submit a feature request or report a bug to be fixed, make sure you have stared this repository or given or about to give good compliments regarding what a good job the contributors of this project have done as they are doing this for free at their own free time, this is the least you can do. A [donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GJSPRG9RKSJLQ&source=url) is also welcomed
 
 **Describe the bug**
 A clear and concise description of what the bug is.
