@@ -47,6 +47,7 @@ Production-ready, lightweight fully customizable React carousel component that r
 - Accessibility support
 - Center mode.
 - Show next/previous set of items partially
+- RTL support (only for `customButtonGroup` prop)
 
 ### Shoutouts 🙏
 
