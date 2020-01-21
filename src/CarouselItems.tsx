@@ -27,6 +27,7 @@ const CarouselItems = ({
     children,
     infinite,
     itemClass,
+    activeItemClass,
     partialVisbile,
     partialVisible
   } = props;
@@ -75,7 +76,7 @@ const CarouselItems = ({
               }}
               className={`react-multi-carousel-item ${
                 getIfSlideIsVisbile(index, state)
-                  ? "react-multi-carousel-item--active"
+                  ? `react-multi-carousel-item--active ${activeItemClass}`
                   : ""
               } ${itemClass}`}
             >

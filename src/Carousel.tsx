@@ -40,6 +40,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     containerClass: "",
     sliderClass: "",
     itemClass: "",
+    activeItemClass: "",
     keyBoardControl: true,
     autoPlaySpeed: 3000,
     showDots: false,

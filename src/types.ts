@@ -33,6 +33,7 @@ export interface CarouselProps {
   beforeChange?: (nextSlide: number, state: StateCallBack) => void; // Change callback before sliding everytime. `(previousSlide, currentState) => ...`
   sliderClass?: string; // Use this to style your own track list.
   itemClass?: string; // Use this to style your own Carousel item. For example add padding-left and padding-right
+  activeItemClass?: string; // Use this to style your own active Carousel item.
   containerClass?: string; // Use this to style the whole container. For example add padding to allow the "dots" or "arrows" to go to other places without being overflown.
   className?: string; // Use this to style the whole container with styled-components
   dotListClass?: string; // Use this to style the dot list.
@@ -56,7 +57,6 @@ export interface CarouselProps {
   focusOnSelect?: boolean;
   additionalTransfrom?: number; // this is only used if you want to add additional transfrom to the current transform
 }
-
 
 export type StateCallBack = CarouselInternalState;
 
