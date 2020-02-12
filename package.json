@@ -58,7 +58,7 @@
     "url": "https://yizhuang.fi/"
   },
   "license": "MIT",
-  "homepage": "https://w3js.com/react-multi-carousel/",
+  "homepage": "https://w3js.com/react-multi-carousel",
   "jest": {
     "testEnvironment": "jsdom",
     "verbose": true,
