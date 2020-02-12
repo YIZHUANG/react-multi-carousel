@@ -54,7 +54,7 @@ Production-ready, lightweight fully customizable React carousel component that r
 
 Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maintainers use their service to debug browser issues.
 
-## [Documentation](https://w3js.com/react-multi-carousel/)
+## [Documentation](https://w3js.com/react-multi-carousel)
 
 ## Other important links.
 
@@ -72,7 +72,7 @@ Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maint
 
 ## Demo.
 
-Documentation is [here](https://w3js.com/react-multi-carousel/).
+Documentation is [here](https://w3js.com/react-multi-carousel).
 
 Demo for the SSR <https://react-multi-carousel.now.sh/>
 
@@ -188,8 +188,6 @@ You can pass your own custom arrows to make it the way you want, the same for th
 
 You custom arrows will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
 
-[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=Custom%20arrow&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
-
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomArrows.js)
 
 ```js
@@ -207,8 +205,6 @@ const CustomRightArrow = ({ onClick, ...rest }) => {
 ## Custom button group.
 
 This is very useful if you don't want the dots, or arrows and you want to fully customize the control functionality and styling yourself.
-
-[Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=With%20custom%20button%20group&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomArrows.js)
 
@@ -252,8 +248,6 @@ The codes for this [example](https://github.com/YIZHUANG/react-multi-carousel/bl
 
 You custom dots will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
 
-[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=custom%20dots&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
-
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomDot.js)
 
 ```js
@@ -292,8 +286,6 @@ Shows the next items partially, this is very useful if you want to indicate to t
 
 This is different from the "centerMode" prop, as it only shows the next items. For the centerMode, it shows both.
 
-[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=partially%20visibie%20on%20next%20items&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
-
 ```js
 const responsive = {
   desktop: {
@@ -330,8 +322,6 @@ Shows the next items and previous items partially.
 
 This is a callback function that is invoked each time when there has been a sliding.
 
-[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=afterChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
-
 ```js
 <Carousel
   afterChange={(previousSlide, { currentSlide, onMove }) => {
@@ -343,8 +333,6 @@ This is a callback function that is invoked each time when there has been a slid
 ## beforeChange call back
 
 This is a callback function that is invoked each time before a sliding.
-
-[An Example](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=beforeChanged%20function%2C%20a%20callback%20function&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel).
 
 ```js
 <Carousel
