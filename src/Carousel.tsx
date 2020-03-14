@@ -289,7 +289,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         shouldCorrectItemPosition = true;
       }
     }
-    this.setItemsToShow(shouldCorrectItemPosition, true);
+    this.setItemsToShow(shouldCorrectItemPosition);
   }
   public componentDidUpdate(
     { keyBoardControl, autoPlay, children }: CarouselProps,
