@@ -194,7 +194,7 @@ You custom arrows will receive a list of props/state that's passed back by the c
 const CustomRightArrow = ({ onClick, ...rest }) => {
   const {
     onMove,
-    state: { currentSlide, deviceType },
+    carouselState: { currentSlide, deviceType },
   } = rest;
   // onMove means if dragging or swiping in progress.
   return <button onClick={() => onClick()} />;
