@@ -496,22 +496,26 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/revskill10"><img src="https://avatars3.githubusercontent.com/u/1390196?v=4" width="100px;" alt="Truong Hoang Dung"/><br /><sub><b>Truong Hoang Dung</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=revskill10" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/tpinne"><img src="https://avatars1.githubusercontent.com/u/1384345?v=4" width="100px;" alt="Tobias Pinnekamp"/><br /><sub><b>Tobias Pinnekamp</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=tpinne" title="Code">💻</a></td>
-    <td align="center"><a href="https://raajnadar.in"><img src="https://avatars1.githubusercontent.com/u/17236768?v=4" width="100px;" alt="Rajendran Nadar"/><br /><sub><b>Rajendran Nadar</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=raajnadar" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/abhinavdalal-iconnect"><img src="https://avatars0.githubusercontent.com/u/35057308?v=4" width="100px;" alt="Abhinav Dalal"/><br /><sub><b>Abhinav Dalal</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=abhinavdalal-iconnect" title="Code">💻</a></td>
-    <td align="center"><a href="https://oscarbarrett.github.io/"><img src="https://avatars0.githubusercontent.com/u/3511332?v=4" width="100px;" alt="Oscar Barrett"/><br /><sub><b>Oscar Barrett</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=OscarBarrett" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/neamatmim"><img src="https://avatars2.githubusercontent.com/u/37859935?v=4" width="100px;" alt="Neamat Mim"/><br /><sub><b>Neamat Mim</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=neamatmim" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/Martinretrou"><img src="https://avatars3.githubusercontent.com/u/17448102?v=4" width="100px;" alt="Martin Retrou"/><br /><sub><b>Martin Retrou</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=Martinretrou" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/revskill10"><img src="https://avatars3.githubusercontent.com/u/1390196?v=4" width="100px;" alt=""/><br /><sub><b>Truong Hoang Dung</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=revskill10" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/tpinne"><img src="https://avatars1.githubusercontent.com/u/1384345?v=4" width="100px;" alt=""/><br /><sub><b>Tobias Pinnekamp</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=tpinne" title="Code">💻</a></td>
+    <td align="center"><a href="https://raajnadar.in"><img src="https://avatars1.githubusercontent.com/u/17236768?v=4" width="100px;" alt=""/><br /><sub><b>Rajendran Nadar</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=raajnadar" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/abhinavdalal-iconnect"><img src="https://avatars0.githubusercontent.com/u/35057308?v=4" width="100px;" alt=""/><br /><sub><b>Abhinav Dalal</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=abhinavdalal-iconnect" title="Code">💻</a></td>
+    <td align="center"><a href="https://oscarbarrett.github.io/"><img src="https://avatars0.githubusercontent.com/u/3511332?v=4" width="100px;" alt=""/><br /><sub><b>Oscar Barrett</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=OscarBarrett" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/neamatmim"><img src="https://avatars2.githubusercontent.com/u/37859935?v=4" width="100px;" alt=""/><br /><sub><b>Neamat Mim</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=neamatmim" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Martinretrou"><img src="https://avatars3.githubusercontent.com/u/17448102?v=4" width="100px;" alt=""/><br /><sub><b>Martin Retrou</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=Martinretrou" title="Code">💻</a></td>
   </tr>
   <tr>
-    <td align="center"><a href="http://benhodgson.net"><img src="https://avatars0.githubusercontent.com/u/189707?v=4" width="100px;" alt="Ben Hodgson"/><br /><sub><b>Ben Hodgson</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=benhodgson87" title="Code">💻</a></td>
+    <td align="center"><a href="http://benhodgson.net"><img src="https://avatars0.githubusercontent.com/u/189707?v=4" width="100px;" alt=""/><br /><sub><b>Ben Hodgson</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=benhodgson87" title="Code">💻</a></td>
+    <td align="center"><a href="http://www.fiverr.com/mfaizan1"><img src="https://avatars3.githubusercontent.com/u/17065546?v=4" width="100px;" alt=""/><br /><sub><b>Faizan ul haq</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=mfaizan1" title="Code">💻</a></td>
   </tr>
 </table>
 
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
