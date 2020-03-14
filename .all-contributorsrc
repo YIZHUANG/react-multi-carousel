@@ -76,11 +76,21 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mfaizan1",
+      "name": "Faizan ul haq",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/17065546?v=4",
+      "profile": "http://www.fiverr.com/mfaizan1",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "projectName": "react-multi-carousel",
   "projectOwner": "YIZHUANG",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
