@@ -57,7 +57,6 @@ export interface CarouselProps {
   additionalTransfrom?: number; // this is only used if you want to add additional transfrom to the current transform
 }
 
-
 export type StateCallBack = CarouselInternalState;
 
 export type Direction = "left" | "right" | "" | undefined;

@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>32/32</span>
+        <span class='fraction'>31/31</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">77.78% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>32/32</span>
+        <span class='fraction'>28/28</span>
       </div>
     </div>
     <p class="quiet">
@@ -109,17 +109,7 @@
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -137,20 +127,11 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -184,7 +165,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -200,30 +180,21 @@ function populateSlidesOnMouseTouchMove(
   props: CarouselProps,
   initialX: number,
   lastX: number,
-  clientX: number
+  clientX: number,
+  transformPlaceHolder: number
 ): {
   direction?: Direction;
   nextPosition: number | undefined;
   canContinue: boolean;
 } {
-  const {
-    itemWidth,
-    slidesToShow,
-    totalItems,
-    transform,
-    currentSlide
-  } = state;
+  const { itemWidth, slidesToShow, totalItems, currentSlide } = state;
   const { infinite } = props;
   let canContinue = false; // it will be true if we have slides to slide to.
-  let direction:Direction; // either 'left' or 'right'
+  let direction: Direction; // either 'left' or 'right'
   let nextPosition;
   // making sure we have items to slide back to, prevent oversliding.
-  const slidesHavePassedRight = Math.round(
-    (initialX - lastX) / itemWidth
-  );
-  const slidesHavePassedLeft = Math.round(
-    (lastX - initialX) / itemWidth
-  );
+  const slidesHavePassedRight = Math.round((initialX - lastX) / itemWidth);
+  const slidesHavePassedLeft = Math.round((lastX - initialX) / itemWidth);
   const isMovingRight = initialX &gt; clientX;
   const isMovingLeft = clientX &gt; initialX;
   if (isMovingRight) {
@@ -233,7 +204,7 @@ function populateSlidesOnMouseTouchMove(
       const translateXLimit = Math.abs(
         -(itemWidth * (totalItems - slidesToShow))
       );
-      const nextTranslate = transform - (lastX - clientX);
+      const nextTranslate = transformPlaceHolder - (lastX - clientX);
       const isLastSlide = currentSlide === totalItems - slidesToShow;
       if (
         Math.abs(nextTranslate) &lt;= translateXLimit ||
@@ -248,7 +219,7 @@ function populateSlidesOnMouseTouchMove(
     const isAboutToOverSlide = !(slidesHavePassedLeft &lt;= slidesToShow);
     <span class="missing-if-branch" title="else path not taken" >E</span>if (!isAboutToOverSlide) {
       direction = "left";
-      const nextTranslate = transform + (clientX - lastX);
+      const nextTranslate = transformPlaceHolder + (clientX - lastX);
       const isFirstSlide = currentSlide === 0;
       if (nextTranslate &lt;= 0 || (isFirstSlide &amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >infinite)</span>) {
         canContinue = true;
@@ -263,7 +234,6 @@ function populateSlidesOnMouseTouchMove(
   };
 }
 &nbsp;
-&nbsp;
 export { populateSlidesOnMouseTouchMove };
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -271,7 +241,7 @@ export { populateSlidesOnMouseTouchMove };
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 02 2019 23:01:37 GMT+0300 (Eastern European Summer Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Mar 14 2020 19:53:16 GMT+0530 (India Standard Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>
