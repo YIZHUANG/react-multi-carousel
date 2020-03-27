@@ -68,7 +68,8 @@ const CarouselItems = ({
                       (partialVisbile || partialVisible) &&
                       partialVisibilityGutter &&
                       !notEnoughChildren
-                        ? itemWidth - partialVisibilityGutter
+                        ? itemWidth -
+                          partialVisibilityGutter / state.slidesToShow
                         : itemWidth
                     }px`
                   : "auto"
