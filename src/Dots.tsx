@@ -91,7 +91,10 @@ const Dots = ({
                 isActive ? "react-multi-carousel-dot--active" : ""
               }`}
             >
-              <button onClick={() => goToSlide(nextSlide)} />
+              <button
+                aria-label={`Go to slide ${index + 1}`}
+                onClick={() => goToSlide(nextSlide)}
+              />
             </li>
           );
         })}
