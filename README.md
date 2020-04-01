@@ -511,6 +511,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="http://benhodgson.net"><img src="https://avatars0.githubusercontent.com/u/189707?v=4" width="100px;" alt=""/><br /><sub><b>Ben Hodgson</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=benhodgson87" title="Code">💻</a></td>
     <td align="center"><a href="http://www.fiverr.com/mfaizan1"><img src="https://avatars3.githubusercontent.com/u/17065546?v=4" width="100px;" alt=""/><br /><sub><b>Faizan ul haq</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=mfaizan1" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Adrian3PG"><img src="https://avatars0.githubusercontent.com/u/54852308?v=4" width="100px;" alt=""/><br /><sub><b>Adrian3PG</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=Adrian3PG" title="Code">💻</a></td>
   </tr>
 </table>
 
