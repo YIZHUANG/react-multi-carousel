@@ -1,4 +1,5 @@
 # react-multi-carousel 👋
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
 
 Production-ready, lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering).
@@ -25,6 +26,16 @@ Production-ready, lightweight fully customizable React carousel component that r
 ![demo](https://media.giphy.com/media/emNGIfso7Iu66qz53C/giphy.gif)
 
 ![demo](https://media.giphy.com/media/3octyw2XELzfaplNUm/giphy.gif)
+
+### Hello world!
+
+We are on a very excited journey towards version 3.0 of this component which will be rewritten in hooks/context completely. It means smaller bundle size, performance improvement and easier customization of the component and so many more benefits.
+
+It would mean so much if you could provide help towards the further development of this project as we do this open source work in our own free time especially during this covid-19 crisis.
+
+If you are using this component seriously, please donate or talk to your manager as this project increases your income too. It will help us make releases, fix bugs, fulfill new feature requests faster and better.
+
+[Become a backer/sponsor](https://opencollective.com/react-multi-carousel) to get your logo/image on our README on Github with a link to your site.
 
 ### Features.
 
@@ -111,20 +122,20 @@ const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
-    items: 5,
+    items: 5
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 3,
+    items: 3
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    items: 2
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
+    items: 1
+  }
 };
 <Carousel responsive={responsive}>
   <div>Item 1</div>
@@ -144,18 +155,18 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
-    slidesToSlide: 3, // optional, default to 1.
+    slidesToSlide: 3 // optional, default to 1.
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    slidesToSlide: 2, // optional, default to 1.
+    slidesToSlide: 2 // optional, default to 1.
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    slidesToSlide: 1, // optional, default to 1.
-  },
+    slidesToSlide: 1 // optional, default to 1.
+  }
 };
 <Carousel
   swipeable={false}
@@ -194,7 +205,7 @@ You custom arrows will receive a list of props/state that's passed back by the c
 const CustomRightArrow = ({ onClick, ...rest }) => {
   const {
     onMove,
-    carouselState: { currentSlide, deviceType },
+    carouselState: { currentSlide, deviceType }
   } = rest;
   // onMove means if dragging or swiping in progress.
   return <button onClick={() => onClick()} />;
@@ -252,19 +263,27 @@ You custom dots will receive a list of props/state that's passed back by the car
 
 ```js
 const CustomDot = ({ onClick, ...rest }) => {
-  const { onMove, index, active, carouselState: { currentSlide, deviceType }  } = rest;
+  const {
+    onMove,
+    index,
+    active,
+    carouselState: { currentSlide, deviceType }
+  } = rest;
   const carouselItems = [CarouselItem1, CaourselItem2, CarouselItem3];
   // onMove means if dragging or swiping in progress.
   // active is provided by this lib for checking if the item is active or not.
   return (
-    <button className={active ? 'active' : 'inactive'} onClick={() => onClick()}>
+    <button
+      className={active ? "active" : "inactive"}
+      onClick={() => onClick()}
+    >
       {React.Children.toArray(carouselItems)[index]}
     </button>
-    )
-}
+  );
+};
 <Carousel showDots customDot={<CustomDot />}>
-{carouselItems}
-</Carousel>
+  {carouselItems}
+</Carousel>;
 ```
 
 ## renderDotsOutside
@@ -517,6 +536,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
