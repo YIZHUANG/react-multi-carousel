@@ -1,6 +1,6 @@
 # react-multi-carousel 👋
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
+[![Financial Contributors on Open Collective](https://opencollective.com/react-multi-carousel/all/badge.svg?label=financial+contributors)](https://opencollective.com/react-multi-carousel) [![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
 
 Production-ready, lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering).
 
@@ -505,6 +505,36 @@ Submit an issue for feature request or submit a pr.
 If this project help you reduce time to develop, you can give me a cup of coffee :)
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GJSPRG9RKSJLQ&source=url)
+
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/YIZHUANG/react-multi-carousel/graphs/contributors"><img src="https://opencollective.com/react-multi-carousel/contributors.svg?width=890&button=false" /></a>
+
+### Financial Contributors
+
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/react-multi-carousel/contribute)]
+
+#### Individuals
+
+<a href="https://opencollective.com/react-multi-carousel"><img src="https://opencollective.com/react-multi-carousel/individuals.svg?width=890"></a>
+
+#### Organizations
+
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/react-multi-carousel/contribute)]
+
+<a href="https://opencollective.com/react-multi-carousel/organization/0/website"><img src="https://opencollective.com/react-multi-carousel/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/react-multi-carousel/organization/1/website"><img src="https://opencollective.com/react-multi-carousel/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/react-multi-carousel/organization/2/website"><img src="https://opencollective.com/react-multi-carousel/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/react-multi-carousel/organization/3/website"><img src="https://opencollective.com/react-multi-carousel/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/react-multi-carousel/organization/4/website"><img src="https://opencollective.com/react-multi-carousel/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/react-multi-carousel/organization/5/website"><img src="https://opencollective.com/react-multi-carousel/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/react-multi-carousel/organization/6/website"><img src="https://opencollective.com/react-multi-carousel/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/react-multi-carousel/organization/7/website"><img src="https://opencollective.com/react-multi-carousel/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/react-multi-carousel/organization/8/website"><img src="https://opencollective.com/react-multi-carousel/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/react-multi-carousel/organization/9/website"><img src="https://opencollective.com/react-multi-carousel/organization/9/avatar.svg"></a>
 
 ## License
 
