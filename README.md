@@ -197,7 +197,7 @@ const responsive = {
 
 You can pass your own custom arrows to make it the way you want, the same for the position. For example, add media query for the arrows to go under when on smaller screens.
 
-You custom arrows will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
+Your custom arrows will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomArrows.js)
 
@@ -224,7 +224,7 @@ const ButtonGroup = ({ next, previous, goToSlide ...rest }) => {
   const { carouselState: { currentSlide } } = rest;
   return (
     <div className="carousel-button-group"> // remember to give it position:absolute
-      <ButtonOne className={currentSlide === 0 : 'disable' : ''} onClick={() => previous()} />
+      <ButtonOne className={currentSlide === 0 ? 'disable' : ''} onClick={() => previous()} />
       <ButtonTwo onClick={() => next()} />
       <ButtonThree onClick={() => goToSlide(currentSlide + 1)}> Go to any slide </ButtonThree>
     </div>
