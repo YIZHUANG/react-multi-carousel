@@ -220,7 +220,7 @@ This is very useful if you don't want the dots, or arrows and you want to fully 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomArrows.js)
 
 ```js
-const ButtonGroup = ({ next, previous, goToSlide ...rest }) => {
+const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
   const { carouselState: { currentSlide } } = rest;
   return (
     <div className="carousel-button-group"> // remember to give it position:absolute
