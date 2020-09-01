@@ -63,6 +63,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public isInThrottle?: boolean;
   public initialY: number;
   private transformPlaceHolder: number;
+  private itemsToShowTimeout: any;
   constructor(props: CarouselProps) {
     super(props);
     this.containerRef = React.createRef();
@@ -301,7 +302,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.containerRef.current.offsetWidth !== containerWidth
     ) {
       // this is for handling resizing only.
-      setTimeout(() => {
+      if (this.itemsToShowTimeout) {
+        clearTimeout(this.itemsToShowTimeout);
+      }
+      this.itemsToShowTimeout = setTimeout(() => {
         this.setItemsToShow(true);
       }, this.props.transitionDuration || defaultTransitionDuration);
     }
@@ -456,6 +460,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.props.autoPlay && this.autoPlay) {
       clearInterval(this.autoPlay);
       this.autoPlay = undefined;
+    }
+    if (this.itemsToShowTimeout) {
+      clearTimeout(this.itemsToShowTimeout);
     }
   }
   public resetMoveStatus(): void {
