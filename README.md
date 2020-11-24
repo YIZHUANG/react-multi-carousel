@@ -404,7 +404,7 @@ They are very useful in the following cases:
 
 ## Skipping callbacks
 
-When calling the `goToSlide` function on a Carousel the callbacks will be run by default. You can skip all or individul callbacks by passing a second parameter to `goToSlide.`
+When calling the `goToSlide` function on a Carousel the callbacks will be run by default. You can skip all or individual callbacks by passing a second parameter to `goToSlide.`
 
 ```js
 this.Carousel.goToSlide(1, true); // Skips both beforeChange and afterChange
@@ -476,7 +476,7 @@ For example if you give to your carousel item padding left and padding right 20p
 | showDots                |                                                                     `boolean`                                                                      |              `false`              | Hide the default dot list                                                                                                                                             |
 | renderDotsOutside       |                                                                     `boolean`                                                                      |              `false`              | Show dots outside of the container                                                                                                                                    |
 | partialVisible          |                                                                 `boolean | string`                                                                 |              `false`              | Show partial next slides. This is use with the `responsive` prop, see example for details                                                                             |
-| customTransition        |                                                                      `string`                                                                      |   `transform 300ms ease-in-out`   | Configure your own anaimation when sliding                                                                                                                            |
+| customTransition        |                                                                      `string`                                                                      |   `transform 300ms ease-in-out`   | Configure your own animation when sliding                                                                                                                            |
 | transitionDuration      | `number |`300` | The unit is ms, if you are using customTransition, make sure to put the duration here as this is needed for the resizing to work. |
 | focusOnSelect           |                                    `boolean |`false` | Go to slide on click and make the slide a current slide.                                    |
 | centerMode              |                                       `boolean |`false` | Shows the next items and previous items partially.                                       |
