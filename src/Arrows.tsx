@@ -29,6 +29,7 @@ const LeftArrow = ({
       aria-label="Go to previous slide"
       className="react-multiple-carousel__arrow react-multiple-carousel__arrow--left"
       onClick={() => previous()}
+      type="button"
     />
   );
 };
@@ -48,6 +49,7 @@ const RightArrow = ({
       aria-label="Go to next slide"
       className="react-multiple-carousel__arrow react-multiple-carousel__arrow--right"
       onClick={() => next()}
+      type="button"
     />
   );
 };
