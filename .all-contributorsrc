@@ -112,6 +112,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "groomain",
+      "name": "Romain",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/3601848?v=4",
+      "profile": "https://github.com/groomain",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
