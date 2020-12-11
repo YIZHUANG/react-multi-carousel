@@ -103,6 +103,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "VadimFilimonov",
+      "name": "Vadim Filimonov",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/11225648?v=4",
+      "profile": "http://t.me/s/filimonovvadim",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
