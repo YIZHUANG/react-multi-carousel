@@ -562,6 +562,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://www.fiverr.com/mfaizan1"><img src="https://avatars3.githubusercontent.com/u/17065546?v=4" width="100px;" alt=""/><br /><sub><b>Faizan ul haq</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=mfaizan1" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Adrian3PG"><img src="https://avatars0.githubusercontent.com/u/54852308?v=4" width="100px;" alt=""/><br /><sub><b>Adrian3PG</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=Adrian3PG" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/kuznetsovgm"><img src="https://avatars1.githubusercontent.com/u/46741704?v=4" width="100px;" alt=""/><br /><sub><b>kuznetsovgm</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=kuznetsovgm" title="Code">💻</a></td>
+    <td align="center"><a href="http://t.me/s/filimonovvadim"><img src="https://avatars1.githubusercontent.com/u/11225648?v=4" width="100px;" alt=""/><br /><sub><b>Vadim Filimonov</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=VadimFilimonov" title="Documentation">📖</a></td>
   </tr>
 </table>
 
