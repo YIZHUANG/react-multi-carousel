@@ -6,7 +6,7 @@ import { CarouselInternalState, CarouselProps } from "../types";
 
 function notEnoughChildren(state: CarouselInternalState): boolean {
   const { slidesToShow, totalItems } = state;
-  return totalItems < slidesToShow;
+  return totalItems <= slidesToShow;
 }
 
 function getInitialState(
