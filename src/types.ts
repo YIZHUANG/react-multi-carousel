@@ -20,6 +20,7 @@ export interface CarouselProps {
   slidesToSlide?: number;
   draggable?: boolean;
   arrows?: boolean; // show or hide arrows.
+  renderArrowsWhenDisabled?: boolean; // Allow for the arrows to have a disabled attribute instead of not showing them
   swipeable?: boolean;
   removeArrowOnDeviceType?: string | Array<string>;
   children: any;
