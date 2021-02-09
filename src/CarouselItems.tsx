@@ -27,6 +27,7 @@ const CarouselItems = ({
     children,
     infinite,
     itemClass,
+    itemAriaLabel,
     partialVisbile,
     partialVisible
   } = props;
@@ -45,6 +46,7 @@ const CarouselItems = ({
       'WARNING: Please correct props name: "partialVisible" as old typo will be removed in future versions!'
     );
   }
+
   return (
     <>
       {(infinite ? clones : React.Children.toArray(children)).map(
@@ -59,6 +61,13 @@ const CarouselItems = ({
                 }
               }}
               aria-hidden={getIfSlideIsVisbile(index, state) ? "false" : "true"}
+              aria-label={
+                itemAriaLabel
+                  ? itemAriaLabel
+                  : child.props.ariaLabel
+                  ? child.props.ariaLabel
+                  : null
+              }
               style={{
                 flex: shouldRenderOnSSR ? `1 0 ${flexBisis}%` : "auto",
                 position: "relative",
