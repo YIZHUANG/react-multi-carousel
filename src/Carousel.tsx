@@ -50,7 +50,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     dotListClass: "",
     focusOnSelect: false,
     centerMode: false,
-    additionalTransfrom: 0
+    additionalTransfrom: 0,
+    isRTL: false
   };
   private readonly containerRef: React.RefObject<HTMLDivElement>;
   private readonly listRef: React.RefObject<HTMLUListElement>;
@@ -403,7 +404,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.isAnimationAllowed = true;
     this.setState(
       {
-        transform: nextPosition,
+        transform: this.props.isRTL ? -nextPosition : nextPosition,
         currentSlide: nextSlides
       },
       () => {
@@ -436,7 +437,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.isAnimationAllowed = true;
     this.setState(
       {
-        transform: nextPosition,
+        transform: this.props.isRTL ? -nextPosition : nextPosition,
         currentSlide: nextSlides
       },
       () => {
@@ -731,6 +732,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           <ul
             ref={this.listRef}
             className={`react-multi-carousel-track ${sliderClass}`}
+            dir={this.props.isRTL ? 'rtl' : 'ltr'}
             style={{
               // todos.  Remove this from virtual dom.
               transition: this.isAnimationAllowed
