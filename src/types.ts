@@ -56,6 +56,7 @@ export interface CarouselProps {
   // this is needed for the resizing to work.
   focusOnSelect?: boolean;
   additionalTransfrom?: number; // this is only used if you want to add additional transfrom to the current transform
+  pauseOnHover?: boolean;
 }
 
 export type StateCallBack = CarouselInternalState;
