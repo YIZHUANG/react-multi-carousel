@@ -37,6 +37,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     draggable: true,
     swipeable: true,
     arrows: true,
+    renderArrowsWhenDisabled: false,
     containerClass: "",
     sliderClass: "",
     itemClass: "",
@@ -630,23 +631,25 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public getState(): StateCallBack {
     return this.state;
   }
-  public renderLeftArrow(): React.ReactNode {
+  public renderLeftArrow(disbaled: boolean): React.ReactNode {
     const { customLeftArrow } = this.props;
     return (
       <LeftArrow
         customLeftArrow={customLeftArrow}
         getState={() => this.getState()}
         previous={this.previous}
+        disabled={disbaled}
       />
     );
   }
-  public renderRightArrow(): React.ReactNode {
+  public renderRightArrow(disbaled: boolean): React.ReactNode {
     const { customRightArrow } = this.props;
     return (
       <RightArrow
         customRightArrow={customRightArrow}
         getState={() => this.getState()}
         next={this.next}
+        disabled={disbaled}
       />
     );
   }
@@ -694,6 +697,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const {
       deviceType,
       arrows,
+      renderArrowsWhenDisabled,
       removeArrowOnDeviceType,
       infinite,
       containerClass,
@@ -757,8 +761,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           >
             {this.renderCarouselItems()}
           </ul>
-          {shouldShowArrows && !disableLeftArrow && this.renderLeftArrow()}
-          {shouldShowArrows && !disableRightArrow && this.renderRightArrow()}
+          {shouldShowArrows &&
+            (!disableLeftArrow || renderArrowsWhenDisabled) &&
+            this.renderLeftArrow(disableLeftArrow)}
+          {shouldShowArrows &&
+            (!disableRightArrow || renderArrowsWhenDisabled) &&
+            this.renderRightArrow(disableRightArrow)}
           {shouldRenderAtAll &&
             !renderButtonGroupOutside &&
             this.renderButtonGroups()}
