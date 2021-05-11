@@ -452,13 +452,15 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     );
   }
   public componentWillUnmount(): void {
-    window.removeEventListener("resize", this.onResize as React.EventHandler<
-      any
-    >);
+    window.removeEventListener(
+      "resize",
+      this.onResize as React.EventHandler<any>
+    );
     if (this.props.keyBoardControl) {
-      window.removeEventListener("keyup", this.onKeyUp as React.EventHandler<
-        any
-      >);
+      window.removeEventListener(
+        "keyup",
+        this.onKeyUp as React.EventHandler<any>
+      );
     }
     if (this.props.autoPlay && this.autoPlay) {
       clearInterval(this.autoPlay);
@@ -484,7 +486,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       return;
     }
     const { clientX, clientY } = isMouseMoveEvent(e) ? e : e.touches[0];
-    console.log('{ clientX, clientY }', { clientX, clientY });
     this.onMove = true;
     this.initialX = clientX;
     this.initialY = clientY;
