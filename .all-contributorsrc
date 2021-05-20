@@ -121,6 +121,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "rlundquist3",
+      "name": "Riley Lundquist",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5504497?v=4",
+      "profile": "http://rileylundquist.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
