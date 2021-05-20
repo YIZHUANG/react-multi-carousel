@@ -312,9 +312,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }, this.props.transitionDuration || defaultTransitionDuration);
     }
     if (keyBoardControl && !this.props.keyBoardControl) {
-      window.removeEventListener("keyup", this.onKeyUp as React.EventHandler<
-        any
-      >);
+      window.removeEventListener(
+        "keyup",
+        this.onKeyUp as React.EventHandler<any>
+      );
     }
     if (!keyBoardControl && this.props.keyBoardControl) {
       window.addEventListener("keyup", this.onKeyUp as React.EventHandler<any>);
@@ -451,13 +452,15 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     );
   }
   public componentWillUnmount(): void {
-    window.removeEventListener("resize", this.onResize as React.EventHandler<
-      any
-    >);
+    window.removeEventListener(
+      "resize",
+      this.onResize as React.EventHandler<any>
+    );
     if (this.props.keyBoardControl) {
-      window.removeEventListener("keyup", this.onKeyUp as React.EventHandler<
-        any
-      >);
+      window.removeEventListener(
+        "keyup",
+        this.onKeyUp as React.EventHandler<any>
+      );
     }
     if (this.props.autoPlay && this.autoPlay) {
       clearInterval(this.autoPlay);
@@ -577,12 +580,46 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.resetMoveStatus();
     }
   }
+  private isInViewport(el: HTMLInputElement) {
+    const {
+      top = 0,
+      left = 0,
+      bottom = 0,
+      right = 0
+    } = el.getBoundingClientRect();
+    return (
+      top >= 0 &&
+      left >= 0 &&
+      bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  private isChildOfCarousel(el: EventTarget) {
+    if (el instanceof Element && this.listRef && this.listRef.current) {
+      return this.listRef.current.contains(el);
+    }
+    return false;
+  }
+
   public onKeyUp(e: React.KeyboardEvent): void {
-    switch (e.keyCode) {
+    const { target, keyCode } = e;
+    switch (keyCode) {
       case 37:
-        return this.previous();
+        if (this.isChildOfCarousel(target)) return this.previous();
+        break;
       case 39:
-        return this.next();
+        if (this.isChildOfCarousel(target)) return this.next();
+        break;
+      case 9:
+        if (
+          this.isChildOfCarousel(target) &&
+          target instanceof HTMLInputElement &&
+          !this.isInViewport(target)
+        ) {
+          return this.next();
+        }
+        break;
     }
   }
   public handleEnter(): void {
