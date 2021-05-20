@@ -312,10 +312,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }, this.props.transitionDuration || defaultTransitionDuration);
     }
     if (keyBoardControl && !this.props.keyBoardControl) {
-      window.removeEventListener(
-        "keyup",
-        this.onKeyUp as React.EventHandler<any>
-      );
+      window.removeEventListener("keyup", this.onKeyUp as React.EventHandler<
+        any
+      >);
     }
     if (!keyBoardControl && this.props.keyBoardControl) {
       window.addEventListener("keyup", this.onKeyUp as React.EventHandler<any>);
@@ -452,15 +451,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     );
   }
   public componentWillUnmount(): void {
-    window.removeEventListener(
-      "resize",
-      this.onResize as React.EventHandler<any>
-    );
+    window.removeEventListener("resize", this.onResize as React.EventHandler<
+      any
+    >);
     if (this.props.keyBoardControl) {
-      window.removeEventListener(
-        "keyup",
-        this.onKeyUp as React.EventHandler<any>
-      );
+      window.removeEventListener("keyup", this.onKeyUp as React.EventHandler<
+        any
+      >);
     }
     if (this.props.autoPlay && this.autoPlay) {
       clearInterval(this.autoPlay);
