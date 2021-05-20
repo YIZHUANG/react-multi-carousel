@@ -121,6 +121,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Skagoo",
+      "name": "Sacha",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16117503?v=4",
+      "profile": "http://skagoo.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
