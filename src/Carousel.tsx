@@ -608,12 +608,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
 
   public onKeyUp(e: React.KeyboardEvent, carouselItem: HTMLElement): void {
-    switch (e.keyCode) {
-      case 37:
+    switch (e.key) {
+      case "ArrowLeft":
         return this.previous();
-      case 39:
+      case "ArrowRight":
         return this.next();
-      case 9:
+      case "Tab":
         let canSrollNext = false;
         if (this.listRef.current) {
           for (let i = 0; i < this.listRef.current.children.length; i++) {

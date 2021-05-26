@@ -2,10 +2,23 @@ import { CarouselInternalState, CarouselProps } from "../types";
 
 function throwError(state: CarouselInternalState, props: CarouselProps): void {
   // old wrongly spelt partialVisbile prop kept to not make changes breaking
-  const { partialVisbile, partialVisible, centerMode, ssr, responsive } = props;
+  const {
+    partialVisbile,
+    partialVisible,
+    centerMode,
+    ssr,
+    responsive,
+    infinite,
+    keyBoardControl
+  } = props;
   if ((partialVisbile || partialVisible) && centerMode) {
     throw new Error(
       "center mode can not be used at the same time with partialVisible"
+    );
+  }
+  if (infinite && keyBoardControl) {
+    throw new Error(
+      "Keyboard control cannot be used with inifinite option to prevent Tab lock"
     );
   }
   if (!responsive) {
