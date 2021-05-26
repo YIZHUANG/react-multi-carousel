@@ -151,14 +151,33 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }
     }
   }
+
+  public bindKeyUpEvent() {
+    if (this.listRef.current) {
+      for (const carouselItem of this.listRef.current.children as any) {
+        carouselItem.addEventListener("keyup", (e: React.KeyboardEvent) => {
+          this.onKeyUp(e, carouselItem);
+        });
+      }
+    }
+  }
+
+  public removeKeyUpEvent() {
+    if (this.listRef.current) {
+      for (const carouselItem of this.listRef.current.children as any) {
+        carouselItem.removeEventListener("keyup", (e: React.KeyboardEvent) => {
+          this.onKeyUp(e, carouselItem);
+        });
+      }
+    }
+  }
+
   public componentDidMount(): void {
     this.setState({ domLoaded: true });
     this.setItemsToShow();
+    this.bindKeyUpEvent();
     window.addEventListener("resize", this.onResize as React.EventHandler<any>);
     this.onResize(true);
-    if (this.props.keyBoardControl) {
-      window.addEventListener("keyup", this.onKeyUp as React.EventHandler<any>);
-    }
     if (this.props.autoPlay && this.props.autoPlaySpeed) {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
@@ -312,13 +331,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }, this.props.transitionDuration || defaultTransitionDuration);
     }
     if (keyBoardControl && !this.props.keyBoardControl) {
-      window.removeEventListener(
-        "keyup",
-        this.onKeyUp as React.EventHandler<any>
-      );
+      this.removeKeyUpEvent();
     }
     if (!keyBoardControl && this.props.keyBoardControl) {
-      window.addEventListener("keyup", this.onKeyUp as React.EventHandler<any>);
+      this.bindKeyUpEvent();
     }
     if (autoPlay && !this.props.autoPlay && this.autoPlay) {
       clearInterval(this.autoPlay);
@@ -452,15 +468,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     );
   }
   public componentWillUnmount(): void {
-    window.removeEventListener(
-      "resize",
-      this.onResize as React.EventHandler<any>
-    );
+    window.removeEventListener("resize", this.onResize as React.EventHandler<
+      any
+    >);
     if (this.props.keyBoardControl) {
-      window.removeEventListener(
-        "keyup",
-        this.onKeyUp as React.EventHandler<any>
-      );
+      this.removeKeyUpEvent();
     }
     if (this.props.autoPlay && this.autoPlay) {
       clearInterval(this.autoPlay);
@@ -580,7 +592,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.resetMoveStatus();
     }
   }
-  private isInViewport(el: HTMLInputElement) {
+  private isInViewport(el: HTMLElement) {
     const {
       top = 0,
       left = 0,
@@ -595,28 +607,29 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     );
   }
 
-  private isChildOfCarousel(el: EventTarget) {
-    if (el instanceof Element && this.listRef && this.listRef.current) {
-      return this.listRef.current.contains(el);
-    }
-    return false;
-  }
-
-  public onKeyUp(e: React.KeyboardEvent): void {
-    const { target, keyCode } = e;
-    switch (keyCode) {
+  public onKeyUp(e: React.KeyboardEvent, carouselItem: HTMLElement): void {
+    switch (e.keyCode) {
       case 37:
-        if (this.isChildOfCarousel(target)) return this.previous();
-        break;
+        return this.previous();
       case 39:
-        if (this.isChildOfCarousel(target)) return this.next();
-        break;
+        return this.next();
       case 9:
-        if (
-          this.isChildOfCarousel(target) &&
-          target instanceof HTMLInputElement &&
-          !this.isInViewport(target)
-        ) {
+        let canSrollNext = false;
+        if (this.listRef.current) {
+          for (let i = 0; i < this.listRef.current.children.length; i++) {
+            if (this.listRef.current.children[i].isSameNode(carouselItem)) {
+              const nextNode = this.listRef.current.children[i + 1];
+              if (
+                nextNode instanceof HTMLElement &&
+                !this.isInViewport(nextNode)
+              ) {
+                canSrollNext = true;
+                break;
+              }
+            }
+          }
+        }
+        if (canSrollNext) {
           return this.next();
         }
         break;
