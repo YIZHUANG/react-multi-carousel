@@ -90,11 +90,11 @@ function getTransformForPartialVsibile(
   props: CarouselProps,
   transformPlaceHolder?: number
 ) {
-  const { currentSlide, slidesToShow } = state;
+  const { totalItems, currentSlide, slidesToShow } = state;
   const isRightEndReach = isInRightEnd(state);
   const shouldRemoveRightGutter = !props.infinite && isRightEndReach;
   const baseTransform = transformPlaceHolder || state.transform;
-  if (notEnoughChildren(state)) {
+  if (totalItems <= slidesToShow) {
     return baseTransform;
   }
   const transform = baseTransform + currentSlide * partialVisibilityGutter;
