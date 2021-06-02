@@ -16,11 +16,6 @@ function throwError(state: CarouselInternalState, props: CarouselProps): void {
       "center mode can not be used at the same time with partialVisible"
     );
   }
-  if (infinite && keyBoardControl) {
-    throw new Error(
-      "Keyboard control cannot be used with inifinite option to prevent Tab lock"
-    );
-  }
   if (!responsive) {
     if (ssr) {
       throw new Error(

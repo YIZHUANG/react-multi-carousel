@@ -154,21 +154,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
 
   public bindKeyUpEvent() {
     if (this.listRef.current) {
-      for (const carouselItem of this.listRef.current.children as any) {
-        carouselItem.addEventListener("keyup", (e: React.KeyboardEvent) => {
-          this.onKeyUp(e, carouselItem);
-        });
-      }
+      this.listRef.current.addEventListener("keyup", this.onKeyUp, false);
     }
   }
 
   public removeKeyUpEvent() {
     if (this.listRef.current) {
-      for (const carouselItem of this.listRef.current.children as any) {
-        carouselItem.removeEventListener("keyup", (e: React.KeyboardEvent) => {
-          this.onKeyUp(e, carouselItem);
-        });
-      }
+      this.listRef.current.removeEventListener("keyup", this.onKeyUp, false);
     }
   }
 
@@ -292,9 +284,15 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (setToDomDirectly) {
       this.setTransformDirectly(nextTransform, true);
     }
-    this.setState({
-      transform: nextTransform
-    });
+    this.removeKeyUpEvent();
+    this.setState(
+      {
+        transform: nextTransform
+      },
+      () => {
+        this.bindKeyUpEvent();
+      }
+    );
   }
   public onResize(value?: React.KeyboardEvent | boolean): void {
     // value here can be html event or a boolean.
@@ -592,47 +590,71 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.resetMoveStatus();
     }
   }
-  private isInViewport(el: HTMLElement) {
-    const {
-      top = 0,
-      left = 0,
-      bottom = 0,
-      right = 0
-    } = el.getBoundingClientRect();
-    return (
-      top >= 0 &&
-      left >= 0 &&
-      bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      right <= (window.innerWidth || document.documentElement.clientWidth)
+  private getKeyboardFocusableElements(element: HTMLElement) {
+    // check if element has any focusable child Element
+    const focusableChildren = element.querySelectorAll(
+      'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
     );
+    const elements = [].slice.call(focusableChildren);
+    // Add current element if its focusable to list of focusable elements.
+    const isFocusableElement = element.matches(
+      'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
+    );
+    if (isFocusableElement) {
+      elements.push(element);
+    }
+    return elements.filter(el => !el.hasAttribute("disabled"));
   }
 
-  public onKeyUp(e: React.KeyboardEvent, carouselItem: HTMLElement): void {
+  public onKeyUp(e: React.KeyboardEvent): void {
     switch (e.key) {
       case "ArrowLeft":
         return this.previous();
       case "ArrowRight":
         return this.next();
       case "Tab":
-        let canSrollNext = false;
-        if (this.listRef.current) {
-          for (let i = 0; i < this.listRef.current.children.length; i++) {
-            if (this.listRef.current.children[i].isSameNode(carouselItem)) {
-              const nextNode = this.listRef.current.children[i + 1];
-              if (
-                nextNode instanceof HTMLElement &&
-                !this.isInViewport(nextNode)
-              ) {
-                canSrollNext = true;
-                break;
-              }
+        if (!(e.target instanceof HTMLElement)) {
+          return;
+        }
+        const carouselItem = e.target.closest("li.react-multi-carousel-item");
+        const nextNode = carouselItem.nextSibling as HTMLElement;
+
+        let hasFoundTarget = false;
+        let hasFocussableChild = false;
+
+        for (const child of [].slice.call(
+          carouselItem.getElementsByTagName("*")
+        )) {
+          // Find Focusable Elements after the current target
+          if (hasFoundTarget) {
+            const hasFocus = this.getKeyboardFocusableElements(child);
+            if (!!hasFocus.length) {
+              hasFocussableChild = true;
+              break;
             }
           }
+          if (e.target.isSameNode(child)) {
+            hasFoundTarget = true;
+          }
         }
-        if (canSrollNext) {
-          return this.next();
+
+        const { slidesToShow, totalItems, currentSlide } = this.state;
+        const curSlide =
+          nextNode && this.props.infinite
+            ? nextNode.getAttribute("data-index")
+            : currentSlide;
+        const isLastSlide =
+          curSlide ==
+          totalItems - (!this.props.infinite ? slidesToShow : slidesToShow + 1);
+
+        if (!hasFocussableChild) {
+          if (!isLastSlide) {
+            return this.next();
+          } else if (this.listRef.current.nextSibling instanceof HTMLElement) {
+            this.listRef.current.nextSibling.focus();
+            break;
+          }
         }
-        break;
     }
   }
   public handleEnter(): void {
