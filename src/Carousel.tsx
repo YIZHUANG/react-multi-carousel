@@ -603,10 +603,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (isFocusableElement) {
       elements.push(element);
     }
-    return elements.filter(el => !el.hasAttribute("disabled"));
+    return elements.filter((el: HTMLElement) => !el.hasAttribute("disabled"));
   }
 
-  public onKeyUp(e: React.KeyboardEvent): void {
+  public onKeyUp(e: KeyboardEvent): void {
     switch (e.key) {
       case "ArrowLeft":
         return this.previous();
@@ -617,14 +617,18 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           return;
         }
         const carouselItem = e.target.closest("li.react-multi-carousel-item");
-        const nextNode = carouselItem.nextSibling as HTMLElement;
+        const nextNode = carouselItem.nextSibling;
+
+        if (carouselItem! instanceof HTMLElement) {
+          break;
+        }
 
         let hasFoundTarget = false;
         let hasFocussableChild = false;
-
-        for (const child of [].slice.call(
+        const carouselItemChildren = [].slice.call(
           carouselItem.getElementsByTagName("*")
-        )) {
+        );
+        for (const child of carouselItemChildren) {
           // Find Focusable Elements after the current target
           if (hasFoundTarget) {
             const hasFocus = this.getKeyboardFocusableElements(child);
@@ -639,18 +643,26 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         }
 
         const { slidesToShow, totalItems, currentSlide } = this.state;
-        const curSlide =
-          nextNode && this.props.infinite
-            ? nextNode.getAttribute("data-index")
-            : currentSlide;
+        let tempCurrentSlide = currentSlide;
+        if (
+          nextNode &&
+          nextNode instanceof HTMLElement &&
+          this.props.infinite
+        ) {
+          tempCurrentSlide = parseInt(nextNode.getAttribute("data-index"));
+        }
+
         const isLastSlide =
-          curSlide ==
+          tempCurrentSlide ==
           totalItems - (!this.props.infinite ? slidesToShow : slidesToShow + 1);
 
         if (!hasFocussableChild) {
           if (!isLastSlide) {
             return this.next();
-          } else if (this.listRef.current.nextSibling instanceof HTMLElement) {
+          } else if (
+            this.listRef.current.nextSibling &&
+            this.listRef.current.nextSibling instanceof HTMLElement
+          ) {
             this.listRef.current.nextSibling.focus();
             break;
           }
