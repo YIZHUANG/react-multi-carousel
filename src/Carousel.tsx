@@ -617,11 +617,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           return;
         }
         const carouselItem = e.target.closest("li.react-multi-carousel-item");
-        const nextNode = carouselItem.nextSibling;
 
-        if (carouselItem! instanceof HTMLElement) {
+        if (!carouselItem && !(carouselItem instanceof HTMLElement)) {
           break;
         }
+
+        const nextNode = carouselItem.nextSibling;
 
         let hasFoundTarget = false;
         let hasFocussableChild = false;
@@ -660,8 +661,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           if (!isLastSlide) {
             return this.next();
           } else if (
-            this.listRef.current.nextSibling &&
-            this.listRef.current.nextSibling instanceof HTMLElement
+            this.listRef.current &&
+            (this.listRef.current.nextSibling &&
+              this.listRef.current.nextSibling instanceof HTMLElement)
           ) {
             this.listRef.current.nextSibling.focus();
             break;
