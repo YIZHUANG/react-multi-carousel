@@ -52,7 +52,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     focusOnSelect: false,
     centerMode: false,
     additionalTransfrom: 0,
-    pauseOnHover: true
+    pauseOnHover: true,
+    shouldResetAutoplay: false
   };
   private readonly containerRef: React.RefObject<HTMLDivElement>;
   private readonly listRef: React.RefObject<HTMLUListElement>;
@@ -403,6 +404,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       beforeChange(nextSlides, this.getState());
     }
     this.isAnimationAllowed = true;
+    this.props.shouldResetAutoplay && this.resetAutoplayInterval();
     this.setState(
       {
         transform: nextPosition,
@@ -436,6 +438,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       beforeChange(nextSlides, this.getState());
     }
     this.isAnimationAllowed = true;
+    this.props.shouldResetAutoplay && this.resetAutoplayInterval();
     this.setState(
       {
         transform: nextPosition,
@@ -449,6 +452,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         }
       }
     );
+  }
+  resetAutoplayInterval() {
+    clearInterval(this.autoPlay);
+    this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
   }
   public componentWillUnmount(): void {
     window.removeEventListener("resize", this.onResize as React.EventHandler<
@@ -500,15 +507,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const { clientX, clientY } = isMouseMoveEvent(e) ? e : e.touches[0];
     const diffX = this.initialX - clientX;
     const diffY = this.initialY - clientY;
-    if (
-      !isMouseMoveEvent(e) &&
-      this.autoPlay &&
-      this.props.autoPlay &&
-      this.props.pauseOnHover
-    ) {
-      clearInterval(this.autoPlay);
-      this.autoPlay = undefined;
-    }
     if (this.onMove) {
       if (!(Math.abs(diffX) > Math.abs(diffY))) {
         // prevent swiping up and down moves the carousel.
@@ -619,8 +617,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         break;
     }
   }
-  public handleEnter(): void {
-    if (this.autoPlay && this.props.autoPlay) {
+  public handleEnter(e: React.MouseEvent): void {
+    if (
+      isMouseMoveEvent(e) &&
+      this.autoPlay &&
+      this.props.autoPlay &&
+      this.props.pauseOnHover
+    ) {
       clearInterval(this.autoPlay);
       this.autoPlay = undefined;
     }
@@ -640,6 +643,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       beforeChange(slide, this.getState());
     }
     this.isAnimationAllowed = true;
+    this.props.shouldResetAutoplay && this.resetAutoplayInterval();
     this.setState(
       {
         currentSlide: slide,
