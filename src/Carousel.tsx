@@ -27,6 +27,7 @@ import Dots from "./Dots";
 import { LeftArrow, RightArrow } from "./Arrows";
 import CarouselItems from "./CarouselItems";
 import { getTransform } from "./utils/common";
+import { parse } from "@typescript-eslint/parser";
 
 const defaultTransitionDuration = 400;
 const defaultTransition = "transform 400ms ease-in-out";
@@ -590,7 +591,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.resetMoveStatus();
     }
   }
-  private getKeyboardFocusableElements(element: HTMLElement) {
+  private static getKeyboardFocusableElements(element: HTMLElement) {
     // check if element has any focusable child Element
     const focusableChildren = element.querySelectorAll(
       'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
@@ -615,7 +616,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
    * @param reverse
    * @private
    */
-  private elementHasFocusableChildren(
+  private static elementHasFocusableChildren(
     parentElement: HTMLElement,
     fromElement: HTMLElement,
     reverse: boolean
@@ -631,7 +632,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     let index = targetElementIndex < 0 ? 0 : targetElementIndex + 1;
     for (index; index < carouselItemChildren.length; index++) {
       const child = carouselItemChildren[index];
-      const hasFocus = this.getKeyboardFocusableElements(child);
+      const hasFocus = Carousel.getKeyboardFocusableElements(child);
       if (!!hasFocus.length) {
         hasFocusableChild = true;
         break;
@@ -655,11 +656,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           break;
         }
         const totalSlides = this.props.children.length;
-        const currentSlide = parseInt(carouselItem.getAttribute("data-index"));
+        const currentSlide = carouselItem.hasAttribute("data-index")
+          ? parseInt(carouselItem.getAttribute("data-index"))
+          : this.state.currentSlide;
         const { totalItems } = this.state;
         const isLastSlide = currentSlide == totalItems - totalSlides;
         const isFirstSlide = currentSlide === totalSlides;
-        const hasFocusableChild = this.elementHasFocusableChildren(
+        const hasFocusableChild = Carousel.elementHasFocusableChildren(
           carouselItem,
           e.target,
           e.shiftKey
