@@ -606,6 +606,40 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     return elements.filter((el: HTMLElement) => !el.hasAttribute("disabled"));
   }
 
+  /**
+   * Checks of there are focusable children element in a parent element from a certain child Node
+   * and can go up or down the tree.
+   *
+   * @param parentElement
+   * @param fromElement
+   * @param reverse
+   * @private
+   */
+  private elementHasFocusableChildren(
+    parentElement: HTMLElement,
+    fromElement: HTMLElement,
+    reverse: boolean
+  ) {
+    let hasFocusableChild = false;
+    const carouselItems = [].slice.call(
+      parentElement.getElementsByTagName("*")
+    );
+    const carouselItemChildren = reverse
+      ? carouselItems.reverse()
+      : carouselItems;
+    const targetElementIndex = carouselItemChildren.indexOf(fromElement);
+    let index = targetElementIndex < 0 ? 0 : targetElementIndex + 1;
+    for (index; index < carouselItemChildren.length; index++) {
+      const child = carouselItemChildren[index];
+      const hasFocus = this.getKeyboardFocusableElements(child);
+      if (!!hasFocus.length) {
+        hasFocusableChild = true;
+        break;
+      }
+    }
+    return hasFocusableChild;
+  }
+
   public onKeyUp(e: KeyboardEvent): void {
     switch (e.key) {
       case "ArrowLeft":
@@ -617,56 +651,40 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           return;
         }
         const carouselItem = e.target.closest("li.react-multi-carousel-item");
-
-        if (!carouselItem && !(carouselItem instanceof HTMLElement)) {
+        if (!carouselItem || !(carouselItem instanceof HTMLElement)) {
           break;
         }
-
-        const nextNode = carouselItem.nextSibling;
-
-        let hasFoundTarget = false;
-        let hasFocussableChild = false;
-        const carouselItemChildren = [].slice.call(
-          carouselItem.getElementsByTagName("*")
+        const totalSlides = this.props.children.length;
+        const currentSlide = parseInt(carouselItem.getAttribute("data-index"));
+        const { totalItems } = this.state;
+        const isLastSlide = currentSlide == totalItems - totalSlides;
+        const isFirstSlide = currentSlide === totalSlides;
+        const hasFocusableChild = this.elementHasFocusableChildren(
+          carouselItem,
+          e.target,
+          e.shiftKey
         );
-        for (const child of carouselItemChildren) {
-          // Find Focusable Elements after the current target
-          if (hasFoundTarget) {
-            const hasFocus = this.getKeyboardFocusableElements(child);
-            if (!!hasFocus.length) {
-              hasFocussableChild = true;
-              break;
-            }
+
+        if (e.shiftKey) {
+          if (isFirstSlide) {
+            break;
+          } else {
+            this.previous();
           }
-          if (e.target.isSameNode(child)) {
-            hasFoundTarget = true;
-          }
-        }
-
-        const { slidesToShow, totalItems, currentSlide } = this.state;
-        let tempCurrentSlide = currentSlide;
-        if (
-          nextNode &&
-          nextNode instanceof HTMLElement &&
-          this.props.infinite
-        ) {
-          tempCurrentSlide = parseInt(nextNode.getAttribute("data-index"));
-        }
-
-        const isLastSlide =
-          tempCurrentSlide ==
-          totalItems - (!this.props.infinite ? slidesToShow : slidesToShow + 1);
-
-        if (!hasFocussableChild) {
-          if (!isLastSlide) {
-            return this.next();
-          } else if (
-            this.listRef.current &&
-            (this.listRef.current.nextSibling &&
-              this.listRef.current.nextSibling instanceof HTMLElement)
+          return;
+        } else {
+          if (
+            isLastSlide &&
+            (this.listRef.current &&
+              (this.listRef.current.nextSibling &&
+                this.listRef.current.nextSibling instanceof HTMLElement))
           ) {
             this.listRef.current.nextSibling.focus();
             break;
+          } else {
+            if (!hasFocusableChild) {
+              this.next();
+            }
           }
         }
     }
