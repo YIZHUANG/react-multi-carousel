@@ -27,7 +27,6 @@ import Dots from "./Dots";
 import { LeftArrow, RightArrow } from "./Arrows";
 import CarouselItems from "./CarouselItems";
 import { getTransform } from "./utils/common";
-import { parse } from "@typescript-eslint/parser";
 
 const defaultTransitionDuration = 400;
 const defaultTransition = "transform 400ms ease-in-out";
