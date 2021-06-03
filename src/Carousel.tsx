@@ -655,8 +655,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           break;
         }
         const totalSlides = this.props.children.length;
-        const currentSlide = carouselItem.hasAttribute("data-index")
-          ? parseInt(carouselItem.getAttribute("data-index"))
+        const slideIndex = carouselItem.getAttribute("data-index");
+        const currentSlide = slideIndex
+          ? parseInt(slideIndex)
           : this.state.currentSlide;
         const { totalItems } = this.state;
         const isLastSlide = currentSlide == totalItems - totalSlides;
