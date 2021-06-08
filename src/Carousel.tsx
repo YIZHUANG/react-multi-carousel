@@ -112,7 +112,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.initialY = 0;
     this.isInThrottle = false;
     this.transformPlaceHolder = 0;
-    this.initialStartIndex = null;
+    this.initialStartIndex = 0;
   }
   // we only use this when infinite mode is off
   public resetTotalItems(): void {
@@ -670,7 +670,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           : totalSlides;
 
         const isLastSlide = currentSlide == lastSlideIndex;
-        const isFirstSlide = currentSlide === totalSlides;
+        const isFirstSlide = currentSlide === this.initialStartIndex;
 
         const hasFocusableChild = Carousel.elementHasFocusableChildren(
           carouselItem,
