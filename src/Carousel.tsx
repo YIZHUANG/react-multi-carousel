@@ -13,7 +13,8 @@ import {
   isInLeftEnd,
   isInRightEnd,
   getInitialSlideInInfiniteMode,
-  notEnoughChildren
+  notEnoughChildren,
+  getSlidesToSlide
 } from "./utils";
 import {
   CarouselInternalState,
@@ -66,6 +67,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public initialY: number;
   private transformPlaceHolder: number;
   private itemsToShowTimeout: any;
+  private initialStartIndex: number;
+
   constructor(props: CarouselProps) {
     super(props);
     this.containerRef = React.createRef();
@@ -110,6 +113,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.initialY = 0;
     this.isInThrottle = false;
     this.transformPlaceHolder = 0;
+    this.initialStartIndex = null;
+
+    console.log("constructor start index", this.state.currentSlide);
   }
   // we only use this when infinite mode is off
   public resetTotalItems(): void {
@@ -304,11 +310,14 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       shouldCorrectItemPosition = false;
     } else {
       if (typeof value === "boolean" && value) {
+        console.log("if on resize..");
         shouldCorrectItemPosition = false;
       } else {
+        console.log("else on resize...");
         shouldCorrectItemPosition = true;
       }
     }
+    console.log("shouldCorrectItemPosition", shouldCorrectItemPosition);
     this.setItemsToShow(shouldCorrectItemPosition);
   }
   public componentDidUpdate(
@@ -648,20 +657,27 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         return this.next();
       case "Tab":
         if (!(e.target instanceof HTMLElement)) {
-          return;
+          break;
         }
         const carouselItem = e.target.closest("li.react-multi-carousel-item");
         if (!carouselItem || !(carouselItem instanceof HTMLElement)) {
           break;
+        }
+        if (this.props.infinite && this.initialStartIndex === null) {
+          this.initialStartIndex = this.state.currentSlide;
         }
         const totalSlides = this.props.children.length;
         const slideIndex = carouselItem.getAttribute("data-index");
         const currentSlide = slideIndex
           ? parseInt(slideIndex)
           : this.state.currentSlide;
-        const { totalItems } = this.state;
-        const isLastSlide = currentSlide == totalItems - totalSlides;
+        const lastSlideIndex = this.props.infinite
+          ? this.initialStartIndex + totalSlides
+          : totalSlides;
+
+        const isLastSlide = currentSlide == lastSlideIndex;
         const isFirstSlide = currentSlide === totalSlides;
+
         const hasFocusableChild = Carousel.elementHasFocusableChildren(
           carouselItem,
           e.target,
@@ -687,6 +703,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           } else {
             if (!hasFocusableChild) {
               this.next();
+              break;
             }
           }
         }
