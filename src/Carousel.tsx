@@ -113,8 +113,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.isInThrottle = false;
     this.transformPlaceHolder = 0;
     this.initialStartIndex = null;
-
-    console.log("constructor start index", this.state.currentSlide);
   }
   // we only use this when infinite mode is off
   public resetTotalItems(): void {
@@ -309,14 +307,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       shouldCorrectItemPosition = false;
     } else {
       if (typeof value === "boolean" && value) {
-        console.log("if on resize..");
         shouldCorrectItemPosition = false;
       } else {
-        console.log("else on resize...");
         shouldCorrectItemPosition = true;
       }
     }
-    console.log("shouldCorrectItemPosition", shouldCorrectItemPosition);
     this.setItemsToShow(shouldCorrectItemPosition);
   }
   public componentDidUpdate(
@@ -372,6 +367,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
     if (this.transformPlaceHolder !== this.state.transform) {
       this.transformPlaceHolder = this.state.transform;
+    }
+    if (this.props.infinite && !this.initialStartIndex) {
+      this.initialStartIndex = this.state.currentSlide;
     }
   }
   public correctClonesPosition({
@@ -661,9 +659,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         const carouselItem = e.target.closest("li.react-multi-carousel-item");
         if (!carouselItem || !(carouselItem instanceof HTMLElement)) {
           break;
-        }
-        if (this.props.infinite && this.initialStartIndex === null) {
-          this.initialStartIndex = this.state.currentSlide;
         }
         const totalSlides = this.props.children.length;
         const slideIndex = carouselItem.getAttribute("data-index");
