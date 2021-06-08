@@ -13,8 +13,7 @@ import {
   isInLeftEnd,
   isInRightEnd,
   getInitialSlideInInfiniteMode,
-  notEnoughChildren,
-  getSlidesToSlide
+  notEnoughChildren
 } from "./utils";
 import {
   CarouselInternalState,
