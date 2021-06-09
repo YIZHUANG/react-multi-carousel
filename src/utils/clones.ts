@@ -1,4 +1,5 @@
 import { CarouselInternalState, CarouselProps } from "../types";
+import * as React from "react";
 
 /*
 getOriginalCounterPart gets the index of the original children.
@@ -28,7 +29,7 @@ function getOriginalCounterPart(
   }
 }
 /*
-A slide can have many clones, this produces a hash table structure for us to know 
+A slide can have many clones, this produces a hash table structure for us to know
 What is the clone of a particular slide and where it is. Note: a slide can have multiple clones.
 This is based on the getclones method below.
 */
@@ -79,6 +80,16 @@ function getOriginalIndexLookupTableByClones(
   }
 }
 
+/**
+ * This function sets props of disableTabIndex to true for cloned elememts.
+ * @param elementArray
+ */
+function disableElementsTabIndex(elementArray: any[]): any[] {
+  return elementArray.map(element => {
+    return React.cloneElement(element, { disableTabIndex: true }, null);
+  });
+}
+
 /*
 The current setting is if the length of the carousel item is larger than "slidesToShow * 2",
 then we clone "slidesToShow * 2" amount of beginning and end items.
@@ -89,17 +100,30 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
   if (childrenArr.length < slidesToShow) {
     return childrenArr;
   }
-  if (childrenArr.length > slidesToShow * 2) {
+  const largerThanSlideShow2Times = childrenArr.length > slidesToShow * 2;
+  const firstClone = largerThanSlideShow2Times
+    ? [
+        ...childrenArr.slice(
+          childrenArr.length - slidesToShow * 2,
+          childrenArr.length
+        )
+      ]
+    : [...childrenArr];
+  const lastClone = largerThanSlideShow2Times
+    ? [...childrenArr.slice(0, slidesToShow * 2)]
+    : [...childrenArr];
+  if (largerThanSlideShow2Times) {
     return [
-      ...childrenArr.slice(
-        childrenArr.length - slidesToShow * 2,
-        childrenArr.length
-      ),
+      ...disableElementsTabIndex(firstClone),
       ...childrenArr,
-      ...childrenArr.slice(0, slidesToShow * 2)
+      ...disableElementsTabIndex(lastClone)
     ];
   }
-  return [...childrenArr, ...childrenArr, ...childrenArr];
+  return [
+    ...disableElementsTabIndex(firstClone),
+    ...childrenArr,
+    ...disableElementsTabIndex(lastClone)
+  ];
 }
 
 function getInitialSlideInInfiniteMode(

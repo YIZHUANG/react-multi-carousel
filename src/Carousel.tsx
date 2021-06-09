@@ -66,7 +66,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public initialY: number;
   private transformPlaceHolder: number;
   private itemsToShowTimeout: any;
-  private initialStartIndex: number;
 
   constructor(props: CarouselProps) {
     super(props);
@@ -112,7 +111,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.initialY = 0;
     this.isInThrottle = false;
     this.transformPlaceHolder = 0;
-    this.initialStartIndex = 0;
   }
   // we only use this when infinite mode is off
   public resetTotalItems(): void {
@@ -178,6 +176,25 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
   }
 
+  /**
+   * This function disable tabIndex on clone elements children
+   * @private
+   */
+  private disableCloneTabs() {
+    if (this.listRef.current) {
+      const notTabableItems = this.listRef.current.querySelectorAll(
+        'li[tabindex="-1"]'
+      );
+
+      notTabableItems.forEach((item: HTMLElement) => {
+        const tabableItems = Carousel.getKeyboardFocusableElements(item);
+        tabableItems.forEach(element => {
+          element.setAttribute("tabindex", -1);
+        });
+      });
+    }
+  }
+
   /*
   We only want to set the clones on the client-side cause it relies on getting the width of the carousel items.
   */
@@ -210,6 +227,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       },
       () => {
         this.correctItemsPosition(itemWidth || this.state.itemWidth);
+        this.disableCloneTabs();
       }
     );
   }
@@ -367,9 +385,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
     if (this.transformPlaceHolder !== this.state.transform) {
       this.transformPlaceHolder = this.state.transform;
-    }
-    if (this.props.infinite && !this.initialStartIndex) {
-      this.initialStartIndex = this.state.currentSlide;
     }
   }
   public correctClonesPosition({
@@ -656,50 +671,15 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         if (!(e.target instanceof HTMLElement)) {
           break;
         }
-        const carouselItem = e.target.closest("li.react-multi-carousel-item");
+        const carouselItem = document.activeElement.closest(
+          "li.react-multi-carousel-item"
+        );
         if (!carouselItem || !(carouselItem instanceof HTMLElement)) {
           break;
         }
-        const totalSlides = this.props.children.length;
-        const slideIndex = carouselItem.getAttribute("data-index");
-        const currentSlide = slideIndex
-          ? parseInt(slideIndex)
-          : this.state.currentSlide;
-        const lastSlideIndex = this.props.infinite
-          ? this.initialStartIndex + totalSlides
-          : totalSlides;
-
-        const isLastSlide = currentSlide == lastSlideIndex;
-        const isFirstSlide = currentSlide === this.initialStartIndex;
-
-        const hasFocusableChild = Carousel.elementHasFocusableChildren(
-          carouselItem,
-          e.target,
-          e.shiftKey
-        );
-
-        if (e.shiftKey) {
-          if (isFirstSlide) {
-            break;
-          } else {
-            this.previous();
-          }
-          return;
-        } else {
-          if (
-            isLastSlide &&
-            (this.listRef.current &&
-              (this.listRef.current.nextSibling &&
-                this.listRef.current.nextSibling instanceof HTMLElement))
-          ) {
-            this.listRef.current.nextSibling.focus();
-            break;
-          } else {
-            if (!hasFocusableChild) {
-              this.next();
-              break;
-            }
-          }
+        const newCurrentSlide = carouselItem.getAttribute("data-index");
+        if (this.state.currentSlide != parseInt(newCurrentSlide)) {
+          this.goToSlide(parseInt(newCurrentSlide));
         }
     }
   }
