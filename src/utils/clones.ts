@@ -86,7 +86,12 @@ function getOriginalIndexLookupTableByClones(
  */
 function disableElementsTabIndex(elementArray: any[]): any[] {
   return elementArray.map(element => {
-    return React.cloneElement(element, { disableTabIndex: true }, null);
+    const props = element.props
+      ? { ...element.props, disableTabIndex: true }
+      : { disableTabIndex: true };
+    return React.isValidElement(element)
+      ? React.cloneElement(element, props, null)
+      : element;
   });
 }
 
