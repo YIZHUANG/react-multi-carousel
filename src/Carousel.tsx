@@ -189,7 +189,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       notTabableItems.forEach((item: HTMLElement) => {
         const tabableItems = Carousel.getKeyboardFocusableElements(item);
         tabableItems.forEach((element: HTMLElement) => {
-          element.setAttribute("tabindex", -1);
+          element.setAttribute("tabindex", "-1");
         });
       });
     }
