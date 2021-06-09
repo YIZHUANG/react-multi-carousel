@@ -188,7 +188,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
 
       notTabableItems.forEach((item: HTMLElement) => {
         const tabableItems = Carousel.getKeyboardFocusableElements(item);
-        tabableItems.forEach(element => {
+        tabableItems.forEach((element: HTMLElement) => {
           element.setAttribute("tabindex", -1);
         });
       });
@@ -668,7 +668,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       case "ArrowRight":
         return this.next();
       case "Tab":
-        if (!(e.target instanceof HTMLElement)) {
+        if (!(e.target instanceof HTMLElement) || !document.activeElement) {
           break;
         }
         const carouselItem = document.activeElement.closest(
@@ -678,7 +678,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           break;
         }
         const newCurrentSlide = carouselItem.getAttribute("data-index");
-        if (this.state.currentSlide != parseInt(newCurrentSlide)) {
+        if (
+          newCurrentSlide &&
+          this.state.currentSlide != parseInt(newCurrentSlide)
+        ) {
           this.goToSlide(parseInt(newCurrentSlide));
         }
     }
