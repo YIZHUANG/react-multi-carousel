@@ -627,40 +627,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     return elements.filter((el: HTMLElement) => !el.hasAttribute("disabled"));
   }
 
-  /**
-   * Checks of there are focusable children element in a parent element from a certain child Node
-   * and can go up or down the tree.
-   *
-   * @param parentElement
-   * @param fromElement
-   * @param reverse
-   * @private
-   */
-  private static elementHasFocusableChildren(
-    parentElement: HTMLElement,
-    fromElement: HTMLElement,
-    reverse: boolean
-  ) {
-    let hasFocusableChild = false;
-    const carouselItems = [].slice.call(
-      parentElement.getElementsByTagName("*")
-    );
-    const carouselItemChildren = reverse
-      ? carouselItems.reverse()
-      : carouselItems;
-    const targetElementIndex = carouselItemChildren.indexOf(fromElement);
-    let index = targetElementIndex < 0 ? 0 : targetElementIndex + 1;
-    for (index; index < carouselItemChildren.length; index++) {
-      const child = carouselItemChildren[index];
-      const hasFocus = Carousel.getKeyboardFocusableElements(child);
-      if (!!hasFocus.length) {
-        hasFocusableChild = true;
-        break;
-      }
-    }
-    return hasFocusableChild;
-  }
-
   public onKeyUp(e: KeyboardEvent): void {
     switch (e.key) {
       case "ArrowLeft":
