@@ -105,8 +105,8 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
   if (childrenArr.length < slidesToShow) {
     return childrenArr;
   }
-  const largerThanSlideShow2Times = childrenArr.length > slidesToShow * 2;
-  const firstClone = largerThanSlideShow2Times
+  const isLengthDoubleSlidesToShow = childrenArr.length > slidesToShow * 2;
+  const prependedClones = isLengthDoubleSlidesToShow
     ? [
         ...childrenArr.slice(
           childrenArr.length - slidesToShow * 2,
@@ -114,20 +114,20 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
         )
       ]
     : [...childrenArr];
-  const lastClone = largerThanSlideShow2Times
+  const appendedClones = isLengthDoubleSlidesToShow
     ? [...childrenArr.slice(0, slidesToShow * 2)]
     : [...childrenArr];
-  if (largerThanSlideShow2Times) {
+  if (isLengthDoubleSlidesToShow) {
     return [
-      ...disableElementsTabIndex(firstClone),
+      ...disableElementsTabIndex(prependedClones),
       ...childrenArr,
-      ...disableElementsTabIndex(lastClone)
+      ...disableElementsTabIndex(appendedClones)
     ];
   }
   return [
-    ...disableElementsTabIndex(firstClone),
+    ...disableElementsTabIndex(prependedClones),
     ...childrenArr,
-    ...disableElementsTabIndex(lastClone)
+    ...disableElementsTabIndex(appendedClones)
   ];
 }
 

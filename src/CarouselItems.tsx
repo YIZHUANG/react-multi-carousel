@@ -54,7 +54,6 @@ const CarouselItems = ({
           return (
             <li
               key={index}
-              tabIndex={child.props.disableTabIndex ? -1 : undefined} //set tabIndex to be used to disable cloned tab indexes (needed for tab accessibility)
               data-index={index}
               onClick={() => {
                 if (props.focusOnSelect) {
@@ -87,7 +86,8 @@ const CarouselItems = ({
                 getIfSlideIsVisbile(index, state)
                   ? "react-multi-carousel-item--active"
                   : ""
-              } ${itemClass}`}
+              } ${itemClass}
+              ${child.props.disableTabIndex ? "cloned-item" : ""}`}
             >
               {child}
             </li>

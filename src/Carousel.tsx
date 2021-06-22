@@ -183,7 +183,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   private disableCloneTabs() {
     if (this.listRef.current) {
       const notTabableItems = this.listRef.current.querySelectorAll(
-        'li[tabindex="-1"]'
+        "li.cloned-item"
       );
 
       notTabableItems.forEach((item: HTMLElement) => {
