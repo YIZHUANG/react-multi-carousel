@@ -500,15 +500,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const { clientX, clientY } = isMouseMoveEvent(e) ? e : e.touches[0];
     const diffX = this.initialX - clientX;
     const diffY = this.initialY - clientY;
-    if (
-      !isMouseMoveEvent(e) &&
-      this.autoPlay &&
-      this.props.autoPlay &&
-      this.props.pauseOnHover
-    ) {
-      clearInterval(this.autoPlay);
-      this.autoPlay = undefined;
-    }
     if (this.onMove) {
       if (!(Math.abs(diffX) > Math.abs(diffY))) {
         // prevent swiping up and down moves the carousel.
@@ -619,8 +610,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         break;
     }
   }
-  public handleEnter(): void {
-    if (this.autoPlay && this.props.autoPlay) {
+  public handleEnter(e: React.MouseEvent): void {
+    if (
+      isMouseMoveEvent(e) &&
+      this.autoPlay &&
+      this.props.autoPlay &&
+      this.props.pauseOnHover
+    ) {
       clearInterval(this.autoPlay);
       this.autoPlay = undefined;
     }
