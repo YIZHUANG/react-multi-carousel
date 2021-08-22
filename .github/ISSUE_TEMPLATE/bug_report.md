@@ -8,7 +8,7 @@ assignees: ''
 ---
 **Prerequisite**
 
-Before you submit a feature request or report a bug to be fixed, make sure you have stared this repository or given or about to give good compliments regarding what a good job the contributors of this project have done as they are doing this for free at their own free time, this is the least you can do. A [donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GJSPRG9RKSJLQ&source=url) is also welcomed
+Before you submit a feature request or report a bug to be fixed, make sure you have stared this repository. A [donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GJSPRG9RKSJLQ&source=url) is also welcomed
 
 **Describe the bug**
 A clear and concise description of what the bug is.
@@ -25,17 +25,6 @@ A clear and concise description of what you expected to happen.
 
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
-
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
-
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
 
 **Additional context**
 Add any other context about the problem here.
