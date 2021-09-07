@@ -4,6 +4,7 @@
   src: url("./revicons.woff") format('woff'),
   url("./revicons.ttf") format('ttf'),
   url("./revicons.eot") format('ttf');
+  font-display: swap;
 }
 .react-multi-carousel-list {
   display: flex;
