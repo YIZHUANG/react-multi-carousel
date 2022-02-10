@@ -28,7 +28,7 @@ function getOriginalCounterPart(
   }
 }
 /*
-A slide can have many clones, this produces a hash table structure for us to know 
+A slide can have many clones, this produces a hash table structure for us to know
 What is the clone of a particular slide and where it is. Note: a slide can have multiple clones.
 This is based on the getclones method below.
 */
@@ -163,7 +163,7 @@ function checkClonesPosition(
         nextSlide = childrenArr.length;
         nextPosition = -(itemWidth * nextSlide);
       } else {
-        nextSlide = totalItems - slidesToShow * 2;
+        nextSlide = totalItems / 3;
         nextPosition = -(itemWidth * nextSlide);
       }
     }
