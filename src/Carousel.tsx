@@ -225,11 +225,18 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   ): void {
     if (this.containerRef && this.containerRef.current) {
       const containerWidth = this.containerRef.current.offsetWidth;
+      const { partialVisibilityGutter } = getInitialState(
+        this.state,
+        this.props
+      );
+
       const itemWidth: number = getItemClientSideWidth(
         this.props,
         slidesToShow,
-        containerWidth
+        containerWidth,
+        partialVisibilityGutter
       );
+
       this.setState(
         {
           containerWidth,
