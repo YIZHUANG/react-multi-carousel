@@ -53,7 +53,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     centerMode: false,
     additionalTransfrom: 0,
     pauseOnHover: true,
-    shouldResetAutoplay: false
+    shouldResetAutoplay: true
   };
   private readonly containerRef: React.RefObject<HTMLDivElement>;
   private readonly listRef: React.RefObject<HTMLUListElement>;
