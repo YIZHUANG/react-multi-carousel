@@ -569,6 +569,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/ak-pdeshaies"><img src="https://avatars.githubusercontent.com/u/78373209?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Paul Deshaies Jr</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=ak-pdeshaies" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/donotcodeit"><img src="https://avatars.githubusercontent.com/u/30778436?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pavel Mikheev</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=donotcodeit" title="Code">💻</a></td>
   </tr>
 </table>
 
