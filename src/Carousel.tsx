@@ -52,7 +52,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     focusOnSelect: false,
     centerMode: false,
     additionalTransfrom: 0,
-    pauseOnHover: true
+    pauseOnHover: true,
+    shouldResetAutoplay: false
   };
   private readonly containerRef: React.RefObject<HTMLDivElement>;
   private readonly listRef: React.RefObject<HTMLUListElement>;
@@ -403,6 +404,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       beforeChange(nextSlides, this.getState());
     }
     this.isAnimationAllowed = true;
+    this.props.shouldResetAutoplay && this.resetAutoplayInterval();
     this.setState(
       {
         transform: nextPosition,
@@ -436,6 +438,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       beforeChange(nextSlides, this.getState());
     }
     this.isAnimationAllowed = true;
+    this.props.shouldResetAutoplay && this.resetAutoplayInterval();
     this.setState(
       {
         transform: nextPosition,
@@ -449,6 +452,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         }
       }
     );
+  }
+  resetAutoplayInterval() {
+    clearInterval(this.autoPlay);
+    this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
   }
   public componentWillUnmount(): void {
     window.removeEventListener("resize", this.onResize as React.EventHandler<
@@ -636,6 +643,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       beforeChange(slide, this.getState());
     }
     this.isAnimationAllowed = true;
+    this.props.shouldResetAutoplay && this.resetAutoplayInterval();
     this.setState(
       {
         currentSlide: slide,
