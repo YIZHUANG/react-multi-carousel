@@ -567,6 +567,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/groomain"><img src="https://avatars3.githubusercontent.com/u/3601848?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Romain</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=groomain" title="Code">💻</a></td>
     <td align="center"><a href="http://rileylundquist.com"><img src="https://avatars.githubusercontent.com/u/5504497?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Riley Lundquist</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=rlundquist3" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/ak-pdeshaies"><img src="https://avatars.githubusercontent.com/u/78373209?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Paul Deshaies Jr</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=ak-pdeshaies" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->

@@ -130,6 +130,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ak-pdeshaies",
+      "name": "Paul Deshaies Jr",
+      "avatar_url": "https://avatars.githubusercontent.com/u/78373209?v=4",
+      "profile": "https://github.com/ak-pdeshaies",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
