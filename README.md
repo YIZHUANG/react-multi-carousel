@@ -10,7 +10,7 @@ Production-ready, lightweight fully customizable React carousel component that r
 <img alt="download per month" src="https://img.shields.io/npm/dm/react-multi-carousel" target="_blank" />
 </a>
 [![Build Status](https://api.travis-ci.org/YIZHUANG/react-multi-carousel.svg?branch=master)](https://travis-ci.org/YIZHUANG/react-multi-carousel)
-<a href="https://w3js.com/react-multi-carousel">
+<a href="https://react-multi-carousel.surge.sh">
 <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
 </a>
 <a href="https://github.com/YIZHUANG/react-multi-carousel/graphs/commit-activity">
@@ -65,7 +65,7 @@ If you are using this component seriously, please donate or talk to your manager
 
 Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maintainers use their service to debug browser issues.
 
-## [Documentation](https://w3js.com/react-multi-carousel)
+## [Documentation](https://react-multi-carousel.surge.sh)
 
 ## Other important links.
 
@@ -83,7 +83,7 @@ Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maint
 
 ## Demo.
 
-Documentation is [here](https://w3js.com/react-multi-carousel).
+Documentation is [here](https://react-multi-carousel.surge.sh).
 
 Demo for the SSR <https://react-multi-carousel.now.sh/>
 
@@ -436,7 +436,7 @@ Go to slide on click and make the slide a current slide.
 
 ## additionalTransfrom Props.
 
-This is very useful when you are fully customizing the control functionality by yourself like this [one](https://w3js.com/react-multi-carousel/?selectedKind=Carousel&selectedStory=With%20custom%20control%20functionality&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
+This is very useful when you are fully customizing the control functionality by yourself like this [one](https://react-multi-carousel.surge.sh/?selectedKind=Carousel&selectedStory=With%20custom%20control%20functionality&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/WithScrollbar.js)
 
@@ -479,9 +479,10 @@ For example if you give to your carousel item padding left and padding right 20p
 | partialVisible          |                                                                 `boolean` | `string`                                                                 |              `false`              | Show partial next slides. This is use with the `responsive` prop, see example for details                                                                             |
 | customTransition        |                                                                      `string`                                                                      |   `transform 300ms ease-in-out`   | Configure your own anaimation when sliding                                                                                                                            |
 | transitionDuration      | `number |`300` | The unit is ms, if you are using customTransition, make sure to put the duration here as this is needed for the resizing to work. |
-| focusOnSelect           |                                    `boolean |`false` | Go to slide on click and make the slide a current slide.                                    |
-| centerMode              |                                       `boolean |`false` | Shows the next items and previous items partially.                                       |
-| additionalTransfrom     |                                              `number |`0` | additional transfrom to the current one.                                               |
+| focusOnSelect           |                                    `boolean` |`false` | Go to slide on click and make the slide a current slide.                                    |
+| centerMode              |                                       `boolean` |`false` | Shows the next items and previous items partially.                                       |
+| additionalTransfrom     |                                              `number` |`0` | additional transfrom to the current one.                                               |
+| shouldResetAutoplay     |                                              `boolean` |`true` | resets autoplay when clicking next, previous button and the dots                                              |
 
 ## Author
 
@@ -566,6 +567,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://t.me/s/filimonovvadim"><img src="https://avatars1.githubusercontent.com/u/11225648?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vadim Filimonov</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=VadimFilimonov" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/groomain"><img src="https://avatars3.githubusercontent.com/u/3601848?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Romain</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=groomain" title="Code">💻</a></td>
     <td align="center"><a href="http://rileylundquist.com"><img src="https://avatars.githubusercontent.com/u/5504497?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Riley Lundquist</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=rlundquist3" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/ak-pdeshaies"><img src="https://avatars.githubusercontent.com/u/78373209?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Paul Deshaies Jr</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=ak-pdeshaies" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/donotcodeit"><img src="https://avatars.githubusercontent.com/u/30778436?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pavel Mikheev</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=donotcodeit" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/nev1d"><img src="https://avatars.githubusercontent.com/u/69861627?v=4?s=100" width="100px;" alt=""/><br /><sub><b>nev1d</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=nev1d" title="Code">💻</a></td>
   </tr>
 </table>
 
