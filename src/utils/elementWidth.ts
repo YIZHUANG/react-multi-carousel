@@ -48,10 +48,19 @@ function getItemClientSideWidth(
   containerWidth: number,
   gutter?: number
 ): number {
-  return Math.round(
-    (containerWidth - (gutter ? gutter * 2 : 0)) /
-      (slidesToShow + (props.centerMode && !gutter ? 1 : 0))
-  );
+  if (gutter && props.partialVisible && props.centerMode) {
+    return Math.round((containerWidth - gutter * 2) / slidesToShow);
+  }
+
+  if (gutter && props.partialVisible) {
+    return Math.round((containerWidth - gutter) / slidesToShow);
+  }
+
+  if (props.centerMode) {
+    return Math.round(containerWidth / (slidesToShow + 1));
+  }
+
+  return Math.round(containerWidth / slidesToShow);
 }
 
 export {
