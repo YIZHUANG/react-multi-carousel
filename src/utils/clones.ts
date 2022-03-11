@@ -163,7 +163,7 @@ function checkClonesPosition(
         nextSlide = childrenArr.length;
         nextPosition = -(itemWidth * nextSlide);
       } else {
-        nextSlide = totalItems - slidesToShow * 2;
+        nextSlide = totalItems / 3;
         nextPosition = -(itemWidth * nextSlide);
       }
     }
