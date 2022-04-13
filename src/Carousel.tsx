@@ -53,7 +53,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     centerMode: false,
     additionalTransfrom: 0,
     pauseOnHover: true,
-    shouldResetAutoplay: true
+    shouldResetAutoplay: true,
+    rewind: false
   };
   private readonly containerRef: React.RefObject<HTMLDivElement>;
   private readonly listRef: React.RefObject<HTMLUListElement>;
@@ -350,6 +351,20 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
     if (this.transformPlaceHolder !== this.state.transform) {
       this.transformPlaceHolder = this.state.transform;
+    }
+    /* 
+     If we reach the last slide of a non-infinite carousel we can rewind the carousel
+     if opted in to autoPlay (lightweight infinite mode alternative).
+    */
+     if (this.props.autoPlay && this.props.rewind) {
+      if (!this.props.infinite && isInRightEnd(this.state)) {
+        const rewindBuffer = this.props.transitionDuration || defaultTransitionDuration;
+        setTimeout(() => {
+          this.setIsInThrottle(false);
+          this.resetAutoplayInterval();
+          this.goToSlide(0);
+        }, rewindBuffer + this.props.autoPlaySpeed);
+      }
     }
   }
   public correctClonesPosition({
