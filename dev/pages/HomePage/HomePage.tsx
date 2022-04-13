@@ -131,6 +131,7 @@ class Index extends React.Component {
           containerClass="container-with-dots"
           itemClass="image-item"
           deviceType={this.props.deviceType}
+          rewind={true}
         >
           {fakerData.slice(0,5).map(card => {
             return <Image url={card.image} alt={card.headline} />;
