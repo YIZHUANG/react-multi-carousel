@@ -157,6 +157,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "MaSchVam",
+      "name": "Mads Vammen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62725224?v=4",
+      "profile": "https://brandinavian.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
