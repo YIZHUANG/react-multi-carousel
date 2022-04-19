@@ -162,7 +162,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.props.keyBoardControl) {
       window.addEventListener("keyup", this.onKeyUp as React.EventHandler<any>);
     }
-    if (this.props.autoPlay && this.props.autoPlaySpeed) {
+    if (this.props.autoPlay) {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
   }
@@ -361,14 +361,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       if (!this.props.infinite && isInRightEnd(this.state)) {
         const rewindBuffer =
           this.props.transitionDuration || defaultTransitionDuration;
-        const delay =
-          rewindBuffer +
-          (this.props.autoPlaySpeed ? this.props.autoPlaySpeed : 3000);
         setTimeout(() => {
           this.setIsInThrottle(false);
           this.resetAutoplayInterval();
-          this.goToSlide(0);
-        }, delay);
+          this.goToSlide(0, undefined, false);
+        }, rewindBuffer + this.props.autoPlaySpeed!);
       }
     }
   }
@@ -648,7 +645,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = undefined;
     }
   }
-  public goToSlide(slide: number, skipCallbacks?: SkipCallbackOptions): void {
+  public goToSlide(
+    slide: number,
+    skipCallbacks?: SkipCallbackOptions,
+    animationAllowed = true
+  ): void {
     if (this.isInThrottle) {
       return;
     }
@@ -662,7 +663,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     ) {
       beforeChange(slide, this.getState());
     }
-    this.isAnimationAllowed = true;
+    this.isAnimationAllowed = animationAllowed;
     this.props.shouldResetAutoplay && this.resetAutoplayInterval();
     this.setState(
       {
