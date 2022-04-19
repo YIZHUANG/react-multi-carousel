@@ -163,7 +163,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.props.keyBoardControl) {
       window.addEventListener("keyup", this.onKeyUp as React.EventHandler<any>);
     }
-    if (this.props.autoPlay && this.props.autoPlaySpeed) {
+    if (this.props.autoPlay) {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
     }
   }
