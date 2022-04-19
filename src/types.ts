@@ -59,6 +59,7 @@ export interface CarouselProps {
   additionalTransfrom?: number; // this is only used if you want to add additional transfrom to the current transform
   pauseOnHover?: boolean;
   shouldResetAutoplay?: boolean;
+  rewind?: boolean;
 }
 
 export type StateCallBack = CarouselInternalState;
