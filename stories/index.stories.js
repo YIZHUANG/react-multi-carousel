@@ -14,7 +14,7 @@ import {
   CustomLeftArrow,
   CustomRightArrow,
   CustomButtonGroup,
-  CustomButtonGroupAsArrows,
+  CustomButtonGroupAsArrows
 } from "./CustomArrows";
 import CopyOfChildAsDots from "./CopyOfChildAsDots";
 import CustomDot from "./CustomDot";
@@ -43,14 +43,14 @@ const images = [
   "https://images.unsplash.com/photo-1549737328-8b9f3252b927?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
   "https://images.unsplash.com/photo-1549833284-6a7df91c1f65?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
   "https://images.unsplash.com/photo-1549985908-597a09ef0a7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+  "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
 ];
 const texts = [
   "Appending currency sign to a purchase form in your e-commerce site using plain JavaScript.",
   "Fixing CSS load order/style.chunk.css incorrect in Nextjs",
   "React Carousel with Server Side Rendering Support – Part 1",
   "React Carousel with Server Side Rendering Support – Part 2",
-  "Flutter Xcode couldn’t find any iOS App Development provisioning profiles",
+  "Flutter Xcode couldn’t find any iOS App Development provisioning profiles"
 ];
 const fakerData = Array(12)
   .fill(0)
@@ -59,7 +59,7 @@ const fakerData = Array(12)
     return {
       image: images[index],
       headline: "w3js.com - web front-end studio",
-      description: texts[number],
+      description: texts[number]
     };
   });
 
@@ -67,33 +67,33 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
-    partialVisibilityGutter: 40, // this is optional if you are not using partialVisible props
+    partialVisibilityGutter: 40 // this is optional if you are not using partialVisible props
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    partialVisibilityGutter: 30, // this is optional if you are not using partialVisible props
+    partialVisibilityGutter: 30 // this is optional if you are not using partialVisible props
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    partialVisibilityGutter: 30, // this is optional if you are not using partialVisible props
-  },
+    partialVisibilityGutter: 30 // this is optional if you are not using partialVisible props
+  }
 };
 
 const responsiveImageHero = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 1,
+    items: 1
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 1,
+    items: 1
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
+    items: 1
+  }
 };
 
 storiesOf("Carousel", module)
@@ -180,7 +180,23 @@ storiesOf("Carousel", module)
   .addWithJSX("With custom control functionality", () => {
     return <WithScrollbar />;
   })
-  .addWithJSX("Auto play", () => {
+  .addWithJSX("Auto play with rewind in non-infinite mode", () => {
+    return (
+      <Carousel
+        autoPlay
+        rewind
+        autoPlaySpeed={1000}
+        containerClass="container-with-dots"
+        slidesToSlide={2}
+        responsive={responsive}
+      >
+        {fakerData.map(card => {
+          return <Card {...card} />;
+        })}
+      </Carousel>
+    );
+  })
+  .addWithJSX("Auto play in infinite mode", () => {
     return (
       <Carousel
         autoPlay
@@ -232,7 +248,7 @@ storiesOf("Carousel", module)
                 width: "100%",
                 display: "block",
                 height: "100%",
-                margin: "auto",
+                margin: "auto"
               }}
             />
           );
@@ -262,7 +278,7 @@ storiesOf("Carousel", module)
                     width: "100%",
                     display: "block",
                     height: "100%",
-                    margin: "auto",
+                    margin: "auto"
                   }}
                 />
               );
@@ -291,7 +307,7 @@ storiesOf("Carousel", module)
                 width: "100%",
                 display: "block",
                 height: "100%",
-                margin: "auto",
+                margin: "auto"
               }}
             />
           );
@@ -406,7 +422,7 @@ storiesOf("Carousel", module)
     return (
       <div
         style={{
-          position: "relative",
+          position: "relative"
         }}
       >
         <Carousel

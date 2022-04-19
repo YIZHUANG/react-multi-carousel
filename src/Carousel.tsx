@@ -356,13 +356,14 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
      If we reach the last slide of a non-infinite carousel we can rewind the carousel
      if opted in to autoPlay (lightweight infinite mode alternative).
     */
-     if (this.props.autoPlay && this.props.rewind) {
+    if (this.props.autoPlay && this.props.rewind && this.props.autoPlaySpeed) {
       if (!this.props.infinite && isInRightEnd(this.state)) {
-        const rewindBuffer = this.props.transitionDuration || defaultTransitionDuration;
+        const rewindBuffer =
+          this.props.transitionDuration || defaultTransitionDuration;
         setTimeout(() => {
           this.setIsInThrottle(false);
           this.resetAutoplayInterval();
-          this.goToSlide(0);
+          this.goToSlide(0, undefined, false);
         }, rewindBuffer + this.props.autoPlaySpeed);
       }
     }
@@ -643,7 +644,11 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.autoPlay = undefined;
     }
   }
-  public goToSlide(slide: number, skipCallbacks?: SkipCallbackOptions): void {
+  public goToSlide(
+    slide: number,
+    skipCallbacks?: SkipCallbackOptions,
+    animationAllowed = true
+  ): void {
     if (this.isInThrottle) {
       return;
     }
@@ -657,7 +662,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     ) {
       beforeChange(slide, this.getState());
     }
-    this.isAnimationAllowed = true;
+    this.isAnimationAllowed = animationAllowed;
     this.props.shouldResetAutoplay && this.resetAutoplayInterval();
     this.setState(
       {
