@@ -1,4 +1,5 @@
 import { CarouselInternalState, CarouselProps } from "../types";
+import * as React from "react";
 
 /*
 getOriginalCounterPart gets the index of the original children.
@@ -79,6 +80,21 @@ function getOriginalIndexLookupTableByClones(
   }
 }
 
+/**
+ * This function sets props of disableTabIndex to true for cloned elememts.
+ * @param elementArray
+ */
+function disableElementsTabIndex(elementArray: any[]): any[] {
+  return elementArray.map(element => {
+    const props = element.props
+      ? { ...element.props, disableTabIndex: true }
+      : { disableTabIndex: true };
+    return React.isValidElement(element)
+      ? React.cloneElement(element, props, null)
+      : element;
+  });
+}
+
 /*
 The current setting is if the length of the carousel item is larger than "slidesToShow * 2",
 then we clone "slidesToShow * 2" amount of beginning and end items.
@@ -89,17 +105,30 @@ function getClones(slidesToShow: number, childrenArr: any[]) {
   if (childrenArr.length < slidesToShow) {
     return childrenArr;
   }
-  if (childrenArr.length > slidesToShow * 2) {
+  const isLengthDoubleSlidesToShow = childrenArr.length > slidesToShow * 2;
+  const prependedClones = isLengthDoubleSlidesToShow
+    ? [
+        ...childrenArr.slice(
+          childrenArr.length - slidesToShow * 2,
+          childrenArr.length
+        )
+      ]
+    : [...childrenArr];
+  const appendedClones = isLengthDoubleSlidesToShow
+    ? [...childrenArr.slice(0, slidesToShow * 2)]
+    : [...childrenArr];
+  if (isLengthDoubleSlidesToShow) {
     return [
-      ...childrenArr.slice(
-        childrenArr.length - slidesToShow * 2,
-        childrenArr.length
-      ),
+      ...disableElementsTabIndex(prependedClones),
       ...childrenArr,
-      ...childrenArr.slice(0, slidesToShow * 2)
+      ...disableElementsTabIndex(appendedClones)
     ];
   }
-  return [...childrenArr, ...childrenArr, ...childrenArr];
+  return [
+    ...disableElementsTabIndex(prependedClones),
+    ...childrenArr,
+    ...disableElementsTabIndex(appendedClones)
+  ];
 }
 
 function getInitialSlideInInfiniteMode(

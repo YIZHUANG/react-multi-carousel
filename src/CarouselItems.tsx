@@ -86,7 +86,8 @@ const CarouselItems = ({
                 getIfSlideIsVisbile(index, state)
                   ? "react-multi-carousel-item--active"
                   : ""
-              } ${itemClass}`}
+              } ${itemClass}
+              ${child.props.disableTabIndex ? "cloned-item" : ""}`}
             >
               {child}
             </li>

@@ -68,6 +68,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public initialY: number;
   private transformPlaceHolder: number;
   private itemsToShowTimeout: any;
+
   constructor(props: CarouselProps) {
     super(props);
     this.containerRef = React.createRef();
@@ -153,16 +154,46 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }
     }
   }
+
+  public bindKeyUpEvent() {
+    if (this.listRef.current) {
+      this.listRef.current.addEventListener("keyup", this.onKeyUp, false);
+    }
+  }
+
+  public removeKeyUpEvent() {
+    if (this.listRef.current) {
+      this.listRef.current.removeEventListener("keyup", this.onKeyUp, false);
+    }
+  }
+
   public componentDidMount(): void {
     this.setState({ domLoaded: true });
     this.setItemsToShow();
+    this.bindKeyUpEvent();
     window.addEventListener("resize", this.onResize as React.EventHandler<any>);
     this.onResize(true);
-    if (this.props.keyBoardControl) {
-      window.addEventListener("keyup", this.onKeyUp as React.EventHandler<any>);
-    }
     if (this.props.autoPlay && this.props.autoPlaySpeed) {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
+    }
+  }
+
+  /**
+   * This function disable tabIndex on clone elements children
+   * @private
+   */
+  private disableCloneTabs() {
+    if (this.listRef.current) {
+      const notTabableItems = this.listRef.current.querySelectorAll(
+        "li.cloned-item"
+      );
+
+      notTabableItems.forEach((item: HTMLElement) => {
+        const tabableItems = Carousel.getKeyboardFocusableElements(item);
+        tabableItems.forEach((element: HTMLElement) => {
+          element.setAttribute("tabindex", "-1");
+        });
+      });
     }
   }
 
@@ -198,6 +229,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       },
       () => {
         this.correctItemsPosition(itemWidth || this.state.itemWidth);
+        this.disableCloneTabs();
       }
     );
   }
@@ -275,9 +307,15 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (setToDomDirectly) {
       this.setTransformDirectly(nextTransform, true);
     }
-    this.setState({
-      transform: nextTransform
-    });
+    this.removeKeyUpEvent();
+    this.setState(
+      {
+        transform: nextTransform
+      },
+      () => {
+        this.bindKeyUpEvent();
+      }
+    );
   }
   public onResize(value?: React.KeyboardEvent | boolean): void {
     // value here can be html event or a boolean.
@@ -314,12 +352,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       }, this.props.transitionDuration || defaultTransitionDuration);
     }
     if (keyBoardControl && !this.props.keyBoardControl) {
-      window.removeEventListener("keyup", this.onKeyUp as React.EventHandler<
-        any
-      >);
+      this.removeKeyUpEvent();
     }
     if (!keyBoardControl && this.props.keyBoardControl) {
-      window.addEventListener("keyup", this.onKeyUp as React.EventHandler<any>);
+      this.bindKeyUpEvent();
     }
     if (autoPlay && !this.props.autoPlay && this.autoPlay) {
       clearInterval(this.autoPlay);
@@ -477,9 +513,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       any
     >);
     if (this.props.keyBoardControl) {
-      window.removeEventListener("keyup", this.onKeyUp as React.EventHandler<
-        any
-      >);
+      this.removeKeyUpEvent();
     }
     if (this.props.autoPlay && this.autoPlay) {
       clearInterval(this.autoPlay);
@@ -590,46 +624,45 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.resetMoveStatus();
     }
   }
-  private isInViewport(el: HTMLInputElement) {
-    const {
-      top = 0,
-      left = 0,
-      bottom = 0,
-      right = 0
-    } = el.getBoundingClientRect();
-    return (
-      top >= 0 &&
-      left >= 0 &&
-      bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      right <= (window.innerWidth || document.documentElement.clientWidth)
+  private static getKeyboardFocusableElements(element: HTMLElement) {
+    // check if element has any focusable child Element
+    const focusableChildren = element.querySelectorAll(
+      'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
     );
-  }
-
-  private isChildOfCarousel(el: EventTarget) {
-    if (el instanceof Element && this.listRef && this.listRef.current) {
-      return this.listRef.current.contains(el);
+    const elements = [].slice.call(focusableChildren);
+    // Add current element if its focusable to list of focusable elements.
+    const isFocusableElement = element.matches(
+      'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
+    );
+    if (isFocusableElement) {
+      elements.push(element);
     }
-    return false;
+    return elements.filter((el: HTMLElement) => !el.hasAttribute("disabled"));
   }
 
-  public onKeyUp(e: React.KeyboardEvent): void {
-    const { target, keyCode } = e;
-    switch (keyCode) {
-      case 37:
-        if (this.isChildOfCarousel(target)) return this.previous();
-        break;
-      case 39:
-        if (this.isChildOfCarousel(target)) return this.next();
-        break;
-      case 9:
-        if (
-          this.isChildOfCarousel(target) &&
-          target instanceof HTMLInputElement &&
-          !this.isInViewport(target)
-        ) {
-          return this.next();
+  public onKeyUp(e: KeyboardEvent): void {
+    switch (e.key) {
+      case "ArrowLeft":
+        return this.previous();
+      case "ArrowRight":
+        return this.next();
+      case "Tab":
+        if (!(e.target instanceof HTMLElement) || !document.activeElement) {
+          break;
         }
-        break;
+        const carouselItem = document.activeElement.closest(
+          "li.react-multi-carousel-item"
+        );
+        if (!carouselItem || !(carouselItem instanceof HTMLElement)) {
+          break;
+        }
+        const newCurrentSlide = carouselItem.getAttribute("data-index");
+        if (
+          newCurrentSlide &&
+          this.state.currentSlide != parseInt(newCurrentSlide)
+        ) {
+          this.goToSlide(parseInt(newCurrentSlide));
+        }
     }
   }
   public handleEnter(e: React.MouseEvent): void {
