@@ -5,6 +5,9 @@
   url("./revicons.ttf") format('ttf'),
   url("./revicons.eot") format('ttf');
 }
+body.react-multi-carousel-scroll-lock {
+  overflow: hidden;
+}
 .react-multi-carousel-list {
   display: flex;
   align-items: center;

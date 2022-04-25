@@ -519,6 +519,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     ) {
       return;
     }
+    const body = document.body;
+    body.classList.add("react-multi-carousel-scroll-lock");
     const { clientX, clientY } = isMouseMoveEvent(e) ? e : e.touches[0];
     const diffX = this.initialX - clientX;
     const diffY = this.initialY - clientY;
@@ -561,6 +563,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (shouldDisableOnMobile || shouldDisableOnDesktop) {
       return;
     }
+    const body = document.body;
+    body.classList.remove("react-multi-carousel-scroll-lock");
     if (this.onMove) {
       this.setAnimationDirectly(true);
       if (this.direction === "right") {
