@@ -27,6 +27,7 @@ const CarouselItems = ({
     children,
     infinite,
     itemClass,
+    itemActiveClass,
     itemAriaLabel,
     partialVisbile,
     partialVisible
@@ -86,7 +87,13 @@ const CarouselItems = ({
                 getIfSlideIsVisbile(index, state)
                   ? "react-multi-carousel-item--active"
                   : ""
-              } ${itemClass}`}
+              } ${itemClass} ${
+                itemActiveClass &&
+                itemActiveClass.index.length > 0 &&
+                itemActiveClass.index.findIndex(i => i === index) !== -1
+                  ? itemActiveClass.className
+                  : ""
+              }`}
             >
               {child}
             </li>

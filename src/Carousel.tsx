@@ -41,6 +41,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     containerClass: "",
     sliderClass: "",
     itemClass: "",
+    itemActiveClass: null,
     keyBoardControl: true,
     autoPlaySpeed: 3000,
     showDots: false,
@@ -356,9 +357,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
      If we reach the last slide of a non-infinite carousel we can rewind the carousel
      if opted in to autoPlay (lightweight infinite mode alternative).
     */
-     if (this.props.autoPlay && this.props.rewind) {
+    if (this.props.autoPlay && this.props.rewind) {
       if (!this.props.infinite && isInRightEnd(this.state)) {
-        const rewindBuffer = this.props.transitionDuration || defaultTransitionDuration;
+        const rewindBuffer =
+          this.props.transitionDuration || defaultTransitionDuration;
         setTimeout(() => {
           this.setIsInThrottle(false);
           this.resetAutoplayInterval();
