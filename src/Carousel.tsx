@@ -361,11 +361,14 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       if (!this.props.infinite && isInRightEnd(this.state)) {
         const rewindBuffer =
           this.props.transitionDuration || defaultTransitionDuration;
+        const delay =
+          rewindBuffer +
+          (this.props.autoPlaySpeed ? this.props.autoPlaySpeed : 3000);
         setTimeout(() => {
           this.setIsInThrottle(false);
           this.resetAutoplayInterval();
           this.goToSlide(0);
-        }, rewindBuffer + this.props.autoPlaySpeed);
+        }, delay);
       }
     }
   }
