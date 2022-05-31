@@ -484,6 +484,7 @@ For example if you give to your carousel item padding left and padding right 20p
 | additionalTransfrom     |                                              `number` |`0` | additional transfrom to the current one.                                               |
 | shouldResetAutoplay     |                                              `boolean` |`true` | resets autoplay when clicking next, previous button and the dots                                              |
 | rewind     |                                              `boolean` |`false` | if infinite is not enabled and autoPlay explicitly is, this option rewinds the carousel when the end is reached (Lightweight infinite mode alternative without cloning).                                              |
+| rtl     |                                              `boolean` |`false` | Sets the carousel direction to be right to left                                              |
 
 ## Author
 
