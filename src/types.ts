@@ -61,6 +61,7 @@ export interface CarouselProps {
   shouldResetAutoplay?: boolean;
   rewind?: boolean;
   rewindWithAnimation?: boolean;
+  rtl?: boolean;
 }
 
 export type StateCallBack = CarouselInternalState;

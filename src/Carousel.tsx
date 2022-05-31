@@ -55,7 +55,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     pauseOnHover: true,
     shouldResetAutoplay: true,
     rewind: false,
-    rewindWithAnimation: false
+    rewindWithAnimation: false,
+    rtl: false
   };
   private readonly containerRef: React.RefObject<HTMLDivElement>;
   private readonly listRef: React.RefObject<HTMLUListElement>;
@@ -357,7 +358,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
      If we reach the last slide of a non-infinite carousel we can rewind the carousel
      if opted in to autoPlay (lightweight infinite mode alternative).
     */
-    if (this.props.autoPlay && this.props.rewind && this.props.autoPlaySpeed) {
+    if (this.props.autoPlay && this.props.rewind) {
       if (!this.props.infinite && isInRightEnd(this.state)) {
         const rewindBuffer =
           this.props.transitionDuration || defaultTransitionDuration;
@@ -365,7 +366,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           this.setIsInThrottle(false);
           this.resetAutoplayInterval();
           this.goToSlide(0, undefined, !!this.props.rewindWithAnimation);
-        }, rewindBuffer + this.props.autoPlaySpeed);
+        }, rewindBuffer + this.props.autoPlaySpeed!);
       }
     }
   }
@@ -691,24 +692,26 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     return this.state;
   }
   public renderLeftArrow(disbaled: boolean): React.ReactNode {
-    const { customLeftArrow } = this.props;
+    const { customLeftArrow, rtl } = this.props;
     return (
       <LeftArrow
         customLeftArrow={customLeftArrow}
         getState={() => this.getState()}
         previous={this.previous}
         disabled={disbaled}
+        rtl={rtl}
       />
     );
   }
   public renderRightArrow(disbaled: boolean): React.ReactNode {
-    const { customRightArrow } = this.props;
+    const { customRightArrow, rtl } = this.props;
     return (
       <RightArrow
         customRightArrow={customRightArrow}
         getState={() => this.getState()}
         next={this.next}
         disabled={disbaled}
+        rtl={rtl}
       />
     );
   }
@@ -765,7 +768,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       additionalTransfrom,
       renderDotsOutside,
       renderButtonGroupOutside,
-      className
+      className,
+      rtl
     } = this.props;
     if (process.env.NODE_ENV !== "production") {
       throwError(this.state, this.props);
@@ -795,6 +799,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       <>
         <div
           className={`react-multi-carousel-list ${containerClass} ${className}`}
+          dir={rtl ? "rtl" : "ltr"}
           ref={this.containerRef}
         >
           <ul

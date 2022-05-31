@@ -118,7 +118,8 @@ function getTransform(
     partialVisible,
     responsive,
     deviceType,
-    centerMode
+    centerMode,
+    rtl
   } = props;
   const transform = transformPlaceHolder || state.transform;
   const partialVisibilityGutter = getPartialVisibilityGutter(
@@ -138,7 +139,7 @@ function getTransform(
       : centerMode
       ? getTransformForCenterMode(state, props, transformPlaceHolder)
       : transform;
-  return currentTransform;
+  return rtl ? -1 * currentTransform : currentTransform;
 }
 
 function getSlidesToSlide(
