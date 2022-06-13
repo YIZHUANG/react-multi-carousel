@@ -55,8 +55,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     pauseOnHover: true,
     shouldResetAutoplay: true,
     rewind: false,
+<<<<<<< HEAD
     rewindWithAnimation: false,
     rtl: false
+=======
+    rtl: false,
+    rewindWithAnimation: false
+>>>>>>> 89f197f (Add a new type rewindWithAnimation for deciding if rewinding should include transition or not)
   };
   private readonly containerRef: React.RefObject<HTMLDivElement>;
   private readonly listRef: React.RefObject<HTMLUListElement>;
