@@ -54,7 +54,8 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     additionalTransfrom: 0,
     pauseOnHover: true,
     shouldResetAutoplay: true,
-    rewind: false
+    rewind: false,
+    rewindWithAnimation: false
   };
   private readonly containerRef: React.RefObject<HTMLDivElement>;
   private readonly listRef: React.RefObject<HTMLUListElement>;
@@ -363,7 +364,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         setTimeout(() => {
           this.setIsInThrottle(false);
           this.resetAutoplayInterval();
-          this.goToSlide(0, undefined, false);
+          this.goToSlide(0, undefined, !!this.props.rewindWithAnimation);
         }, rewindBuffer + this.props.autoPlaySpeed);
       }
     }
