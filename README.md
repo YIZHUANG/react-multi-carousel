@@ -577,6 +577,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/donotcodeit"><img src="https://avatars.githubusercontent.com/u/30778436?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pavel Mikheev</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=donotcodeit" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/nev1d"><img src="https://avatars.githubusercontent.com/u/69861627?v=4?s=100" width="100px;" alt=""/><br /><sub><b>nev1d</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=nev1d" title="Code">💻</a></td>
     <td align="center"><a href="https://brandinavian.com"><img src="https://avatars.githubusercontent.com/u/62725224?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mads Vammen</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=MaSchVam" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/jir-f"><img src="https://avatars.githubusercontent.com/u/13970855?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jiro Farah</b></sub></a><br /><a href="https://github.com/YIZHUANG/react-multi-carousel/commits?author=jir-f" title="Code">💻</a></td>
   </tr>
 </table>
 
