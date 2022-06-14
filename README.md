@@ -58,6 +58,7 @@ If you are using this component seriously, please donate or talk to your manager
 - Accessibility support
 - Center mode.
 - Show next/previous set of items partially
+- RTL support
 
 ### Shoutouts 🙏
 
