@@ -464,6 +464,7 @@ storiesOf("Carousel", module)
         containerClass="container"
         focusOnSelect
         showDots
+        autoPlay={false}
         partialVisible={true}
         responsive={responsive}
         rtl

@@ -107,6 +107,10 @@ function getTransformForPartialVsibile(
   return transform;
 }
 
+export function parsePosition(props: CarouselProps, position: number) {
+  return props.rtl ? -1 * position : position;
+}
+
 function getTransform(
   state: CarouselInternalState,
   props: CarouselProps,
@@ -118,8 +122,7 @@ function getTransform(
     partialVisible,
     responsive,
     deviceType,
-    centerMode,
-    rtl
+    centerMode
   } = props;
   const transform = transformPlaceHolder || state.transform;
   const partialVisibilityGutter = getPartialVisibilityGutter(
@@ -139,7 +142,7 @@ function getTransform(
       : centerMode
       ? getTransformForCenterMode(state, props, transformPlaceHolder)
       : transform;
-  return rtl ? -1 * currentTransform : currentTransform;
+  return parsePosition(props, currentTransform);
 }
 
 function getSlidesToSlide(

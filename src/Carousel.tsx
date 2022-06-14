@@ -26,7 +26,7 @@ import {
 import Dots from "./Dots";
 import { LeftArrow, RightArrow } from "./Arrows";
 import CarouselItems from "./CarouselItems";
-import { getTransform } from "./utils/common";
+import { getTransform, parsePosition } from "./utils/common";
 
 const defaultTransitionDuration = 400;
 const defaultTransition = "transform 400ms ease-in-out";
@@ -137,8 +137,12 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   }
   public setTransformDirectly(position: number, withAnimation?: boolean) {
     const { additionalTransfrom } = this.props;
-    const currentTransform = getTransform(this.state, this.props, position);
     this.transformPlaceHolder = position;
+    const currentTransform = getTransform(
+      this.state,
+      this.props,
+      this.transformPlaceHolder
+    );
     if (this.listRef && this.listRef.current) {
       this.setAnimationDirectly(withAnimation);
       this.listRef.current.style.transform = `translate3d(${currentTransform +
@@ -366,7 +370,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           this.setIsInThrottle(false);
           this.resetAutoplayInterval();
           this.goToSlide(0, undefined, !!this.props.rewindWithAnimation);
-        }, rewindBuffer + this.props.autoPlaySpeed);
+        }, rewindBuffer + this.props.autoPlaySpeed!);
       }
     }
   }
@@ -472,8 +476,10 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     );
   }
   resetAutoplayInterval() {
-    clearInterval(this.autoPlay);
-    this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
+    if (this.props.autoPlay) {
+      clearInterval(this.autoPlay);
+      this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
+    }
   }
   public componentWillUnmount(): void {
     window.removeEventListener("resize", this.onResize as React.EventHandler<
@@ -499,6 +505,14 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.direction = "";
     this.initialY = 0;
   }
+
+  public getCords({ clientX, clientY }: { clientX: number; clientY: number }) {
+    return {
+      clientX: parsePosition(this.props, clientX),
+      clientY: parsePosition(this.props, clientY)
+    };
+  }
+
   public handleDown(e: React.MouseEvent | React.TouchEvent): void {
     if (
       (!isMouseMoveEvent(e) && !this.props.swipeable) ||
@@ -507,7 +521,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     ) {
       return;
     }
-    const { clientX, clientY } = isMouseMoveEvent(e) ? e : e.touches[0];
+    const { clientX, clientY } = this.getCords(
+      isMouseMoveEvent(e) ? e : e.touches[0]
+    );
     this.onMove = true;
     this.initialX = clientX;
     this.initialY = clientY;
@@ -522,7 +538,9 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     ) {
       return;
     }
-    const { clientX, clientY } = isMouseMoveEvent(e) ? e : e.touches[0];
+    const { clientX, clientY } = this.getCords(
+      isMouseMoveEvent(e) ? e : e.touches[0]
+    );
     const diffX = this.initialX - clientX;
     const diffY = this.initialY - clientY;
     if (this.onMove) {
@@ -548,9 +566,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           // nextPosition can be 0;
           this.setTransformDirectly(nextPosition);
         }
+        console.log("canGoNext", canContinue);
       }
       this.lastX = clientX;
     }
+  }
+  public parseCords(cord: number) {
+    return this.props.rtl ? -1 * cord : cord;
   }
   public handleOut(e: React.MouseEvent | React.TouchEvent): void {
     if (this.props.autoPlay && !this.autoPlay) {
