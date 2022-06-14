@@ -457,4 +457,21 @@ storiesOf("Carousel", module)
   })
   .addWithJSX("Responsive dot mode", () => {
     return <DotModeWithSlidesToSlide />;
+  })
+  .addWithJSX("RTL", () => {
+    return (
+      <Carousel
+        containerClass="container"
+        focusOnSelect
+        showDots
+        autoPlay={false}
+        partialVisible={true}
+        responsive={responsive}
+        rtl
+      >
+        {fakerData.map(card => {
+          return <Card {...card} />;
+        })}
+      </Carousel>
+    );
   });

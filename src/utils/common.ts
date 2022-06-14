@@ -107,6 +107,10 @@ function getTransformForPartialVsibile(
   return transform;
 }
 
+export function parsePosition(props: CarouselProps, position: number) {
+  return props.rtl ? -1 * position : position;
+}
+
 function getTransform(
   state: CarouselInternalState,
   props: CarouselProps,
@@ -138,7 +142,7 @@ function getTransform(
       : centerMode
       ? getTransformForCenterMode(state, props, transformPlaceHolder)
       : transform;
-  return currentTransform;
+  return parsePosition(props, currentTransform);
 }
 
 function getSlidesToSlide(
