@@ -571,9 +571,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       this.lastX = clientX;
     }
   }
-  public parseCords(cord: number) {
-    return this.props.rtl ? -1 * cord : cord;
-  }
   public handleOut(e: React.MouseEvent | React.TouchEvent): void {
     if (this.props.autoPlay && !this.autoPlay) {
       this.autoPlay = setInterval(this.next, this.props.autoPlaySpeed);
