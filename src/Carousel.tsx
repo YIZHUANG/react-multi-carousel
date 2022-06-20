@@ -566,7 +566,6 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
           // nextPosition can be 0;
           this.setTransformDirectly(nextPosition);
         }
-        console.log("canGoNext", canContinue);
       }
       this.lastX = clientX;
     }
