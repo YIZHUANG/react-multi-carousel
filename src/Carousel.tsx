@@ -646,7 +646,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
         if (
           this.isChildOfCarousel(target) &&
           target instanceof HTMLInputElement &&
-          !this.isInViewport(target)
+          this.isInViewport(target)
         ) {
           return this.next();
         }
