@@ -70,6 +70,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   public initialY: number;
   private transformPlaceHolder: number;
   private itemsToShowTimeout: any;
+  static clonesTimeout: any;
+  static isInThrottleTimeout: any;
+  static transformTimeout: any;
+  static afterChangeTimeout: any;
+  static afterChangeTimeout2: any;
+  static afterChangeTimeout3: any;
+
   constructor(props: CarouselProps) {
     super(props);
     this.containerRef = React.createRef();
@@ -336,7 +343,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     }
     if (children.length !== this.props.children.length) {
       // this is for handling changing children only.
-      setTimeout(() => {
+      Carousel.clonesTimeout = setTimeout(() => {
         if (this.props.infinite) {
           this.setClones(
             this.state.slidesToShow,
@@ -366,7 +373,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       if (!this.props.infinite && isInRightEnd(this.state)) {
         const rewindBuffer =
           this.props.transitionDuration || defaultTransitionDuration;
-        setTimeout(() => {
+        Carousel.isInThrottleTimeout = setTimeout(() => {
           this.setIsInThrottle(false);
           this.resetAutoplayInterval();
           this.goToSlide(0, undefined, !!this.props.rewindWithAnimation);
@@ -393,7 +400,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     ) {
       if (isReachingTheEnd || isReachingTheStart) {
         this.isAnimationAllowed = false;
-        setTimeout(() => {
+        Carousel.transformTimeout = setTimeout(() => {
           this.setState({
             transform: nextPosition,
             currentSlide: nextSlide
@@ -434,7 +441,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       },
       () => {
         if (typeof afterChange === "function") {
-          setTimeout(() => {
+          Carousel.afterChangeTimeout = setTimeout(() => {
             afterChange(previousSlide, this.getState());
           }, this.props.transitionDuration || defaultTransitionDuration);
         }
@@ -468,7 +475,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
       },
       () => {
         if (typeof afterChange === "function") {
-          setTimeout(() => {
+          Carousel.afterChangeTimeout2 = setTimeout(() => {
             afterChange(previousSlide, this.getState());
           }, this.props.transitionDuration || defaultTransitionDuration);
         }
@@ -497,6 +504,13 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     if (this.itemsToShowTimeout) {
       clearTimeout(this.itemsToShowTimeout);
     }
+
+    Carousel.clonesTimeout && clearTimeout(Carousel.clonesTimeout);
+    Carousel.isInThrottleTimeout && clearTimeout(Carousel.isInThrottleTimeout);
+    Carousel.transformTimeout && clearTimeout(Carousel.transformTimeout);
+    Carousel.afterChangeTimeout && clearTimeout(Carousel.afterChangeTimeout);
+    Carousel.afterChangeTimeout2 && clearTimeout(Carousel.afterChangeTimeout2);
+    Carousel.afterChangeTimeout3 && clearTimeout(Carousel.afterChangeTimeout3);
   }
   public resetMoveStatus(): void {
     this.onMove = false;
@@ -699,7 +713,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
             (typeof skipCallbacks === "object" &&
               !skipCallbacks.skipAfterChange))
         ) {
-          setTimeout(() => {
+          Carousel.afterChangeTimeout3 = setTimeout(() => {
             afterChange(previousSlide, this.getState());
           }, this.props.transitionDuration || defaultTransitionDuration);
         }
