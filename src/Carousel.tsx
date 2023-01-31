@@ -215,7 +215,16 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     Object.keys(responsive).forEach(item => {
       const { breakpoint, items } = responsive[item];
       const { max, min } = breakpoint;
-      if (window.innerWidth >= min && window.innerWidth <= max) {
+
+      const widths = [window.innerWidth];
+
+      if (window.screen && window.screen.width) {
+        widths.push(window.screen.width);
+      }
+
+      const screenWidth = Math.min(...widths);
+
+      if (screenWidth >= min && screenWidth <= max) {
         this.setState({ slidesToShow: items, deviceType: item });
         this.setContainerAndItemWidth(
           items,
