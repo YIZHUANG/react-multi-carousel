@@ -10,7 +10,7 @@ Production-ready, lightweight fully customizable React carousel component that r
 <img alt="download per month" src="https://img.shields.io/npm/dm/react-multi-carousel" target="_blank" />
 </a>
 [![Build Status](https://api.travis-ci.org/YIZHUANG/react-multi-carousel.svg?branch=master)](https://travis-ci.org/YIZHUANG/react-multi-carousel)
-<a href="https://react-multi-carousel.surge.sh">
+<a href="https://www.junia.ai/react-multi-carousel">
 <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
 </a>
 <a href="https://github.com/YIZHUANG/react-multi-carousel/graphs/commit-activity">
@@ -66,7 +66,7 @@ If you are using this component seriously, please donate or talk to your manager
 
 Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maintainers use their service to debug browser issues.
 
-## [Documentation](https://react-multi-carousel.surge.sh)
+## [Documentation](https://www.junia.ai/react-multi-carousel)
 
 ## Other important links.
 
@@ -84,7 +84,7 @@ Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maint
 
 ## Demo.
 
-Documentation is [here](https://react-multi-carousel.surge.sh).
+Documentation is [here](https://www.junia.ai/react-multi-carousel).
 
 Demo for the SSR <https://react-multi-carousel.now.sh/>
 
@@ -437,7 +437,7 @@ Go to slide on click and make the slide a current slide.
 
 ## additionalTransfrom Props.
 
-This is very useful when you are fully customizing the control functionality by yourself like this [one](https://react-multi-carousel.surge.sh/?selectedKind=Carousel&selectedStory=With%20custom%20control%20functionality&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
+This is very useful when you are fully customizing the control functionality by yourself like this [one](https://www.junia.ai/react-multi-carousel/?selectedKind=Carousel&selectedStory=With%20custom%20control%20functionality&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/WithScrollbar.js)
 

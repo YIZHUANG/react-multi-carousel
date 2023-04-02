@@ -55,10 +55,10 @@
   },
   "author": {
     "name": "YI ZHUANG",
-    "url": "https://yizhuang.fi/"
+    "url": "https://github.com/YIZHUANG"
   },
   "license": "MIT",
-  "homepage": "https://w3js.com/react-multi-carousel",
+  "homepage": "https://www.junia.ai/react-multi-carousel",
   "jest": {
     "testEnvironment": "jsdom",
     "verbose": true,
