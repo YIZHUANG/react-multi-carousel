@@ -345,7 +345,7 @@ This is a callback function that is invoked each time when there has been a slid
 ```js
 <Carousel
   afterChange={(previousSlide, { currentSlide, onMove }) => {
-    doSpeicalThing();
+    doSpecialThing();
   }}
 />
 ```
@@ -357,7 +357,7 @@ This is a callback function that is invoked each time before a sliding.
 ```js
 <Carousel
   beforeChange={(nextSlide, { currentSlide, onMove }) => {
-    doSpeicalThing();
+    doSpecialThing();
   }}
 />
 ```
