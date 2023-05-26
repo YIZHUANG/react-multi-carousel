@@ -19,7 +19,7 @@
     "classnames": "^2.2.6",
     "faker": "^4.1.0",
     "jss": "^9.8.7",
-    "markdown-to-jsx": "^6.10.0",
+    "markdown-to-jsx": "^7.2.0",
     "mobile-detect": "^1.4.3",
     "next": "^8.0.3",
     "react": "^16.8.3",
