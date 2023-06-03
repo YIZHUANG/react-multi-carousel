@@ -59,7 +59,8 @@ function getIfSlideIsVisbile(
 function getTransformForCenterMode(
   state: CarouselInternalState,
   props: CarouselProps,
-  transformPlaceHolder?: number
+  transformPlaceHolder?: number,
+  partialVisibilityGutter?: number
 ) {
   const transform = transformPlaceHolder || state.transform;
   if (
@@ -68,6 +69,10 @@ function getTransformForCenterMode(
   ) {
     return transform;
   } else {
+    if (partialVisibilityGutter) {
+      return transform + partialVisibilityGutter;
+    }
+
     return transform + state.itemWidth / 2;
   }
 }
@@ -90,14 +95,17 @@ function getTransformForPartialVsibile(
   props: CarouselProps,
   transformPlaceHolder?: number
 ) {
-  const { currentSlide, slidesToShow } = state;
+  const { slidesToShow } = state;
   const isRightEndReach = isInRightEnd(state);
   const shouldRemoveRightGutter = !props.infinite && isRightEndReach;
   const baseTransform = transformPlaceHolder || state.transform;
   if (notEnoughChildren(state)) {
     return baseTransform;
   }
-  const transform = baseTransform + currentSlide * partialVisibilityGutter;
+
+  const transform =
+    baseTransform - (props.centerMode ? partialVisibilityGutter : 0);
+
   if (shouldRemoveRightGutter) {
     const remainingWidth =
       state.containerWidth -
@@ -132,7 +140,7 @@ function getTransform(
     state.deviceType
   );
   const currentTransform =
-    partialVisible || partialVisbile
+    (partialVisible || partialVisbile) && !centerMode
       ? getTransformForPartialVsibile(
           state,
           partialVisibilityGutter,
@@ -140,7 +148,12 @@ function getTransform(
           transformPlaceHolder
         )
       : centerMode
-      ? getTransformForCenterMode(state, props, transformPlaceHolder)
+      ? getTransformForCenterMode(
+          state,
+          props,
+          transformPlaceHolder,
+          partialVisibilityGutter
+        )
       : transform;
   return parsePosition(props, currentTransform);
 }
