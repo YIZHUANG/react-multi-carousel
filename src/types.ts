@@ -17,6 +17,7 @@ export interface CarouselProps {
   responsive: ResponsiveType;
   deviceType?: string;
   ssr?: boolean;
+  intialSlide?: number;
   slidesToSlide?: number;
   draggable?: boolean;
   arrows?: boolean; // show or hide arrows.
