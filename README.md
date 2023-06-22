@@ -80,7 +80,7 @@ Big thanks to [BrowserStack](https://www.browserstack.com) for letting the maint
 ## Bundle size
 
 [Bundle-size](https://bundlephobia.com/result?p=react-multi-carousel).
-2.5kB
+22.5kB
 
 ## Demo.
 
