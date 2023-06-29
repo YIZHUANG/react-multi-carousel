@@ -29,7 +29,7 @@ Production-ready, lightweight fully customizable React carousel component that r
 
 ### Hello world!
 
-We are on a very excited journey towards version 3.0 of this component which will be rewritten in hooks/context completely. It means smaller bundle size, performance improvement and easier customization of the component and so many more benefits.
+We are on a very exciting journey towards version 3.0 of this component which will be rewritten in hooks/context completely. It means smaller bundle size, performance improvement and easier customization of the component and so many more benefits.
 
 It would mean so much if you could provide help towards the further development of this project as we do this open source work in our own free time especially during this covid-19 crisis.
 
@@ -103,7 +103,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 ```
 
-### How the SSR mode works?
+### How does the SSR mode work?
 
 Codes for SSR at [github](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/pages/index.js).
 
@@ -258,7 +258,7 @@ Custom dots can also be a copy or an image of your carousel item. See example in
 
 The codes for this [example](https://github.com/YIZHUANG/react-multi-carousel/blob/master/examples/ssr/components/carousel-with-custom-dots.js)
 
-You custom dots will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
+Your custom dots will receive a list of props/state that's passed back by the carousel such as the currentSide, is dragging or swiping in progress.
 
 [Code](https://github.com/YIZHUANG/react-multi-carousel/blob/master/stories/CustomDot.js)
 
@@ -405,7 +405,7 @@ They are very useful in the following cases:
 
 ## Skipping callbacks
 
-When calling the `goToSlide` function on a Carousel the callbacks will be run by default. You can skip all or individul callbacks by passing a second parameter to `goToSlide.`
+When calling the `goToSlide` function on a Carousel the callbacks will be run by default. You can skip all or individual callbacks by passing a second parameter to `goToSlide.`
 
 ```js
 this.Carousel.goToSlide(1, true); // Skips both beforeChange and afterChange
