@@ -128,7 +128,7 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     const currentSlide = notEnoughChildren(this.state)
       ? 0
       : // this ensures that if the currentSlide before change in childrenCount is more than new childrenCount; we will set it to new childrenCount
-        Math.max(0, Math.min(this.state.currentSlide, totalItems));
+        Math.max(0, Math.min(this.state.currentSlide, totalItems - 1));
     this.setState(
       {
         totalItems,
