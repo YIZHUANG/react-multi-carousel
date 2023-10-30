@@ -573,7 +573,7 @@ function getSlidesToSlide(
 ): number {
   const { domLoaded, slidesToShow, containerWidth, itemWidth } = state;
   const { deviceType, responsive } = props;
-  let slidesToScroll = props.slidesToSlide || <span class="branch-1 cbranch-no" title="branch not covered" >1;</span>
+  let slidesToScroll = props.slidesToSlide !== undefined ? props.slidesToSlide : <span class="branch-1 cbranch-no" title="branch not covered" >1;</span>;
   const domFullyLoaded = Boolean(
     domLoaded &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >slidesToShow </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >containerWidth </span>&amp;&amp; <span class="branch-3 cbranch-no" title="branch not covered" >itemWidth</span>
   );

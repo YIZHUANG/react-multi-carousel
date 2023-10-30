@@ -151,7 +151,7 @@ function getSlidesToSlide(
 ): number {
   const { domLoaded, slidesToShow, containerWidth, itemWidth } = state;
   const { deviceType, responsive } = props;
-  let slidesToScroll = props.slidesToSlide || 1;
+  let slidesToScroll = props.slidesToSlide !== undefined ? props.slidesToSlide : 1;
   const domFullyLoaded = Boolean(
     domLoaded && slidesToShow && containerWidth && itemWidth
   );
