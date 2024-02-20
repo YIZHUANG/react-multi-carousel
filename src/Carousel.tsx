@@ -31,33 +31,6 @@ import { getTransform, parsePosition } from "./utils/common";
 const defaultTransitionDuration = 400;
 const defaultTransition = "transform 400ms ease-in-out";
 class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
-  public static defaultProps = {
-    slidesToSlide: 1,
-    infinite: false,
-    draggable: true,
-    swipeable: true,
-    arrows: true,
-    renderArrowsWhenDisabled: false,
-    containerClass: "",
-    sliderClass: "",
-    itemClass: "",
-    keyBoardControl: true,
-    autoPlaySpeed: 3000,
-    showDots: false,
-    renderDotsOutside: false,
-    renderButtonGroupOutside: false,
-    minimumTouchDrag: 80,
-    className: "",
-    dotListClass: "",
-    focusOnSelect: false,
-    centerMode: false,
-    additionalTransfrom: 0,
-    pauseOnHover: true,
-    shouldResetAutoplay: true,
-    rewind: false,
-    rtl: false,
-    rewindWithAnimation: false
-  };
   private readonly containerRef: React.RefObject<HTMLDivElement>;
   private readonly listRef: React.RefObject<HTMLUListElement>;
   public onMove: boolean;
@@ -76,6 +49,32 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
   static afterChangeTimeout: any;
   static afterChangeTimeout2: any;
   static afterChangeTimeout3: any;
+  public slidesToSlide : number;
+  public infinite : boolean;
+  public draggable : boolean;
+  public swipeable : boolean;
+  public arrows : boolean;
+  public renderArrowsWhenDisabled : boolean;
+  public containerClass : string;
+  public sliderClass : string;
+  public itemClass : string;
+  public keyBoardControl : boolean;
+  public autoPlaySpeed : number;
+  public showDots : boolean;
+  public renderDotsOutside : boolean; 
+  public renderButtonGroupOutside : boolean;
+  public minimumTouchDrag : number;
+  public className : string;
+  public dotListClass : string;
+  public focusOnSelect : boolean;
+  public centerMode : boolean;
+  public additionalTransfrom : number; 
+  public pauseOnHover : boolean;
+  public shouldResetAutoplay : boolean;
+  public rewind : boolean;
+  public rtl : boolean;
+  public rewindWithAnimation : boolean;
+
 
   constructor(props: CarouselProps) {
     super(props);
@@ -121,6 +120,31 @@ class Carousel extends React.Component<CarouselProps, CarouselInternalState> {
     this.initialY = 0;
     this.isInThrottle = false;
     this.transformPlaceHolder = 0;
+    this.slidesToSlide = 1;
+    this.infinite = false;
+    this.draggable = true;
+    this.swipeable = true;
+    this.arrows = true;
+    this.renderArrowsWhenDisabled = false;
+    this.containerClass = "";
+    this.sliderClass = "";
+    this.itemClass = "";
+    this.keyBoardControl = true;
+    this.autoPlaySpeed = 3000;
+    this.showDots = false;
+    this.renderDotsOutside = false;
+    this.renderButtonGroupOutside = false;
+    this.minimumTouchDrag = 80;
+    this.className = "";
+    this.dotListClass = "";
+    this.focusOnSelect = false;
+    this.centerMode = false;
+    this.additionalTransfrom = 0;
+    this.pauseOnHover = true;
+    this.shouldResetAutoplay = true;
+    this.rewind = false;
+    this.rtl = false;
+    this.rewindWithAnimation = false;
   }
   // we only use this when infinite mode is off
   public resetTotalItems(): void {
