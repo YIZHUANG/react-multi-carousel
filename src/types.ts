@@ -62,6 +62,7 @@ export interface CarouselProps {
   rewind?: boolean;
   rewindWithAnimation?: boolean;
   rtl?: boolean;
+  setItemAriaHidden: boolean; // set the aria-hidden attribute on every item within the carousel.
 }
 
 export type StateCallBack = CarouselInternalState;

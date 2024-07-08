@@ -487,6 +487,7 @@ For example if you give to your carousel item padding left and padding right 20p
 | rewind     |                                              `boolean` |`false` | if infinite is not enabled and autoPlay explicitly is, this option rewinds the carousel when the end is reached (Lightweight infinite mode alternative without cloning).
 | rewindWithAnimation     |                                              `boolean` |`false` | when rewinding the carousel back to the beginning, this decides if the rewind process should be instant or with transition.                                             |
 | rtl     |                                              `boolean` |`false` | Sets the carousel direction to be right to left                                              |
+| setItemAriaHidden       |                                              `boolean`                                                                                              |             `true`              | Sets the aria-hidden attribute on every item within the carousel.                                                                                                      |
 
 ## Author
 
