@@ -2,7 +2,7 @@
 
 [![Financial Contributors on Open Collective](https://opencollective.com/react-multi-carousel/all/badge.svg?label=financial+contributors)](https://opencollective.com/react-multi-carousel) [![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
 
-Production-ready, lightweight fully customizable React carousel component that rocks supports multiple items and SSR(Server-side rendering).
+Production-ready, lightweight fully customizable React carousel component that rocks and supports multiple items and SSR(Server-side rendering).
 
 [![Package Quality](https://npm.packagequality.com/shield/react-multi-carousel.svg)](https://packagequality.com/#?package=react-multi-carousel)
 [![npm version](https://badge.fury.io/js/react-multi-carousel.svg)](https://www.npmjs.com/package/react-multi-carousel)
@@ -20,7 +20,7 @@ Production-ready, lightweight fully customizable React carousel component that r
 <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
 </a>
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FYIZHUANG%2Freact-multi-carousel?ref=badge_shield)
-[![David Dependancy Status](https://david-dm.org/YIZHUANG/react-multi-carousel.svg)](https://david-dm.org/YIZHUANG/react-multi-carousel)
+[![David Dependency Status](https://david-dm.org/YIZHUANG/react-multi-carousel.svg)](https://david-dm.org/YIZHUANG/react-multi-carousel)
 [![Known Vulnerabilities](https://snyk.io/test/github/YIZHUANG/react-multi-carousel/badge.svg?targetFile=package.json)](https://snyk.io/test/github/YIZHUANG/react-multi-carousel?targetFile=package.json)
 
 ![demo](https://media.giphy.com/media/emNGIfso7Iu66qz53C/giphy.gif)
@@ -29,7 +29,7 @@ Production-ready, lightweight fully customizable React carousel component that r
 
 ### Hello world!
 
-We are on a very excited journey towards version 3.0 of this component which will be rewritten in hooks/context completely. It means smaller bundle size, performance improvement and easier customization of the component and so many more benefits.
+We are on a very exciting journey towards version 3.0 of this component which will be rewritten in hooks/context completely. It means smaller bundle size, performance improvement and easier customization of the component and so many more benefits.
 
 It would mean so much if you could provide help towards the further development of this project as we do this open source work in our own free time especially during this covid-19 crisis.
 
@@ -239,7 +239,7 @@ const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
 
 ## renderButtonGroupOutside
 
-Passing this props would render the button group outside of the Carousel container. This is done using React.fragment
+Passing this prop would render the button group outside of the Carousel container. This is done using React.fragment
 
 ```js
 <div className='my-own-custom-container'>
@@ -270,7 +270,7 @@ const CustomDot = ({ onClick, ...rest }) => {
     active,
     carouselState: { currentSlide, deviceType }
   } = rest;
-  const carouselItems = [CarouselItem1, CaourselItem2, CarouselItem3];
+  const carouselItems = [CarouselItem1, CarouselItem2, CarouselItem3];
   // onMove means if dragging or swiping in progress.
   // active is provided by this lib for checking if the item is active or not.
   return (
@@ -345,7 +345,7 @@ This is a callback function that is invoked each time when there has been a slid
 ```js
 <Carousel
   afterChange={(previousSlide, { currentSlide, onMove }) => {
-    doSpeicalThing();
+    doSpecialThing();
   }}
 />
 ```
@@ -357,7 +357,7 @@ This is a callback function that is invoked each time before a sliding.
 ```js
 <Carousel
   beforeChange={(nextSlide, { currentSlide, onMove }) => {
-    doSpeicalThing();
+    doSpecialThing();
   }}
 />
 ```
@@ -405,7 +405,7 @@ They are very useful in the following cases:
 
 ## Skipping callbacks
 
-When calling the `goToSlide` function on a Carousel the callbacks will be run by default. You can skip all or individul callbacks by passing a second parameter to `goToSlide.`
+When calling the `goToSlide` function on a Carousel the callbacks will be run by default. You can skip all or individual callbacks by passing a second parameter to `goToSlide.`
 
 ```js
 this.Carousel.goToSlide(1, true); // Skips both beforeChange and afterChange
@@ -435,7 +435,7 @@ Go to slide on click and make the slide a current slide.
   }}>Click me</button>
 ```
 
-## additionalTransfrom Props.
+## additionalTransform Props.
 
 This is very useful when you are fully customizing the control functionality by yourself like this [one](https://react-multi-carousel.surge.sh/?selectedKind=Carousel&selectedStory=With%20custom%20control%20functionality&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel)
 
@@ -478,7 +478,7 @@ For example if you give to your carousel item padding left and padding right 20p
 | showDots                |                                                                     `boolean`                                                                      |              `false`              | Hide the default dot list                                                                                                                                             |
 | renderDotsOutside       |                                                                     `boolean`                                                                      |              `false`              | Show dots outside of the container                                                                                                                                    |
 | partialVisible          |                                                                 `boolean` | `string`                                                                 |              `false`              | Show partial next slides. This is use with the `responsive` prop, see example for details                                                                             |
-| customTransition        |                                                                      `string`                                                                      |   `transform 300ms ease-in-out`   | Configure your own anaimation when sliding                                                                                                                            |
+| customTransition        |                                                                      `string`                                                                      |   `transform 300ms ease-in-out`   | Configure your own animation when sliding                                                                                                                            |
 | transitionDuration      | `number |`300` | The unit is ms, if you are using customTransition, make sure to put the duration here as this is needed for the resizing to work. |
 | focusOnSelect           |                                    `boolean` |`false` | Go to slide on click and make the slide a current slide.                                    |
 | centerMode              |                                       `boolean` |`false` | Shows the next items and previous items partially.                                       |
@@ -508,7 +508,7 @@ Submit an issue for feature request or submit a pr.
 
 ## Donation
 
-If this project help you reduce time to develop, you can give me a cup of coffee :)
+If this project helps you reduce time to develop, you can give me a cup of coffee :)
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GJSPRG9RKSJLQ&source=url)
 
